@@ -1,4 +1,6 @@
-[![Instituto Politécnico de Leiria](imgReadme/politecnico.png)](https://www.ipleiria.pt/) $\qquad$$\qquad$$\qquad$ Curso Técnico Superior Profissional de Programação de Sistemas de Informação
+[![Instituto Politécnico de Leiria](imgReadme/politecnico.png)](https://www.ipleiria.pt/)
+
+Curso Técnico Superior Profissional de Programação de Sistemas de Informação
 
 ---
 ># Projeto final de curso
@@ -11,7 +13,9 @@
 >> - Elaboração de uma *API* para conectar a base de dados ao site e à aplicação *Android*.
 ---
 #### Links:
-$\qquad$$\qquad$$\qquad$$\qquad$[![GitHub](imgReadme/github.svg)](https://github.com/DiogoRCP/PSI_PROJETO_ADG.git)$\qquad$$\qquad$$\qquad$$\qquad$$\qquad$[![Jira](imgReadme/jira.svg)](https://psi-da-mds-ga.atlassian.net/)
+[![GitHub](imgReadme/github.svg)](https://github.com/DiogoRCP/PSI_PROJETO_ADG.git)
+
+[![Jira](imgReadme/jira.svg)](https://psi-da-mds-ga.atlassian.net/)
 
 &nbsp;
 #### Elaborado por:
