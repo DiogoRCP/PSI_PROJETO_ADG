@@ -7,8 +7,8 @@ Curso Técnico Superior Profissional de Programação de Sistemas de Informaçã
 ### Gestão de reparação de Veículos
 ---
 > #### Objetivo:
->> - Elaboração um site para gestão do produto por parte do gestor do aplicativo e dos mecânicos.
->> - Elaboração uma aplicação em *Android* para utilização do produto por parte dos clientes e mecânicos.
+>> - Elaboração de um site para gestão do produto por parte do gestor do aplicativo e dos mecânicos.
+>> - Elaboração de uma aplicação em *Android* para utilização do produto por parte dos clientes e mecânicos.
 >> - Elaboração de uma base de dados para guardar toda a informação contida tanto no site como na aplicação *Android*.
 >> - Elaboração de uma *API* para conectar a base de dados ao site e à aplicação *Android*.
 ---
