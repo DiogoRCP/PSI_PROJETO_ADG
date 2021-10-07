@@ -44,9 +44,24 @@ CREATE TABLE IF NOT EXISTS repairs(
 		kilometers INT NOT NULL,
         repairdate DATE NOT NULL,
         repairdescription VARCHAR(100) NOT NULL,
+        state VARCHAR(100) NOT NULL,
         carId INT UNSIGNED NOT NULL,
         contributorId INT UNSIGNED NOT NULL,
 	CONSTRAINT repairs_id PRIMARY KEY(id),
 	CONSTRAINT fk_repairs_carId FOREIGN KEY(carId) REFERENCES cars(id),
     CONSTRAINT fk_repairs_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)
+) ENGINE=InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS maintenance(
+		id INT UNSIGNED AUTO_INCREMENT,
+		kilometers INT NOT NULL,
+        maintenancedate DATE NOT NULL,
+        maintenancedescription VARCHAR(100) NOT NULL,
+        state VARCHAR(100) NOT NULL,
+        carId INT UNSIGNED NOT NULL,
+        contributorId INT UNSIGNED NOT NULL,
+	CONSTRAINT repairs_id PRIMARY KEY(id),
+	CONSTRAINT fk_maintenance_carId FOREIGN KEY(carId) REFERENCES cars(id),
+    CONSTRAINT fk_maintenance_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)
 ) ENGINE=InnoDB;
