@@ -1,5 +1,5 @@
-CREATE DATABASE historycar;
-use historycar;
+CREATE DATABASE carbuddy;
+use carbuddy;
 
 CREATE TABLE IF NOT EXISTS clients(
 		id INT UNSIGNED AUTO_INCREMENT,
