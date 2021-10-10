@@ -13,6 +13,17 @@ CREATE TABLE IF NOT EXISTS clients(
 	CONSTRAINT uk_clients_Nif UNIQUE (nif)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS companies(
+		id INT UNSIGNED AUTO_INCREMENT,
+		companyname VARCHAR(100) NOT NULL,
+        nif VARCHAR(9) NOT NULL,
+        mail VARCHAR(100) NOT NULL,
+        phonenumber VARCHAR(40) NOT NULL,
+        registrationdate DATE NOT NULL,
+	CONSTRAINT companies_id PRIMARY KEY(id),
+	CONSTRAINT uk_companies_Nif UNIQUE (nif)
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS contributors(
 		id INT UNSIGNED AUTO_INCREMENT,
 		contributorname VARCHAR(100) NOT NULL,
@@ -22,8 +33,10 @@ CREATE TABLE IF NOT EXISTS contributors(
         phonenumber VARCHAR(40) NOT NULL,
         registrationdate DATE NOT NULL,
         specialty VARCHAR(100) NOT NULL,
+        companyId INT UNSIGNED NOT NULL,
 	CONSTRAINT contributors_id PRIMARY KEY(id),
-	CONSTRAINT uk_contributors_Nif UNIQUE (nif)
+	CONSTRAINT uk_contributors_Nif UNIQUE (nif),
+    CONSTRAINT fk_contributors_companyId FOREIGN KEY(companyId) REFERENCES companies(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS cars(
