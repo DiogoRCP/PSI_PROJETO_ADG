@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS repairs(
         repairdate DATE NOT NULL,
         repairdescription VARCHAR(100) NOT NULL,
         state VARCHAR(100) NOT NULL,
-        repairrtype VARCHAR(100) NOT NULL,
+        repairtype VARCHAR(100) NOT NULL,
         carId INT UNSIGNED NOT NULL,
         contributorId INT UNSIGNED NOT NULL,
 	CONSTRAINT repairs_id PRIMARY KEY(id),
