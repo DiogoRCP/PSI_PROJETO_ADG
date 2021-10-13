@@ -12,15 +12,13 @@ $this->title = 'Login';
 ?>
 <div class="site-login">
     <div class="mt-5 offset-lg-3 col-lg-6 container">
-        <h1><?= Html::encode($this->title) ?></h1>
-
-        <p>Please fill out the following fields to login:</p>
+        <img><?= Html::img('images/logo_white.png', ['class'=>'logo', 'width'=>150]) ?>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'username')->textInput(['class'=>'form-control is-invalid textform', 'autofocus' => true, 'placeholder'=>'Username']) ?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+        <?= $form->field($model, 'password')->passwordInput(['class'=>'form-control is-invalid textform', 'placeholder'=>'Password']) ?>
 
         <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
