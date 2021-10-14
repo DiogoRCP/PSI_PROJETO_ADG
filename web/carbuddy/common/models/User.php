@@ -170,7 +170,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Validates password
      *
-     * @param string $password password to validate
+     * @param string $userpassword password to validate
      * @return bool if password provided is valid for current user
      */
     public function validatePassword($userpassword)
@@ -181,7 +181,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Generates password hash from password and sets it to the model
      *
-     * @param string $password
+     * @param string $userpassword
      */
     public function setPassword($userpassword)
     {
