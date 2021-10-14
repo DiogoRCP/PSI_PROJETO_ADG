@@ -70,7 +70,6 @@ class SignupForm extends Model
         $user->username = $this->username;
         $user->email = $this->email;
         $user->usertype = $this->usertype;
-        $user->password = $this->userpassword;
         $user->phonenumber = $this->phonenumber;
         $user->birsthday = $this->birsthday;
         $user->userpassword = $this->userpassword;

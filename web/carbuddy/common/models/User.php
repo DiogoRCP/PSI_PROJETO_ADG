@@ -2,10 +2,12 @@
 
 namespace common\models;
 
+use Symfony\Component\Yaml\Dumper;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\VarDumper;
 use yii\web\IdentityInterface;
 
 /**
@@ -185,7 +187,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function setPassword($userpassword)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($userpassword);
+        $this->userpassword = Yii::$app->security->generatePasswordHash($userpassword);
     }
 
     /**
