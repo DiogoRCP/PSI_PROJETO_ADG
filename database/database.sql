@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS companies(
         nif VARCHAR(9) NOT NULL,
         mail VARCHAR(100) NOT NULL,
         phonenumber VARCHAR(40) NOT NULL,
-        registrationdate DATE NOT NULL,
+        registrationdate DATETIME default Current_Timestamp,
 	CONSTRAINT companies_id PRIMARY KEY(id),
 	CONSTRAINT uk_companies_Nif UNIQUE (nif)
 ) ENGINE=InnoDB;
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS users(
 		birsthday DATE NOT NULL,
         mail VARCHAR(100) NOT NULL,
         phonenumber VARCHAR(40) NOT NULL,
-        registrationdate DATE NOT NULL,
+        registrationdate DATETIME default Current_Timestamp,
 	CONSTRAINT users_id PRIMARY KEY(id),
 	CONSTRAINT uk_users_Nif UNIQUE (nif)
 ) ENGINE=InnoDB;
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS cars(
 CREATE TABLE IF NOT EXISTS repairs(
 		id INT UNSIGNED AUTO_INCREMENT,
 		kilometers INT NOT NULL,
-        repairdate DATE NOT NULL,
+        repairdate DATETIME default Current_Timestamp,
         repairdescription VARCHAR(100) NOT NULL,
         state VARCHAR(100) NOT NULL,
         repairtype VARCHAR(100) NOT NULL,
