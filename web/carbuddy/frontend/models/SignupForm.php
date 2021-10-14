@@ -24,6 +24,9 @@ class SignupForm extends Model
      */
     public function rules()
     {
+        //definição das regras de inserção de dados
+        //email, username e nif como unicos
+        //todos os campos de preenchimento obrigatorio
         return [
             ['username', 'trim'],
             ['username', 'required'],
@@ -38,6 +41,13 @@ class SignupForm extends Model
 
             ['userpassword', 'required'],
             ['userpassword', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            ['nif', 'required'],
+            ['nif', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This NIF has already been taken.'],
+
+            ['birsthday', 'required'],
+
+            ['phonenumber', 'required']
         ];
     }
 
@@ -55,6 +65,12 @@ class SignupForm extends Model
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->usertype = $this->usertype;
+        $user->password = $this->userpassword;
+        $user->phonenumber = $this->phonenumber;
+        $user->birsthday = $this->birsthday;
+        $user->userpassword = $this->userpassword;
+        $user->nif = $this->nif;
         $user->setPassword($this->userpassword);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
