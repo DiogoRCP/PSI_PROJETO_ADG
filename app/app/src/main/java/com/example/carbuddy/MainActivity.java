@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.PathEffect;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -24,13 +27,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editTextUser = findViewById(R.id.editTextTextPersonName);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
+        /*editTextUser = findViewById(R.id.editTextTextPersonName);
         editTextPass = findViewById(R.id.editTextTextPassword);
         buttonLogin = findViewById(R.id.btnLogin);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { efetuarLogin(); }
-        });
+
+        });*/
     }
 
         private void efetuarLogin() {
@@ -46,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 editTextPass.setError("Password Inválida. Password tem de ter no minimo 8 caracteres");
 
             if(userBool == true && passBool == true) {
-                editTextPass.setError("Login com sucesso");
-                editTextUser.setError("Login com sucesso");
+                editTextPass.setText("Login com sucesso");
+                editTextUser.setText("Login com sucesso");
             }
         }
 
@@ -68,4 +77,6 @@ public class MainActivity extends AppCompatActivity {
             else
                 return true;
         }
+
+
 }

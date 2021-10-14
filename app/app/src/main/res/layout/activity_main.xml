@@ -23,11 +23,11 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="553dp"
+            android:layout_height="309dp"
             android:layout_weight="1"
             android:background="#00FFFFFF"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/logo_white" />
 
         <Space
             android:layout_width="292dp"
@@ -37,7 +37,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="181dp"
         android:orientation="horizontal">
 
         <Space
@@ -62,6 +62,7 @@
                 android:ems="10"
                 android:hint="@string/TextViewUser"
                 android:inputType="textPersonName"
+                android:minHeight="48dp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="@color/white" />
 
@@ -96,23 +97,36 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btnLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Login" />
-
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </LinearLayout>
+
         </LinearLayout>
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
+
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:backgroundTint="#6C6969"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/caret_right_fill" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
