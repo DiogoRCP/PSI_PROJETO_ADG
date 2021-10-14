@@ -8,22 +8,23 @@ use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 
 $this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to signup:</p>
-
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'email')->label('E-mail')?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= $form->field($model, 'nif')->label('NIF')->input("number", ['max' => '999999999', 'maxlength' =>'9', 'pattern'=> '[0-9]{9}'])?>
+
+                <?= $form->field($model, 'birsthday')->input("date") ?>
+
+                <?= $form->field($model, 'phonenumber')->label('Phone Number')->input("tel", ['pattern'=> '[0-9]{9}']) ?>
+
+                <?= $form->field($model, 'userpassword')->label('Password')->passwordInput() ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

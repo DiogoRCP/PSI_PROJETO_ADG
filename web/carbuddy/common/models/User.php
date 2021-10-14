@@ -17,6 +17,10 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $email
+ * @property string $nif
+ * @property string $userpassword
+ * @property string $phonenumber
+ * @property date $birsthday
  * @property string $auth_key
  * @property integer $status
  * @property integer $created_at
@@ -28,14 +32,19 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
-
+    public $password_hash;
+    public $auth_key;
+    public $verification_token;
+    public $status;
+    public $created_at;
+    public $updated_at;
 
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%users}';
+        return '{{%users}}';
     }
 
     /**
@@ -161,22 +170,22 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Validates password
      *
-     * @param string $password password to validate
+     * @param string $userpassword password to validate
      * @return bool if password provided is valid for current user
      */
-    public function validatePassword($password)
+    public function validatePassword($userpassword)
     {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
+        return Yii::$app->security->validatePassword($userpassword, $this->password_hash);
     }
 
     /**
      * Generates password hash from password and sets it to the model
      *
-     * @param string $password
+     * @param string $userpassword
      */
-    public function setPassword($password)
+    public function setPassword($userpassword)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password_hash = Yii::$app->security->generatePasswordHash($userpassword);
     }
 
     /**
