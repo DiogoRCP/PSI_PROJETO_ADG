@@ -26,11 +26,22 @@ body .container .textform {
 body .container .textform:focus {
   color: black;
 }
+@media only screen and (max-device-width: 1000px) and (-webkit-min-device-pixel-ratio: 2) {
+  body .container .textform {
+    width: 70%;
+    margin-left: 3rem;
+  }
+}
 body .container .buttonlogin {
   margin-bottom: -1.8rem;
   height: 56px;
   width: 56px;
   background-color: gray;
+}
+@media only screen and (max-device-width: 1000px) and (-webkit-min-device-pixel-ratio: 2) {
+  body .container {
+    width: 20rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
