@@ -43,11 +43,15 @@ class SignupForm extends Model
             ['userpassword', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
             ['nif', 'required'],
+            ['nif', 'string', 'max' => 9],
+            ['nif', 'string', 'min' => 9],
             ['nif', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This NIF has already been taken.'],
 
             ['birsthday', 'required'],
 
-            ['phonenumber', 'required']
+            ['phonenumber', 'required'],
+            ['phonenumber', 'string', 'max' => 9],
+            ['phonenumber', 'string', 'min' => 9]
         ];
     }
 
