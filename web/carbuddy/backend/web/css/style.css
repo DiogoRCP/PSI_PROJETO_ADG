@@ -5,9 +5,43 @@ body {
   background-attachment: fixed;
   background-size: cover;
   color: white;
+  justify-content: center;
 }
-body container {
+body .container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 0 0 0;
+  width: 30rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+body .container * {
+  background-color: rgba(0, 0, 0, 0);
+}
+body .container .logo {
+  margin: 2rem 0 2rem 0;
+}
+body .container .textform {
+  color: white;
+}
+body .container .textform:focus {
+  color: black;
+}
+@media only screen and (max-device-width: 1000px) and (-webkit-min-device-pixel-ratio: 2) {
+  body .container .textform {
+    width: 70%;
+    margin-left: 3rem;
+  }
+}
+body .container .buttonlogin {
+  margin-bottom: -1.8rem;
+  height: 56px;
+  width: 56px;
   background-color: gray;
+}
+@media only screen and (max-device-width: 1000px) and (-webkit-min-device-pixel-ratio: 2) {
+  body .container {
+    width: 20rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
