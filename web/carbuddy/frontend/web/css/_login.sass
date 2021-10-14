@@ -1,0 +1,42 @@
+@import "login-phone"
+
+body
+  background-image: url("../images/fundo.jpg")
+  background-repeat: no-repeat
+  background-position: center
+  background-attachment: fixed
+  background-size: cover
+  color: white
+  padding-top: 23.5vh
+
+  .container
+    background-color: rgba(0, 0, 0, 0.5)
+    padding: 0 0 0 0
+    width: 30rem
+    text-align: center
+    border-radius: 1.8rem
+
+    *
+      background-color: rgba(0, 0, 0, 0)
+
+    .logo
+      margin: 2rem 0 2rem 0
+
+    .textform
+      color: white
+
+      &:focus
+        color: black
+
+      @include telemovel
+        width: 70%
+        margin-left: 3rem
+
+    .buttonlogin
+      margin-bottom: -1.8rem
+      height: 56px
+      width: 56px
+      background-color: gray
+
+    @include telemovel
+      width: 20rem
