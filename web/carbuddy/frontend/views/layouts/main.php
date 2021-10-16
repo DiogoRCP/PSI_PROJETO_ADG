@@ -53,7 +53,7 @@ AppAsset::register($this);
             . '</li>';
     }
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-center justify-content-end w-100'],
         'items' => $menuItems,
     ]);
     NavBar::end();
