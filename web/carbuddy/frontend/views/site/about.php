@@ -15,10 +15,10 @@ $this->title = 'About';
             <div class="col-lg-6">
                 <h2>Goals</h2>
 
-                <p>Elaboração de um site para gestão do produto por parte do gestor do aplicativo e dos mecânicos.
-                    Elaboração de uma aplicação em Android para utilização do produto por parte dos clientes e mecânicos.
-                    Elaboração de uma base de dados para guardar toda a informação contida tanto no site como na aplicação Android.
-                    Elaboração de uma API para conectar a base de dados ao site e à aplicação Android.</p>
+                <p>Development of a website for product management by the application manager and mechanics.
+                    Development of an Android application for use of the product by customers and mechanics.
+                    Development of a database to store all the information contained both on the website and in the Android application.
+                    Development of an API to connect a database to the website and Android application.</p>
 
              </div>
             <div class="col-lg-6">
