@@ -40,10 +40,10 @@ AppAsset::register($this);
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems2[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+        $menuItems2[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
+        $menuItems2[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -53,9 +53,15 @@ AppAsset::register($this);
             . '</li>';
     }
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-center justify-content-end w-100'],
+        'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-center w-100'],
         'items' => $menuItems,
     ]);
+    if($menuItems2!=null){
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-center justify-content-end w-100'],
+            'items' => $menuItems2,
+        ]);
+    }
     NavBar::end();
     ?>
 </header>
