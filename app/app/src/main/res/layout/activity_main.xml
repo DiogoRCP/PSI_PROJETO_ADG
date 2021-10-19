@@ -17,7 +17,7 @@
         android:layout_height="252dp">
 
         <Space
-            android:layout_width="296dp"
+            android:layout_width="450dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
@@ -30,7 +30,7 @@
             app:srcCompat="@drawable/logo_white" />
 
         <Space
-            android:layout_width="292dp"
+            android:layout_width="450dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
@@ -118,14 +118,18 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
+            style="@style/Theme.CarBuddy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:tint="@color/white"
             app:backgroundTint="#6C6969"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/caret_right_fill" />
+            app:rippleColor="@color/white"
+            app:srcCompat="@drawable/img"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
