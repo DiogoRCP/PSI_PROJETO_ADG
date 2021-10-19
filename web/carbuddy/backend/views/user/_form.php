@@ -12,21 +12,19 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-    <?= $form->field($model, 'userpassword')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'usertype')->dropDownList(['Admin' => 'Admin', 'Collaborator' => 'Collaborator', 'Client' => 'Client']) ?>
 
-    <?= $form->field($model, 'usertype')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nif')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-    <?= $form->field($model, 'nif')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'birsthday')->textInput(['readonly' => true]) ?>
 
-    <?= $form->field($model, 'birsthday')->textInput() ?>
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true,'pattern' =>"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$", 'title' => 'Invalid email address']) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'phonenumber')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-    <?= $form->field($model, 'phonenumber')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'registrationdate')->textInput() ?>
+    <?= $form->field($model, 'registrationdate')->textInput(['readonly' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
