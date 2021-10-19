@@ -42,4 +42,32 @@ body .site-login .container .buttonlogin {
   }
 }
 
+.users-index {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 3rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.users-index table {
+  color: white;
+}
+.users-index table a {
+  color: beige;
+}
+
+.users-view {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.users-view table {
+  color: white;
+}
+.users-view table a {
+  color: beige;
+}
+
 /*# sourceMappingURL=style.css.map */
