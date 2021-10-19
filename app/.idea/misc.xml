@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/laragon/www/PSI_PROJETO_ADG/app/app/src/main/res/drawable/button_states.xml" value="0.1287037037037037" />
+        <entry key="..\:/laragon/www/PSI_PROJETO_ADG/app/app/src/main/res/drawable/roudedconers.xml" value="0.1287037037037037" />
         <entry key="..\:/laragon/www/PSI_PROJETO_ADG/app/app/src/main/res/layout/activity_main.rng" value="0.1421875" />
         <entry key="..\:/laragon/www/PSI_PROJETO_ADG/app/app/src/main/res/layout/activity_main.xml" value="0.26440677966101694" />
+        <entry key="..\:/laragon/www/PSI_PROJETO_ADG/app/app/src/main/res/layout/activity_pagina_inicial.xml" value="0.264" />
       </map>
     </option>
   </component>
