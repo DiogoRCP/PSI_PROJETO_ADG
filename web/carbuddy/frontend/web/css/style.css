@@ -43,10 +43,15 @@ body .site-login .container .buttonlogin {
 }
 
 .site-signup {
+  display: flex;
+  justify-content: center;
+}
+.site-signup .row {
   background-color: rgba(0, 0, 0, 0.5);
-  text-align: center;
   padding: 2rem;
   border-radius: 1.8rem;
+  justify-content: center;
+  width: 50rem;
 }
 
 /*# sourceMappingURL=style.css.map */
