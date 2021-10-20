@@ -47,6 +47,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/roudedconers"
+        android:fontFamily="@font/baloo_da"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:paddingRight="10dp"
