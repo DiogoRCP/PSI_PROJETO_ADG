@@ -14,7 +14,7 @@ $this->title = 'Companies';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Companies', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Company', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

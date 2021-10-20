@@ -24,7 +24,7 @@ $this->title = $model->username.' ('.$model->nif.')';
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= DetailView::widget([

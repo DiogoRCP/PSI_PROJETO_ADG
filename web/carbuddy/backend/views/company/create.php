@@ -5,16 +5,17 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Companies */
 
-$this->title = 'Create Companies';
-$this->params['breadcrumbs'][] = ['label' => 'Companies', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Create Company';
+
 ?>
 <div class="companies-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->render('_form', [
         'model' => $model,
+
     ]) ?>
+
 
 </div>

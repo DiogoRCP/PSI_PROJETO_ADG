@@ -6,9 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Companies */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Companies', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = $model->companyname.' ('.$model->nif.')';
+
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="companies-view">
@@ -24,7 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
+
 
     <?= DetailView::widget([
         'model' => $model,
