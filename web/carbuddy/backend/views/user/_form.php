@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-    <?= $form->field($model, 'usertype')->dropDownList(['Admin' => 'admin', 'Collaborator' => 'collaborator', 'Client' => 'client']) ?>
+    <?= $form->field($model, 'usertype')->dropDownList(['admin' => 'Admin', 'collaborator' => 'Collaborator', 'client' => 'Client']) ?>
 
     <?= $form->field($model, 'nif')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 

@@ -8,7 +8,6 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Companies';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="companies-index">
 
@@ -24,14 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'companyname',
             'nif',
             'email:email',
             'phonenumber',
-            //'registrationdate',
+            'registrationdate',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
