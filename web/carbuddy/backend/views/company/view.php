@@ -4,14 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Users */
+/* @var $model backend\models\Companies */
 
-$this->title = $model->username.' ('.$model->nif.')';
-
+$this->title = $model->companyname.' ('.$model->nif.')';
 
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="users-view">
+<div class="companies-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -27,14 +26,13 @@ $this->title = $model->username.' ('.$model->nif.')';
         <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
 
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'username',
-            'usertype',
+            'companyname',
             'nif',
-            'birsthday',
             'email:email',
             'phonenumber',
             'registrationdate',
