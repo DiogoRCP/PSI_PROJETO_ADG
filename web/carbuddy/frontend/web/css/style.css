@@ -42,4 +42,20 @@ body .site-login .container .buttonlogin {
   }
 }
 
+.site-signup {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.site-signup .row {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 1.8rem;
+  justify-content: center;
+  width: 30rem;
+}
+.site-signup .row h2 {
+  margin-bottom: 2rem;
+}
+
 /*# sourceMappingURL=style.css.map */
