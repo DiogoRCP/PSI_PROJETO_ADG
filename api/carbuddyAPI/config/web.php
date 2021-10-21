@@ -43,7 +43,7 @@ $config = [
             ],
         ],
         'db' => $db,
-
+/*comentar aqui se for necessário aceder ao gii*/
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
