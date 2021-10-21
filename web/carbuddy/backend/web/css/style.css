@@ -45,7 +45,7 @@ body .site-login .container .buttonlogin {
 .users-index {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2rem;
-  margin-top: 3rem;
+  margin-top: 5rem;
   text-align: center;
   border-radius: 1.8rem;
 }
@@ -59,7 +59,7 @@ body .site-login .container .buttonlogin {
 .users-view {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2rem;
-  margin-top: 2rem;
+  margin-top: 5rem;
   text-align: center;
   border-radius: 1.8rem;
 }
@@ -83,6 +83,54 @@ body .site-login .container .buttonlogin {
   color: white;
 }
 .users-update table a {
+  color: beige;
+}
+
+.companies-create {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+  width: 25rem;
+  margin-left: 18vw;
+}
+
+.companies-update {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+  width: 25rem;
+  margin-left: 18vw;
+}
+
+.companies-view {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.companies-view table {
+  color: white;
+}
+.companies-view table a {
+  color: beige;
+}
+
+.companies-index {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.companies-index table {
+  color: white;
+}
+.companies-index table a {
   color: beige;
 }
 
