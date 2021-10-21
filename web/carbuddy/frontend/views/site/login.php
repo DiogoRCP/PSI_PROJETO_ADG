@@ -19,7 +19,7 @@ $buttonimg = '<svg xmlns="http://www.w3.org/2000/svg" width="48" fill="currentCo
 ?>
 
 <div class="site-login">
-    <div class="mt-5 offset-lg-3 col-lg-6 container">
+    <div class="mt-3 offset-lg-3.5 col-lg-6 contentor">
         <img><?= Html::img('images/logo_white.png', ['class' => 'logo', 'width' => 100]) ?>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>

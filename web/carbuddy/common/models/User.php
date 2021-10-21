@@ -91,14 +91,17 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByUsername($username, $type)
     {
         $entrar = static::findOne(['username' => $username]);
-        if($entrar->usertype == "admin" || $entrar->usertype == "collaborator") {
-            return $entrar;
+        if($type == "backend") {
+            if ($entrar->usertype == "admin" || $entrar->usertype == "collaborator") {
+                return $entrar;
+            }
         }else{
-            return false;
+            return $entrar;
         }
+        return false;
     }
 
     /**

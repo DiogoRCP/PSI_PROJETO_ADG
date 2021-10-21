@@ -90,7 +90,8 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $type = "frontend";
+        if ($model->load(Yii::$app->request->post()) && $model->login($type)) {
             return $this->goBack();
         }
 

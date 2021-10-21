@@ -79,7 +79,8 @@ class SiteController extends Controller
         $this->layout = 'blank';
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $type = "backend";
+        if ($model->load(Yii::$app->request->post()) && $model->login($type)) {
             return $this->goBack();
         }
 
