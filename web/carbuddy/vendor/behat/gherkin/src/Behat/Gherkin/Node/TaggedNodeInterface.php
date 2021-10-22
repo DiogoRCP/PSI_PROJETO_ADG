@@ -22,14 +22,14 @@ interface TaggedNodeInterface extends NodeInterface
      *
      * @param string $tag
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasTag($tag);
 
     /**
      * Checks if node has tags (both inherited from feature and own).
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasTags();
 

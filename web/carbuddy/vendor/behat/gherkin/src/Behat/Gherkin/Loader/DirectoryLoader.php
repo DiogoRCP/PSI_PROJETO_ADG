@@ -39,7 +39,7 @@ class DirectoryLoader extends AbstractFileLoader
      *
      * @param mixed $path Resource to load
      *
-     * @return bool
+     * @return Boolean
      */
     public function supports($path)
     {

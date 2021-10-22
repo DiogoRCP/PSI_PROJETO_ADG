@@ -123,7 +123,7 @@ class StepNode implements NodeInterface
     /**
      * Checks if step has arguments.
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasArguments()
     {

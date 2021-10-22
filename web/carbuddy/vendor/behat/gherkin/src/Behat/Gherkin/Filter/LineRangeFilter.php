@@ -46,7 +46,7 @@ class LineRangeFilter implements FilterInterface
      *
      * @param FeatureNode $feature Feature instance
      *
-     * @return bool
+     * @return Boolean
      */
     public function isFeatureMatch(FeatureNode $feature)
     {
@@ -59,7 +59,7 @@ class LineRangeFilter implements FilterInterface
      *
      * @param ScenarioInterface $scenario Scenario or Outline node instance
      *
-     * @return bool
+     * @return Boolean
      */
     public function isScenarioMatch(ScenarioInterface $scenario)
     {

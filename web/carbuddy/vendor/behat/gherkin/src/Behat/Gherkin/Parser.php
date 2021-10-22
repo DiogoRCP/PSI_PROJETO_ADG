@@ -11,7 +11,6 @@
 namespace Behat\Gherkin;
 
 use Behat\Gherkin\Exception\LexerException;
-use Behat\Gherkin\Exception\NodeException;
 use Behat\Gherkin\Exception\ParserException;
 use Behat\Gherkin\Node\BackgroundNode;
 use Behat\Gherkin\Node\ExampleTableNode;
@@ -235,7 +234,7 @@ class Parser
     {
         $token = $this->expectTokenType('Feature');
 
-        $title = trim($token['value'] ?? '');
+        $title = trim($token['value']) ?: null;
         $description = null;
         $tags = $this->popTags();
         $background = null;
@@ -288,7 +287,7 @@ class Parser
 
         return new FeatureNode(
             rtrim($title) ?: null,
-            rtrim($description ?? '') ?: null,
+            rtrim($description) ?: null,
             $tags,
             $background,
             $scenarios,
@@ -310,7 +309,7 @@ class Parser
     {
         $token = $this->expectTokenType('Background');
 
-        $title = trim($token['value'] ?? '');
+        $title = trim($token['value']);
         $keyword = $token['keyword'];
         $line = $token['line'];
 
@@ -375,7 +374,7 @@ class Parser
     {
         $token = $this->expectTokenType('Scenario');
 
-        $title = trim($token['value'] ?? '');
+        $title = trim($token['value']);
         $tags = $this->popTags();
         $keyword = $token['keyword'];
         $line = $token['line'];
@@ -436,7 +435,7 @@ class Parser
     {
         $token = $this->expectTokenType('Outline');
 
-        $title = trim($token['value'] ?? '');
+        $title = trim($token['value']);
         $tags = $this->popTags();
         $keyword = $token['keyword'];
 
@@ -550,15 +549,13 @@ class Parser
      */
     protected function parseExamples()
     {
-        $keyword = ($this->expectTokenType('Examples'))['keyword'];
-        $tags = empty($this->tags) ? array() : $this->popTags();
-        $table = $this->parseTableRows();
+        $token = $this->expectTokenType('Examples');
 
-        try {
-            return new ExampleTableNode($table, $keyword, $tags);
-        } catch(NodeException $e) {
-            $this->rethrowNodeException($e);
-        }
+        $keyword = $token['keyword'];
+
+        $tags = empty($this->tags) ? array() : $this->popTags();
+
+        return new ExampleTableNode($this->parseTableRows(), $keyword, $tags);
     }
 
     /**
@@ -568,13 +565,7 @@ class Parser
      */
     protected function parseTable()
     {
-        $table = $this->parseTableRows();
-
-        try {
-            return new TableNode($table);
-        } catch(NodeException $e) {
-            $this->rethrowNodeException($e);
-        }
+        return new TableNode($this->parseTableRows());
     }
 
     /**
@@ -608,9 +599,6 @@ class Parser
     protected function parseTags()
     {
         $token = $this->expectTokenType('Tag');
-
-        $this->guardTags($token['tags']);
-
         $this->tags = array_merge($this->tags, $token['tags']);
 
         $possibleTransitions = array(
@@ -645,20 +633,6 @@ class Parser
         $this->tags = array();
 
         return $tags;
-    }
-
-    /**
-     * Checks the tags fit the required format
-     *
-     * @param string[] $tags
-     */
-    protected function guardTags(array $tags)
-    {
-        foreach ($tags as $tag) {
-            if (preg_match('/\s/', $tag)) {
-                trigger_error('Whitespace in tags is deprecated, found "$tag"', E_USER_DEPRECATED);
-            }
-        }
     }
 
     /**
@@ -758,14 +732,5 @@ class Parser
             );
         }
         return $node;
-    }
-
-    private function rethrowNodeException(NodeException $e): void
-    {
-        throw new ParserException(
-            $e->getMessage() . ($this->file ? ' in file ' . $this->file : ''),
-            0,
-            $e
-        );
     }
 }

@@ -40,11 +40,11 @@ class NarrativeFilter extends SimpleFilter
      *
      * @param FeatureNode $feature Feature instance
      *
-     * @return bool
+     * @return Boolean
      */
     public function isFeatureMatch(FeatureNode $feature)
     {
-        return 1 === preg_match($this->regex, $feature->getDescription() ?? '');
+        return 1 === preg_match($this->regex, $feature->getDescription());
     }
 
     /**
@@ -52,7 +52,7 @@ class NarrativeFilter extends SimpleFilter
      *
      * @param ScenarioInterface $scenario Scenario or Outline node instance
      *
-     * @return bool
+     * @return Boolean
      */
     public function isScenarioMatch(ScenarioInterface $scenario)
     {

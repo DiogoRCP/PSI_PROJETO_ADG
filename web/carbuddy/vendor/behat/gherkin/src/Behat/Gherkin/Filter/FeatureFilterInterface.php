@@ -24,7 +24,7 @@ interface FeatureFilterInterface
      *
      * @param FeatureNode $feature Feature instance
      *
-     * @return bool
+     * @return Boolean
      */
     public function isFeatureMatch(FeatureNode $feature);
 

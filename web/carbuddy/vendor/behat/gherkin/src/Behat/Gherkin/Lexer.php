@@ -38,7 +38,6 @@ class Lexer
     private $featureStarted = false;
     private $allowMultilineArguments = false;
     private $allowSteps = false;
-    private $pyStringDelimiter = null;
 
     /**
      * Initializes lexer.
@@ -177,15 +176,6 @@ class Lexer
         }
 
         $this->line = $this->lines[$this->lineNumber - 1];
-        $this->trimmedLine = null;
-    }
-
-    /**
-     * Consumes first part of line from input without incrementing the line number
-     */
-    protected function consumeLineUntil(int $trimmedOffset)
-    {
-        $this->line = mb_substr(ltrim($this->line), $trimmedOffset, null, 'utf-8');
         $this->trimmedLine = null;
     }
 
@@ -445,25 +435,13 @@ class Lexer
             return null;
         }
 
-        if(!preg_match('/^\s*(?<delimiter>"""|```)/u', $this->line, $matches, PREG_OFFSET_CAPTURE)) {
+        if (false === ($pos = mb_strpos($this->line, '"""', 0, 'utf8'))) {
             return null;
-        }
-
-        ['delimiter' => [0 => $delimiter, 1 => $indent]] = $matches;
-
-        if ($this->inPyString) {
-            if ($this->pyStringDelimiter !== $delimiter) {
-                return null;
-            }
-            $this->pyStringDelimiter = null;
-        }
-        else {
-            $this->pyStringDelimiter= $delimiter;
         }
 
         $this->inPyString = !$this->inPyString;
         $token = $this->takeToken('PyStringOp');
-        $this->pyStringSwallow = $indent;
+        $this->pyStringSwallow = $pos;
 
         $this->consumeLine();
 
@@ -483,7 +461,7 @@ class Lexer
 
         $token = $this->scanText();
         // swallow trailing spaces
-        $token['value'] = preg_replace('/^\s{0,' . $this->pyStringSwallow . '}/u', '', $token['value'] ?? '');
+        $token['value'] = preg_replace('/^\s{0,' . $this->pyStringSwallow . '}/u', '', $token['value']);
 
         return $token;
     }
@@ -524,16 +502,8 @@ class Lexer
     protected function scanTags()
     {
         $line = $this->getTrimmedLine();
-
         if (!isset($line[0]) || '@' !== $line[0]) {
             return null;
-        }
-
-        if(preg_match('/^(?<line>.*)\s+#.*$/', $line, $matches)) {
-            ['line' => $line] = $matches;
-            $this->consumeLineUntil(mb_strlen($line, 'utf-8'));
-        } else {
-            $this->consumeLine();
         }
 
         $token = $this->takeToken('Tag');
@@ -541,6 +511,7 @@ class Lexer
         $tags = array_map('trim', $tags);
         $token['tags'] = $tags;
 
+        $this->consumeLine();
 
         return $token;
     }

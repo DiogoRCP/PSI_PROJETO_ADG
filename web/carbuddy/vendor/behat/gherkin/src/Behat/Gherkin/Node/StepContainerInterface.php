@@ -20,7 +20,7 @@ interface StepContainerInterface extends NodeInterface
     /**
      * Checks if container has steps.
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasSteps();
 

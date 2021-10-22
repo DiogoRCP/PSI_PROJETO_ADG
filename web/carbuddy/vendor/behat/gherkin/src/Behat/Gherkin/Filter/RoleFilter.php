@@ -42,11 +42,11 @@ class RoleFilter extends SimpleFilter
      *
      * @param FeatureNode $feature Feature instance
      *
-     * @return bool
+     * @return Boolean
      */
     public function isFeatureMatch(FeatureNode $feature)
     {
-        return 1 === preg_match($this->pattern, $feature->getDescription() ?? '');
+        return 1 === preg_match($this->pattern, $feature->getDescription());
     }
 
     /**

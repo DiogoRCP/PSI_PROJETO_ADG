@@ -73,7 +73,7 @@ class BackgroundNode implements ScenarioLikeInterface
     /**
      * Checks if background has steps.
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasSteps()
     {

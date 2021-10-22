@@ -81,7 +81,7 @@ class ScenarioNode implements ScenarioInterface
      *
      * @param string $tag
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasTag($tag)
     {
@@ -91,7 +91,7 @@ class ScenarioNode implements ScenarioInterface
     /**
      * Checks if scenario has tags (both inherited from feature and own).
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasTags()
     {
@@ -111,7 +111,7 @@ class ScenarioNode implements ScenarioInterface
     /**
      * Checks if scenario has steps.
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasSteps()
     {

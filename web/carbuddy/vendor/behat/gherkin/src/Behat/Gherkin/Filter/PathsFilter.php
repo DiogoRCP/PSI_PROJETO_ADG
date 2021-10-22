@@ -45,7 +45,7 @@ class PathsFilter extends SimpleFilter
      *
      * @param FeatureNode $feature Feature instance
      *
-     * @return bool
+     * @return Boolean
      */
     public function isFeatureMatch(FeatureNode $feature)
     {

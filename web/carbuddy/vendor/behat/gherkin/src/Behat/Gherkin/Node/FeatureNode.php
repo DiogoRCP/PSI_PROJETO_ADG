@@ -116,7 +116,7 @@ class FeatureNode implements KeywordNodeInterface, TaggedNodeInterface
     /**
      * Checks if feature has a description.
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasDescription()
     {
@@ -138,7 +138,7 @@ class FeatureNode implements KeywordNodeInterface, TaggedNodeInterface
      *
      * @param string $tag
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasTag($tag)
     {
@@ -148,7 +148,7 @@ class FeatureNode implements KeywordNodeInterface, TaggedNodeInterface
     /**
      * Checks if feature has tags.
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasTags()
     {
@@ -168,7 +168,7 @@ class FeatureNode implements KeywordNodeInterface, TaggedNodeInterface
     /**
      * Checks if feature has background.
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasBackground()
     {
@@ -188,7 +188,7 @@ class FeatureNode implements KeywordNodeInterface, TaggedNodeInterface
     /**
      * Checks if feature has scenarios.
      *
-     * @return bool
+     * @return Boolean
      */
     public function hasScenarios()
     {

@@ -50,7 +50,7 @@ class FileCache implements CacheInterface
      * @param string  $path      Feature path
      * @param integer $timestamp The last time feature was updated
      *
-     * @return bool
+     * @return Boolean
      */
     public function isFresh($path, $timestamp)
     {

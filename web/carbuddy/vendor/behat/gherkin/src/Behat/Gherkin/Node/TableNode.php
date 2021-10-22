@@ -14,7 +14,6 @@ use ArrayIterator;
 use Behat\Gherkin\Exception\NodeException;
 use Iterator;
 use IteratorAggregate;
-use ReturnTypeWillChange;
 
 /**
  * Represents Gherkin Table argument.
@@ -334,7 +333,6 @@ class TableNode implements ArgumentInterface, IteratorAggregate
      *
      * @return Iterator
      */
-    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->getHash());

@@ -26,7 +26,7 @@ interface ComplexFilterInterface extends FeatureFilterInterface
      * @param FeatureNode       $feature  Feature node instance
      * @param ScenarioInterface $scenario Scenario or Outline node instance
      *
-     * @return bool
+     * @return Boolean
      */
     public function isScenarioMatch(FeatureNode $feature, ScenarioInterface $scenario);
 }
