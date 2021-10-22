@@ -95,7 +95,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $entrar = static::findOne(['username' => $username]);
         if($type == "backend") {
-            if ($entrar->usertype == "admin" || $entrar->usertype == "collaborator") {
+            if ($entrar->usertype == "admin") {
                 return $entrar;
             }
         }else{
