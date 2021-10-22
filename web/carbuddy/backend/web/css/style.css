@@ -2,10 +2,6 @@
   font-family: BRLNSDB;
   src: url(fonts/BRLNSDB.TTF);
 }
-* {
-  color: white;
-}
-
 h1, h2, h3, h4, h5, h6, .navbar-brand {
   font-family: BRLNSDB;
 }
