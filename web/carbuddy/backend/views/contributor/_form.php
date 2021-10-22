@@ -14,9 +14,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'speciality')->dropDownList(['Mechanical' => 'Mechanical', 'Electrician' => 'Electrician', 'Painter' => 'Painter', 'Locksmith' => 'Locksmith']) ?>
 
-    <?= $form->field($model, 'companyId')->textInput() ?>
+    <?= $form->field($model, 'companyId')->dropDownList([
+            foreach()
+    ]) ?>
 
-    <?= $form->field($model, 'userId')->textInput() ?>
+    <?= $form->field($model, 'userId')->dropDownList() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
