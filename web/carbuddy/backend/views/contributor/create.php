@@ -13,6 +13,9 @@ $this->title = 'Create Contributor';
     <div class="contributors-content">
 
         <h1><?= Html::encode($this->title) ?></h1>
+        <p>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
+        </p>
 
         <?= $this->render('_form', [
             'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies

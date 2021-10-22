@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Contributors */
 
-$this->title = $model->company->companyname.' ('.$model->user->username.')';
+$this->title = $model->user->username.' ('.$model->company->companyname.')';
 ?>
 <div class="contributors-view">
 
