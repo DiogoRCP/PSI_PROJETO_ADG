@@ -144,4 +144,32 @@ body .site-login .contentor .buttonlogin {
   color: beige;
 }
 
+.contributors-view {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.contributors-view table {
+  color: white;
+}
+.contributors-view table a {
+  color: beige;
+}
+
+.contributors-index {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.contributors-index table {
+  color: white;
+}
+.contributors-index table a {
+  color: beige;
+}
+
 /*# sourceMappingURL=style.css.map */
