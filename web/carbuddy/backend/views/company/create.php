@@ -9,13 +9,12 @@ $this->title = 'Create Company';
 
 ?>
 <div class="companies-create">
+    <div class="companies-content">
+        <h1><?= Html::encode($this->title) ?></h1>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
+        <?= $this->render('_form', [
+            'model' => $model,
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->render('_form', [
-        'model' => $model,
-
-    ]) ?>
-
-
+        ]) ?>
+    </div>
 </div>

@@ -8,11 +8,11 @@ use yii\helpers\Html;
 $this->title = 'Update Company: ' . $model->companyname.' ('.$model->nif.')';
 ?>
 <div class="companies-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+    <div class="companies-content">
+        <h1><?= Html::encode($this->title) ?></h1>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
+        <?= $this->render('_form', [
+            'model' => $model,
+        ]) ?>
+    </div>
 </div>
