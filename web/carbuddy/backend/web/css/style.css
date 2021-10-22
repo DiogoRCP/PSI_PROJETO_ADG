@@ -1,3 +1,11 @@
+@font-face {
+  font-family: BRLNSDB;
+  src: url(fonts/BRLNSDB.TTF);
+}
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: BRLNSDB;
+}
+
 body {
   background-image: url("../images/fundo.jpg");
   background-repeat: no-repeat;
