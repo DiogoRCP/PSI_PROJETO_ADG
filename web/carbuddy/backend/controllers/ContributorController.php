@@ -2,8 +2,11 @@
 
 namespace backend\controllers;
 
+use backend\models\Companies;
 use backend\models\Contributors;
 use backend\models\ContributorSearch;
+use backend\models\Users;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -67,6 +70,8 @@ class ContributorController extends Controller
     public function actionCreate()
     {
         $model = new Contributors();
+        $modelUsers = Users::findAll(['usertype'=>'collaborator']);
+        $modelCompanies = Companies::find()->all();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -75,9 +80,8 @@ class ContributorController extends Controller
         } else {
             $model->loadDefaultValues();
         }
-
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies
         ]);
     }
 
