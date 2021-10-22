@@ -6,10 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Contributors */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Contributors', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+$this->title = $model->user->username.' ('.$model->company->companyname.')';
 ?>
 <div class="contributors-view">
 
@@ -24,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -31,8 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'speciality',
-            'companyId',
-            'userId',
+            [
+                'label' => 'Company',
+                'value' => $model->company->companyname
+            ],
+            [
+                'label' => 'User',
+                'value' => $model->user->username,
+            ],
         ],
     ]) ?>
 

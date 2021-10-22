@@ -95,13 +95,15 @@ class ContributorController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelUsers = Users::findAll(['usertype'=>'collaborator']);
+        $modelCompanies = Companies::find()->all();
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies
         ]);
     }
 

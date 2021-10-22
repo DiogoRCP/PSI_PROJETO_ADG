@@ -2,10 +2,6 @@
   font-family: BRLNSDB;
   src: url(fonts/BRLNSDB.TTF);
 }
-* {
-  color: white;
-}
-
 h1, h2, h3, h4, h5, h6, .navbar-brand {
   font-family: BRLNSDB;
 }
@@ -141,6 +137,47 @@ body .site-login .contentor .buttonlogin {
   color: white;
 }
 .companies-index table a {
+  color: beige;
+}
+
+.contributors-create, .contributors-update {
+  display: flex;
+  justify-content: center;
+}
+.contributors-create .contributors-content, .contributors-update .contributors-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 2.5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+  width: 25rem;
+}
+
+.contributors-view {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.contributors-view table {
+  color: white;
+}
+.contributors-view table a {
+  color: beige;
+}
+
+.contributors-index {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.contributors-index table {
+  color: white;
+}
+.contributors-index table a {
   color: beige;
 }
 
