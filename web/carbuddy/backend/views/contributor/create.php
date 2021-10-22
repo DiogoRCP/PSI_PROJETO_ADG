@@ -7,16 +7,15 @@ use yii\helpers\Html;
 /* @var $modelUsers backend\models\Users */
 /* @var $modelCompanies backend\models\Companies */
 
-$this->title = 'Create Contributors';
-$this->params['breadcrumbs'][] = ['label' => 'Contributors', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Create Contributor';
 ?>
 <div class="contributors-create">
+    <div class="contributors-content">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies
-    ]) ?>
-
+        <?= $this->render('_form', [
+            'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies
+        ]) ?>
+    </div>
 </div>
