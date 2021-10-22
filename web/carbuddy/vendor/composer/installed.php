@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '2.0.43',
-        'version' => '2.0.43.0',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '8ef09cda772131b44e75ad914823264a20ee9636',
         'name' => 'yiisoft/yii2-app-advanced',
         'dev' => true,
     ),
     'versions' => array(
         'behat/gherkin' => array(
-            'pretty_version' => 'v4.8.0',
-            'version' => '4.8.0.0',
+            'pretty_version' => 'v4.9.0',
+            'version' => '4.9.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../behat/gherkin',
             'aliases' => array(),
-            'reference' => '2391482cd003dfdc36b679b27e9f5326bd656acd',
+            'reference' => '0bc8d1e30e96183e4f36db9dc79caead300beff4',
             'dev_requirement' => true,
         ),
         'bower-asset/inputmask' => array(
@@ -266,12 +266,12 @@
             'dev_requirement' => true,
         ),
         'phpdocumentor/reflection-docblock' => array(
-            'pretty_version' => '5.2.2',
-            'version' => '5.2.2.0',
+            'pretty_version' => '5.3.0',
+            'version' => '5.3.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpdocumentor/reflection-docblock',
             'aliases' => array(),
-            'reference' => '069a785b2141f5bcf49f3e353548dc1cce6df556',
+            'reference' => '622548b623e81ca6d78b721c5e029f4ce664f170',
             'dev_requirement' => true,
         ),
         'phpdocumentor/type-resolver' => array(
@@ -533,12 +533,12 @@
             'dev_requirement' => true,
         ),
         'swiftmailer/swiftmailer' => array(
-            'pretty_version' => 'v6.2.7',
-            'version' => '6.2.7.0',
+            'pretty_version' => 'v6.3.0',
+            'version' => '6.3.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../swiftmailer/swiftmailer',
             'aliases' => array(),
-            'reference' => '15f7faf8508e04471f666633addacf54c0ab5933',
+            'reference' => '8a5d5072dca8f48460fce2f4131fcc495eec654c',
             'dev_requirement' => false,
         ),
         'symfony/browser-kit' => array(
@@ -755,12 +755,12 @@
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-app-advanced' => array(
-            'pretty_version' => '2.0.43',
-            'version' => '2.0.43.0',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '8ef09cda772131b44e75ad914823264a20ee9636',
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-bootstrap4' => array(
