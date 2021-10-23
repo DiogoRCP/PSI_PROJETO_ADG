@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '8ef09cda772131b44e75ad914823264a20ee9636',
+        'reference' => '4c9b773b637bbe9747f36464f0c51b309376a147',
         'name' => 'yiisoft/yii2-app-advanced',
         'dev' => true,
     ),
     'versions' => array(
+        '2amigos/yii2-chartjs-widget' => array(
+            'pretty_version' => '2.1.3',
+            'version' => '2.1.3.0',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../2amigos/yii2-chartjs-widget',
+            'aliases' => array(),
+            'reference' => 'b144a4ebd923872a7263c980f8afe2e212378275',
+            'dev_requirement' => false,
+        ),
         'behat/gherkin' => array(
             'pretty_version' => 'v4.9.0',
             'version' => '4.9.0.0',
@@ -18,6 +27,15 @@
             'aliases' => array(),
             'reference' => '0bc8d1e30e96183e4f36db9dc79caead300beff4',
             'dev_requirement' => true,
+        ),
+        'bower-asset/chartjs' => array(
+            'pretty_version' => 'v2.9.4',
+            'version' => '2.9.4.0',
+            'type' => 'bower-asset',
+            'install_path' => __DIR__ . '/../bower-asset/chartjs',
+            'aliases' => array(),
+            'reference' => '9bd4cf82fda9f50a5fb50b72843e06ab88124278',
+            'dev_requirement' => false,
         ),
         'bower-asset/inputmask' => array(
             'pretty_version' => '3.3.11',
@@ -760,7 +778,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '8ef09cda772131b44e75ad914823264a20ee9636',
+            'reference' => '4c9b773b637bbe9747f36464f0c51b309376a147',
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-bootstrap4' => array(

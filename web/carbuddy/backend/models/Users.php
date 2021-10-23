@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "users".
@@ -61,6 +62,14 @@ class Users extends \yii\db\ActiveRecord
             'phonenumber' => 'Phonenumber',
             'registrationdate' => 'Registrationdate',
         ];
+    }
+
+    public function getUserTypes()
+    {
+        $query = $this::find()
+            ->where(['usertype' => $this->usertype])
+            ->count('usertype');
+        return $query;
     }
 
     /**

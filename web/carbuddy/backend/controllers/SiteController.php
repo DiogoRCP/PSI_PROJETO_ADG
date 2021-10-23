@@ -3,9 +3,11 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use backend\models\Users;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -62,7 +64,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $usertypes = Users::find()->select('usertype')->distinct()->all();
+        return $this->render('index', [
+            'usertypes' => $usertypes]
+        );
     }
 
     /**
