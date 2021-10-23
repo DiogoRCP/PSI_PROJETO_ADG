@@ -24,15 +24,15 @@ include_once 'charts.php';
         <div class="row">
             <div class="col-lg-4">
                 <h3>Tipos de utilizador</h3>
-                <?= chart("pie", "Tipos de utilizador", $userlabels, $userdata) ?>
+                <?= chart("pie", "Tipos de utilizador", $userlabels, $userdata, true) ?>
             </div>
             <div class="col-lg-4">
                 <h3>Utilizadores por mês</h3>
-                <?= chart("bar", "Tipos de utilizador", $userlabels, $userdata) ?>
+                <?= chart("bar", "Tipos de utilizador", $userlabels, $userdata, false) ?>
             </div>
             <div class="col-lg-4">
                 <h3>Carros reparados por mês</h3>
-                <?= chart("line", "Tipos de utilizador", $userlabels, $userdata) ?>
+                <?= chart("line", "Tipos de utilizador", $userlabels, $userdata, false) ?>
             </div>
         </div>
 
