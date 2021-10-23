@@ -16,7 +16,7 @@ include_once 'charts.php';
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent">
-        <img src="images/logo_white.png" width="300px">
+        <img src="images/logo_white.png" width="250">
     </div>
 
     <div class="body-content">
