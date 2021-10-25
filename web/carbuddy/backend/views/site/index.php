@@ -1,17 +1,14 @@
 <?php
 
 /* @var $this yii\web\View */
+
 /* @var $usertypes backend\models\Users */
+/* @var $charts backend\models\Charts */
 
-$this->title = 'My Yii Application';
-$userlabels = [];
-$userdata = [];
-foreach ($usertypes as $usertype) {
-    array_push($userlabels, $usertype['usertype']);
-    array_push($userdata, $usertype->getUserTypes());
-}
+use yii\helpers\VarDumper;
 
-include_once 'charts.php';
+$this->title = 'CarBuddy';
+
 ?>
 <div class="site-index">
 
@@ -22,18 +19,13 @@ include_once 'charts.php';
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
-                <h3>Tipos de utilizador</h3>
-                <?= chart("pie", "Tipos de utilizador", $userlabels, $userdata, true) ?>
-            </div>
-            <div class="col-lg-4">
-                <h3>Utilizadores por mês</h3>
-                <?= chart("bar", "Tipos de utilizador", $userlabels, $userdata, false) ?>
-            </div>
-            <div class="col-lg-4">
-                <h3>Carros reparados por mês</h3>
-                <?= chart("line", "Tipos de utilizador", $userlabels, $userdata, false) ?>
-            </div>
+            <!--Adiciona gráficos automáticamente mediante o array charts do controller-->
+            <?php foreach ($charts as $chart) { ?>
+                <div class="col-lg-4">
+                    <h3><?= $chart->getLabel() ?></h3>
+                    <?= $chart ?>
+                </div>
+            <?php } ?>
         </div>
 
     </div>
