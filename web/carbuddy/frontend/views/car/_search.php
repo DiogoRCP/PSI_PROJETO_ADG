@@ -19,11 +19,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'vin') ?>
 
-    <?= $form->field($model, 'registration') ?>
+    <?= $form->field($model, 'brand') ?>
 
-    <?= $form->field($model, 'purschasedate') ?>
+    <?= $form->field($model, 'model') ?>
 
-    <?= $form->field($model, 'kilometers') ?>
+    <?= $form->field($model, 'color') ?>
+
+    <?php // echo $form->field($model, 'carType') ?>
+
+    <?php // echo $form->field($model, 'displacement') ?>
+
+    <?php // echo $form->field($model, 'fuelType') ?>
+
+    <?php // echo $form->field($model, 'registration') ?>
+
+    <?php // echo $form->field($model, 'purschasedate') ?>
+
+    <?php // echo $form->field($model, 'kilometers') ?>
 
     <?php // echo $form->field($model, 'state') ?>
 

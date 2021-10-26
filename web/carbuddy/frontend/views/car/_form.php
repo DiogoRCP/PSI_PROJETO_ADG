@@ -14,6 +14,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'color')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'carType')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'displacement')->textInput() ?>
+
+    <?= $form->field($model, 'fuelType')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'registration')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'purschasedate')->textInput() ?>

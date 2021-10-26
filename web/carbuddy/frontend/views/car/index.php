@@ -28,9 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'vin',
-            'registration',
-            'purschasedate',
-            'kilometers',
+            'brand',
+            'model',
+            'color',
+            //'carType',
+            //'displacement',
+            //'fuelType',
+            //'registration',
+            //'purschasedate',
+            //'kilometers',
             //'state',
             //'userId',
 
