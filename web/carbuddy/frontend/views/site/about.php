@@ -25,7 +25,7 @@ $this->title = 'About';
                 <h2>GitHub and Jira</h2>
 
                 <p>To manage the project, we use Jira and GitHub.</p>
-                <a href="https://psi-da-mds-ga.atlassian.net/jira/software/projects/PPA/boards/4/backlog"><img src="images/jira.svg"></a>
+                <a href="https://psi-da-mds-ga.atlassian.net/jira/software/projects/PPA/boards/4/backlog"><img class="imgAbout" src="images/jira.svg"></a>
                 <br>
                 <br>
                 <a  href="https://github.com/DiogoRCP/PSI_PROJETO_ADG"><img class="imgAbout" src="images/github.svg"></a>
