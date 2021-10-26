@@ -6,16 +6,14 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\CarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Cars';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Vehicles';
 ?>
 <div class="cars-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Cars', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Vehicles', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,20 +22,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            //'id',
             'vin',
             'brand',
             'model',
             'color',
-            //'carType',
-            //'displacement',
-            //'fuelType',
+            'carType',
+            'displacement',
+            'fuelType',
             //'registration',
             //'purschasedate',
-            //'kilometers',
-            //'state',
+            'kilometers',
+            'state',
             //'userId',
 
             ['class' => 'yii\grid\ActionColumn'],

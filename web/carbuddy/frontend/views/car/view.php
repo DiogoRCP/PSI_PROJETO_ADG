@@ -6,9 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Cars */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Cars', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="cars-view">
@@ -24,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= DetailView::widget([

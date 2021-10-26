@@ -14,25 +14,27 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'purschasedate')->input('date') ?>
+
     <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'color')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'color')->input('color',['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'carType')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'carType')->dropDownList(['' => '','Small' => 'Small',
+        'HatchBack' => 'HatchBack', 'SUV' => 'SUV', '4x4' => '4x4', 'Performance' => 'Performance', 'Pick-up' => 'Pick-up'
+    ,'Motorcycle'=>'Motorcycle'])  ?>
 
-    <?= $form->field($model, 'displacement')->textInput() ?>
+    <?= $form->field($model, 'displacement')->input('number',['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fuelType')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'fuelType')->dropDownList(['' => '','Diesel' => 'Diesel', 'Hybrid' => 'Hybrid', 'Electric' => 'Electric', 'Gasoline' => 'Gasoline'])  ?>
 
     <?= $form->field($model, 'registration')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'purschasedate')->textInput() ?>
+    <?= $form->field($model, 'kilometers')->input('number') ?>
 
-    <?= $form->field($model, 'kilometers')->textInput() ?>
-
-    <?= $form->field($model, 'state')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'state')->dropDownList(['' => '','Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending'])  ?>
 
     <?= $form->field($model, 'userId')->textInput() ?>
 
