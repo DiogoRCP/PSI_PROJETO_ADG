@@ -9,6 +9,12 @@ use Yii;
  *
  * @property int $id
  * @property string $vin
+ * @property string $brand
+ * @property string $model
+ * @property string $color
+ * @property string $carType
+ * @property int $displacement
+ * @property string $fuelType
  * @property string $registration
  * @property string $purschasedate
  * @property int $kilometers
@@ -34,10 +40,10 @@ class Cars extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['vin', 'registration', 'purschasedate', 'kilometers', 'state', 'userId'], 'required'],
+            [['vin', 'brand', 'model', 'color', 'carType', 'displacement', 'fuelType', 'registration', 'purschasedate', 'kilometers', 'state', 'userId'], 'required'],
+            [['displacement', 'kilometers', 'userId'], 'integer'],
             [['purschasedate'], 'safe'],
-            [['kilometers', 'userId'], 'integer'],
-            [['vin', 'registration', 'state'], 'string', 'max' => 100],
+            [['vin', 'brand', 'model', 'color', 'carType', 'fuelType', 'registration', 'state'], 'string', 'max' => 100],
             [['vin'], 'unique'],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['userId' => 'id']],
         ];
@@ -51,6 +57,12 @@ class Cars extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'vin' => 'Vin',
+            'brand' => 'Brand',
+            'model' => 'Model',
+            'color' => 'Color',
+            'carType' => 'Car Type',
+            'displacement' => 'Displacement',
+            'fuelType' => 'Fuel Type',
             'registration' => 'Registration',
             'purschasedate' => 'Purschasedate',
             'kilometers' => 'Kilometers',
