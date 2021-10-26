@@ -16,7 +16,12 @@ CREATE TABLE IF NOT EXISTS companies(
 CREATE TABLE IF NOT EXISTS users(
 		id INT UNSIGNED AUTO_INCREMENT,
 		username VARCHAR(100) NOT NULL,
-        userpassword VARCHAR(100) NOT NULL,
+        password_hash TEXT NOT NULL,
+        verification_token TEXT NOT NULL,
+        auth_key TEXT NOT NULL,
+        status INT NOT NULL,
+        updated_at INT NOT NULL,
+        created_at INT NOT NULL,
         usertype VARCHAR(100) NOT NULL,
         nif VARCHAR(9) NOT NULL,
 		birsthday DATE NOT NULL,

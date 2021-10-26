@@ -10,7 +10,7 @@ use yii\helpers\VarDumper;
  *
  * @property int $id
  * @property string $username
- * @property string $userpassword
+ * @property string $password
  * @property string $usertype
  * @property string $nif
  * @property string $birsthday
@@ -37,9 +37,9 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'userpassword', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
+            [['username', 'password', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
             [['birsthday', 'registrationdate'], 'safe'],
-            [['username', 'userpassword', 'usertype', 'email'], 'string', 'max' => 100],
+            [['username', 'password', 'usertype', 'email'], 'string', 'max' => 100],
             [['nif'], 'string', 'max' => 9],
             [['phonenumber'], 'string', 'max' => 40],
             [['nif'], 'unique'],
@@ -54,7 +54,7 @@ class Users extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'username' => 'Username',
-            'userpassword' => 'Userpassword',
+            'password' => 'password',
             'usertype' => 'Usertype',
             'nif' => 'Nif',
             'birsthday' => 'Birsthday',

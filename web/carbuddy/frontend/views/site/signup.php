@@ -25,7 +25,7 @@ $this->title = 'Signup';
 
                 <?= $form->field($model, 'phonenumber')->label('Phone Number')->input("tel", ['pattern'=> '[0-9]{9}']) ?>
 
-                <?= $form->field($model, 'userpassword')->label('Password')->passwordInput() ?>
+                <?= $form->field($model, 'password')->label('Password')->passwordInput() ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

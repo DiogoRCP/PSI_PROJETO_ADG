@@ -21,23 +21,19 @@ use yii\web\IdentityInterface;
  * @property string $verification_token
  * @property string $email
  * @property string $nif
- * @property string $userpassword
  * @property string $phonenumber
  * @property date $birsthday
  * @property string $auth_key
+ * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
-    public $auth_key;
-    public $verification_token;
-    public $status;
-    public $created_at;
-    public $updated_at;
 
     /**
      * {@inheritdoc}
@@ -74,7 +70,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id]);
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -91,17 +87,9 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username, $type)
+    public static function findByUsername($username)
     {
-        $entrar = static::findOne(['username' => $username]);
-        if($type == "backend") {
-            if ($entrar->usertype == "admin") {
-                return $entrar;
-            }
-        }else{
-            return $entrar;
-        }
-        return false;
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -184,7 +172,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return Yii::$app->security->validatePassword($password, $this->userpassword);
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
     /**
@@ -194,7 +182,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->userpassword = Yii::$app->security->generatePasswordHash($password);
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
     /**
