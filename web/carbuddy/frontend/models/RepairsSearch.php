@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\models;
+namespace frontend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Users;
+use frontend\models\Repairs;
 
 /**
- * UserSearch represents the model behind the search form of `backend\models\Users`.
+ * RepairsSearch represents the model behind the search form of `frontend\models\Repairs`.
  */
-class UserSearch extends Users
+class RepairsSearch extends Repairs
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class UserSearch extends Users
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['username', 'password_hash', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber', 'registrationdate'], 'safe'],
+            [['id', 'kilometers', 'carId', 'contributorId'], 'integer'],
+            [['repairdate', 'repairdescription', 'state', 'repairtype'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class UserSearch extends Users
      */
     public function search($params)
     {
-        $query = Users::find();
+        $query = Repairs::find();
 
         // add conditions that should always apply here
 
@@ -59,16 +59,15 @@ class UserSearch extends Users
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'birsthday' => $this->birsthday,
-            'registrationdate' => $this->registrationdate,
+            'kilometers' => $this->kilometers,
+            'repairdate' => $this->repairdate,
+            'carId' => $this->carId,
+            'contributorId' => $this->contributorId,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'userpassword', $this->userpassword])
-            ->andFilterWhere(['like', 'usertype', $this->usertype])
-            ->andFilterWhere(['like', 'nif', $this->nif])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'phonenumber', $this->phonenumber]);
+        $query->andFilterWhere(['like', 'repairdescription', $this->repairdescription])
+            ->andFilterWhere(['like', 'state', $this->state])
+            ->andFilterWhere(['like', 'repairtype', $this->repairtype]);
 
         return $dataProvider;
     }

@@ -126,4 +126,58 @@ body .site-login .contentor .buttonlogin {
   width: 25rem;
 }
 
+.repairs-index {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.repairs-index table {
+  color: white;
+}
+.repairs-index table a {
+  color: beige;
+}
+
+.repairs-view {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.repairs-view table {
+  color: white;
+}
+.repairs-view table a {
+  color: beige;
+}
+
+.repairs-update {
+  display: flex;
+  justify-content: center;
+}
+.repairs-update .repairs-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 2.5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+  width: 25rem;
+}
+
+.repairs-create {
+  display: flex;
+  justify-content: center;
+}
+.repairs-create .repairs-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 2.5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+  width: 25rem;
+}
+
 /*# sourceMappingURL=style.css.map */
