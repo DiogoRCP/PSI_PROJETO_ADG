@@ -14,6 +14,8 @@ function SearchCar(vin) {
             .prop('readonly', true);
         $('#cars-cartype').val(Object.entries(resposta)[3][1][13]['Value'])
             .prop('readonly', true);
+        $('#cars-displacement').val(Object.entries(resposta)[3][1][69]['Value'])
+            .prop('readonly', true);
         $('#cars-fueltype').val(Object.entries(resposta)[3][1][75]['Value'])
             .prop('readonly', true);
     }).fail(function (jqXHR, textStatus) {
