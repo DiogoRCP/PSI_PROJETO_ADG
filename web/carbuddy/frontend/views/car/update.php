@@ -9,6 +9,7 @@ $this->title = 'Update Vehicle: ' .$model->user->username.' ('.$model->brand.' '
 
 ?>
 <div class="cars-update">
+    <div class="cars-content">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
@@ -17,5 +18,5 @@ $this->title = 'Update Vehicle: ' .$model->user->username.' ('.$model->brand.' '
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
+    </div>
 </div>
