@@ -25,10 +25,11 @@ $this->title = 'About';
                 <h2>GitHub and Jira</h2>
 
                 <p>To manage the project, we use Jira and GitHub.</p>
-                <p><a class="btn btn-outline-secondary" href="https://github.com/DiogoRCP/PSI_PROJETO_ADG">Git Repository &raquo;</a></p>
-
-                <p><a class="btn btn-outline-secondary" href="https://psi-da-mds-ga.atlassian.net/jira/software/projects/PPA/boards/4/backlog">Jira &raquo;</a></p>
-            </div>
+                <a href="https://psi-da-mds-ga.atlassian.net/jira/software/projects/PPA/boards/4/backlog"><img class="imgAbout" src="images/jira.svg"></a>
+                <br>
+                <br>
+                <a  href="https://github.com/DiogoRCP/PSI_PROJETO_ADG"><img class="imgAbout" src="images/github.svg"></a>
+               </div>
         </div>
 
 </div>

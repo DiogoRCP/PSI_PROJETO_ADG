@@ -46,6 +46,12 @@ CREATE TABLE IF NOT EXISTS contributors(
 CREATE TABLE IF NOT EXISTS cars(
 		id INT UNSIGNED AUTO_INCREMENT,
         vin VARCHAR(100) NOT NULL,
+        brand VARCHAR(100) NOT NULL,
+        model VARCHAR(100) NOT NULL,
+        color VARCHAR(100) NOT NULL,
+        carType VARCHAR(100) NOT NULL,
+        displacement int not null,
+        fuelType VARCHAR(100) NOT NULL,
         registration VARCHAR(100) NOT NULL,
         purschasedate DATE NOT NULL,
         kilometers INT NOT NULL,
