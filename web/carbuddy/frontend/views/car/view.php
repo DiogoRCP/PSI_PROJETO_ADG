@@ -37,7 +37,7 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
             'displacement',
             'fuelType',
             'registration',
-            'purschasedate',
+            'modelyear',
             'kilometers',
             'state',
             'userId',

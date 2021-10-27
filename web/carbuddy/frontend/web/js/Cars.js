@@ -12,6 +12,8 @@ function SearchCar(vin) {
             .prop('readonly', true);
         $('#cars-model').val(Object.entries(resposta)[3][1][8]['Value'])
             .prop('readonly', true);
+        $('#cars-modelyear').val(Object.entries(resposta)[3][1][9]['Value'])
+            .prop('readonly', true);
         $('#cars-cartype').val(Object.entries(resposta)[3][1][13]['Value'])
             .prop('readonly', true);
         $('#cars-displacement').val(Object.entries(resposta)[3][1][69]['Value'])

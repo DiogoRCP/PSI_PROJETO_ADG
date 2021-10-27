@@ -14,11 +14,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'vin')->textInput(['maxlength' => true, 'onfocusout'=>'SearchCar(this.value)']) ?>
 
-    <?= $form->field($model, 'purschasedate')->input('date') ?>
-
     <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'modelyear')->input('number', ['min' => 1950, 'max' => 9999]) ?>
 
     <?= $form->field($model, 'color')->input('color',['maxlength' => true]) ?>
 

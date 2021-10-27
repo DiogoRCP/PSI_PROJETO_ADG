@@ -13,15 +13,14 @@ use Yii;
  * @property string $model
  * @property string $color
  * @property string $carType
- * @property int $displacement
+ * @property float $displacement
  * @property string $fuelType
  * @property string $registration
- * @property string $purschasedate
+ * @property string $modelyear
  * @property int $kilometers
  * @property string $state
  * @property int $userId
  *
- * @property Repairs[] $repairs
  * @property Users $user
  */
 class Cars extends \yii\db\ActiveRecord
@@ -40,9 +39,10 @@ class Cars extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['vin', 'brand', 'model', 'color', 'carType', 'displacement', 'fuelType', 'registration', 'purschasedate', 'kilometers', 'state', 'userId'], 'required'],
-            [['displacement', 'kilometers', 'userId'], 'integer'],
-            [['purschasedate'], 'safe'],
+            [['vin', 'brand', 'model', 'color', 'carType', 'displacement', 'fuelType', 'registration', 'modelyear', 'kilometers', 'state', 'userId'], 'required'],
+            [['displacement'], 'number'],
+            [['modelyear'], 'safe'],
+            [['kilometers', 'userId'], 'integer'],
             [['vin', 'brand', 'model', 'color', 'carType', 'fuelType', 'registration', 'state'], 'string', 'max' => 100],
             [['vin'], 'unique'],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['userId' => 'id']],
@@ -64,21 +64,11 @@ class Cars extends \yii\db\ActiveRecord
             'displacement' => 'Displacement',
             'fuelType' => 'Fuel Type',
             'registration' => 'Registration',
-            'purschasedate' => 'Purschasedate',
+            'modelyear' => 'Model year',
             'kilometers' => 'Kilometers',
             'state' => 'State',
             'userId' => 'User ID',
         ];
-    }
-
-    /**
-     * Gets query for [[Repairs]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRepairs()
-    {
-        return $this->hasMany(Repairs::className(), ['carId' => 'id']);
     }
 
     /**
