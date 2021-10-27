@@ -79,4 +79,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    public void onClickLogin(View view) {
+        Intent paginalinicial = new Intent(this, Pagina_Inicial.class);
+        startActivity(paginalinicial);
+    }
 }
