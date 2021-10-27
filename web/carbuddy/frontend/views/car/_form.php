@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'color')->input('color',['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'carType')->dropDownList(['' => '','Small' => 'Small',
+    <?= $form->field($model, 'carType')->dropDownList(['' => '', 'PASSENGER CAR' => 'PASSENGER CAR', 'Small' => 'Small',
         'HatchBack' => 'HatchBack', 'SUV' => 'SUV', '4x4' => '4x4', 'Performance' => 'Performance', 'Pick-up' => 'Pick-up'
     ,'Motorcycle'=>'Motorcycle'])  ?>
 
