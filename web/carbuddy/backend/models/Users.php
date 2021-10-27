@@ -37,9 +37,9 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
+            [['username', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
             [['birsthday', 'registrationdate'], 'safe'],
-            [['username', 'password', 'usertype', 'email'], 'string', 'max' => 100],
+            [['username', 'usertype', 'email'], 'string', 'max' => 100],
             [['nif'], 'string', 'max' => 9],
             [['phonenumber'], 'string', 'max' => 40],
             [['nif'], 'unique'],
@@ -55,12 +55,12 @@ class Users extends \yii\db\ActiveRecord
             'id' => 'ID',
             'username' => 'Username',
             'password' => 'password',
-            'usertype' => 'Usertype',
-            'nif' => 'Nif',
+            'usertype' => 'User Type',
+            'nif' => 'NIF',
             'birsthday' => 'Birsthday',
-            'email' => 'Email',
-            'phonenumber' => 'Phonenumber',
-            'registrationdate' => 'Registrationdate',
+            'email' => 'E-mail',
+            'phonenumber' => 'Phone Number',
+            'registrationdate' => 'Registration Date',
         ];
     }
 

@@ -56,7 +56,7 @@ class Cars extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'vin' => 'Vin',
+            'vin' => 'VIN',
             'brand' => 'Brand',
             'model' => 'Model',
             'color' => 'Color',
@@ -64,7 +64,7 @@ class Cars extends \yii\db\ActiveRecord
             'displacement' => 'Displacement',
             'fuelType' => 'Fuel Type',
             'registration' => 'Registration',
-            'purschasedate' => 'Purschasedate',
+            'purschasedate' => 'Purschase Date',
             'kilometers' => 'Kilometers',
             'state' => 'State',
             'userId' => 'User ID',

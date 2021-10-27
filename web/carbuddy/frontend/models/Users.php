@@ -53,13 +53,13 @@ class Users extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'username' => 'Username',
-            'userpassword' => 'Userpassword',
-            'usertype' => 'Usertype',
-            'nif' => 'Nif',
+            'userpassword' => 'User Password',
+            'usertype' => 'User Type',
+            'nif' => 'NIF',
             'birsthday' => 'Birsthday',
-            'email' => 'Email',
-            'phonenumber' => 'Phonenumber',
-            'registrationdate' => 'Registrationdate',
+            'email' => 'E-mail',
+            'phonenumber' => 'Phone Number',
+            'registrationdate' => 'Registration Date',
         ];
     }
 

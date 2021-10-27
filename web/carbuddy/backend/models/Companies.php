@@ -48,11 +48,11 @@ class Companies extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'companyname' => 'Companyname',
-            'nif' => 'Nif',
-            'email' => 'Email',
-            'phonenumber' => 'Phonenumber',
-            'registrationdate' => 'Registrationdate',
+            'companyname' => 'Company Name',
+            'nif' => 'NIF',
+            'email' => 'E-mail',
+            'phonenumber' => 'Phone Number',
+            'registrationdate' => 'Registration Date',
         ];
     }
 
