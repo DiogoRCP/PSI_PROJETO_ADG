@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'vin')->textInput(['maxlength' => true, 'onfocusout'=>'SearchCar(this.value)']) ?>
 
     <?= $form->field($model, 'purschasedate')->input('date') ?>
 
