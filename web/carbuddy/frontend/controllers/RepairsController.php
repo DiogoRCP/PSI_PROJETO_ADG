@@ -97,13 +97,16 @@ class RepairsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelCars = Cars::find()->all();
+        $modelUsers = Users::find()->all();
+        $modelContributor = Contributors::find()->all();
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor, 'modelUsers' => $modelUsers
         ]);
     }
 
