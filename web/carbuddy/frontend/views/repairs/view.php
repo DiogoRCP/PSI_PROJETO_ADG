@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Repairs */
 
-$this->title = $model->id;
+$this->title = $model->car->brand . " " . $model->car->model;
 //$this->params['breadcrumbs'][] = ['label' => 'Repairs', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,14 +29,15 @@ $this->title = $model->id;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            ['label' => 'Car',
+                'value' => $model->car->brand . " " . $model->car->model],
             'kilometers',
-            'repairdate',
+            'repairtype',
             'repairdescription',
             'state',
-            'repairtype',
-            'carId',
-            'contributorId',
+            ['label' => 'Contributor',
+                'value' => $model->contributor->user->username],
+            'repairdate',
         ],
     ]) ?>
 

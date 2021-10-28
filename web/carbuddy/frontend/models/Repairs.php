@@ -52,12 +52,12 @@ class Repairs extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'kilometers' => 'Kilometers',
-            'repairdate' => 'Repair Date',
             'repairdescription' => 'Repair Description',
             'state' => 'State',
             'repairtype' => 'Repair Type',
             'carId' => 'Car',
             'contributorId' => 'Contributor',
+            'repairdate' => 'Repair Start Date',
         ];
     }
 

@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'state') ?>
 
-    <?php // echo $form->field($model, 'repairtype') ?>
+    <?php echo $form->field($model, 'repairtype') ?>
 
     <?php // echo $form->field($model, 'carId') ?>
 
