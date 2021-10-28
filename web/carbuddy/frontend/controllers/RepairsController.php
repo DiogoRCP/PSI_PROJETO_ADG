@@ -2,9 +2,7 @@
 
 namespace frontend\controllers;
 
-use backend\models\Companies;
 use backend\models\Contributors;
-use backend\models\Users;
 use frontend\models\Cars;
 use frontend\models\Repairs;
 use frontend\models\RepairsSearch;
@@ -72,7 +70,8 @@ class RepairsController extends Controller
     {
         $model = new Repairs();
         $modelCars = Cars::find()->all();
-        $modelContributor = \frontend\models\Contributors::find()->all();
+        $modelContributor = Contributors::find()->all();
+
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -82,7 +81,7 @@ class RepairsController extends Controller
         }
 
         return $this->render('create', [
-            'model' => $model, 'modelCars' => $modelCars, 'modelContributor'=>$modelContributor
+            'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor
         ]);
     }
 
