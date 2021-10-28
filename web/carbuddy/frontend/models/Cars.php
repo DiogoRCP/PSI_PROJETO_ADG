@@ -21,6 +21,7 @@ use Yii;
  * @property string $state
  * @property int $userId
  *
+ * @property Repairs[] $repairs
  * @property Users $user
  */
 class Cars extends \yii\db\ActiveRecord
@@ -69,6 +70,16 @@ class Cars extends \yii\db\ActiveRecord
             'state' => 'State',
             'userId' => 'User ID',
         ];
+    }
+
+    /**
+     * Gets query for [[Repairs]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRepairs()
+    {
+        return $this->hasMany(Repairs::className(), ['carId' => 'id']);
     }
 
     /**
