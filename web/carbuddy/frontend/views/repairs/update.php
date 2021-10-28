@@ -4,6 +4,9 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Repairs */
+/* @var $modelCars frontend\models\Cars */
+/* @var $modelUsers backend\models\Users */
+/* @var $modelContributor frontend\models\Contributors */
 
 $this->title = 'Update Repairs: ' . $model->id;
 //$this->params['breadcrumbs'][] = ['label' => 'Repairs', 'url' => ['index']];
@@ -15,7 +18,7 @@ $this->title = 'Update Repairs: ' . $model->id;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor, 'modelUsers' => $modelUsers
     ]) ?>
     </div>
 </div>
