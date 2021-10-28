@@ -9,16 +9,16 @@ use yii\widgets\ActiveForm;
 /* @var $modelContributor frontend\models\Contributors */
 /* @var $form yii\widgets\ActiveForm */
 
-// Carregar Users para a dropDownList
+// Carregar Cars para a dropDownList
 $CarList = ['' => ''];
-foreach ($modelCars as $modelCars) {
-    $CarList += [$modelCars['id'] => $modelCars['vin']];
+foreach ($modelCars as $modelCar) {
+    $CarList += [$modelCar['id'] => $modelCar['vin']];
 }
 
-// Carregar Companies para a dropDownList
+// Carregar Contributors para a dropDownList
 $ContributorsList = ['' => ''];
 foreach ($modelContributor as $modelContributor) {
-    $ContributorsList += [$modelContributor['id'] => $modelContributor['userId']];
+    $ContributorsList += [$modelContributor['id'] => $modelContributor['id']];
 }
 ?>
 
