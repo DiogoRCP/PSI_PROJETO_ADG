@@ -5,6 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Repairs */
 /* @var $modelCars frontend\models\Cars */
+/* @var $modelUsers backend\models\Users */
 /* @var $modelContributor frontend\models\Contributors */
 
 $this->title = 'Create Repairs';
@@ -18,7 +19,7 @@ $this->title = 'Create Repairs';
         <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
     </p>
     <?= $this->render('_form', [
-        'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor
+        'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor, 'modelUsers' => $modelUsers
     ]) ?>
     </div>
 </div>

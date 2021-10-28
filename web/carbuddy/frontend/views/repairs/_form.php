@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Repairs */
 /* @var $modelCars frontend\models\Cars */
+/* @var $modelUsers backend\models\Users */
 /* @var $modelContributor frontend\models\Contributors */
 /* @var $form yii\widgets\ActiveForm */
 
@@ -15,10 +16,15 @@ foreach ($modelCars as $modelCar) {
     $CarList += [$modelCar['id'] => $modelCar['vin']];
 }
 
+$UserList = ['' => ''];
+foreach ($modelUsers as $modelUser) {
+    $UserList += [$modelUser['id'] => $modelUser['username']];
+}
+
 // Carregar Contributors para a dropDownList
 $ContributorsList = ['' => ''];
 foreach ($modelContributor as $modelContributor) {
-    $ContributorsList += [$modelContributor['id'] => $modelContributor['id']];
+    $ContributorsList += [$modelContributor['id'] => $modelUser['username']];
 }
 ?>
 
