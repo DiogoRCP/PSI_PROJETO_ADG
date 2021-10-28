@@ -12,29 +12,33 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'purschasedate')->input('date') ?>
+    <?= $form->field($model, 'vin')->textInput(['maxlength' => true, 'onfocusout' => 'SearchCar(this.value)']) ?>
 
     <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'color')->input('color',['maxlength' => true]) ?>
+    <?= $form->field($model, 'modelyear')->input('number', ['min' => 1950, 'max' => 9999]) ?>
 
-    <?= $form->field($model, 'carType')->dropDownList(['' => '','Small' => 'Small',
+    <?= $form->field($model, 'color')->input('color', ['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'carType')->dropDownList(['' => '', 'PASSENGER CAR' => 'PASSENGER CAR',
+        'MULTIPURPOSE PASSENGER VEHICLE (MPV)' => 'MULTIPURPOSE PASSENGER VEHICLE (MPV)',
+        'TRUCK ' => 'TRUCK ',
+        'MOTORCYCLE' => 'MOTORCYCLE']) ?>
+    <!--'Small' => 'Small',
         'HatchBack' => 'HatchBack', 'SUV' => 'SUV', '4x4' => '4x4', 'Performance' => 'Performance', 'Pick-up' => 'Pick-up'
-    ,'Motorcycle'=>'Motorcycle'])  ?>
+    ,'Motorcycle'=>'Motorcycle'-->
 
-    <?= $form->field($model, 'displacement')->input('number',['maxlength' => true]) ?>
+    <?= $form->field($model, 'displacement')->input('number', ['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fuelType')->dropDownList(['' => '','Diesel' => 'Diesel', 'Hybrid' => 'Hybrid', 'Electric' => 'Electric', 'Gasoline' => 'Gasoline'])  ?>
+    <?= $form->field($model, 'fuelType')->dropDownList(['' => '', 'Diesel' => 'Diesel', 'Hybrid' => 'Hybrid', 'Electric' => 'Electric', 'Gasoline' => 'Gasoline']) ?>
 
     <?= $form->field($model, 'registration')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'kilometers')->input('number') ?>
 
-    <?= $form->field($model, 'state')->dropDownList(['' => '','Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending'])  ?>
+    <?= $form->field($model, 'state')->dropDownList(['' => '', 'Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending']) ?>
 
     <?= $form->field($model, 'userId')->textInput() ?>
 

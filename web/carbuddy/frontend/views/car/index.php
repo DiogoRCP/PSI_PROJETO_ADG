@@ -31,7 +31,7 @@ $this->title = 'Vehicles';
             'displacement',
             'fuelType',
             //'registration',
-            //'purschasedate',
+            'modelyear',
             'kilometers',
             'state',
             //'userId',

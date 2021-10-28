@@ -9,12 +9,12 @@ $this->title = 'Create Vehicle';
 ?>
 <div class="cars-create">
     <div class="cars-content">
-    <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
-    </p>
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+        <h1><?= Html::encode($this->title) ?></h1>
+        <p>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
+        </p>
+        <?= $this->render('_form', [
+            'model' => $model,
+        ]) ?>
     </div>
 </div>

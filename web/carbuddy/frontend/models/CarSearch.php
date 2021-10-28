@@ -18,7 +18,7 @@ class CarSearch extends Cars
     {
         return [
             [['id', 'displacement', 'kilometers', 'userId'], 'integer'],
-            [['vin', 'brand', 'model', 'color', 'carType', 'fuelType', 'registration', 'purschasedate', 'state'], 'safe'],
+            [['vin', 'brand', 'model', 'color', 'carType', 'fuelType', 'registration', 'modelyear', 'state'], 'safe'],
         ];
     }
 
@@ -60,7 +60,7 @@ class CarSearch extends Cars
         $query->andFilterWhere([
             'id' => $this->id,
             'displacement' => $this->displacement,
-            'purschasedate' => $this->purschasedate,
+            'modelyear' => $this->modelyear,
             'kilometers' => $this->kilometers,
             'userId' => $this->userId,
         ]);
