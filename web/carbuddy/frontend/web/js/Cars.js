@@ -7,7 +7,6 @@ function SearchCar(vin) {
         data: {'format': 'json'},
         dataType: "json"
     }).done(function (resposta) {
-        console.log(Object.entries(resposta)[3][1]);
         $('#cars-brand').val(Object.entries(resposta)[3][1][6]['Value'])
             .prop('readonly', true);
         $('#cars-model').val(Object.entries(resposta)[3][1][8]['Value'])
