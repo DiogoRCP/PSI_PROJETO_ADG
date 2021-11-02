@@ -12,6 +12,25 @@ class m211102_131502_init_rbac extends Migration
      */
     public function safeUp()
     {
+        $auth = Yii::$app->authManager;
+
+        //create users
+        $admin = $auth->createRole('admin');
+        $auth->add($admin);
+
+        $client = $auth->createRole('client');
+        $auth->add($client);
+
+        $collaborator = $auth->createRole('collaborator');
+        $auth->add($collaborator);
+
+        //Permissions
+        $createCompany = $auth->createPermission('createCompany');
+        $createCompany->description = 'Create a company';
+        $auth->add($createCompany);
+
+        //Atribuições
+        $auth->addChild($admin, $createCompany);
 
     }
 
@@ -20,12 +39,12 @@ class m211102_131502_init_rbac extends Migration
      */
     public function safeDown()
     {
-        echo "m211102_131502_init_rbac cannot be reverted.\n";
+        $auth = Yii::$app->authManager;
 
-        return false;
+        $auth->removeAll();
     }
 
-    /*
+/*
     // Use up()/down() to run migration code without a transaction.
     public function up()
     {
@@ -34,9 +53,7 @@ class m211102_131502_init_rbac extends Migration
 
     public function down()
     {
-        echo "m211102_131502_init_rbac cannot be reverted.\n";
 
-        return false;
     }
-    */
+*/
 }
