@@ -14,7 +14,7 @@ $this->title = 'Create Contributor';
 
         <h1><?= Html::encode($this->title) ?></h1>
         <p>
-            <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
         </p>
 
         <?= $this->render('_form', [

@@ -16,7 +16,9 @@ $this->title = 'Update Repairs: ' . $model->id;
 <div class="repairs-update">
     <div class="repairs-content">
         <h1><?= Html::encode($this->title) ?></h1>
-
+        <p>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
+        </p>
         <?= $this->render('_form', [
             'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor, 'modelUsers' => $modelUsers
         ]) ?>

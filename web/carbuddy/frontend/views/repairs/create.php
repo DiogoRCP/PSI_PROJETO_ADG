@@ -16,7 +16,7 @@ $this->title = 'Create Repairs';
     <div class = "repairs-content">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
     </p>
     <?= $this->render('_form', [
         'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor, 'modelUsers' => $modelUsers
