@@ -51,7 +51,7 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
-        $menuItems[] = ['label' => 'Repairs', 'url' => ['/repair/index']];
+        $menuItems[] = ['label' => 'Repairs', 'url' => ['/repairs/index']];
         $menuItems[] = ['label' => 'Vehicles', 'url' => ['/car/index']];
     }
     echo Nav::widget([
