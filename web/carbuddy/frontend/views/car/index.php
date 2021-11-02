@@ -27,7 +27,7 @@ $this->title = 'Vehicles';
             'brand',
             'model',
             'color',
-            'carType',
+            //'carType',
             'displacement',
             'fuelType',
             //'registration',
