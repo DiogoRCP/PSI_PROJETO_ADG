@@ -32,20 +32,20 @@ foreach ($modelContributor as $modelContributor) {
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'kilometers')->textInput() ?>
+    <?= $form->field($model, 'kilometers')->input('number') ?>
 
     <?= $form->field($model, 'repairdescription')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'state')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'state')->dropDownList(['' => '','Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending'])  ?>
 
-    <?= $form->field($model, 'repairtype')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'repairtype')->dropDownList(['' => '','Repair' => 'Repair', 'Maintenance' => 'Maintenance'])  ?>
 
     <?= $form->field($model, 'carId')->dropDownList($CarList) ?>
 
     <?= $form->field($model, 'contributorId')->dropDownList($ContributorsList) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
