@@ -17,7 +17,7 @@
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <sodipodi:namedview
      id="namedview48"
-     pagecolor="#ffffff"
+     pagecolor="#000000"
      bordercolor="#666666"
      borderopacity="1.0"
      inkscape:pageshadow="2"
@@ -38,7 +38,7 @@
   <defs
      id="defs10">
     <style
-       id="style2">.cls-1{fill:#253858;}.cls-2{fill:#2684ff;}.cls-3{fill:url(#linear-gradient);}.cls-4{fill:url(#linear-gradient-2);}</style>
+       id="style2">.cls-1{fill:#ffffff;}.cls-2{fill:#2684ff;}.cls-3{fill:url(#linear-gradient);}.cls-4{fill:url(#linear-gradient-2);}</style>
     <linearGradient
        id="linear-gradient"
        x1="34.639999"
