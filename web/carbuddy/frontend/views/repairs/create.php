@@ -13,7 +13,7 @@ $this->title = 'Create Repairs';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="repairs-create">
-    <div class = "repairs-content>"
+    <div class = "repairs-content">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a('Back', ['index'], ['class' => 'btn btn-primary']) ?>
