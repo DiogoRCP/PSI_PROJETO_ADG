@@ -15,7 +15,7 @@ $this->title = 'Contributors';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Contributors', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Contributors', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
