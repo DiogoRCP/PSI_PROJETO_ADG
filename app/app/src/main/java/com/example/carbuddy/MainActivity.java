@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
-        /*editTextUser = findViewById(R.id.editTextTextPersonName);
+        editTextUser = findViewById(R.id.editTextTextPersonName);
         editTextPass = findViewById(R.id.editTextTextPassword);
-        buttonLogin = findViewById(R.id.btnLogin);
+     /*   buttonLogin = findViewById(R.id.btnLogin);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { efetuarLogin(); }
@@ -42,27 +42,27 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
-        private void efetuarLogin() {
+        private boolean efetuarLogin() {
             String user = editTextUser.getText().toString();
             String pass = editTextPass.getText().toString();
             boolean userBool = isUserValid(user);
             boolean passBool = isPassValid(pass);
 
             if(userBool != true)
-                editTextUser.setError("Utilizador Inválido");
+                editTextUser.setError("Invalid User");
 
             if (passBool != true)
-                editTextPass.setError("Password Inválida. Password tem de ter no minimo 8 caracteres");
+                editTextPass.setError("Invalid Password");
 
             if(userBool == true && passBool == true) {
-                editTextPass.setText("Login com sucesso");
-                editTextUser.setText("Login com sucesso");
+                return true;
             }
+            return false;
         }
 
 
         private boolean isUserValid(String user){
-            if(user != null && user != "Nome de Utilizador")
+            if(user.length() > 1 && user != "Username")
                 return true;
             else
                 return false;
@@ -80,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickLogin(View view) {
-        Intent paginalinicial = new Intent(this, Pagina_Inicial.class);
-        startActivity(paginalinicial);
+        if(efetuarLogin()==true) {
+            Intent paginalinicial = new Intent(this, Pagina_Inicial.class);
+            startActivity(paginalinicial);
+        }
     }
 }
