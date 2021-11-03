@@ -18,7 +18,7 @@ class SignupForm extends Model
     public $nif;
     public $birsthday;
     public $phonenumber;
-    public $usertype = "pendente";
+    public $usertype = "client";
 
     /**
      * {@inheritdoc}
