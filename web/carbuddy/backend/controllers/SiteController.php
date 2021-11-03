@@ -76,9 +76,14 @@ class SiteController extends Controller
             new Charts("line", "Mais um teste", ['data' => ["testar", "testamento", "valores"], 'values' => [10, 55, 23]], false)
         ];
 
-        return $this->render('index', [
-                'charts' => $charts]
-        );
+        if (Yii::$app->user->can('backendCrudCompany') && Yii::$app->user->can('backendCrudContributor') && Yii::$app->user->can('backendCrudUser')) {
+            return $this->render('index', [
+                    'charts' => $charts]
+            );
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**
@@ -86,7 +91,8 @@ class SiteController extends Controller
      *
      * @return string|Response
      */
-    public function actionLogin()
+    public
+    function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -110,7 +116,8 @@ class SiteController extends Controller
      *
      * @return Response
      */
-    public function actionLogout()
+    public
+    function actionLogout()
     {
         Yii::$app->user->logout();
 
