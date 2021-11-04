@@ -4,5 +4,18 @@
 
 $font-title: BRLNSDB
 
-h1, h2, h3, h4, h5, h6, .navbar-brand
+@font-face
+  font-family: WorkSans
+  src: url(fonts/WorkSans-Regular.ttf)
+
+$font-title: BRLNSDB
+$font-regular: WorkSans
+
+\:root
+  font-size: 0.875em
+
+*
+  font-family: $font-regular
+
+h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link
   font-family: $font-title
