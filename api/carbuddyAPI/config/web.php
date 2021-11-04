@@ -54,11 +54,22 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule',
-                    'controller' => 'v1/users',
+                    'controller' => 'v1/user',
                     'controller' => 'v1/repairs',
                     'controller' => 'v1/companies',
                     'controller' => 'v1/cars',
+
                     'controller' => 'v1/contributors',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET set/{limit}' => 'set',
+
+                        'POST post' => 'post',
+                        'PUT put/{id}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                     'pluralize' => false ]
             ],
         ],
