@@ -6,6 +6,7 @@ use backend\models\Companies;
 use backend\models\Contributors;
 use backend\models\ContributorSearch;
 use backend\models\Users;
+use Yii;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -69,20 +70,25 @@ class ContributorController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Contributors();
-        $modelUsers = Users::findAll(['usertype'=>'collaborator']);
-        $modelCompanies = Companies::find()->all();
+        if (Yii::$app->user->can('backendCrudContributor')) {
+            $model = new Contributors();
+            $modelUsers = Users::findAll(['usertype' => 'collaborator']);
+            $modelCompanies = Companies::find()->all();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
+            return $this->render('create', [
+                'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies
+            ]);
         } else {
-            $model->loadDefaultValues();
+            Yii::$app->user->logout();
+            return $this->goHome();
         }
-        return $this->render('create', [
-            'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies
-        ]);
     }
 
     /**
@@ -94,17 +100,22 @@ class ContributorController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $modelUsers = Users::findAll(['usertype'=>'collaborator']);
-        $modelCompanies = Companies::find()->all();
+        if (Yii::$app->user->can('backendCrudContributor')) {
+            $model = $this->findModel($id);
+            $modelUsers = Users::findAll(['usertype' => 'collaborator']);
+            $modelCompanies = Companies::find()->all();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
         }
-
-        return $this->render('update', [
-            'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies
-        ]);
     }
 
     /**
@@ -116,9 +127,13 @@ class ContributorController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        if (Yii::$app->user->can('backendCrudContributor')) {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**
@@ -128,7 +143,8 @@ class ContributorController extends Controller
      * @return Contributors the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected
+    function findModel($id)
     {
         if (($model = Contributors::findOne($id)) !== null) {
             return $model;

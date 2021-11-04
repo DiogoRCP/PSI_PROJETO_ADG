@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use backend\models\Users;
 use backend\models\UserSearch;
+use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,13 +39,18 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->user->can('backendCrudCompany')) {
+            $searchModel = new UserSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**
@@ -54,31 +61,14 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Users model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Users();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if (Yii::$app->user->can('backendCrudCompany')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
         } else {
-            $model->loadDefaultValues();
+            Yii::$app->user->logout();
+            return $this->goHome();
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -90,15 +80,28 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if (Yii::$app->user->can('backendCrudUser')) {
+            $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                $this->AssignUserUpdate($model);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
         }
+    }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+    public function AssignUserUpdate($model){
+        $auth = Yii::$app->authManager;
+
+        $auth->revokeAll($model->id);
+        $auth->assign($auth->getRole($model->usertype), $model->id);
     }
 
     /**
@@ -110,9 +113,13 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        if (Yii::$app->user->can('backendCrudUser')) {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**
