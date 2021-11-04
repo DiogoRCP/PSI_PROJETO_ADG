@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\v1\controllers;
+use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\filters\auth\HttpBasicAuth;
 use app\models\User;
@@ -13,16 +14,15 @@ class ContributorsController extends ActiveController
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(),
-            'auth' => [$this, 'auth']
+            'class' => QueryParamAuth::className()
         ];
 
         return $behaviors;
     }
-    public function auth($username, $password_hash) {
+    public function auth($token) {
 
-        $user = User::findByUsername($username);
-        if ($user && $user->validatePassword($password_hash))
+        $user = User::findIdentityByAccessToken($token);
+        if ($user !=null)
         {
             return $user;
         } return null;
