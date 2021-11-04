@@ -37,7 +37,7 @@ class Contributors extends \yii\db\ActiveRecord
             [['speciality'], 'string', 'max' => 100],
             [['userId'], 'unique'],
             [['companyId'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::className(), 'targetAttribute' => ['companyId' => 'id']],
-            [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['userId' => 'id']],
+            [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
         ];
     }
 

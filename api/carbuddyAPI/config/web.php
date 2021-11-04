@@ -11,6 +11,11 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'v1' => [
+            'class' => 'app\modules\v1\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -49,12 +54,61 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule',
-                    'controller' => 'users',
-                    'controller' => 'repairs',
-                    'controller' => 'companies',
-                    'controller' => 'cars',
-                    'controller' => 'contributors',
-                    'pluralize' => false ]
+                    'controller' => 'v1/user',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET set/{limit}' => 'set',
+                        'POST post' => 'post',
+                        'PUT put/{id}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+
+                    'controller' => 'v1/repairs',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET set/{limit}' => 'set',
+                        'POST post' => 'post',
+                        'PUT put/{id}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+
+                    'controller' => 'v1/companies',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET set/{limit}' => 'set',
+                        'POST post' => 'post',
+                        'PUT put/{id}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+
+                    'controller' => 'v1/cars',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET set/{limit}' => 'set',
+                        'POST post' => 'post',
+                        'PUT put/{id}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+
+                    'controller' => 'v1/contributors',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET set/{limit}' => 'set',
+                        'POST post' => 'post',
+                        'PUT put/{id}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                ]
             ],
         ],
 
