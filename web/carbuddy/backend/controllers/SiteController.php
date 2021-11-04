@@ -76,7 +76,7 @@ class SiteController extends Controller
             new Charts("line", "Mais um teste", ['data' => ["testar", "testamento", "valores"], 'values' => [10, 55, 23]], false)
         ];
 
-        if (Yii::$app->user->can('backendCrudCompany') && Yii::$app->user->can('backendCrudContributor') && Yii::$app->user->can('backendCrudUser')) {
+        if (Yii::$app->user->can('admin')) {
             return $this->render('index', [
                     'charts' => $charts]
             );
