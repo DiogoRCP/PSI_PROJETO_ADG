@@ -4,14 +4,94 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d22b902b148b28298601ec014616fdf3",
+    "content-hash": "32cf765eeca77a5ee1cf0f70c22fae2e",
     "packages": [
+        {
+            "name": "2amigos/yii2-chartjs-widget",
+            "version": "2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-chartjs-widget.git",
+                "reference": "b144a4ebd923872a7263c980f8afe2e212378275"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-chartjs-widget/zipball/b144a4ebd923872a7263c980f8afe2e212378275",
+                "reference": "b144a4ebd923872a7263c980f8afe2e212378275",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/chartjs": "~2.6",
+                "yiisoft/yii2": "~2.0.5"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\chartjs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ChartJs widget for Yii2.",
+            "homepage": "http://yiiwheels.com/extension/chartjs-widget",
+            "keywords": [
+                "2amigos",
+                "chartjs",
+                "extension",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/2amigos/yii2-chartjs-widget/issues",
+                "source": "https://github.com/2amigos/yii2-chartjs-widget"
+            },
+            "time": "2018-05-02T17:59:16+00:00"
+        },
+        {
+            "name": "bower-asset/chartjs",
+            "version": "v2.9.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chartjs/Chart.js.git",
+                "reference": "9bd4cf82fda9f50a5fb50b72843e06ab88124278"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chartjs/Chart.js/zipball/9bd4cf82fda9f50a5fb50b72843e06ab88124278",
+                "reference": "9bd4cf82fda9f50a5fb50b72843e06ab88124278"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
         {
             "name": "bower-asset/inputmask",
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -32,7 +112,7 @@
             "version": "3.6.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
+                "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
             },
             "dist": {
@@ -411,16 +491,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.2.7",
+            "version": "v6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "15f7faf8508e04471f666633addacf54c0ab5933"
+                "reference": "8a5d5072dca8f48460fce2f4131fcc495eec654c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/15f7faf8508e04471f666633addacf54c0ab5933",
-                "reference": "15f7faf8508e04471f666633addacf54c0ab5933",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/8a5d5072dca8f48460fce2f4131fcc495eec654c",
+                "reference": "8a5d5072dca8f48460fce2f4131fcc495eec654c",
                 "shasum": ""
             },
             "require": {
@@ -432,7 +512,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "symfony/phpunit-bridge": "^4.4|^5.0"
+                "symfony/phpunit-bridge": "^4.4|^5.4"
             },
             "suggest": {
                 "ext-intl": "Needed to support internationalized email addresses"
@@ -470,7 +550,7 @@
             ],
             "support": {
                 "issues": "https://github.com/swiftmailer/swiftmailer/issues",
-                "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.2.7"
+                "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.3.0"
             },
             "funding": [
                 {
@@ -482,7 +562,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-09T12:30:35+00:00"
+            "time": "2021-10-18T15:26:12+00:00"
         },
         {
             "name": "symfony/polyfill-iconv",
@@ -1250,25 +1330,24 @@
     "packages-dev": [
         {
             "name": "behat/gherkin",
-            "version": "v4.8.0",
+            "version": "v4.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "2391482cd003dfdc36b679b27e9f5326bd656acd"
+                "reference": "0bc8d1e30e96183e4f36db9dc79caead300beff4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/2391482cd003dfdc36b679b27e9f5326bd656acd",
-                "reference": "2391482cd003dfdc36b679b27e9f5326bd656acd",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/0bc8d1e30e96183e4f36db9dc79caead300beff4",
+                "reference": "0bc8d1e30e96183e4f36db9dc79caead300beff4",
                 "shasum": ""
             },
             "require": {
                 "php": "~7.2|~8.0"
             },
             "require-dev": {
-                "cucumber/cucumber": "dev-gherkin-16.0.0",
+                "cucumber/cucumber": "dev-gherkin-22.0.0",
                 "phpunit/phpunit": "~8|~9",
-                "symfony/phpunit-bridge": "~3|~4|~5",
                 "symfony/yaml": "~3|~4|~5"
             },
             "suggest": {
@@ -1277,7 +1356,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.4-dev"
+                    "dev-master": "4.x-dev"
                 }
             },
             "autoload": {
@@ -1308,9 +1387,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Behat/Gherkin/issues",
-                "source": "https://github.com/Behat/Gherkin/tree/v4.8.0"
+                "source": "https://github.com/Behat/Gherkin/tree/v4.9.0"
             },
-            "time": "2021-02-04T12:44:21+00:00"
+            "time": "2021-10-12T13:05:09+00:00"
         },
         {
             "name": "codeception/codeception",
@@ -2347,16 +2426,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.2.2",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556"
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/069a785b2141f5bcf49f3e353548dc1cce6df556",
-                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/622548b623e81ca6d78b721c5e029f4ce664f170",
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170",
                 "shasum": ""
             },
             "require": {
@@ -2367,7 +2446,8 @@
                 "webmozart/assert": "^1.9.1"
             },
             "require-dev": {
-                "mockery/mockery": "~1.3.2"
+                "mockery/mockery": "~1.3.2",
+                "psalm/phar": "^4.8"
             },
             "type": "library",
             "extra": {
@@ -2397,9 +2477,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/master"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.3.0"
             },
-            "time": "2020-09-03T19:13:55+00:00"
+            "time": "2021-10-19T17:43:47+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -5443,5 +5523,5 @@
         "php": ">=5.6.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }

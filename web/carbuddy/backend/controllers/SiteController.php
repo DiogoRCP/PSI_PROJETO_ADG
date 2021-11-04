@@ -3,9 +3,12 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use backend\models\Users;
+use backend\models\Charts;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -62,7 +65,25 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $usertypes = Users::find()->select('usertype')->distinct()->all();
+
+        /*Aqui adiciona-se graficos novos
+            - Tipos de gráficos: line, bar, radar, polarArea, pie, doughnut
+        */
+        $charts = [
+            new Charts("pie", "Tipos de utilizador", Charts::LabelAndData($usertypes), true),
+            new Charts("bar", "Teste", ['data' => ["teste", "testado", "dados"], 'values' => [4, 7, 2]], false),
+            new Charts("line", "Mais um teste", ['data' => ["testar", "testamento", "valores"], 'values' => [10, 55, 23]], false)
+        ];
+
+        if (Yii::$app->user->can('admin')) {
+            return $this->render('index', [
+                    'charts' => $charts]
+            );
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**
@@ -70,14 +91,14 @@ class SiteController extends Controller
      *
      * @return string|Response
      */
-    public function actionLogin()
+    public
+    function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $this->layout = 'blank';
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
@@ -95,7 +116,8 @@ class SiteController extends Controller
      *
      * @return Response
      */
-    public function actionLogout()
+    public
+    function actionLogout()
     {
         Yii::$app->user->logout();
 

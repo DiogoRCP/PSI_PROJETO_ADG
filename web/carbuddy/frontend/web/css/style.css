@@ -1,0 +1,165 @@
+@font-face {
+  font-family: BRLNSDB;
+  src: url(fonts/BRLNSDB.TTF);
+}
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: BRLNSDB;
+}
+
+body {
+  background-image: url("../images/fundo.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  color: white;
+}
+body .site-login {
+  display: flex;
+  justify-content: center;
+}
+body .site-login .contentor {
+  top: 15vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0;
+  width: 30rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+body .site-login .contentor * {
+  background-color: rgba(0, 0, 0, 0);
+}
+body .site-login .contentor .logo {
+  margin: 2rem 0 2rem 0;
+}
+body .site-login .contentor .textform {
+  color: white;
+  width: 70%;
+  margin-left: 4.5rem;
+}
+@media only screen and (max-device-width: 1000px) and (-webkit-min-device-pixel-ratio: 2) {
+  body .site-login .contentor .textform {
+    width: 70%;
+    margin-left: 3rem;
+  }
+}
+body .site-login .contentor .buttonlogin {
+  margin-bottom: -3rem;
+  height: 56px;
+  width: 56px;
+  background-color: gray;
+}
+@media only screen and (max-device-width: 1000px) and (-webkit-min-device-pixel-ratio: 2) {
+  body .site-login .contentor {
+    width: 20rem;
+  }
+}
+
+.site-signup {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 5rem;
+}
+.site-signup .row {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 1.8rem;
+  justify-content: center;
+  width: 30rem;
+}
+.site-signup .row h2 {
+  margin-bottom: 2rem;
+}
+
+.site-about {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+
+.cars-index {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.cars-index table {
+  color: white;
+}
+.cars-index table a {
+  color: beige;
+}
+
+.cars-view {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.cars-view table {
+  color: white;
+}
+.cars-view table a {
+  color: beige;
+}
+
+.cars-update, .cars-create {
+  display: flex;
+  justify-content: center;
+}
+.cars-update .cars-content, .cars-create .cars-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 2.5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+  width: 25rem;
+}
+
+.repairs-index {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.repairs-index table {
+  color: white;
+}
+.repairs-index table a {
+  color: beige;
+}
+
+.repairs-view {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.repairs-view table {
+  color: white;
+}
+.repairs-view table a {
+  color: beige;
+}
+
+.repairs-update, .repairs-create {
+  display: flex;
+  justify-content: center;
+}
+.repairs-update .repairs-content, .repairs-create .repairs-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 2.5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+  width: 25rem;
+}
+
+/*# sourceMappingURL=style.css.map */

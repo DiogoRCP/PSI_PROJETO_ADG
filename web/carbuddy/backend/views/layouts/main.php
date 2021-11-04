@@ -36,11 +36,14 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Users', 'url' => ['/user/index']],
+        ['label' => 'Companies', 'url' => ['/company/index']],
+        ['label' => 'Contributors', 'url' => ['/contributor/index']]
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems2[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
+        $menuItems2[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -50,9 +53,15 @@ AppAsset::register($this);
             . '</li>';
     }
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-center w-100'],
         'items' => $menuItems,
     ]);
+    if($menuItems2!=null){
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-center justify-content-end w-100'],
+            'items' => $menuItems2,
+        ]);
+    }
     NavBar::end();
     ?>
 </header>
@@ -66,13 +75,6 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </main>
-
-<footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
-        <p class="float-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>

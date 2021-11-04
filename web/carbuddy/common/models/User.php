@@ -2,10 +2,12 @@
 
 namespace common\models;
 
+use Symfony\Component\Yaml\Dumper;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\VarDumper;
 use yii\web\IdentityInterface;
 
 /**
@@ -14,9 +16,13 @@ use yii\web\IdentityInterface;
  * @property integer $id
  * @property string $username
  * @property string $password_hash
+ * @property string $usertype
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $email
+ * @property string $nif
+ * @property string $phonenumber
+ * @property date $birsthday
  * @property string $auth_key
  * @property integer $status
  * @property integer $created_at
@@ -29,10 +35,10 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-
     /**
      * {@inheritdoc}
      */
+
     public static function tableName()
     {
         return '{{%user}}';
