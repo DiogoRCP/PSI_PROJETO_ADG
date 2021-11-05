@@ -14,15 +14,15 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-light']) ?>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-secondary',
+            'class' => 'btn btn-dark',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
     </p>
 
     <?= DetailView::widget([
