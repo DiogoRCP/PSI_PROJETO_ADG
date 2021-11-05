@@ -41,7 +41,7 @@ class RepairsController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->can('frontendCrudVehicle')) {
+        if (Yii::$app->user->can('frontendCrudRepair')) {
             $searchModel = new RepairsSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -63,7 +63,7 @@ class RepairsController extends Controller
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->can('frontendCrudVehicle')) {
+        if (Yii::$app->user->can('frontendCrudRepair')) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
@@ -80,7 +80,7 @@ class RepairsController extends Controller
      */
     public function actionCreate()
     {
-        if (Yii::$app->user->can('frontendCrudVehicle')) {
+        if (Yii::$app->user->can('frontendCrudRepair')) {
             $model = new Repairs();
             $modelCars = Cars::find()->all();
             $modelUsers = Users::find()->all();
@@ -112,7 +112,7 @@ class RepairsController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->can('frontendCrudVehicle')) {
+        if (Yii::$app->user->can('frontendCrudRepair')) {
             $model = $this->findModel($id);
             $modelCars = Cars::find()->all();
             $modelUsers = Users::find()->all();
@@ -140,7 +140,7 @@ class RepairsController extends Controller
      */
     public function actionDelete($id)
     {
-        if (Yii::$app->user->can('frontendCrudVehicle')) {
+        if (Yii::$app->user->can('frontendCrudRepair')) {
             $this->findModel($id)->delete();
 
             return $this->redirect(['index']);
