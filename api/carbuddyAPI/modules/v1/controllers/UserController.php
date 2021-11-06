@@ -48,7 +48,7 @@ class UserController extends ActiveController
 
     public function actionPost() {
 
-        $username=\Yii::$app -> request -> get('username');
+        $username=\Yii::$app -> request -> post('username');
         $Usersmodel = new $this -> modelClass;
         $Usersmodel -> username = $username;
 
