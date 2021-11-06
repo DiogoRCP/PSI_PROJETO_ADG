@@ -31,6 +31,7 @@ class CompaniesController extends ActiveController
     {
         return $this->render('index');
     }
+
     public function actionTotal(){
         $Companiessmodel = new $this -> modelClass;
         $recs = $Companiessmodel::find() -> all();
