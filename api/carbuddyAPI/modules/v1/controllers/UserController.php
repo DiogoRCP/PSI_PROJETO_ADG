@@ -48,10 +48,9 @@ class UserController extends ActiveController
 
     public function actionPost() {
 
-        $name=\Yii::$app -> request -> post('name');
-
+        $username=\Yii::$app -> request -> get('username');
         $Usersmodel = new $this -> modelClass;
-        $Usersmodel -> name = $name;
+        $Usersmodel -> username = $username;
 
         $ret = $Usersmodel -> save(false);
         return ['SaveError' => $ret];
@@ -66,5 +65,29 @@ class UserController extends ActiveController
         if($ret)
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");
+    }
+
+    public function actionPut($id){
+
+        $username=\Yii::$app -> request -> post('username');
+        $usertype=\Yii::$app -> request -> post('usertype');
+        $nif=\Yii::$app -> request -> post('nif');
+        $birsthday=\Yii::$app -> request -> post('birsthday');
+        $email=\Yii::$app -> request -> post('email');
+        $phonenumber=\Yii::$app -> request -> post('phonenumber');
+
+        $Usermodel = new $this->modelClass;
+        $rec = $Usermodel::find()->where('id = '.$id)->one();
+
+        $rec->username = $username;
+        $rec->usertype = $usertype;
+        $rec->nif = $nif;
+        $rec->birsthday = $birsthday;
+        $rec->email = $email;
+        $rec->phonenumber = $phonenumber;
+
+        $rec->save(false);
+        return ['SaveError1' => $rec];
+        //throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
 }
