@@ -32,7 +32,11 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
             'vin',
             'brand',
             'model',
-            'color',
+            ['label' => 'Color',
+                'attribute' => 'image',
+                'format' => 'raw',
+                'value' => $model->veicleImage()
+            ],
             'carType',
             'displacement',
             'fuelType',
