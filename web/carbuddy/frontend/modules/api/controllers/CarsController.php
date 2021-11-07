@@ -7,7 +7,7 @@ use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 class CarsController extends ActiveController
 {
-    public $modelClass = 'app\models\Cars';
+    public $modelClass = 'frontend\models\Cars';
 
     public function behaviors()
     {

@@ -1,12 +1,12 @@
 <?php
 
 namespace frontend\modules\api\controllers;
-use frontend\models\User;
+use common\models\User;
 use yii\rest\ActiveController;
 use yii\filters\auth\QueryParamAuth;
 class UserController extends ActiveController
 {
-    public $modelClass = 'app\models\User';
+    public $modelClass = 'common\models\User';
 
     public function behaviors()
     {

@@ -7,7 +7,7 @@ use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 class RepairsController extends ActiveController
 {
-    public $modelClass = 'app\models\Repairs';
+    public $modelClass = 'frontend\models\Repairs';
 
     public function behaviors()
     {

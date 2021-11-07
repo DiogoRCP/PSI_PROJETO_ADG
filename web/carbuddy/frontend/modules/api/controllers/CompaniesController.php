@@ -2,12 +2,11 @@
 
 namespace frontend\modules\api\controllers;
 use frontend\models\User;
-use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 class CompaniesController extends ActiveController
 {
-    public $modelClass = 'app\models\Companies';
+    public $modelClass = 'frontend\models\Companies';
 
     public function behaviors()
     {

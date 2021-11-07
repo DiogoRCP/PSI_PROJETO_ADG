@@ -47,7 +47,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule',
-                    'controller' => 'v1/user',
+                    'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
@@ -58,7 +58,7 @@ return [
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
 
-                    'controller' => 'v1/repairs',
+                    'controller' => 'api/repairs',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
@@ -69,7 +69,7 @@ return [
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
 
-                    'controller' => 'v1/companies',
+                    'controller' => 'api/companies',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
@@ -80,7 +80,7 @@ return [
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
 
-                    'controller' => 'v1/cars',
+                    'controller' => 'api/cars',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
@@ -91,7 +91,7 @@ return [
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
 
-                    'controller' => 'v1/contributors',
+                    'controller' => 'api/contributors',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',

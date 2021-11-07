@@ -3,12 +3,11 @@
 namespace frontend\modules\api\controllers;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
-use yii\filters\auth\HttpBasicAuth;
 use frontend\models\User;
 
 class ContributorsController extends ActiveController
 {
-    public $modelClass = 'app\models\Contributors';
+    public $modelClass = 'frontend\models\Contributors';
 
     public function behaviors()
     {
