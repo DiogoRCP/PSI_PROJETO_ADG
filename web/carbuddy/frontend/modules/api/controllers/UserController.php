@@ -11,6 +11,7 @@ use yii\filters\auth\QueryParamAuth;
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
+    const noPermission = 'Access denied';
 
     public function behaviors()
     {
@@ -24,7 +25,6 @@ class UserController extends ActiveController
 
     public function auth($token)
     {
-
         $user = User::findIdentityByAccessToken($token);
         if ($user != null) {
             return $user;
@@ -34,30 +34,42 @@ class UserController extends ActiveController
 
     public function actionIndex()
     {
-        return $this->render('index');
+        if (\Yii::$app->user->can('admin')) {
+            return $this->render('index');
+        } else {
+            return self::noPermission;
+        }
     }
 
     public function actionTotal()
     {
-        $Usersmodel = new $this->modelClass;
-        $recs = $Usersmodel::find()->all();
-        return ['total' => count($recs)];
+        if (\Yii::$app->user->can('admin')) {
+            $Usersmodel = new $this->modelClass;
+            $recs = $Usersmodel::find()->all();
+            return ['total' => count($recs)];
+        } else {
+            return self::noPermission;
+        }
     }
 
     //http://localhost:8080/api/user/set/3
 
     public function actionSet($limit)
     {
-        $Usersmodel = new $this->modelClass;
-        $rec = $Usersmodel::find()->limit($limit)->all();
-        return ['limite' => $limit, 'Records' => $rec];
+        if (\Yii::$app->user->can('admin')) {
+            $Usersmodel = new $this->modelClass;
+            $rec = $Usersmodel::find()->limit($limit)->all();
+            return ['limite' => $limit, 'Records' => $rec];
+        } else {
+            return self::noPermission;
+        }
     }
 
 // http://localhost:8080/api/user/post
 
     public function actionPost()
     {
-
+        // lembrar que para fazer post de um user, nessa altura ainda não existe access-token
         $username = \Yii::$app->request->post('username');
         $Usersmodel = new $this->modelClass;
         $Usersmodel->username = $username;
@@ -70,11 +82,15 @@ class UserController extends ActiveController
 
     public function actionDelete($id)
     {
-        $Usersmodel = new $this->modelClass;
-        $ret = $Usersmodel->deleteAll("id=" . $id);
-        if ($ret)
-            return ['DelError' => $ret];
-        throw new \yii\web\NotFoundHttpException("Client id not found!");
+        if (\Yii::$app->user->getId() == $id) {
+            $Usersmodel = new $this->modelClass;
+            $ret = $Usersmodel->deleteAll("id=" . $id);
+            if ($ret)
+                return ['DelError' => $ret];
+            throw new \yii\web\NotFoundHttpException("Client id not found!");
+        } else {
+            return self::noPermission;
+        }
     }
 
     public function actionPut($id)
@@ -96,7 +112,7 @@ class UserController extends ActiveController
             //return ['SaveError1' => $rec];
             //throw new \yii\web\NotFoundHttpException("Client id not found!");
         } else {
-            return "Sem permissões";
+            return self::noPermission;
         }
     }
 }
