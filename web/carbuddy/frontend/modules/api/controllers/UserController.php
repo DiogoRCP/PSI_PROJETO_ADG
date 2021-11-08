@@ -36,7 +36,7 @@ class UserController extends ActiveController
         return ['total' => count($recs)];
     }
 
-    //http://localhost:8080/v1/user/set/3
+    //http://localhost:8080/api/user/set/3
 
     public function actionSet($limit){
         $Usersmodel = new $this -> modelClass;
@@ -44,7 +44,7 @@ class UserController extends ActiveController
         return ['limite' => $limit, 'Records' => $rec ];
     }
 
-// http://localhost:8080/v1/user/post
+// http://localhost:8080/api/user/post
 
     public function actionPost() {
 
@@ -56,7 +56,7 @@ class UserController extends ActiveController
         return ['SaveError' => $ret];
     }
 
-    //http://localhost:8080/v1/user/delete/id
+    //http://localhost:8080/api/user/delete/id
 
     public function actionDelete($id)
     {

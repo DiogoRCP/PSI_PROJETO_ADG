@@ -1,12 +1,12 @@
 <?php
 
 namespace frontend\modules\api\controllers;
-use frontend\models\User;
+use backend\models\User;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 class CompaniesController extends ActiveController
 {
-    public $modelClass = 'frontend\models\Companies';
+    public $modelClass = 'backend\models\Companies';
 
     public function behaviors()
     {
