@@ -27,7 +27,7 @@ class m211102_131502_init_rbac extends Migration
 
         //Permissions Back-end
         $crudCompany = $auth->createPermission('backendCrudCompany');
-            $crudCompany->description = 'backendCrudCompany';
+        $crudCompany->description = 'backendCrudCompany';
         $auth->add($crudCompany);
 
         $crudContributor = $auth->createPermission('backendCrudContributor');
