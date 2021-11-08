@@ -1,12 +1,13 @@
 <?php
 
-namespace app\modules\v1\controllers;
+namespace frontend\modules\api\controllers;
 use app\models\User;
-use yii\rest\ActiveController;
+use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
-class UserController extends ActiveController
+use yii\rest\ActiveController;
+class RepairsController extends ActiveController
 {
-    public $modelClass = 'app\models\User';
+    public $modelClass = 'frontend\models\Repairs';
 
     public function behaviors()
     {
@@ -31,38 +32,38 @@ class UserController extends ActiveController
         return $this->render('index');
     }
     public function actionTotal(){
-        $Usersmodel = new $this -> modelClass;
-        $recs = $Usersmodel::find() -> all();
+        $Repairssmodel = new $this -> modelClass;
+        $recs = $Repairssmodel::find() -> all();
         return ['total' => count($recs)];
     }
 
-    //http://localhost:8080/v1/user/set/3
+    //http://localhost:8080/v1/repairs/set/3
 
     public function actionSet($limit){
-        $Usersmodel = new $this -> modelClass;
-        $rec = $Usersmodel::find() -> limit($limit) -> all();
+        $Repairssmodel = new $this -> modelClass;
+        $rec = $Repairssmodel::find() -> limit($limit) -> all();
         return ['limite' => $limit, 'Records' => $rec ];
     }
 
-// http://localhost:8080/v1/user/post
+// http://localhost:8080/v1/repairs/post
 
     public function actionPost() {
 
         $name=\Yii::$app -> request -> post('name');
 
-        $Usersmodel = new $this -> modelClass;
-        $Usersmodel -> name = $name;
+        $Repairssmodel = new $this -> modelClass;
+        $Repairssmodel -> name = $name;
 
-        $ret = $Usersmodel -> save(false);
+        $ret = $Repairssmodel -> save(false);
         return ['SaveError' => $ret];
     }
 
-    //http://localhost:8080/v1/user/delete/id
+    //http://localhost:8080/v1/repairs/delete/id
 
     public function actionDelete($id)
     {
-        $Usersmodel = new $this->modelClass;
-        $ret=$Usersmodel->deleteAll("id=".$id);
+        $Repairssmodel = new $this->modelClass;
+        $ret=$Repairssmodel->deleteAll("id=".$id);
         if($ret)
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");

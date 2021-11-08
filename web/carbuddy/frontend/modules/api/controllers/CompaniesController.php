@@ -1,13 +1,12 @@
 <?php
 
-namespace app\modules\v1\controllers;
-use app\models\User;
-use yii\filters\auth\HttpBasicAuth;
+namespace frontend\modules\api\controllers;
+use backend\models\User;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 class CompaniesController extends ActiveController
 {
-    public $modelClass = 'app\models\Companies';
+    public $modelClass = 'backend\models\Companies';
 
     public function behaviors()
     {
@@ -31,6 +30,7 @@ class CompaniesController extends ActiveController
     {
         return $this->render('index');
     }
+
     public function actionTotal(){
         $Companiessmodel = new $this -> modelClass;
         $recs = $Companiessmodel::find() -> all();
