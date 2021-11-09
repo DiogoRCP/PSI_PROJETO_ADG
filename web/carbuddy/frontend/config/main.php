@@ -53,10 +53,10 @@ return [
                         'GET total' => 'total',
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
-                        'PUT put/{id}' => 'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'PUT put' => 'put',
+                        'DELETE  delete' => 'delete'
                     ],
-                    'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
+                    'tokens' => ['{limit}' => '<limit:\d+>',],
 
                     'controller' => 'api/repairs',
                     'pluralize' => false,

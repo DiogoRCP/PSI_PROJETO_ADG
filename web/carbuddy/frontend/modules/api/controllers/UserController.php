@@ -34,7 +34,7 @@ class UserController extends ActiveController
 
     public function actionIndex()
     {
-        if (\Yii::$app->user->can('admin')) {
+        if (\Yii::$app->user->can('backendCrudUser')) {
             return $this->render('index');
         } else {
             return self::noPermission;
@@ -43,7 +43,7 @@ class UserController extends ActiveController
 
     public function actionTotal()
     {
-        if (\Yii::$app->user->can('admin')) {
+        if (\Yii::$app->user->can('backendCrudUser')) {
             $Usersmodel = new $this->modelClass;
             $recs = $Usersmodel::find()->all();
             return ['total' => count($recs)];
@@ -56,7 +56,7 @@ class UserController extends ActiveController
 
     public function actionSet($limit)
     {
-        if (\Yii::$app->user->can('admin')) {
+        if (\Yii::$app->user->can('backendCrudUser')) {
             $Usersmodel = new $this->modelClass;
             $rec = $Usersmodel::find()->limit($limit)->all();
             return ['limite' => $limit, 'Records' => $rec];
@@ -80,11 +80,11 @@ class UserController extends ActiveController
 
     //http://localhost:8080/api/user/delete/id
 
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        if (\Yii::$app->user->getId() == $id) {
+        if (\Yii::$app->user->can('client')) {
             $Usersmodel = new $this->modelClass;
-            $ret = $Usersmodel->deleteAll("id=" . $id);
+            $ret = $Usersmodel->deleteAll("id=" . \Yii::$app->user->getId());
             if ($ret)
                 return ['DelError' => $ret];
             throw new \yii\web\NotFoundHttpException("Client id not found!");
@@ -93,13 +93,13 @@ class UserController extends ActiveController
         }
     }
 
-    public function actionPut($id)
+    public function actionPut()
     {
-        if (\Yii::$app->user->getId() == $id) {
+        if (\Yii::$app->user->can('client')) {
             $user = json_decode(\Yii::$app->request->rawBody);
 
             $Usermodel = new $this->modelClass;
-            $rec = $Usermodel::find()->where('id = ' . $id)->one();
+            $rec = $Usermodel::find()->where('id = ' . \Yii::$app->user->getId())->one();
 
             if (isset($user->username)) $rec->username = $user->username;
             if (isset($user->usertype)) $rec->usertype = $user->usertype;
