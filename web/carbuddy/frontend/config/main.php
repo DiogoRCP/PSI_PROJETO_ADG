@@ -84,6 +84,7 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
+                        'GET totaluser' => 'totaluser',
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put/{id}' => 'put',
