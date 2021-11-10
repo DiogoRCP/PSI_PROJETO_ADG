@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use frontend\models\Cars;
 use frontend\models\CarSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,13 +38,18 @@ class CarController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CarSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->user->can('frontendCrudVehicle')) {
+            $searchModel = new CarSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**
@@ -54,9 +60,14 @@ class CarController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (Yii::$app->user->can('frontendCrudVehicle')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**
@@ -66,19 +77,24 @@ class CarController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Cars();
+        if (Yii::$app->user->can('frontendCrudVehicle')) {
+            $model = new Cars();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**
@@ -90,15 +106,20 @@ class CarController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if (Yii::$app->user->can('frontendCrudVehicle')) {
+            $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -110,9 +131,13 @@ class CarController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        if (Yii::$app->user->can('frontendCrudVehicle')) {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**

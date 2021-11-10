@@ -1,5 +1,3 @@
-//SearchCar('wBA1V910805G93301', 2016);
-
 function SearchCar(vin) {
     $.ajax({
         url: `https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}`,
@@ -8,17 +6,22 @@ function SearchCar(vin) {
         dataType: "json"
     }).done(function (resposta) {
         $('#cars-brand').val(Object.entries(resposta)[3][1][6]['Value'])
-            .prop('readonly', true);
+            .prop('readonly', (Object.entries(resposta)[3][1][6]['Value'] != null)?true:false);
+
         $('#cars-model').val(Object.entries(resposta)[3][1][8]['Value'])
-            .prop('readonly', true);
+            .prop('readonly', (Object.entries(resposta)[3][1][8]['Value'] != null)?true:false);
+
         $('#cars-modelyear').val(Object.entries(resposta)[3][1][9]['Value'])
-            .prop('readonly', true);
+            .prop('readonly', (Object.entries(resposta)[3][1][9]['Value'] != null)?true:false);
+
         $('#cars-cartype').val(Object.entries(resposta)[3][1][13]['Value'])
-            .prop('readonly', true);
+            .prop('disabled', (Object.entries(resposta)[3][1][13]['Value'] != null)?true:false);
+
         $('#cars-displacement').val(Object.entries(resposta)[3][1][69]['Value'])
-            .prop('readonly', true);
+            .prop('readonly', (Object.entries(resposta)[3][1][69]['Value'] != null)?true:false);
+
         $('#cars-fueltype').val(Object.entries(resposta)[3][1][75]['Value'])
-            .prop('readonly', true);
+            .prop('disabled', (Object.entries(resposta)[3][1][75]['Value'] != null)?true:false);
     }).fail(function (jqXHR, textStatus) {
         //console.log("Request failed: " + textStatus);
 

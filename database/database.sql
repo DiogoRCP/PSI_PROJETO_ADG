@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS companies(
 	CONSTRAINT uk_companies_Nif UNIQUE (nif)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS users(
+CREATE TABLE IF NOT EXISTS user(
 		id INT UNSIGNED AUTO_INCREMENT,
 		username VARCHAR(100) NOT NULL,
         password_hash TEXT NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS contributors(
         userId INT UNSIGNED NOT NULL,
 	CONSTRAINT contributors_id PRIMARY KEY(id),
     CONSTRAINT fk_contributors_companyId FOREIGN KEY(companyId) REFERENCES companies(id),
-	CONSTRAINT fk_contributors_userId FOREIGN KEY(userId) REFERENCES users(id),
+	CONSTRAINT fk_contributors_userId FOREIGN KEY(userId) REFERENCES user(id),
     CONSTRAINT uk_contributors_userId UNIQUE (userId)
 ) ENGINE=InnoDB;
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS cars(
         userId INT UNSIGNED NOT NULL,
 	CONSTRAINT cars_id PRIMARY KEY(id),
     CONSTRAINT uk_cars_vin UNIQUE (vin),
-	CONSTRAINT fk_cars_userId FOREIGN KEY(userId) REFERENCES users(id)
+	CONSTRAINT fk_cars_userId FOREIGN KEY(userId) REFERENCES user(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS repairs(

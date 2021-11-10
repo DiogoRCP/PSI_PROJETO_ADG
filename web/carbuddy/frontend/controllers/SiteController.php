@@ -3,9 +3,11 @@
 namespace frontend\controllers;
 
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\Users;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\VarDumper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -155,12 +157,22 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+
+            $this->AssignUser($model);
+
             return $this->goHome();
         }
 
         return $this->render('signup', [
             'model' => $model,
         ]);
+    }
+
+    private function AssignUser($model){
+        $auth = Yii::$app->authManager;
+        $assign = Users::findOne(['nif'=>$model->nif]);
+
+        $auth->assign($auth->getRole('client'), $assign->id);
     }
 
     /**

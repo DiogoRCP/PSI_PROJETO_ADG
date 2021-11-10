@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use Symfony\Component\Yaml\Dumper;
 use Yii;
 use yii\base\Model;
 use common\models\User;
@@ -17,7 +18,7 @@ class SignupForm extends Model
     public $nif;
     public $birsthday;
     public $phonenumber;
-    public $usertype = "pendente";
+    public $usertype = "client";
 
     /**
      * {@inheritdoc}
@@ -65,7 +66,7 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;

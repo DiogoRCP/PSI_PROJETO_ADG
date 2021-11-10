@@ -2,12 +2,9 @@
 
 namespace common\models;
 
-use Symfony\Component\Yaml\Dumper;
 use Yii;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\helpers\VarDumper;
 use yii\web\IdentityInterface;
 
 /**
@@ -41,7 +38,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function tableName()
     {
-        return '{{%users}}';
+        return '{{%user}}';
     }
 
     /**
@@ -78,7 +75,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['auth_key' => $token]);
     }
 
     /**
