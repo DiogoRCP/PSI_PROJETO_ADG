@@ -11,17 +11,22 @@ $this->title = 'CarBuddy';
 
 ?>
 <div class="site-index">
-
     <div class="jumbotron text-center bg-transparent">
         <img src="../images/logo_white.png" width="250">
     </div>
 
-    <div class="body-content">
+    <div class="body-content" style="margin-top: -7rem; margin-bottom: 2rem">
 
+        <?php
+        echo $this->render('about');
+        ?>
+
+    </div>
+    <div class="body-content">
         <div class="row">
             <!--Adiciona gráficos automáticamente mediante o array charts do controller-->
             <?php foreach ($charts as $chart) { ?>
-                <div class="col-lg-4">
+                <div class="col-md-3">
                     <h3><?= $chart->getLabel() ?></h3>
                     <?= $chart ?>
                 </div>
