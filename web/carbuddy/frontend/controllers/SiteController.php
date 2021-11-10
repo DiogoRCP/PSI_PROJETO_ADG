@@ -158,7 +158,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
 
-            $this->AssignUser($model);
+            $model->AssignUser();
 
             return $this->goHome();
         }
@@ -166,13 +166,6 @@ class SiteController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
-    }
-
-    private function AssignUser($model){
-        $auth = Yii::$app->authManager;
-        $assign = Users::findOne(['nif'=>$model->nif]);
-
-        $auth->assign($auth->getRole('client'), $assign->id);
     }
 
     /**
