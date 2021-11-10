@@ -44,7 +44,7 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
             'modelyear',
             'kilometers',
             'state',
-            'userId',
+            //'userId',
         ],
     ]) ?>
 

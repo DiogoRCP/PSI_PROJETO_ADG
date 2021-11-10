@@ -26,7 +26,7 @@ $this->title = 'Repairs';
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'kilometers',
             'repairdate',
             'repairdescription',
