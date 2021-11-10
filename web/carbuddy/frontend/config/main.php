@@ -47,16 +47,23 @@ return [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule',
+
+                    'controller' => 'api/signup',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST post' => 'post',
+                    ],
+
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
-                        'PUT put/{id}' => 'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'PUT put' => 'put',
+                        'DELETE  delete' => 'delete'
                     ],
-                    'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
+                    'tokens' => ['{limit}' => '<limit:\d+>',],
 
                     'controller' => 'api/repairs',
                     'pluralize' => false,
@@ -84,6 +91,7 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
+                        'GET totaluser' => 'totaluser',
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put/{id}' => 'put',

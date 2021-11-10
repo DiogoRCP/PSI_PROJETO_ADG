@@ -2,12 +2,14 @@
 
 namespace frontend\modules\api\controllers;
 use frontend\models\User;
+use phpDocumentor\Reflection\PseudoTypes\NonEmptyLowercaseString;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 class CarsController extends ActiveController
 {
     public $modelClass = 'frontend\models\Cars';
+    const noPermission = 'Access denied';
 
     public function behaviors()
     {
@@ -24,28 +26,51 @@ class CarsController extends ActiveController
         if ($user !=null)
         {
             return $user;
-        } return null;
+        } return "ola";
     }
 
     public function actionIndex()
     {
-        return $this->render('index');
-    }
-    public function actionTotal(){
-        $Carssmodel = new $this -> modelClass;
-        $recs = $Carssmodel::find() -> all();
-        return ['total' => count($recs)];
+        if(\Yii::$app->user->can('frontendCrudVehicle')) {
+            return $this->render('index');
+        }else{
+            return self::noPermission;
+        }
     }
 
-    //http://localhost:8080/v1/cars/set/3
+    public function actionTotal(){
+        if(\Yii::$app->user->can('admin')) {
+            $Carssmodel = new $this -> modelClass;
+            $recs = $Carssmodel::find() -> all();
+            return ['total' => count($recs)];
+        }else{
+            return self::noPermission;
+        }
+    }
+
+    public function actionTotaluser(){
+        if(\Yii::$app->user->can('frontendCrudVehicle')) {
+            $Carssmodel = new $this -> modelClass;
+            $recs = $Carssmodel::find()->where('userId = ' . \Yii::$app->user->getId()) -> all();
+            return ['total' => count($recs)];
+        }else{
+            return self::noPermission;
+        }
+    }
+
+    //http://localhost:8080/api/cars/set/3
 
     public function actionSet($limit){
-        $Carssmodel = new $this -> modelClass;
-        $rec = $Carssmodel::find() -> limit($limit) -> all();
-        return ['limite' => $limit, 'Records' => $rec ];
+        if(\Yii::$app->user->can('frontendCrudVehicle')) {
+            $Carssmodel = new $this->modelClass;
+            $rec = $Carssmodel::find()->limit($limit)->all();
+            return ['limite' => $limit, 'Records' => $rec];
+        }else{
+            return self::noPermission;
+        }
     }
 
-// http://localhost:8080/v1/cars/post
+// http://localhost:8080/api/cars/post
 
     public function actionPost() {
 
@@ -58,14 +83,19 @@ class CarsController extends ActiveController
         return ['SaveError' => $ret];
     }
 
-    //http://localhost:8080/v1/cars/delete/id
+    //http://localhost:8080/api/cars/delete/id
 
     public function actionDelete($id)
     {
         $Carssmodel = new $this->modelClass;
         $ret=$Carssmodel->deleteAll("id=".$id);
-        if($ret)
-            return ['DelError' => $ret];
-        throw new \yii\web\NotFoundHttpException("Client id not found!");
+        if($ret) {
+            if (\Yii::$app->user->getId() == $ret->userId) {
+                return ['DelError' => $ret];
+            }else{
+                return self::noPermission;
+            }
+        }
+        throw new \yii\web\NotFoundHttpException("Car id not found!");
     }
 }

@@ -24,7 +24,6 @@ class m211102_131502_init_rbac extends Migration
         $collaborator = $auth->createRole('collaborator');
         $auth->add($collaborator);
 
-
         //Permissions Back-end
         $crudCompany = $auth->createPermission('backendCrudCompany');
         $crudCompany->description = 'backendCrudCompany';

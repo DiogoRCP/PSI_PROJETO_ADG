@@ -1,12 +1,15 @@
 <?php
 
 namespace frontend\modules\api\controllers;
+
 use common\models\User;
 use yii\rest\ActiveController;
 use yii\filters\auth\QueryParamAuth;
+
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
+    const noPermission = 'Access denied';
 
     public function behaviors()
     {
@@ -17,77 +20,97 @@ class UserController extends ActiveController
 
         return $behaviors;
     }
-    public function auth($token) {
 
+    public function auth($token)
+    {
         $user = User::findIdentityByAccessToken($token);
-        if ($user !=null)
-        {
+        if ($user != null) {
             return $user;
-        } return null;
+        }
+        return null;
     }
 
     public function actionIndex()
     {
-        return $this->render('index');
+        if (\Yii::$app->user->can('backendCrudUser')) {
+            return $this->render('index');
+        } else {
+            return self::noPermission;
+        }
     }
-    public function actionTotal(){
-        $Usersmodel = new $this -> modelClass;
-        $recs = $Usersmodel::find() -> all();
-        return ['total' => count($recs)];
+
+    public function actionTotal()
+    {
+        if (\Yii::$app->user->can('backendCrudUser')) {
+            $Usersmodel = new $this->modelClass;
+            $recs = $Usersmodel::find()->all();
+            return ['total' => count($recs)];
+        } else {
+            return self::noPermission;
+        }
     }
 
     //http://localhost:8080/api/user/set/3
 
-    public function actionSet($limit){
-        $Usersmodel = new $this -> modelClass;
-        $rec = $Usersmodel::find() -> limit($limit) -> all();
-        return ['limite' => $limit, 'Records' => $rec ];
+    public function actionSet($limit)
+    {
+        if (\Yii::$app->user->can('backendCrudUser')) {
+            $Usersmodel = new $this->modelClass;
+            $rec = $Usersmodel::find()->limit($limit)->all();
+            return ['limite' => $limit, 'Records' => $rec];
+        } else {
+            return self::noPermission;
+        }
     }
 
 // http://localhost:8080/api/user/post
 
-    public function actionPost() {
+    public function actionPost()
+    {
+        // lembrar que para fazer post de um user, nessa altura ainda não existe access-token
+        $username = \Yii::$app->request->post('username');
+        $Usersmodel = new $this->modelClass;
+        $Usersmodel->username = $username;
 
-        $username=\Yii::$app -> request -> post('username');
-        $Usersmodel = new $this -> modelClass;
-        $Usersmodel -> username = $username;
-
-        $ret = $Usersmodel -> save(false);
+        $ret = $Usersmodel->save(false);
         return ['SaveError' => $ret];
     }
 
     //http://localhost:8080/api/user/delete/id
 
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $Usersmodel = new $this->modelClass;
-        $ret=$Usersmodel->deleteAll("id=".$id);
-        if($ret)
-            return ['DelError' => $ret];
-        throw new \yii\web\NotFoundHttpException("Client id not found!");
+        if (\Yii::$app->user->can('client')) {
+            $Usersmodel = new $this->modelClass;
+            $ret = $Usersmodel->deleteAll("id=" . \Yii::$app->user->getId());
+            if ($ret)
+                return ['DelError' => $ret];
+            throw new \yii\web\NotFoundHttpException("Client id not found!");
+        } else {
+            return self::noPermission;
+        }
     }
 
-    public function actionPut($id){
+    public function actionPut()
+    {
+        if (\Yii::$app->user->can('client')) {
+            $user = json_decode(\Yii::$app->request->rawBody);
 
-        $username=\Yii::$app -> request -> post('username');
-        $usertype=\Yii::$app -> request -> post('usertype');
-        $nif=\Yii::$app -> request -> post('nif');
-        $birsthday=\Yii::$app -> request -> post('birsthday');
-        $email=\Yii::$app -> request -> post('email');
-        $phonenumber=\Yii::$app -> request -> post('phonenumber');
+            $Usermodel = new $this->modelClass;
+            $rec = $Usermodel::find()->where('id = ' . \Yii::$app->user->getId())->one();
 
-        $Usermodel = new $this->modelClass;
-        $rec = $Usermodel::find()->where('id = '.$id)->one();
+            if (isset($user->username)) $rec->username = $user->username;
+            if (isset($user->usertype)) $rec->usertype = $user->usertype;
+            if (isset($user->nif)) $rec->nif = $user->nif;
+            if (isset($user->birsthday)) $rec->birsthday = $user->birsthday;
+            if (isset($user->email)) $rec->email = $user->email;
+            if (isset($user->phonenumber)) $rec->phonenumber = $user->phonenumber;
 
-        $rec->username = $username;
-        $rec->usertype = $usertype;
-        $rec->nif = $nif;
-        $rec->birsthday = $birsthday;
-        $rec->email = $email;
-        $rec->phonenumber = $phonenumber;
-
-        $rec->save(false);
-        return ['SaveError1' => $rec];
-        //throw new \yii\web\NotFoundHttpException("Client id not found!");
+            $rec->save(false);
+            //return ['SaveError1' => $rec];
+            //throw new \yii\web\NotFoundHttpException("Client id not found!");
+        } else {
+            return self::noPermission;
+        }
     }
 }
