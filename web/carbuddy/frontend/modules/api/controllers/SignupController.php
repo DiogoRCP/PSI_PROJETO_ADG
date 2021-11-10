@@ -25,6 +25,7 @@ class SignupController extends ActiveController
         $signupmodel->birsthday = $user->birsthday;
 
         $ret = $signupmodel->signup();
+        if($ret == true) $signupmodel->AssignUser();
         return ['Save' => $ret];
     }
 
