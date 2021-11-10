@@ -26,7 +26,7 @@ class CarsController extends ActiveController
         if ($user !=null)
         {
             return $user;
-        } return null;
+        } return "ola";
     }
 
     public function actionIndex()
@@ -58,7 +58,7 @@ class CarsController extends ActiveController
         }
     }
 
-    //http://localhost:8080/v1/cars/set/3
+    //http://localhost:8080/api/cars/set/3
 
     public function actionSet($limit){
         if(\Yii::$app->user->can('frontendCrudVehicle')) {
@@ -70,7 +70,7 @@ class CarsController extends ActiveController
         }
     }
 
-// http://localhost:8080/v1/cars/post
+// http://localhost:8080/api/cars/post
 
     public function actionPost() {
 
@@ -83,7 +83,7 @@ class CarsController extends ActiveController
         return ['SaveError' => $ret];
     }
 
-    //http://localhost:8080/v1/cars/delete/id
+    //http://localhost:8080/api/cars/delete/id
 
     public function actionDelete($id)
     {

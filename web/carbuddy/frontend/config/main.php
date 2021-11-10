@@ -47,6 +47,13 @@ return [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule',
+
+                    'controller' => 'api/signup',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST post' => 'post',
+                    ],
+
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [

@@ -133,7 +133,6 @@ class CarController extends Controller
     {
         if (Yii::$app->user->can('frontendCrudVehicle')) {
             $this->findModel($id)->delete();
-
             return $this->redirect(['index']);
         } else {
             Yii::$app->user->logout();

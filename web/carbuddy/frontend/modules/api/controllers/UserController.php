@@ -3,8 +3,6 @@
 namespace frontend\modules\api\controllers;
 
 use common\models\User;
-use PHPUnit\Util\Log\JSON;
-use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
 use yii\filters\auth\QueryParamAuth;
 
