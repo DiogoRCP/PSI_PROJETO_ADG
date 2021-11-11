@@ -8,6 +8,7 @@ use yii\helpers\Html;
 $this->title = 'Update User: ' .$model->username.' ('.$model->nif.')';
 ?>
 <div class="users-update">
+    <div class="users-content">
     <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
@@ -17,5 +18,5 @@ $this->title = 'Update User: ' .$model->username.' ('.$model->nif.')';
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
+    </div>
 </div>
