@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Companies';
 ?>
 <div class="companies-index">
-
+    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
