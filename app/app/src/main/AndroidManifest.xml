@@ -11,19 +11,19 @@
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".InfoCarro"
+            android:name=".controllers.InfoCarro"
             android:exported="true" />
         <activity
-            android:name=".garagem"
+            android:name=".controllers.garagem"
             android:exported="true" />
         <activity
-            android:name=".Pagina_Inicial"
+            android:name=".controllers.Pagina_Inicial"
             android:exported="true" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".controllers.SignupActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".controllers.MainActivity"
             android:exported="true"
             android:fitsSystemWindows="true">
             <intent-filter>

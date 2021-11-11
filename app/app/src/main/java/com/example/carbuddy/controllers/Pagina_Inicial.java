@@ -1,4 +1,4 @@
-package com.example.carbuddy;
+package com.example.carbuddy.controllers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,21 +9,22 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class garagem extends AppCompatActivity {
+import com.example.carbuddy.R;
+
+public class Pagina_Inicial extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_garagem);
+        setContentView(R.layout.activity_pagina_inicial);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
     }
 
-    public void onClickVeiculo(View view) {
-        Intent carinfo = new Intent(this, InfoCarro.class);
-        startActivity(carinfo);
+    public void onClickGaragem(View view) {
+        Intent garagem = new Intent(this, garagem.class);
+        startActivity(garagem);
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".controllers.MainActivity" >
 
     <Space
         android:layout_width="match_parent"
