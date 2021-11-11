@@ -91,9 +91,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickLogin(View view ) {
         if(efetuarLogin()==true) {
 
-
-
-
+            /*
             // Instantiate the RequestQueue.
             RequestQueue queue = Volley.newRequestQueue(this);
             String url ="http://localhost:8080/users";
@@ -117,15 +115,10 @@ public class MainActivity extends AppCompatActivity {
 
 // Add the request to the RequestQueue.
             queue.add(stringRequest);
+*/
 
-
-
-
-
-
-
-            Intent paginalinicial = new Intent(this, Pagina_Inicial.class);
-            startActivity(paginalinicial);
+            Intent signup = new Intent(this, SignupActivity.class);
+            startActivity(signup);
         }
     }
 }
