@@ -58,7 +58,7 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Repairs', 'url' => ['/repairs/index']];
             }
             if(Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
-                $menuItems[] = ['label' => 'Schedules Manager', 'url' => ['/repairs/index']];
+                $menuItems[] = ['label' => 'Schedules Manager', 'url' => ['/schedule/index']];
             }
             $menuItems[] = ['label' => 'Vehicles', 'url' => ['/car/index']];
             $menuItems[] = ['label' => 'Schedules', 'url' => ['/schedules/index']];
