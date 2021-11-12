@@ -57,8 +57,9 @@ return [
                     'controller' => 'api/login',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'POST post' => 'post',
+                        'GET get/{username}/{password}' => 'get'
                     ],
+                    'tokens' => ['{username}' => '<username:\d+>', '{password}' => '<password:\d+>',],
 
                     'controller' => 'api/user',
                     'pluralize' => false,
