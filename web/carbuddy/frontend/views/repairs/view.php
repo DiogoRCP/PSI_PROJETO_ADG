@@ -32,7 +32,7 @@ $this->title = $model->car->brand . " " . $model->car->model;
         'attributes' => [
             'id',
             ['label' => 'Car',
-                'value' => $model->car->brand . " " . $model->car->model],
+                'value' => $model->car->registration],
             'kilometers',
             'repairtype',
             'repairdescription',
