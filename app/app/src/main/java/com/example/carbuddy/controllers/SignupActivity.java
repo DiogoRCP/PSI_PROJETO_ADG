@@ -1,7 +1,6 @@
 package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -9,14 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.models.Signup;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import org.json.JSONObject;
-
-import java.io.DataOutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -47,13 +38,6 @@ public class SignupActivity extends AppCompatActivity {
         form.setPhonenumber(phonenumber.getText().toString());
         form.setPassword(password.getText().toString());
 
-        GsonBuilder builder = new GsonBuilder();
-        builder.setPrettyPrinting();
-
-        Gson gson = builder.create();
-
-        String formjson = gson.toJson(form, Signup.class);
-        System.out.println(formjson);
-        form.sendPost(formjson);
+        ApiCRUDActivity.sendPost("signup/post", "POST", ApiCRUDActivity.jsonObjectConvert(form));
     }
 }
