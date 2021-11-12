@@ -67,7 +67,7 @@ public class Signup {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://http://192.168.1.174:8080/api/signup/post");
+                    URL url = new URL("http://10.0.2.2:8080/api/signup/post");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
