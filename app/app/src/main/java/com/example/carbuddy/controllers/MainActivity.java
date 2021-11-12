@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText editTextUser, editTextPass;
     private Button buttonLogin;
+    private String user, pass;
 
 
     @Override
@@ -41,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
         private boolean efetuarLogin() {
-            String user = editTextUser.getText().toString();
-            String pass = editTextPass.getText().toString();
+            user = editTextUser.getText().toString();
+            pass = editTextPass.getText().toString();
             boolean userBool = isUserValid(user);
             boolean passBool = isPassValid(pass);
 
@@ -80,31 +81,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickLogin(View view ) {
         if(efetuarLogin()==true) {
 
-            /*
-            // Instantiate the RequestQueue.
-            RequestQueue queue = Volley.newRequestQueue(this);
-            String url ="http://localhost:8080/users";
-
-// Request a string response from the provided URL.
-            //JsonObjectRequest
-            //JsonArrayRequest
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Display the first 500 characters of the response string.
-                            Toast.makeText(MainActivity.this, response.substring(0,500), Toast.LENGTH_LONG);
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(MainActivity.this, "error", Toast.LENGTH_LONG);
-                }
-            });
-
-// Add the request to the RequestQueue.
-            queue.add(stringRequest);
-*/
+            ApiCRUDActivity.sendGET(this, "login/get?username=" + user + "&password=" + pass);
 
             Intent signup = new Intent(this, SignupActivity.class);
             startActivity(signup);

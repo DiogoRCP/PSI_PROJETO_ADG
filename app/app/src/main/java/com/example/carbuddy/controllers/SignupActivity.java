@@ -38,6 +38,6 @@ public class SignupActivity extends AppCompatActivity {
         form.setPhonenumber(phonenumber.getText().toString());
         form.setPassword(password.getText().toString());
 
-        ApiCRUDActivity.sendPost("signup/post", "POST", ApiCRUDActivity.jsonObjectConvert(form));
+        ApiCRUDActivity.sendPost("signup/post", ApiCRUDActivity.jsonObjectConvert(form));
     }
 }
