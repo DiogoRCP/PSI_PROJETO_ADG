@@ -26,6 +26,7 @@ class SignupController extends ActiveController
 
         $ret = $signupmodel->signup();
         if($ret == true) $signupmodel->AssignUser();
+        echo json_encode(["message" => $ret]);
         return ['Save' => $ret];
     }
 

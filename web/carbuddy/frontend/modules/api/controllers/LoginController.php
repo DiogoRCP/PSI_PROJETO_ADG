@@ -9,13 +9,12 @@ class LoginController extends ActiveController
 {
     public $modelClass = 'common\models\LoginForm';
 
-    public function actionPost()
+    public function actionGet($username, $password)
     {
-        $user = json_decode(Yii::$app->request->rawBody);
 
         $login = ['LoginForm' =>[
-            'username' => $user->username,
-            'password' => $user->password]
+            'username' => $username,
+            'password' => $password]
         ];
 
         $loginmodel = new $this->modelClass;
