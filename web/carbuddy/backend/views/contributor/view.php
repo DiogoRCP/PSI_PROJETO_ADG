@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $model->user->username.' ('.$model->company->companyname.')';
 ?>
 <div class="contributors-view">
-
+    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>

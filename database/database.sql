@@ -75,3 +75,17 @@ CREATE TABLE IF NOT EXISTS repairs(
 	CONSTRAINT fk_repairs_carId FOREIGN KEY(carId) REFERENCES cars(id),
     CONSTRAINT fk_repairs_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS schedules(
+		id INT UNSIGNED AUTO_INCREMENT,
+        currentdate DATETIME default Current_Timestamp,
+        schedulingdate DATETIME not null,
+        repairdescription VARCHAR(100) NOT NULL,
+        state VARCHAR(100) NOT NULL,
+        repairtype VARCHAR(100) NOT NULL,
+        carId INT UNSIGNED NOT NULL,
+        companyId INT UNSIGNED NOT NULL,
+	CONSTRAINT schedules_id PRIMARY KEY(id),
+	CONSTRAINT fk_schedules_carId FOREIGN KEY(carId) REFERENCES cars(id),
+    CONSTRAINT fk_schedules_companyId FOREIGN KEY(companyId) REFERENCES companies(id)
+) ENGINE=InnoDB;

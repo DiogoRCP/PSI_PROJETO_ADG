@@ -54,6 +54,12 @@ return [
                         'POST post' => 'post',
                     ],
 
+                    'controller' => 'api/login',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST post' => 'post',
+                    ],
+
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [

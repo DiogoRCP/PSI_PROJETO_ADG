@@ -11,7 +11,7 @@ $this->title = 'Repairs';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="repairs-index">
-
+    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>

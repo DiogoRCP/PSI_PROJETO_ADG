@@ -11,7 +11,7 @@ $this->title = 'Users';
 
 ?>
 <div class="users-index">
-
+    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

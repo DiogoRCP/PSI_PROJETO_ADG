@@ -1,3 +1,6 @@
+$topmargin: 5rem
+$topmarginForm: 2.5rem
+
 .users-index
   background-color: rgba(0, 0, 0, 0.5)
   padding: 2rem
@@ -27,13 +30,16 @@
       color: beige
 
 .users-update
-  background-color: rgba(0, 0, 0, 0.5)
-  padding: 2rem
-  margin-top: 2rem
-  text-align: center
-  border-radius: 1.8rem
-  width: 30rem
-  margin-left: 20rem
+  display: flex
+  justify-content: center
+
+  .users-content
+    background-color: rgba(0, 0, 0, 0.5)
+    padding: 2rem
+    margin-top: $topmarginForm
+    text-align: center
+    border-radius: 1.8rem
+    width: 25rem
 
 
   table

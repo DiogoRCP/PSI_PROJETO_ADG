@@ -96,13 +96,16 @@ body .site-login .contentor .buttonlogin {
 }
 
 .users-update {
+  display: flex;
+  justify-content: center;
+}
+.users-update .users-content {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2rem;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   text-align: center;
   border-radius: 1.8rem;
-  width: 30rem;
-  margin-left: 20rem;
+  width: 25rem;
 }
 .users-update table {
   color: white;
