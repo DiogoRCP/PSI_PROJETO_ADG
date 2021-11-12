@@ -8,6 +8,7 @@ $this->title = 'About';
 
 ?>
 <div class="site-about">
+    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
     <br>
     <div class="body-content">

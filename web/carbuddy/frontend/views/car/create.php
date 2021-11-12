@@ -9,6 +9,7 @@ $this->title = 'Create Vehicle';
 ?>
 <div class="cars-create">
     <div class="cars-content">
+        <img src="../images/logo_white.png" width="80">
         <h1><?= Html::encode($this->title) ?></h1>
         <p>
             <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>

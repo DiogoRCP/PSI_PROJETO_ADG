@@ -19,6 +19,7 @@ $this->title = 'CarBuddy';
 
         <?php
         echo $this->render('about');
+        $this->title = 'CarBuddy';
         ?>
 
     </div>

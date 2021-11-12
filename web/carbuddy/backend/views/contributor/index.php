@@ -11,9 +11,8 @@ use yii\grid\GridView;
 $this->title = 'Contributors';
 ?>
 <div class="contributors-index">
-
+    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Create Contributors', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
