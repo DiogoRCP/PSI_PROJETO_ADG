@@ -6,6 +6,7 @@ use frontend\models\Cars;
 use frontend\models\Companies;
 use frontend\models\Schedules;
 use frontend\models\SchedulesSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -62,8 +63,8 @@ class SchedulesController extends Controller
     public function actionView($id)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+            return $this->render('view', [
+                'model' => $this->findModel($id),
         ]);
         } else {
             Yii::$app->user->logout();

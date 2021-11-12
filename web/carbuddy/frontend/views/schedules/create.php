@@ -8,15 +8,16 @@ use yii\helpers\Html;
 /* @var $modelCars frontend\models\Cars */
 
 
-$this->title = 'Create Schedules';
-$this->params['breadcrumbs'][] = ['label' => 'Schedules', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Create Schedule';
+
 ?>
 <div class="schedules-create">
     <div class="schedules-content">
-
+        <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
-
+        <p>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
+        </p>
     <?= $this->render('_form', [
         'model' => $model, 'modelCompanies' => $modelCompanies, 'modelCars' => $modelCars,
     ]) ?>

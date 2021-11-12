@@ -51,13 +51,13 @@ class Schedules extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'currentdate' => 'Currentdate',
-            'schedulingdate' => 'Schedulingdate',
-            'repairdescription' => 'Repairdescription',
+            'currentdate' => 'Registry Date',
+            'schedulingdate' => 'Scheduling Date',
+            'repairdescription' => 'Repair Description',
             'state' => 'State',
-            'repairtype' => 'Repairtype',
-            'carId' => 'Car ID',
-            'companyId' => 'Company ID',
+            'repairtype' => 'Repair Type',
+            'carId' => 'Car',
+            'companyId' => 'Company',
         ];
     }
 
