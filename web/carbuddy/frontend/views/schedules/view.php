@@ -4,14 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Repairs */
+/* @var $model frontend\models\Schedules */
 
-$this->title = $model->car->brand . " " . $model->car->model;
-//$this->params['breadcrumbs'][] = ['label' => 'Repairs', 'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
+$this->title = $model->car->brand." ".$model->car->model." (".$model->company->companyname." - ".$model->schedulingdate.")";
+
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="repairs-view">
+<div class="schedules-view">
     <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -31,15 +30,19 @@ $this->title = $model->car->brand . " " . $model->car->model;
         'model' => $model,
         'attributes' => [
             'id',
-            ['label' => 'Car',
-                'value' => $model->car->registration],
-            'kilometers',
-            'repairtype',
+            [
+                'label' => 'Car',
+                'value' => $model->car->registration
+            ],
+            [
+                'label' => 'Company',
+                'value' => $model->company->companyname
+            ],
+            //'currentdate',
+            'schedulingdate',
             'repairdescription',
             'state',
-            ['label' => 'Contributor',
-                'value' => $model->contributor->user->username],
-            'repairdate',
+            'repairtype',
         ],
     ]) ?>
 
