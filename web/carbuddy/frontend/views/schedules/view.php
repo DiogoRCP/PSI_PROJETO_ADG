@@ -30,13 +30,19 @@ $this->title = $model->car->brand." ".$model->car->model." (".$model->company->c
         'model' => $model,
         'attributes' => [
             'id',
-            'currentdate',
+            [
+                'label' => 'Car',
+                'value' => $model->car->registration
+            ],
+            [
+                'label' => 'Company',
+                'value' => $model->company->companyname
+            ],
+            //'currentdate',
             'schedulingdate',
             'repairdescription',
             'state',
             'repairtype',
-            'carId',
-            'companyId',
         ],
     ]) ?>
 

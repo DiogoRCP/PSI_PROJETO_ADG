@@ -28,7 +28,7 @@ $this->title = 'Schedules';
             //'id',
             'carId',
             'companyId',
-            'currentdate',
+            //'currentdate',
             'schedulingdate',
             'repairdescription',
             'state',
