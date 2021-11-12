@@ -72,34 +72,6 @@ class ScheduleController extends Controller
         }
     }
 
-    /**
-     * Creates a new Schedules model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        if (Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
-            $model = new Schedules();
-            $modelCompanies = Companies::find()->all();
-            $modelCars = Cars::find()->all();
-
-            if ($this->request->isPost) {
-                if ($model->load($this->request->post()) && $model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
-            } else {
-                $model->loadDefaultValues();
-            }
-
-            return $this->render('create', [
-                'model' => $model, 'modelCompanies' => $modelCompanies, 'modelCars' => $modelCars,
-            ]);
-        } else {
-            Yii::$app->user->logout();
-            return $this->goHome();
-        }
-    }
 
     /**
      * Updates an existing Schedules model.
