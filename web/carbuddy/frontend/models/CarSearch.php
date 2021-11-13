@@ -42,6 +42,7 @@ class CarSearch extends Cars
     {
         $query = Cars::find();
 
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -62,7 +63,7 @@ class CarSearch extends Cars
             'displacement' => $this->displacement,
             'modelyear' => $this->modelyear,
             'kilometers' => $this->kilometers,
-            'userId' => $this->userId,
+            'userId' => \Yii::$app->user->id
         ]);
 
         $query->andFilterWhere(['like', 'vin', $this->vin])
