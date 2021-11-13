@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/roudedconers"
             android:fontFamily="@font/baloo_da"
-            android:text="Sign Up"
+            android:text="SignUp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="@color/white" />
@@ -133,7 +133,8 @@
             android:background="@drawable/button_states"
             android:fontFamily="@font/baloo_da"
             android:onClick="btSignup"
-            android:text="Signup" />
+            android:text="Signup"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <Space
             android:layout_width="match_parent"
