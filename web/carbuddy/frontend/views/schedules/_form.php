@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use frontend\models\Users;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Schedules */
@@ -11,7 +12,9 @@ use yii\widgets\ActiveForm;
 
 $CarList = ['' => ''];
 foreach ($modelCars as $modelCar) {
-    $CarList += [$modelCar['id'] => $modelCar['registration']];
+    if($modelCar->user->id == \Yii::$app->user->id){
+        $CarList += [$modelCar['id'] => $modelCar['registration']];
+    }
 }
 
 $CompaniesList = ['' => ''];
