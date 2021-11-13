@@ -61,7 +61,6 @@ public class ApiCRUDActivity {
                 }
             }
         });
-
         thread.start();
     }
 

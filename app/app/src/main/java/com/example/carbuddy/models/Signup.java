@@ -2,6 +2,8 @@ package com.example.carbuddy.models;
 
 import android.util.Log;
 
+import com.example.carbuddy.controllers.ApiCRUDActivity;
+
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -62,4 +64,7 @@ public class Signup {
         this.password = password;
     }
 
+    public void DoSignup(){
+        ApiCRUDActivity.sendPost("signup/post", ApiCRUDActivity.jsonObjectConvert(this));
+    }
 }

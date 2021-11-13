@@ -1,5 +1,6 @@
 package com.example.carbuddy.controllers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -38,6 +39,8 @@ public class SignupActivity extends AppCompatActivity {
         form.setPhonenumber(phonenumber.getText().toString());
         form.setPassword(password.getText().toString());
 
-        ApiCRUDActivity.sendPost("signup/post", ApiCRUDActivity.jsonObjectConvert(form));
+        form.DoSignup();
+        Intent login = new Intent(this, MainActivity.class);
+        startActivity(login);
     }
 }
