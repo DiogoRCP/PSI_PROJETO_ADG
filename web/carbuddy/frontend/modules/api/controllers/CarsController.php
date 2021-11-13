@@ -1,11 +1,13 @@
 <?php
 
 namespace frontend\modules\api\controllers;
+
 use frontend\models\User;
 use phpDocumentor\Reflection\PseudoTypes\NonEmptyLowercaseString;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
+
 class CarsController extends ActiveController
 {
     public $modelClass = 'frontend\models\Cars';
@@ -20,66 +22,74 @@ class CarsController extends ActiveController
 
         return $behaviors;
     }
-    public function auth($token) {
+
+    public function auth($token)
+    {
 
         $user = User::findIdentityByAccessToken($token);
-        if ($user !=null)
-        {
+        if ($user != null) {
             return $user;
-        } return "ola";
+        }
+        return null;
     }
 
-    public function actionIndex()
+    public function actionCarsuser()
     {
-        if(\Yii::$app->user->can('frontendCrudVehicle')) {
-            return $this->render('index');
-        }else{
+        if (\Yii::$app->user->can('frontendCrudVehicle')) {
+            $CarsModel = new $this->modelClass;
+            $recs = $CarsModel::find()->where('userId = ' . \Yii::$app->user->getId())->all();
+            return ['response' => $recs];
+        } else {
             return self::noPermission;
         }
     }
 
-    public function actionTotal(){
-        if(\Yii::$app->user->can('admin')) {
-            $Carssmodel = new $this -> modelClass;
-            $recs = $Carssmodel::find() -> all();
+    public function actionTotal()
+    {
+        if (\Yii::$app->user->can('admin')) {
+            $Carssmodel = new $this->modelClass;
+            $recs = $Carssmodel::find()->all();
             return ['total' => count($recs)];
-        }else{
+        } else {
             return self::noPermission;
         }
     }
 
-    public function actionTotaluser(){
-        if(\Yii::$app->user->can('frontendCrudVehicle')) {
-            $Carssmodel = new $this -> modelClass;
-            $recs = $Carssmodel::find()->where('userId = ' . \Yii::$app->user->getId()) -> all();
+    public function actionTotaluser()
+    {
+        if (\Yii::$app->user->can('frontendCrudVehicle')) {
+            $Carssmodel = new $this->modelClass;
+            $recs = $Carssmodel::find()->where('userId = ' . \Yii::$app->user->getId())->all();
             return ['total' => count($recs)];
-        }else{
+        } else {
             return self::noPermission;
         }
     }
 
     //http://localhost:8080/api/cars/set/3
 
-    public function actionSet($limit){
-        if(\Yii::$app->user->can('frontendCrudVehicle')) {
+    public function actionSet($limit)
+    {
+        if (\Yii::$app->user->can('frontendCrudVehicle')) {
             $Carssmodel = new $this->modelClass;
             $rec = $Carssmodel::find()->limit($limit)->all();
             return ['limite' => $limit, 'Records' => $rec];
-        }else{
+        } else {
             return self::noPermission;
         }
     }
 
 // http://localhost:8080/api/cars/post
 
-    public function actionPost() {
+    public function actionPost()
+    {
 
-        $name=\Yii::$app -> request -> post('name');
+        $name = \Yii::$app->request->post('name');
 
-        $Carssmodel = new $this -> modelClass;
-        $Carssmodel -> name = $name;
+        $Carssmodel = new $this->modelClass;
+        $Carssmodel->name = $name;
 
-        $ret = $Carssmodel -> save(false);
+        $ret = $Carssmodel->save(false);
         return ['SaveError' => $ret];
     }
 
@@ -88,11 +98,11 @@ class CarsController extends ActiveController
     public function actionDelete($id)
     {
         $Carssmodel = new $this->modelClass;
-        $ret=$Carssmodel->deleteAll("id=".$id);
-        if($ret) {
+        $ret = $Carssmodel->deleteAll("id=" . $id);
+        if ($ret) {
             if (\Yii::$app->user->getId() == $ret->userId) {
                 return ['DelError' => $ret];
-            }else{
+            } else {
                 return self::noPermission;
             }
         }

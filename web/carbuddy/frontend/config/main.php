@@ -97,6 +97,7 @@ return [
                     'controller' => 'api/cars',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'GET carsuser' => 'carsuser',
                         'GET total' => 'total',
                         'GET totaluser' => 'totaluser',
                         'GET set/{limit}' => 'set',

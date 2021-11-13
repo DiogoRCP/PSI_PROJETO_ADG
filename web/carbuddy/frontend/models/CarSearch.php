@@ -63,7 +63,7 @@ class CarSearch extends Cars
             'displacement' => $this->displacement,
             'modelyear' => $this->modelyear,
             'kilometers' => $this->kilometers,
-            'userId' => \Yii::$app->user->id
+            'userId' => \Yii::$app->user->getId()
         ]);
 
         $query->andFilterWhere(['like', 'vin', $this->vin])
