@@ -27,4 +27,14 @@ public class Pagina_Inicial extends AppCompatActivity {
         Intent garagem = new Intent(this, garagem.class);
         startActivity(garagem);
     }
+
+    public void onClickAllRepairs(View view) {
+        //Intent allrepairs = new Intent(this, Repairs.class);
+        //startActivity(allrepairs);
+    }
+
+    public void onClickUsers(View view) {
+        //Intent user = new Intent(this, User.class);
+        //startActivity(user);
+    }
 }
