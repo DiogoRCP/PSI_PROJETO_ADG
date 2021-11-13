@@ -1,12 +1,6 @@
 package com.example.carbuddy.models;
 
-import android.util.Log;
-
 import com.example.carbuddy.controllers.ApiCRUDActivity;
-
-import java.io.DataOutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class Signup {
     String username;
@@ -66,5 +60,6 @@ public class Signup {
 
     public void DoSignup(){
         ApiCRUDActivity.sendPost("signup/post", ApiCRUDActivity.jsonObjectConvert(this));
+
     }
 }

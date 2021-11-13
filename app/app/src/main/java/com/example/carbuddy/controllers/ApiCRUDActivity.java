@@ -56,6 +56,7 @@ public class ApiCRUDActivity {
                     Log.i("MSG", conn.getResponseMessage());
 
                     conn.disconnect();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
