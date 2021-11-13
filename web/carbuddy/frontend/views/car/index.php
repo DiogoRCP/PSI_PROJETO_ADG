@@ -13,7 +13,7 @@ $this->title = 'Vehicles';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Vehicles', ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a('Create Vehicle', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
