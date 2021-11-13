@@ -24,10 +24,9 @@ class m211102_131502_init_rbac extends Migration
         $collaborator = $auth->createRole('collaborator');
         $auth->add($collaborator);
 
-
         //Permissions Back-end
         $crudCompany = $auth->createPermission('backendCrudCompany');
-            $crudCompany->description = 'backendCrudCompany';
+        $crudCompany->description = 'backendCrudCompany';
         $auth->add($crudCompany);
 
         $crudContributor = $auth->createPermission('backendCrudContributor');
@@ -48,6 +47,14 @@ class m211102_131502_init_rbac extends Migration
         $crudRepair->description = 'frontendCrudRepair';
         $auth->add($crudRepair);
 
+        $CrudSchedulesCollaborator = $auth->createPermission('frontendCrudSchedulesCollaborator');
+        $CrudSchedulesCollaborator->description = 'frontendCrudSchedulesCollaborator';
+        $auth->add($CrudSchedulesCollaborator);
+
+        $CrudSchedulesClient = $auth->createPermission('frontendCrudSchedulesClient');
+        $CrudSchedulesClient->description = 'frontendCrudSchedulesClient';
+        $auth->add($CrudSchedulesClient);
+
 
         //Atribuições
         $auth->addChild($admin, $crudCompany);
@@ -56,8 +63,10 @@ class m211102_131502_init_rbac extends Migration
         $auth->addChild($admin, $client);
 
         $auth->addChild($collaborator, $crudRepair);
+        $auth->addChild($collaborator, $CrudSchedulesCollaborator);
         $auth->addChild($collaborator, $client);
 
+        $auth->addChild($client, $CrudSchedulesClient);
         $auth->addChild($client, $crudVehicle);
 
 

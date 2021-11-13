@@ -99,4 +99,11 @@ class SignupForm extends Model
             ->setSubject('Account registration at ' . Yii::$app->name)
             ->send();
     }
+
+    public function AssignUser(){
+        $auth = Yii::$app->authManager;
+        $assign = Users::findOne(['nif'=>$this->nif]);
+
+        $auth->assign($auth->getRole('client'), $assign->id);
+    }
 }

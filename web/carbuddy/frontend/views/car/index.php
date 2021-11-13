@@ -9,11 +9,11 @@ use yii\grid\GridView;
 $this->title = 'Vehicles';
 ?>
 <div class="cars-index">
-
+    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Vehicles', ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a('Create Vehicle', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -23,14 +23,14 @@ $this->title = 'Vehicles';
         'filterModel' => $searchModel,
         'columns' => [
             //'id',
+            'registration',
             'vin',
             'brand',
             'model',
-            'color',
+            //'color',
             //'carType',
             'displacement',
             'fuelType',
-            //'registration',
             'modelyear',
             'kilometers',
             'state',

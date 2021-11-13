@@ -10,7 +10,7 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="cars-view">
-
+    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -44,7 +44,7 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
             'modelyear',
             'kilometers',
             'state',
-            'userId',
+            //'userId',
         ],
     ]) ?>
 

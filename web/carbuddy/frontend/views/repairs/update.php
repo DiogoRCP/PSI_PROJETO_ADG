@@ -8,13 +8,14 @@ use yii\helpers\Html;
 /* @var $modelUsers backend\models\Users */
 /* @var $modelContributor frontend\models\Contributors */
 
-$this->title = 'Update Repairs: ' . $model->id;
+$this->title = 'Update Repair: ' .$model->car->brand . " " . $model->car->model;
 //$this->params['breadcrumbs'][] = ['label' => 'Repairs', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 //$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="repairs-update">
     <div class="repairs-content">
+        <img src="../images/logo_white.png" width="80">
         <h1><?= Html::encode($this->title) ?></h1>
         <p>
             <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>

@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">CarBuddy</string>
-    <string name="TextViewUser">Nome de Utilizador</string>
-    <string name="TextViewPassword">Palavra-Passe</string>
+    <string name="TextViewUser">Username</string>
+    <string name="TextViewPassword">Password</string>
 </resources>

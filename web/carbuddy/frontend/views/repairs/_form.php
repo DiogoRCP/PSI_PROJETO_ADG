@@ -32,17 +32,18 @@ foreach ($modelContributor as $modelContributor) {
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'kilometers')->input('number') ?>
-
-    <?= $form->field($model, 'repairdescription')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'state')->dropDownList(['' => '','Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending'])  ?>
-
-    <?= $form->field($model, 'repairtype')->dropDownList(['' => '','Repair' => 'Repair', 'Maintenance' => 'Maintenance'])  ?>
-
     <?= $form->field($model, 'carId')->dropDownList($CarList) ?>
 
     <?= $form->field($model, 'contributorId')->dropDownList($ContributorsList) ?>
+
+
+    <?= $form->field($model, 'repairtype')->dropDownList(['' => '','Repair' => 'Repair', 'Maintenance' => 'Maintenance'])  ?>
+
+    <?= $form->field($model, 'state')->dropDownList(['' => '','Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending'])  ?>
+
+    <?= $form->field($model, 'kilometers')->input('number') ?>
+
+    <?= $form->field($model, 'repairdescription')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-secondary']) ?>
