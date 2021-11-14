@@ -83,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
             ApiCRUDActivity.sendGET(this, "login/get?username=" + user + "&password=" + pass);
 
+            boolean variavelQueVemDoGet = true;
+
+            if(variavelQueVemDoGet == true){
+                Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
+                startActivity(paginaInicial);
+            }
 
         }
     }

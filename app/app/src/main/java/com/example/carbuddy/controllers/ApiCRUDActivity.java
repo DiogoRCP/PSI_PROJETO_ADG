@@ -1,6 +1,7 @@
 package com.example.carbuddy.controllers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -78,7 +79,7 @@ public class ApiCRUDActivity {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                        //Toast.makeText(context, response.substring(0,500), Toast.LENGTH_LONG);
+                        // Toast.makeText(context, response.substring(0,500), Toast.LENGTH_LONG);
 
                         JSONObject obj = null;
                         try {
@@ -86,6 +87,7 @@ public class ApiCRUDActivity {
 
                             Log.i("Login", obj.getString("Login"));
                             Log.i("Authkey", obj.getString("authkey"));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -99,6 +101,5 @@ public class ApiCRUDActivity {
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
     }
 }
