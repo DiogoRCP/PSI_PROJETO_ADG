@@ -51,15 +51,6 @@
             android:inputType="number" />
 
         <EditText
-            android:id="@+id/txbirsthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Birsthday"
-            android:inputType="date" />
-
-        <EditText
             android:id="@+id/txphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,6 +67,13 @@
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword" />
+
+        <DatePicker
+            android:id="@+id/txbirsthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
 
         <Space
             android:layout_width="match_parent"
