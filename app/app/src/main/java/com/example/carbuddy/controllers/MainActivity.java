@@ -1,7 +1,5 @@
 package com.example.carbuddy.controllers;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.carbuddy.R;
 
@@ -83,8 +83,18 @@ public class MainActivity extends AppCompatActivity {
 
             ApiCRUDActivity.sendGET(this, "login/get?username=" + user + "&password=" + pass);
 
-            Intent signup = new Intent(this, SignupActivity.class);
-            startActivity(signup);
+            boolean variavelQueVemDoGet = true;
+
+            if(variavelQueVemDoGet == true){
+                Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
+                startActivity(paginaInicial);
+            }
+
         }
+    }
+
+    public void onClickRegister(View view) {
+        Intent signup = new Intent(this, SignupActivity.class);
+        startActivity(signup);
     }
 }
