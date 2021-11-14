@@ -120,6 +120,13 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
 
+        <DatePicker
+            android:id="@+id/txbirsthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
