@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fundo">
 
+
     <Space
         android:layout_width="10dp"
         android:layout_height="match_parent"
@@ -109,6 +110,11 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
@@ -122,12 +128,20 @@
 
         <DatePicker
             android:id="@+id/txbirsthday"
-            style="@android:style/Widget.DeviceDefault.DatePicker"
+            style="@android:style/Widget.DatePicker"
             android:layout_width="match_parent"
-            android:layout_height="139dp"
-            android:background="#FFFFFF"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roudedconers"
+            android:calendarTextColor="#ffffff"
             android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
+            android:datePickerMode="spinner"
+            android:theme="@style/MyDatePicker" />
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Space
             android:layout_width="match_parent"
