@@ -29,7 +29,8 @@
             android:text="SignUp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="34sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -73,18 +74,6 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/txbirsthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:fontFamily="@font/baloo_da"
-            android:hint="Birsthday"
-            android:inputType="date"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
-
-        <EditText
             android:id="@+id/txphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,10 +109,23 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
 
-        <DatePicker
-            android:id="@+id/txbirsthday"
+        <TextView
+            android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:fontFamily="@font/baloo_da"
+            android:text="Birsthday"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <DatePicker
+            android:id="@+id/txbirsthday"
+            style="@android:style/Widget.DeviceDefault.DatePicker"
+            android:layout_width="match_parent"
+            android:layout_height="139dp"
+            android:background="#FFFFFF"
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
 
