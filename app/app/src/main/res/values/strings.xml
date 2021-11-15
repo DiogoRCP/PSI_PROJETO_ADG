@@ -2,4 +2,5 @@
     <string name="app_name">CarBuddy</string>
     <string name="TextViewUser">Username</string>
     <string name="TextViewPassword">Password</string>
+    <string name="Garage">Garage</string>
 </resources>
