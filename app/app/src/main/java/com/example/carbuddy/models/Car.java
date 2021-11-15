@@ -2,12 +2,12 @@ package com.example.carbuddy.models;
 
 import android.graphics.Color;
 
-public class Carro {
+public class Car {
     private int id, kilometers, userId;
     private String vin, brand, model, color, cartype, fueltype, registration, modelyear, state;
     private float displacement;
 
-    public Carro(int id, int kilometers, int userId, String vin, String brand, String model, String color, String cartype, String fueltype, String registration, String modelyear, String state, float displacement) {
+    public Car(int id, int kilometers, int userId, String vin, String brand, String model, String color, String cartype, String fueltype, String registration, String modelyear, String state, float displacement) {
         this.id = id;
         this.kilometers = kilometers;
         this.userId = userId;
