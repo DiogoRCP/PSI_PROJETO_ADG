@@ -1,6 +1,6 @@
 package com.example.carbuddy.models;
 
-import com.example.carbuddy.controllers.ApiCRUDActivity;
+import com.example.carbuddy.controllers.Json_Objects_Convertor;
 
 public class Signup {
     String username;
@@ -9,6 +9,15 @@ public class Signup {
     String birsthday;
     String phonenumber;
     String password;
+
+    public Signup(String username, String email, String nif, String birsthday, String phonenumber, String password) {
+        this.username = username;
+        this.email = email;
+        this.nif = nif;
+        this.birsthday = birsthday;
+        this.phonenumber = phonenumber;
+        this.password = password;
+    }
 
     public String getUsername() {
         return username;
@@ -58,8 +67,26 @@ public class Signup {
         this.password = password;
     }
 
-    public void DoSignup(){
-        ApiCRUDActivity.sendPost("signup/post", ApiCRUDActivity.jsonObjectConvert(this));
+    @Override
+    public String toString() {
+        return "Signup{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", nif='" + nif + '\'' +
+                ", birsthday='" + birsthday + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 
+    public static boolean PasswordVerify(String password1, String password2){
+        if(password1.matches(password2)){
+            return true;
+        }
+        return false;
+    }
+
+    public void DoSignup(){
+        Json_Objects_Convertor.sendPost("signup/post", Json_Objects_Convertor.jsonObjectConvert(this));
     }
 }

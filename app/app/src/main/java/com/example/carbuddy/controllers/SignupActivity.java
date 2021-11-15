@@ -36,27 +36,17 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-
     public void btSignup(View view) {
-        //Verificação das passwords para verificar se ambas são iguais
-        String password1 = null;
-        String password2 = null;
-        //Toast.makeText(getApplicationContext(), "Password:" +password1+ "Repetição:" +password2, Toast.LENGTH_SHORT).show();
+        if (Signup.PasswordVerify(password.getText().toString(), passwordR.getText().toString())) {
 
-        password1 = password.getText().toString();
-        password2 = passwordR.getText().toString();
-        //Toast.makeText(getApplicationContext(), "Password:" +password1+ "Repetição:" +password2, Toast.LENGTH_SHORT).show();
-
-        if (password1.matches(password2)) {
-            //Toast.makeText(getApplicationContext(), "Password:" +password1+ "Repetição:" +password2, Toast.LENGTH_SHORT).show();
-            //Inicio do Post de Registo do Cliente
-            Signup form = new Signup();
-            form.setUsername(username.getText().toString());
-            form.setEmail(email.getText().toString());
-            form.setNif(nif.getText().toString());
-            form.setBirsthday(birsthday.getYear()+"/"+birsthday.getMonth()+"/"+birsthday.getDayOfMonth());
-            form.setPhonenumber(phonenumber.getText().toString());
-            form.setPassword(password.getText().toString());
+            Signup form = new Signup(
+                    username.getText().toString(),
+                    email.getText().toString(),
+                    nif.getText().toString(),
+                    birsthday.getYear()+"/"+birsthday.getMonth()+"/"+birsthday.getDayOfMonth(),
+                    phonenumber.getText().toString(),
+                    password.getText().toString()
+            );
 
             form.DoSignup();
             Toast.makeText(getApplicationContext(), "Account Created Successfully. You can start a session.", Toast.LENGTH_SHORT).show();

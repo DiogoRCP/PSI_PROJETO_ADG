@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.models.CarSingleton;
 
 public class Pagina_Inicial extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             fragmentManager = getSupportFragmentManager();
             CarregarFragmentoInicial();
         }
+        CarregarSingletons();
     }
 
     public void onClickGaragem(View view) {
@@ -60,5 +62,9 @@ public class Pagina_Inicial extends AppCompatActivity {
         fragment = new fragment_carInfo();
         setTitle("Schedules Appointment");
         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
+    }
+
+    private void CarregarSingletons(){
+        CarSingleton.getInstance(this);
     }
 }
