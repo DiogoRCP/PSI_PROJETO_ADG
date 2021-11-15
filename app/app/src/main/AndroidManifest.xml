@@ -11,12 +11,6 @@
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".controllers.InfoCarro"
-            android:exported="true" />
-        <activity
-            android:name=".controllers.garagem"
-            android:exported="true" />
-        <activity
             android:name=".controllers.Pagina_Inicial"
             android:exported="true" />
         <activity

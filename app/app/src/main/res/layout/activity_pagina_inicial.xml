@@ -8,20 +8,11 @@
     tools:context=".controllers.Pagina_Inicial">
 
 
-    <TextView
-        android:id="@+id/textView8"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.carbuddy.controllers.Schedules_Appointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/roudedconers"
-        android:fontFamily="@font/baloo_da"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp"
-        android:text="@string/Schedules"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +47,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:background="@drawable/button_states"
-        android:onClick="onClickAllRepairs"
+        android:onClick="onClickSchedulesAppointment"
         app:icon="@drawable/clipboard"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"

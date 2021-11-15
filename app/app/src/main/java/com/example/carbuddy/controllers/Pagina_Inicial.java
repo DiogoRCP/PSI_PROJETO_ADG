@@ -1,6 +1,8 @@
 package com.example.carbuddy.controllers;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Build;
@@ -13,6 +15,8 @@ import com.example.carbuddy.R;
 
 public class Pagina_Inicial extends AppCompatActivity {
 
+    private FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,21 +24,34 @@ public class Pagina_Inicial extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            fragmentManager = getSupportFragmentManager();
+            CarregarFragmentoInicial();
         }
     }
 
     public void onClickGaragem(View view) {
-        Intent garagem = new Intent(this, garagem.class);
-        startActivity(garagem);
+        Fragment fragment = new fragment_garage();
+        setTitle("Schedules");
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 
-    public void onClickAllRepairs(View view) {
-        //Intent allrepairs = new Intent(this, Repairs.class);
-        //startActivity(allrepairs);
+    public void onClickSchedulesAppointment(View view) {
+        CarregarFragmentoSchedulesAppointment();
     }
 
     public void onClickUsers(View view) {
-        //Intent user = new Intent(this, User.class);
-        //startActivity(user);
+        CarregarFragmentoInicial();
+    }
+
+    public void CarregarFragmentoInicial() {
+        Fragment fragment = new fragment_schedules();
+        setTitle("Schedules");
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
+    }
+
+    public void CarregarFragmentoSchedulesAppointment() {
+        Fragment fragment = new Schedules_Appointment();
+        setTitle("Schedules");
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 }
