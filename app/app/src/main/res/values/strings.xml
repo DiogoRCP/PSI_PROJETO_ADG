@@ -5,6 +5,8 @@
     <string name="Garage">Garage</string>
     <string name="Signup">Sign Up</string>
     <string name="Schedules">Schedules</string>
+    <string name="Schedulesappointment">Scheduling Appointment</string>
     <string name="InfoCarro">Car Information</string>
     <string name="CarExample">Car Example</string>
+    <string name="Companies">Companies</string>
 </resources>
