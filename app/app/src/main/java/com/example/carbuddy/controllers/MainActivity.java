@@ -3,23 +3,23 @@ package com.example.carbuddy.controllers;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.models.LoginSingleton;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private EditText editTextUser, editTextPass;
-    private Button buttonLogin;
     private String user, pass;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         editTextUser = findViewById(R.id.editTextTextPersonName);
         editTextPass = findViewById(R.id.editTextTextPassword);
-     /*   buttonLogin = findViewById(R.id.btnLogin);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { efetuarLogin(); }
-
-        });*/
     }
 
         private boolean efetuarLogin() {
@@ -81,15 +75,12 @@ public class MainActivity extends AppCompatActivity {
     public void onClickLogin(View view ) {
         if(efetuarLogin()==true) {
 
-            ApiCRUDActivity.sendGET(this, "login/get?username=" + user + "&password=" + pass);
-
-            boolean variavelQueVemDoGet = true;
-
-            if(variavelQueVemDoGet == true){
+            if(LoginSingleton.getInstance(this, user, pass).isEntrar() == true){
                 Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
                 startActivity(paginaInicial);
+            }else {
+                Toast.makeText(this, "Conta não existente", Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 

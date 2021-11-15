@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.models.CarSingleton;
 
 public class Pagina_Inicial extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+        CarregarSingletons();
     }
 
     public void onClickGaragem(View view) {
@@ -36,5 +38,9 @@ public class Pagina_Inicial extends AppCompatActivity {
     public void onClickUsers(View view) {
         //Intent user = new Intent(this, User.class);
         //startActivity(user);
+    }
+
+    private void CarregarSingletons(){
+        CarSingleton.getInstance(this);
     }
 }
