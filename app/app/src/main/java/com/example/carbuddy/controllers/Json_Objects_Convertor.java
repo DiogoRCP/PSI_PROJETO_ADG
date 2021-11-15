@@ -24,7 +24,7 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ApiCRUDActivity {
+public class Json_Objects_Convertor {
 
     public static String jsonObjectConvert(Object object) {
         GsonBuilder builder = new GsonBuilder();
@@ -80,34 +80,5 @@ public class ApiCRUDActivity {
             }
         });
         thread.start();
-    }
-
-    public static void sendGET(Context context, String uri) {
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://10.0.2.2:8080/api/" + uri;
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        try {
-                            Log.i("Login", response.getString("Login"));
-                            Log.i("Authkey", response.getString("authkey"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("Error", error.toString());
-                    }
-                });
-
-        // Access the RequestQueue through your singleton class.
-        //CarSingleton.getInstance().addToRequestQueue(jsonObjectRequest);
-
-        queue.add(jsonObjectRequest);
     }
 }

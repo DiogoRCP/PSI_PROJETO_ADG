@@ -1,6 +1,6 @@
 package com.example.carbuddy.models;
 
-import com.example.carbuddy.controllers.ApiCRUDActivity;
+import com.example.carbuddy.controllers.Json_Objects_Convertor;
 
 public class Signup {
     String username;
@@ -87,6 +87,6 @@ public class Signup {
     }
 
     public void DoSignup(){
-        ApiCRUDActivity.sendPost("signup/post", ApiCRUDActivity.jsonObjectConvert(this));
+        Json_Objects_Convertor.sendPost("signup/post", Json_Objects_Convertor.jsonObjectConvert(this));
     }
 }

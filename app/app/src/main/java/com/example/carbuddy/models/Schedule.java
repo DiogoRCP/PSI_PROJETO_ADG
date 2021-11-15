@@ -1,10 +1,10 @@
 package com.example.carbuddy.models;
 
-public class Schedules {
+public class Schedule {
     private int id, carId, companyId;
     private String currentDate, schedulingDate, repairDescription, state, repairType;
 
-    public Schedules(int id, int carId, int companyId, String currentDate, String schedulingDate, String repairDescription, String state, String repairType) {
+    public Schedule(int id, int carId, int companyId, String currentDate, String schedulingDate, String repairDescription, String state, String repairType) {
         this.id = id;
         this.carId = carId;
         this.companyId = companyId;
