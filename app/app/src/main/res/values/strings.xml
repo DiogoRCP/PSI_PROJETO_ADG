@@ -3,4 +3,8 @@
     <string name="TextViewUser">Username</string>
     <string name="TextViewPassword">Password</string>
     <string name="Garage">Garage</string>
+    <string name="Signup">Sign Up</string>
+    <string name="Schedules">Schedules</string>
+    <string name="InfoCarro">Car Information</string>
+    <string name="CarExample">Car Example</string>
 </resources>
