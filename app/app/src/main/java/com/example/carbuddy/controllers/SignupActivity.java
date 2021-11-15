@@ -59,13 +59,13 @@ public class SignupActivity extends AppCompatActivity {
             form.setPassword(password.getText().toString());
 
             form.DoSignup();
-            Toast.makeText(getApplicationContext(), "Conta Criada com Sucesso. Pode iniciar sessão", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Account Created Successfully. You can start a session.", Toast.LENGTH_SHORT).show();
             Intent login = new Intent(this, MainActivity.class);
             startActivity(login);
         }
         else {
             //Mensagem de erro a endicar que as passwors não correspondem
-            Toast.makeText(getApplicationContext(), "Password e a sua Repetição são diferentes", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Password and its Replay are different.", Toast.LENGTH_SHORT).show();
         }
     }
 }
