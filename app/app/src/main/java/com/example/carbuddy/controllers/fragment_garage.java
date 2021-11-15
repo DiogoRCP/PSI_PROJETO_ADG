@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.models.CarSingleton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,9 +59,8 @@ public class fragment_garage extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
-
         }
+        System.out.println(CarSingleton.getInstance(getContext()).getCars());
     }
 
     @Override
