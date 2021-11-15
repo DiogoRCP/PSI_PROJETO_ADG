@@ -3,23 +3,19 @@ package com.example.carbuddy.controllers;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.carbuddy.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragment_garage#newInstance} factory method to
+ * Use the {@link fragment_carInfo#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_garage extends Fragment {
-
-
+public class fragment_carInfo extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +26,7 @@ public class fragment_garage extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public fragment_garage() {
+    public fragment_carInfo() {
         // Required empty public constructor
     }
 
@@ -40,11 +36,11 @@ public class fragment_garage extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_garage.
+     * @return A new instance of fragment fragment_carInfo.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_garage newInstance(String param1, String param2) {
-        fragment_garage fragment = new fragment_garage();
+    public static fragment_carInfo newInstance(String param1, String param2) {
+        fragment_carInfo fragment = new fragment_carInfo();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,8 +54,6 @@ public class fragment_garage extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
-
         }
     }
 
@@ -67,7 +61,6 @@ public class fragment_garage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_garage, container, false);
+        return inflater.inflate(R.layout.fragment_car_info, container, false);
     }
-
 }

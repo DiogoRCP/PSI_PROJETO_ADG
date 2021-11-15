@@ -16,6 +16,7 @@ import com.example.carbuddy.R;
 public class Pagina_Inicial extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
+    private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,8 @@ public class Pagina_Inicial extends AppCompatActivity {
     }
 
     public void onClickGaragem(View view) {
-        Fragment fragment = new fragment_garage();
-        setTitle("Schedules");
+        fragment = new fragment_garage();
+        setTitle("Garage");
         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 
@@ -44,14 +45,20 @@ public class Pagina_Inicial extends AppCompatActivity {
     }
 
     public void CarregarFragmentoInicial() {
-        Fragment fragment = new fragment_schedules();
+        fragment = new fragment_schedules();
         setTitle("Schedules");
         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 
     public void CarregarFragmentoSchedulesAppointment() {
-        Fragment fragment = new Schedules_Appointment();
-        setTitle("Schedules");
+        fragment = new Schedules_Appointment();
+        setTitle("Schedules Appointment");
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
+    }
+
+    public void onClickCar(View view) {
+        fragment = new fragment_carInfo();
+        setTitle("Schedules Appointment");
         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 }
