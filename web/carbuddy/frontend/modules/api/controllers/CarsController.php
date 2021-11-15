@@ -38,7 +38,7 @@ class CarsController extends ActiveController
         if (\Yii::$app->user->can('frontendCrudVehicle')) {
             $CarsModel = new $this->modelClass;
             $recs = $CarsModel::find()->where('userId = ' . \Yii::$app->user->getId())->all();
-            return ['response' => $recs];
+            return $recs;
         } else {
             return self::noPermission;
         }

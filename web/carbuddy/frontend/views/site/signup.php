@@ -12,6 +12,7 @@ $this->title = 'Signup';
 <div class="site-signup">
     <div class="row">
         <div class="col-lg-9">
+            <img src="../images/logo_white.png" width="80">
             <h2>Sign Up</h2>
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
@@ -28,7 +29,7 @@ $this->title = 'Signup';
                 <?= $form->field($model, 'password')->label('Password')->passwordInput() ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton('Signup', ['class' => 'btn btn-secondary', 'name' => 'signup-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

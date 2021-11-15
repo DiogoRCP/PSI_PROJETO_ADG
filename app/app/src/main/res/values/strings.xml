@@ -2,4 +2,13 @@
     <string name="app_name">CarBuddy</string>
     <string name="TextViewUser">Username</string>
     <string name="TextViewPassword">Password</string>
+    <string name="Garage">Garage</string>
+    <string name="Signup">Sign Up</string>
+    <string name="Schedules">Schedules</string>
+    <string name="Schedulesappointment">Scheduling Appointment</string>
+    <string name="InfoCarro">Car Information</string>
+    <string name="CarExample">Car Example</string>
+    <string name="Companies">Companies</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -4,44 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo"
-    tools:context=".controllers.garagem">
+    tools:context=".controllers.fragment_carInfo" >
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/roudedconers"
-        android:fontFamily="@font/baloo_da"
+        android:fontFamily="@font/berlinsansfb"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:paddingRight="10dp"
         android:paddingBottom="5dp"
-        android:text="Garagem"
+        android:text="@string/InfoCarro"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_weight="1"
-        android:onClick="onClickVeiculo"
-        android:text="exemplo carro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <ListView
-        android:layout_width="409dp"
-        android:layout_height="597dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="133dp"
-        tools:listitem="@layout/activity_info_carro" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
