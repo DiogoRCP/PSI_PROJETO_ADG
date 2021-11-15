@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/roudedconers"
-        android:fontFamily="@font/baloo_da"
+        android:fontFamily="@font/berlinsansfb"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:paddingRight="10dp"
