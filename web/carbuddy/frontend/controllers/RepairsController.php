@@ -73,6 +73,22 @@ class RepairsController extends Controller
         }
     }
 
+    public function actionHistory($car)
+    {
+        if (Yii::$app->user->can('frontendReadRepair')) {
+            $searchModel = new RepairsSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
+    }
+
     /**
      * Creates a new Repairs model.
      * If creation is successful, the browser will be redirected to the 'view' page.
