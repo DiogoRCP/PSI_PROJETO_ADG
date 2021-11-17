@@ -61,7 +61,7 @@ class RepairsSearch extends Repairs
             'id' => $this->id,
             'kilometers' => $this->kilometers,
             'repairdate' => $this->repairdate,
-            'carId' => $this->carId,
+            'carId' => (\Yii::$app->request->get('car'))?\Yii::$app->request->get('car'):$this->carId,
             'contributorId' => $this->contributorId,
         ]);
 

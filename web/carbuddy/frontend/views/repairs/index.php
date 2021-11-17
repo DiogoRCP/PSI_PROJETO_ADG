@@ -8,36 +8,54 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Repairs';
+
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="repairs-index">
     <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Repairs', ['create'], ['class' => 'btn btn-secondary']) ?>
-    </p>
+    <?php if (Yii::$app->user->can('frontendCRUDRepair')) { ?>
+        <p>
+            <?= Html::a('Create Repairs', ['create'], ['class' => 'btn btn-secondary']) ?>
+        </p>
+
+    <?php } ?>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
-            'kilometers',
-            'repairdate',
-            'repairdescription',
-            'state',
-            'repairtype',
-            'carId',
-            //'contributorId',
+    <?php if (\Yii::$app->request->get('car') != null) { ?>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                'kilometers',
+                'repairdate',
+                'repairdescription',
+                'state',
+                'repairtype',
+            ],
+        ]); ?>
+    <?php } else { ?>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                //['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                //'id',
+                'kilometers',
+                'repairdate',
+                'repairdescription',
+                'state',
+                'repairtype',
+                'carId',
+                //'contributorId',
 
+                ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]);
+    } ?>
 
 </div>
