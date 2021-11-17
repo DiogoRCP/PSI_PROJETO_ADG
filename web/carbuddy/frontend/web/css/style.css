@@ -106,6 +106,20 @@ body .site-login .contentor .buttonlogin {
   color: beige;
 }
 
+.index-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 0px;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.index-content table {
+  color: white;
+}
+.index-content table a {
+  color: beige;
+}
+
 .cars-view {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2rem;
@@ -213,6 +227,20 @@ body .site-login .contentor .buttonlogin {
   text-align: center;
   border-radius: 1.8rem;
   width: 25rem;
+}
+
+.site-index2 {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.site-index2 table {
+  color: white;
+}
+.site-index2 table a {
+  color: beige;
 }
 
 /*# sourceMappingURL=style.css.map */
