@@ -14,15 +14,6 @@ $this->title = 'CarBuddy';
     <div class="jumbotron text-center bg-transparent">
         <img src="../images/logo_white.png" width="250">
     </div>
-
-    <div class="body-content" style="margin-top: -7rem; margin-bottom: 2rem">
-
-        <?php
-        echo $this->render('about');
-        $this->title = 'CarBuddy';
-        ?>
-
-    </div>
     <div class="body-content">
         <div class="row">
             <!--Adiciona gráficos automáticamente mediante o array charts do controller-->
@@ -33,6 +24,14 @@ $this->title = 'CarBuddy';
                 </div>
             <?php } ?>
         </div>
+    </div>
+
+    <div class="body-content" style="margin-top: 5rem; margin-bottom: 2rem">
+
+        <?php
+        echo $this->render('about');
+        $this->title = 'CarBuddy';
+        ?>
 
     </div>
 </div>
