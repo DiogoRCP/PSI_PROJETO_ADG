@@ -14,8 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginSingleton {
-    private boolean entrar;
-    private String token;
+    Login login;
 
     private static LoginSingleton instancia = null;
 
@@ -27,10 +26,10 @@ public class LoginSingleton {
     }
 
     public LoginSingleton(Context context, String user, String pass){
-        getLogin(context, user, pass);
+        apiLogin(context, user, pass);
     }
 
-    public void getLogin(Context context, String user, String pass) {
+    public void apiLogin(Context context, String user, String pass) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "http://10.0.2.2:8080/api/login/get?username=" + user + "&password=" + pass;
 
@@ -40,8 +39,8 @@ public class LoginSingleton {
                     public void onResponse(JSONObject response) {
 
                         try {
-                            entrar = response.getBoolean("Login");
-                            token = response.getString("authkey");
+
+                            login = new Login(response.getBoolean("Login"), response.getString("authkey"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -53,17 +52,10 @@ public class LoginSingleton {
                     }
                 });
 
-        // Access the RequestQueue through your singleton class.
-        //CarSingleton.getInstance().addToRequestQueue(jsonObjectRequest);
-
         queue.add(jsonObjectRequest);
     }
 
-    public boolean isEntrar() {
-        return entrar;
-    }
-
-    public String getToken() {
-        return token;
+    public Login getLogin() {
+        return login;
     }
 }

@@ -35,7 +35,7 @@ public class CarSingleton {
 
     private void CarregarListaCarros(Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://10.0.2.2:8080/api/cars/carsuser?access-token="+LoginSingleton.getInstance(context, "","").getToken();
+        String url = "http://10.0.2.2:8080/api/cars/carsuser?access-token="+LoginSingleton.getInstance(context, "", "").getLogin().getToken();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -59,9 +59,6 @@ public class CarSingleton {
                         Log.i("Error", error.toString());
                     }
                 });
-
-        // Access the RequestQueue through your singleton class.
-        //CarSingleton.getInstance().addToRequestQueue(jsonObjectRequest);
 
         queue.add(jsonArrayRequest);
     }
