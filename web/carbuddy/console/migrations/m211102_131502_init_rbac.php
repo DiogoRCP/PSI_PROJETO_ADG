@@ -55,6 +55,10 @@ class m211102_131502_init_rbac extends Migration
         $CrudSchedulesClient->description = 'frontendCrudSchedulesClient';
         $auth->add($CrudSchedulesClient);
 
+        $ReadRepair = $auth->createPermission('frontendReadRepair');
+        $ReadRepair->description = 'frontendReadRepair';
+        $auth->add($ReadRepair);
+
 
         //Atribuições
         $auth->addChild($admin, $crudCompany);
@@ -68,6 +72,7 @@ class m211102_131502_init_rbac extends Migration
 
         $auth->addChild($client, $CrudSchedulesClient);
         $auth->addChild($client, $crudVehicle);
+        $auth->addChild($client, $ReadRepair);
 
 
         //assign ID to users
