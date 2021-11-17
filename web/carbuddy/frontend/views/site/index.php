@@ -2,6 +2,9 @@
 
 /* @var $this yii\web\View */
 
+use yii\grid\GridView;
+/* @var $searchModel frontend\models\CarSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 $this->title = 'CarBuddy';
 ?>
 <div class="site-index">
@@ -10,12 +13,27 @@ $this->title = 'CarBuddy';
         <img src="../images/logo_white.png" width="250">
     </div>
 
-    <div class="body-content" style="margin-top: -7rem; margin-bottom: 2rem">
+    <div class="index-content">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                //'id',
+                'registration',
+                'vin',
+                'brand',
+                'model',
+                //'color',
+                //'carType',
+                'displacement',
+                'fuelType',
+                'modelyear',
+                'kilometers',
+                'state',
+                //'userId',
 
-        <?php
-        echo $this->render('about');
-        $this->title = 'CarBuddy';
-        ?>
-
+               // ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]); ?>
     </div>
 </div>

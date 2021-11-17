@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\CarSearch;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\Users;
 use frontend\models\VerifyEmailForm;
@@ -77,6 +78,18 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->can('frontendCrudVehicle')) {
+            $searchModel = new CarSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
         return $this->render('index');
     }
 
