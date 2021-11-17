@@ -63,7 +63,7 @@ class RepairsController extends Controller
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->can('frontendCrudRepair')) {
+        if (Yii::$app->user->can('frontendReadRepair')) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);

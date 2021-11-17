@@ -14,14 +14,14 @@ function SearchCar(vin) {
         $('#cars-modelyear').val(Object.entries(resposta)[3][1][9]['Value'])
             .prop('readonly', (Object.entries(resposta)[3][1][9]['Value'] != null)?true:false);
 
-        $('#cars-cartype').val(Object.entries(resposta)[3][1][13]['Value'])
-            .prop('disabled', (Object.entries(resposta)[3][1][13]['Value'] != null)?true:false);
+        $('#cars-cartype').val(Object.entries(resposta)[3][1][13]['Value']);
+            //.prop('disabled', (Object.entries(resposta)[3][1][13]['Value'] != null)?true:false);
 
         $('#cars-displacement').val(Object.entries(resposta)[3][1][69]['Value'])
             .prop('readonly', (Object.entries(resposta)[3][1][69]['Value'] != null)?true:false);
 
-        $('#cars-fueltype').val(Object.entries(resposta)[3][1][75]['Value'])
-            .prop('disabled', (Object.entries(resposta)[3][1][75]['Value'] != null)?true:false);
+        $('#cars-fueltype').val(Object.entries(resposta)[3][1][75]['Value']);
+            //.prop('disabled', (Object.entries(resposta)[3][1][75]['Value'] != null)?true:false);
     }).fail(function (jqXHR, textStatus) {
         //console.log("Request failed: " + textStatus);
 
