@@ -14,10 +14,10 @@ $this->title = $model->car->brand . " " . $model->car->model;
 <div class="repairs-view">
     <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php if (Yii::$app->user->can('frontendCRUDRepair')) { ?>
 
-        <p>
-            <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
+    <p>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
+        <?php if (Yii::$app->user->can('frontendCRUDRepair')) { ?>
             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
             <?= Html::a('Delete', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-dark',
@@ -26,8 +26,9 @@ $this->title = $model->car->brand . " " . $model->car->model;
                     'method' => 'post',
                 ],
             ]) ?>
-        </p>
-    <?php } ?>
+        <?php } ?>
+    </p>
+
 
     <?= DetailView::widget([
         'model' => $model,
