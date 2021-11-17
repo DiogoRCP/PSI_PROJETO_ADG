@@ -75,13 +75,17 @@ public class MainActivity extends AppCompatActivity {
     public void onClickLogin(View view ) {
         if(efetuarLogin()==true) {
 
+            LoginSingleton.getInstance(this, user, pass);
             if(LoginSingleton.getInstance(this, user, pass).getLogin() != null) {
                 if (LoginSingleton.getInstance(this, user, pass).getLogin().isEntrar() == true) {
                     Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
                     startActivity(paginaInicial);
-                } else {
+                }else{
                     Toast.makeText(this, "Conta não existente", Toast.LENGTH_SHORT).show();
+                    LoginSingleton.setInstancia(null);
                 }
+            }else{
+
             }
         }
     }

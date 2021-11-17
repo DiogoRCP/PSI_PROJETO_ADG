@@ -25,7 +25,7 @@ public class LoginSingleton {
         return instancia;
     }
 
-    public LoginSingleton(Context context, String user, String pass){
+    public LoginSingleton(Context context, String user, String pass) {
         apiLogin(context, user, pass);
     }
 
@@ -39,10 +39,10 @@ public class LoginSingleton {
                     public void onResponse(JSONObject response) {
 
                         try {
-
                             login = new Login(response.getBoolean("Login"), response.getString("authkey"));
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            login = new Login(false, "");
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -57,5 +57,9 @@ public class LoginSingleton {
 
     public Login getLogin() {
         return login;
+    }
+
+    public static void setInstancia(LoginSingleton instancia) {
+        LoginSingleton.instancia = instancia;
     }
 }
