@@ -19,6 +19,6 @@ Curso Técnico Superior Profissional de Programação de Sistemas de Informaçã
 
 &nbsp;
 #### Elaborado por:
-- Alberto Correia
+- Andreia Batista
 - Diogo Pereira
 - Gonçalo Ferreira
