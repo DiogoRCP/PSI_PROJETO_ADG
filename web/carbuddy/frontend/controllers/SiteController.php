@@ -87,10 +87,8 @@ class SiteController extends Controller
                 'dataProvider' => $dataProvider,
             ]);
         } else {
-            Yii::$app->user->logout();
-            return $this->goHome();
+            return $this->render('index');
         }
-        return $this->render('index');
     }
 
     /**
