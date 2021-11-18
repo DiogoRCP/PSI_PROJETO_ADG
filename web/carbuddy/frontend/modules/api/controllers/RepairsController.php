@@ -27,10 +27,10 @@ class RepairsController extends ActiveController
         } return null;
     }
 
-    public function actionIndex()
-    {
-        return $this->render('index');
+    public function actionHistory($car){
+
     }
+
     public function actionTotal(){
         $Repairssmodel = new $this -> modelClass;
         $recs = $Repairssmodel::find() -> all();
