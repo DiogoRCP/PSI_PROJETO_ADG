@@ -2,6 +2,7 @@
 
 namespace frontend\modules\api\controllers;
 use app\models\User;
+use frontend\models\Repairs;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
@@ -28,7 +29,9 @@ class RepairsController extends ActiveController
     }
 
     public function actionHistory($car){
-
+        $Repairssmodel = new $this -> modelClass;
+        $recs = $Repairssmodel::find()->where("carId = ".$car)->all();
+        return $recs;
     }
 
     public function actionTotal(){
