@@ -15,7 +15,7 @@ $this->title = 'CarBuddy';
         <img src="../images/logo_white.png" width="250">
     </div>
     <div class="body-content">
-        <div class="row">
+        <div class="row" style="display: flex; justify-content: center;">
             <!--Adiciona gráficos automáticamente mediante o array charts do controller-->
             <?php foreach ($charts as $chart) { ?>
                 <div class="col-md-3">
