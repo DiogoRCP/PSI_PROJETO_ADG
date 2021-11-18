@@ -56,7 +56,7 @@ class Users extends \yii\db\ActiveRecord
             'userpassword' => 'User Password',
             'usertype' => 'User Type',
             'nif' => 'NIF',
-            'birsthday' => 'Birsthday',
+            'birsthday' => 'Birthday',
             'email' => 'E-mail',
             'phonenumber' => 'Phone Number',
             'registrationdate' => 'Registration Date',
