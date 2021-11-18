@@ -22,7 +22,7 @@ $this->title = 'Signup';
 
                 <?= $form->field($model, 'nif')->label('NIF')->input("number", ['max' => '999999999', 'maxlength' =>'9', 'pattern'=> '[0-9]{9}'])?>
 
-                <?= $form->field($model, 'birsthday')->input("date") ?>
+                <?= $form->field($model, 'birsthday')->label('Birthday')->input("date") ?>
 
                 <?= $form->field($model, 'phonenumber')->label('Phone Number')->input("tel", ['pattern'=> '[0-9]{9}']) ?>
 
