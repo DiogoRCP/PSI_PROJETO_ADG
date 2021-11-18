@@ -70,7 +70,6 @@ public class fragment_garage extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         lstCar = CarSingleton.getInstance(getContext()).getCars();
-        System.out.println(CarSingleton.getInstance(getContext()).getCars());
     }
 
     @Override

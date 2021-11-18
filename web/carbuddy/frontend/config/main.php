@@ -75,13 +75,14 @@ return [
                     'controller' => 'api/repairs',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'GET history/{car}' => 'history',
                         'GET total' => 'total',
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put/{id}' => 'put',
                         'DELETE  delete/{id}' => 'delete'
                     ],
-                    'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
+                    'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>', '{car}' => '<car:\d+>',],
 
                     'controller' => 'api/companies',
                     'pluralize' => false,
