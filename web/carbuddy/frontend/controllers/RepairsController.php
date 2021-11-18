@@ -63,9 +63,25 @@ class RepairsController extends Controller
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->can('frontendCrudRepair')) {
+        if (Yii::$app->user->can('frontendReadRepair')) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
+    }
+
+    public function actionHistory($car)
+    {
+        if (Yii::$app->user->can('frontendReadRepair')) {
+            $searchModel = new RepairsSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
             ]);
         } else {
             Yii::$app->user->logout();
