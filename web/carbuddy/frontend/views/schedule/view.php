@@ -29,7 +29,7 @@ $this->title = $model->car->brand." ".$model->car->model." (".$model->company->c
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             [
                 'label' => 'Car',
                 'value' => $model->car->registration
