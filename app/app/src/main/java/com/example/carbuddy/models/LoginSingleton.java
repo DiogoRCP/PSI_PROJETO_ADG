@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.controllers.Json_Objects_Convertor;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +45,9 @@ public class LoginSingleton {
                             e.printStackTrace();
                             login = new Login(false, "");
                         }
+
+                        /* this is gonna be the right way */
+                        // login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
                     }
                 }, new Response.ErrorListener() {
                     @Override
