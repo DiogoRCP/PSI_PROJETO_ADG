@@ -49,8 +49,8 @@ class Contributors extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'speciality' => 'Speciality',
-            'companyId' => 'Company ID',
-            'userId' => 'User ID',
+            'companyId' => 'Company',
+            'userId' => 'User',
         ];
     }
 
