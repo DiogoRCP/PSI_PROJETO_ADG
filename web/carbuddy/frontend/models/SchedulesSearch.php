@@ -5,6 +5,7 @@ namespace frontend\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Schedules;
+use yii\helpers\VarDumper;
 
 /**
  * SchedulesSearch represents the model behind the search form of `frontend\models\Schedules`.
@@ -40,7 +41,7 @@ class SchedulesSearch extends Schedules
      */
     public function search($params)
     {
-        $query = Schedules::find();
+        $query = Schedules::find()->innerJoin("cars", "cars.id = schedules.carId");
 
         // add conditions that should always apply here
 
@@ -63,6 +64,7 @@ class SchedulesSearch extends Schedules
             'schedulingdate' => $this->schedulingdate,
             'carId' => $this->carId,
             'companyId' => $this->companyId,
+            'cars.userId' => \Yii::$app->getUser()->getId()
         ]);
 
         $query->andFilterWhere(['like', 'repairdescription', $this->repairdescription])
