@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.models.CarSingleton;
+import com.example.carbuddy.models.ModeloBDHelper;
 
 public class Pagina_Inicial extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             CarregarFragmentoInicial();
         }
         CarregarSingletons();
+        ModeloBDHelper database = new ModeloBDHelper(this);
     }
 
     public void onClickGaragem(View view) {

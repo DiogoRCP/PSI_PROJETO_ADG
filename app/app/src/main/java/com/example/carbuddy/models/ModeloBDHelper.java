@@ -39,6 +39,19 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY (userId) REFERENCES user(id)" +
                         ");";
         db.execSQL(createCarsTable);
+
+        String createSchedulesTable =
+                "CREATE TABLE IF NOT EXISTS schedules" +
+                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "currentdate DATETIME default Current_Timestamp, " +
+                        "schedulingdate DATETIME NOT NULL, " +
+                        "repairdescription VARCHAR(100) NOT NULL, " +
+                        "state VARCHAR(100) NOT NULL," +
+                        "repairtype VARCHAR(100) NOT NULL," +
+                        "carId INT NOT NULL," +
+                        "contributorId INT NOT NULL" +
+                        ");";
+        db.execSQL(createSchedulesTable);
     }
 
     @Override
