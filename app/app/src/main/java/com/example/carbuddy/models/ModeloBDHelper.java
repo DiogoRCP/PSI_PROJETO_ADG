@@ -49,7 +49,9 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         "state VARCHAR(100) NOT NULL," +
                         "repairtype VARCHAR(100) NOT NULL," +
                         "carId INT NOT NULL," +
-                        "contributorId INT NOT NULL" +
+                        "companyId INT NOT NULL," +
+                        "FOREIGN KEY (carId) REFERENCES car(id)," +
+                        "FOREIGN KEY (companyId) REFERENCES company(id)" +
                         ");";
         db.execSQL(createSchedulesTable);
     }
