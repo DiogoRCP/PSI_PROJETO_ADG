@@ -106,7 +106,7 @@ class CarController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->can('frontendCrudVehicle')) {
+        if (Yii::$app->user->can('frontendCrudVehicle')& $this->findModel($id)->userId == \Yii::$app->user->getId()) {
             $model = $this->findModel($id);
 
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
