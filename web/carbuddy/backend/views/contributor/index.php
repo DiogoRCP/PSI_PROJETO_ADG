@@ -23,9 +23,9 @@ $this->title = 'Contributors';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'speciality',
-            'companyId',
             'userId',
+            'companyId',
+            'speciality',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
