@@ -28,15 +28,16 @@ $this->title = $model->user->username.' ('.$model->company->companyname.')';
         'model' => $model,
         'attributes' => [
             //'id',
-            'speciality',
-            [
-                'label' => 'Company',
-                'value' => $model->company->companyname
-            ],
+
             [
                 'label' => 'User',
                 'value' => $model->user->username,
             ],
+            [
+                'label' => 'Company',
+                'value' => $model->company->companyname
+            ],
+            'speciality',
         ],
     ]) ?>
 
