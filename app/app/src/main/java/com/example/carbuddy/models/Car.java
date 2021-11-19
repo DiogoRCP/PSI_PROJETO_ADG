@@ -1,13 +1,14 @@
 package com.example.carbuddy.models;
 
+import android.content.ContentValues;
 import android.graphics.Color;
 
 public class Car {
     private int id, kilometers, userId;
-    private String vin, brand, model, color, cartype, fueltype, registration, modelyear, state;
+    private String vin, brand, model, color, carType, fuelType, registration, modelyear, state;
     private float displacement;
 
-    public Car(int id, int kilometers, int userId, String vin, String brand, String model, String color, String cartype, String fueltype, String registration, String modelyear, String state, float displacement) {
+    public Car(int id, String vin, String brand, String model, String color, String carType, float displacement, String fuelType, String registration, String modelyear, int kilometers, String state, int userId) {
         this.id = id;
         this.kilometers = kilometers;
         this.userId = userId;
@@ -15,8 +16,8 @@ public class Car {
         this.brand = brand;
         this.model = model;
         this.color = color;
-        this.cartype = cartype;
-        this.fueltype = fueltype;
+        this.carType = carType;
+        this.fuelType = fuelType;
         this.registration = registration;
         this.modelyear = modelyear;
         this.state = state;
@@ -80,19 +81,19 @@ public class Car {
     }
 
     public String getCartype() {
-        return cartype;
+        return carType;
     }
 
     public void setCartype(String cartype) {
-        this.cartype = cartype;
+        this.carType = cartype;
     }
 
     public String getFueltype() {
-        return fueltype;
+        return fuelType;
     }
 
     public void setFueltype(String fueltype) {
-        this.fueltype = fueltype;
+        this.fuelType = fueltype;
     }
 
     public String getRegistration() {
@@ -137,8 +138,8 @@ public class Car {
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", color='" + color + '\'' +
-                ", cartype='" + cartype + '\'' +
-                ", fueltype='" + fueltype + '\'' +
+                ", cartype='" + carType + '\'' +
+                ", fueltype='" + fuelType + '\'' +
                 ", registration='" + registration + '\'' +
                 ", modelyear='" + modelyear + '\'' +
                 ", state='" + state + '\'' +

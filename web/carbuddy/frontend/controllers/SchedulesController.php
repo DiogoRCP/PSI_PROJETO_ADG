@@ -7,6 +7,7 @@ use frontend\models\Companies;
 use frontend\models\Schedules;
 use frontend\models\SchedulesSearch;
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -48,6 +49,7 @@ class SchedulesController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+
         } else {
             Yii::$app->user->logout();
             return $this->goHome();
