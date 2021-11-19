@@ -28,7 +28,7 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'vin',
             'brand',
             'model',

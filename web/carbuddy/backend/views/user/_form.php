@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'birsthday')->textInput(['readonly' => true]) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true,'pattern' =>"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$", 'title' => 'Invalid email address']) ?>
+    <?= $form->field($model, 'email')->textInput(['readonly' => true, 'maxlength' => true,'pattern' =>"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$", 'title' => 'Invalid email address']) ?>
 
     <?= $form->field($model, 'phonenumber')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 

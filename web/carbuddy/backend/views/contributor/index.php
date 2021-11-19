@@ -14,7 +14,7 @@ $this->title = 'Contributors';
     <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Create Contributors', ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a('Create Contributor', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -23,9 +23,9 @@ $this->title = 'Contributors';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'speciality',
-            'companyId',
             'userId',
+            'companyId',
+            'speciality',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

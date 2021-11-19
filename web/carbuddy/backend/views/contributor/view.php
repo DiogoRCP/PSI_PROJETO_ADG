@@ -27,16 +27,17 @@ $this->title = $model->user->username.' ('.$model->company->companyname.')';
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'speciality',
-            [
-                'label' => 'Company',
-                'value' => $model->company->companyname
-            ],
+            //'id',
+
             [
                 'label' => 'User',
                 'value' => $model->user->username,
             ],
+            [
+                'label' => 'Company',
+                'value' => $model->company->companyname
+            ],
+            'speciality',
         ],
     ]) ?>
 

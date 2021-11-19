@@ -30,7 +30,7 @@ $this->title = $model->username.' ('.$model->nif.')';
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'username',
             'usertype',
             'nif',
