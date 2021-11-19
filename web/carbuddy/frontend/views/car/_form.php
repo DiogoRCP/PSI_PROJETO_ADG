@@ -9,6 +9,8 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="cars-form">
+    <div class="row">
+        <div class="col-lg-5">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -30,6 +32,10 @@ use yii\widgets\ActiveForm;
         'HatchBack' => 'HatchBack', 'SUV' => 'SUV', '4x4' => '4x4', 'Performance' => 'Performance', 'Pick-up' => 'Pick-up'
     ,'Motorcycle'=>'Motorcycle'-->
 
+        </div>
+
+        <div class="col-lg-5">
+
     <?= $form->field($model, 'displacement')->input('number', ['maxlength' => true]) ?>
 
     <?= $form->field($model, 'fuelType')->dropDownList(['' => '', 'Diesel' => 'Diesel', 'Hybrid' => 'Hybrid', 'Electric' => 'Electric', 'Gasoline' => 'Gasoline']) ?>
@@ -39,6 +45,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'kilometers')->input('number') ?>
 
     <?= $form->field($model, 'state')->dropDownList(['' => '', 'Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending']) ?>
+
+    <?= $form->field($model, 'userId')->textInput() ?>
+
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-secondary']) ?>
