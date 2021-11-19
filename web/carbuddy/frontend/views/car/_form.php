@@ -40,8 +40,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'state')->dropDownList(['' => '', 'Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending']) ?>
 
-    <?= $form->field($model, 'userId')->textInput() ?>
-
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-secondary']) ?>
     </div>

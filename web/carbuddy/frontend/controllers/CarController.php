@@ -80,6 +80,9 @@ class CarController extends Controller
         if (Yii::$app->user->can('frontendCrudVehicle')) {
             $model = new Cars();
 
+            //Faz com que assuma e preencha automaticamente o ID do utilizador logado
+            $model->userId = \Yii::$app->user->getId();
+
             if ($this->request->isPost) {
                 if ($model->load($this->request->post()) && $model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
