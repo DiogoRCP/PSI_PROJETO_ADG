@@ -20,7 +20,7 @@ $this->title = 'Create Repair';
         <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
     </p>
     <?= $this->render('_form', [
-        'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor, 'modelUsers' => $modelUsers
+        'model' => $model, 'modelCars' => $modelCars
     ]) ?>
     </div>
 </div>
