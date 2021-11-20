@@ -41,13 +41,18 @@ class ContributorController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ContributorSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->user->can('backendCrudContributor')) {
+            $searchModel = new ContributorSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**
@@ -58,9 +63,15 @@ class ContributorController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+
+        if (Yii::$app->user->can('backendCrudContributor')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
     }
 
     /**

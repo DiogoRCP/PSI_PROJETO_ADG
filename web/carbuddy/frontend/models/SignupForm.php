@@ -77,6 +77,8 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        //Para os users registarem-se e ficarem logo prontos a iniciar a sessão
+        $user->status = 10;
 
         return $user->save() && $this->sendEmail($user);
     }
