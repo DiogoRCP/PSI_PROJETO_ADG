@@ -7,13 +7,14 @@ use yii\helpers\VarDumper;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Cars */
+/* @var $create */
 $this->title = 'Vehicles';
 ?>
 <div class="cars-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= ($create == true)?Html::a('Create Vehicle', ['create'], ['class' => 'btn btn-secondary']):"" ?>
+        <?= ($create)?Html::a('Create Vehicle', ['create'], ['class' => 'btn btn-secondary']):"" ?>
     </p>
 
     <div class="body-content">
