@@ -9,7 +9,6 @@ $this->title = 'Update User: ' .$model->username.' ('.$model->nif.')';
 ?>
 <div class="users-update">
     <div class="users-content">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>

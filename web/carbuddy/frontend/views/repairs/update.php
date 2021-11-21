@@ -15,7 +15,6 @@ $this->title = 'Update Repair: ' .$model->car->brand . " " . $model->car->model;
 ?>
 <div class="repairs-update">
     <div class="repairs-content">
-        <img src="../images/logo_white.png" width="80">
         <h1><?= Html::encode($this->title) ?></h1>
         <p>
             <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
