@@ -12,7 +12,6 @@ $this->title = 'Signup';
 <div class="site-signup">
     <div class="row">
         <div class="col-lg-9">
-            <img src="../images/logo_white.png" width="80">
             <h2>Sign Up</h2>
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 

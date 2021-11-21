@@ -13,14 +13,13 @@ $this->title = 'Create Repair';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="repairs-create">
-    <div class = "repairs-content">
-        <img src="../images/logo_white.png" width="80">
-    <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
-    </p>
-    <?= $this->render('_form', [
-        'model' => $model, 'modelCars' => $modelCars
-    ]) ?>
+    <div class="repairs-content">
+        <h1><?= Html::encode($this->title) ?></h1>
+        <p>
+            <?= Html::a('Back', "javascript:history.back()", ['class' => 'btn btn-light']) ?>
+        </p>
+        <?= $this->render('_form', [
+            'model' => $model, 'modelCars' => $modelCars
+        ]) ?>
     </div>
 </div>

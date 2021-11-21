@@ -11,7 +11,6 @@ $this->title = $model->car->brand." ".$model->car->model." (".$model->company->c
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="schedules-view">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>

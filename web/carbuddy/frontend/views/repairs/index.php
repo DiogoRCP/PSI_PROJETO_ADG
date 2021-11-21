@@ -12,16 +12,17 @@ $this->title = 'Repairs';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="repairs-index">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if (Yii::$app->user->can('frontendCRUDRepair')) { ?>
-        <p>
+    <p>
+        <?= Html::a('Back', "javascript:history.back()", ['class' => 'btn btn-light']) ?>
+
+        <?php if (Yii::$app->user->can('frontendCRUDRepair')) { ?>
+
             <?= Html::a('Create Repairs', ['create'], ['class' => 'btn btn-secondary']) ?>
-        </p>
 
-    <?php } ?>
-
+        <?php } ?>
+    </p>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 
