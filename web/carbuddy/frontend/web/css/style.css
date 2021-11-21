@@ -105,6 +105,23 @@ body .site-login .contentor .buttonlogin {
 .cars-index table a {
   color: beige;
 }
+.cars-index .body-content .row {
+  display: flex;
+  justify-content: center;
+}
+.cars-index .body-content .row .col-md-3:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+}
+.cars-index .body-content .row .col-md-3 a {
+  color: white;
+}
+.cars-index .body-content .row .col-md-3 a:hover {
+  text-decoration: none;
+}
+.cars-index .body-content .row .col-md-3 a h4 {
+  margin: 1rem;
+}
 
 .index-content {
   background-color: rgba(0, 0, 0, 0.5);
