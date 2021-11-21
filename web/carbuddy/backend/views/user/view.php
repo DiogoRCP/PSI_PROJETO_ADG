@@ -12,7 +12,6 @@ $this->title = $model->username.' ('.$model->nif.')';
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="users-view">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
