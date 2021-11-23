@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use backend\models\Contributors;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Repairs;
@@ -57,7 +58,7 @@ class RepairsSearch extends Repairs
             return $dataProvider;
         }
 
-        $user = Users::findOne(\Yii::$app->user->getId());
+        $user = Users::findOne(Yii::$app->user->getId());
 
         $collaborator = Contributors::find()
             ->where(['userId' => $user->id])
@@ -70,9 +71,9 @@ class RepairsSearch extends Repairs
             'repairdate' => $this->repairdate,
         ]);
 
-        if(\Yii::$app->request->get('car')){
+        if(Yii::$app->request->get('car')){
             $query->andFilterWhere([
-                'carId' => \Yii::$app->request->get('car'),
+                'carId' => Yii::$app->request->get('car'),
             ]);
         }
         else{
