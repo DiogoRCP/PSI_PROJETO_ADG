@@ -25,8 +25,8 @@ $this->title = 'Schedules';
         'columns' => [
 
             //'id',
-            'carId',
-            'companyId',
+            //'carId',
+            //'companyId',
             //'currentdate',
             'schedulingdate',
             'repairdescription',

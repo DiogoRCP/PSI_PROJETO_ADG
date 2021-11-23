@@ -51,7 +51,7 @@ $this->title = 'Repairs';
                 'repairdescription',
                 'state',
                 'repairtype',
-                'carId',
+                //'carId',
                 //'contributorId',
 
                 ['class' => 'yii\grid\ActionColumn'],
