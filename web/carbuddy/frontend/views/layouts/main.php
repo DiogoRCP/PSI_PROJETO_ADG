@@ -46,18 +46,22 @@ AppAsset::register($this);
                 ['label' => 'Login', 'url' => ['/site/login']]
             ];
         } else {
-            $menuItems2 = ['<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+            $menuItems2 = ['<li>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Definitions
+                </a><div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'
+                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline dropdown-item'])
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
-                . '</li>'];
-            if(Yii::$app->user->can('frontendCrudRepair')) {
+                . '</div>
+                </li>'];
+            if (Yii::$app->user->can('frontendCrudRepair')) {
                 $menuItems[] = ['label' => 'Repairs', 'url' => ['/repairs/index']];
             }
-            if(Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
+            if (Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
                 $menuItems[] = ['label' => 'Schedules Manager', 'url' => ['/schedule/index']];
             }
             $menuItems[] = ['label' => 'Garage', 'url' => ['/car/index']];
