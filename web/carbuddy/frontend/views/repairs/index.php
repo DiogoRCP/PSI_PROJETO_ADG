@@ -19,7 +19,7 @@ $this->title = 'Repairs';
 
         <?php if (Yii::$app->user->can('frontendCRUDRepair')) { ?>
 
-            <?= Html::a('Create Repairs', ['create'], ['class' => 'btn btn-secondary']) ?>
+            <?= Html::a('Create Repair', ['create'], ['class' => 'btn btn-secondary']) ?>
 
         <?php } ?>
     </p>
@@ -51,7 +51,7 @@ $this->title = 'Repairs';
                 'repairdescription',
                 'state',
                 'repairtype',
-                'carId',
+                //'carId',
                 //'contributorId',
 
                 ['class' => 'yii\grid\ActionColumn'],

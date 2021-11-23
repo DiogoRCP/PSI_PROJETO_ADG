@@ -13,7 +13,7 @@ $this->title = 'Update Contributor: ' .$model->user->username.' ('.$model->compa
     <div class="contributors-content">
         <h1><?= Html::encode($this->title) ?></h1>
         <p>
-            <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
         </p>
         <?= $this->render('_form', [
             'model' => $model, 'modelUsers' => $modelUsers, 'modelCompanies' => $modelCompanies
