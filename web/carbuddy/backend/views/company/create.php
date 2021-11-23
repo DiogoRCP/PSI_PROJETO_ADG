@@ -12,7 +12,7 @@ $this->title = 'Create Company';
     <div class="companies-content">
         <h1><?= Html::encode($this->title) ?></h1>
         <p>
-            <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
         </p>
 
         <?= $this->render('_form', [
