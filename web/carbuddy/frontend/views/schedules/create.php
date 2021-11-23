@@ -4,11 +4,11 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Schedules */
-/* @var $modelCompanies frontend\models\Companies */
+/* @var $companyName */
 /* @var $modelCars frontend\models\Cars */
 
 
-$this->title = 'Create Schedule';
+$this->title = $companyName . " Appointment";
 
 ?>
 <div class="schedules-create">
@@ -18,7 +18,7 @@ $this->title = 'Create Schedule';
             <?= Html::a('Back', "javascript:history.back()", ['class' => 'btn btn-light']) ?>
         </p>
         <?= $this->render('_form', [
-            'model' => $model, 'modelCompanies' => $modelCompanies, 'modelCars' => $modelCars,
+            'model' => $model, 'modelCars' => $modelCars,
         ]) ?>
     </div>
 </div>
