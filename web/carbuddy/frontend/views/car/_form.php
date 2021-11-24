@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="cars-form">
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-6">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
 
         </div>
 
-        <div class="col-lg-5">
+        <div class="col-lg-6">
 
     <?= $form->field($model, 'displacement')->input('number', ['maxlength' => true]) ?>
 
