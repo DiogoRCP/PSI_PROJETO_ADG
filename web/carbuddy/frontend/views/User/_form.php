@@ -18,10 +18,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password_hash')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'password_hash')->label('Password')->textInput(['type' => 'password', 'id' => 'pass1', 'onkeypress'=>'SecondPassword()']) ?>
 
-
-
+    <?= Html::label('Repeat Password', 'pass2', ['id'=> 'passRepeatLabel', 'style' => 'display: none']) ?>
+    <?=Html::textInput("", "", ['type' => 'password', 'id' => 'pass2', 'onkeypress'=>'PasswordVerify()', 'style' => 'display: none'])
+    ?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-secondary']) ?>
     </div>

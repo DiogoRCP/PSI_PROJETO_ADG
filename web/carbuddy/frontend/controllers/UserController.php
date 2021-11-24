@@ -96,8 +96,9 @@ class UserController extends Controller
     {
         if(!\Yii::$app->user->isGuest) {
             $model = $this->findModel(\Yii::$app->user->getId());
+            $oldPassword = $model->password_hash;
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->newPassword($oldPassword) && $model->save()) {
 
-            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 

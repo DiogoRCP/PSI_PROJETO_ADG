@@ -94,4 +94,13 @@ class Users extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Contributors::className(), ['userId' => 'id']);
     }
+
+    public function newPassword($password)
+    {
+        if($this->password_hash!=$password){
+            $this->password_hash=Yii::$app->security->generatePasswordHash($this->password_hash);
+        }
+
+        return true;
+    }
 }
