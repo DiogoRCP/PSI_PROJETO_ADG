@@ -60,7 +60,7 @@ class Users extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'username' => 'Username',
-            'password_hash' => 'Password Hash',
+            'password_hash' => 'Password',
             'verification_token' => 'Verification Token',
             'auth_key' => 'Auth Key',
             'status' => 'Status',
