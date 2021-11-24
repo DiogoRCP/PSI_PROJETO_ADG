@@ -4,13 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Schedules */
+/* @var $model frontend\models\Users */
 
-$this->title = $model->car->brand." ".$model->car->model." (".$model->company->companyname." - ".$model->schedulingdate.")";
+$this->title = $model->username.' ('.$model->nif.')';
 
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="schedules-view">
+<div class="users-view">
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -19,7 +20,7 @@ $this->title = $model->car->brand." ".$model->car->model." (".$model->company->c
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-dark',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Are you sure you want to delete your account?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,19 +30,19 @@ $this->title = $model->car->brand." ".$model->car->model." (".$model->company->c
         'model' => $model,
         'attributes' => [
             //'id',
-            [
-                'label' => 'Car',
-                'value' => $model->car->registration
-            ],
-            [
-                'label' => 'Company',
-                'value' => $model->company->companyname
-            ],
-            //'currentdate',
-            'schedulingdate',
-            'repairdescription',
-            'state',
-            'repairtype',
+            'username',
+            //'password_hash:ntext',
+            //'verification_token:ntext',
+            //'auth_key:ntext',
+            //'status',
+            //'updated_at',
+            //'created_at',
+            //'usertype',
+            'nif',
+            'birsthday',
+            'email:email',
+            'phonenumber',
+            'registrationdate',
         ],
     ]) ?>
 

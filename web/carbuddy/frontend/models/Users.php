@@ -5,11 +5,16 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "users".
+ * This is the model class for table "user".
  *
  * @property int $id
  * @property string $username
- * @property string $userpassword
+ * @property string $password_hash
+ * @property string $verification_token
+ * @property string $auth_key
+ * @property int $status
+ * @property int $updated_at
+ * @property int $created_at
  * @property string $usertype
  * @property string $nif
  * @property string $birsthday
@@ -36,9 +41,11 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'userpassword', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
+            [['username', 'password_hash', 'verification_token', 'auth_key', 'status', 'updated_at', 'created_at', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
+            [['password_hash', 'verification_token', 'auth_key'], 'string'],
+            [['status', 'updated_at', 'created_at'], 'integer'],
             [['birsthday', 'registrationdate'], 'safe'],
-            [['username', 'userpassword', 'usertype', 'email'], 'string', 'max' => 100],
+            [['username', 'usertype', 'email'], 'string', 'max' => 100],
             [['nif'], 'string', 'max' => 9],
             [['phonenumber'], 'string', 'max' => 40],
             [['nif'], 'unique'],
@@ -53,11 +60,16 @@ class Users extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'username' => 'Username',
-            'userpassword' => 'User Password',
+            'password_hash' => 'Password Hash',
+            'verification_token' => 'Verification Token',
+            'auth_key' => 'Auth Key',
+            'status' => 'Status',
+            'updated_at' => 'Updated At',
+            'created_at' => 'Created At',
             'usertype' => 'User Type',
             'nif' => 'NIF',
             'birsthday' => 'Birthday',
-            'email' => 'E-mail',
+            'email' => 'E-Mail',
             'phonenumber' => 'Phone Number',
             'registrationdate' => 'Registration Date',
         ];
