@@ -45,8 +45,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'kilometers')->input('number') ?>
 
     <?= $form->field($model, 'state')->dropDownList(['' => '', 'Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending']) ?>
-
-    <?= $form->field($model, 'userId')->textInput() ?>
+            
 
         </div>
     </div>
