@@ -35,7 +35,7 @@ class UserController extends Controller
      * Lists all Users models.
      * @return mixed
      */
-    public function actionIndex()
+    /* public function actionIndex()
     {
         $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -44,8 +44,7 @@ class UserController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
-
+    } */
     /**
      * Displays a single Users model.
      * @param int $id ID
