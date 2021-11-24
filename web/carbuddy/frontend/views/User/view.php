@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Users */
 
-$this->title = $model->id;
+$this->title = $model->username.' ('.$model->nif.')';
 
 \yii\web\YiiAsset::register($this);
 ?>
@@ -15,11 +15,12 @@ $this->title = $model->id;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Back', "javascript:history.back()", ['class' => 'btn btn-light']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-dark',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Are you sure you want to delete your account?',
                 'method' => 'post',
             ],
         ]) ?>
