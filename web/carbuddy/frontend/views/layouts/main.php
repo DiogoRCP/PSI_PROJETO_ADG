@@ -46,18 +46,28 @@ AppAsset::register($this);
                 ['label' => 'Login', 'url' => ['/site/login']]
             ];
         } else {
-            $menuItems2 = ['<li>
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Definitions
-                </a><div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline dropdown-item'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</div>
-                </li>'];
+            $menuItems2 = [Html::tag('li',
+
+                Html::a(Yii::$app->user->identity->username, '#', ['class' => 'nav-link dropdown-toggle',
+                    'id' => 'navbarDropdownMenuLink', 'data-toggle' => 'dropdown', 'aria-haspopup' => 'true',
+                    'aria-expanded' => 'false']) .
+
+                Html::tag('div', Html::beginForm(['/site/logout'], 'post')
+
+                        // Conteudo
+
+                    . Html::a('Account', ['/user/view'], ['class' => 'dropdown-item'])
+
+                    . Html::a('Contact', ['/site/contact'], ['class' => 'dropdown-item'])
+
+                    . Html::a('About', ['/site/about'], ['class' => 'dropdown-item'])
+
+                    . Html::submitButton('Logout', ['class' => 'logout dropdown-item'])
+                    . Html::endForm()
+
+                    , ['class' => 'dropdown-menu dropdown-menu-right', 'aria-labelledby' => 'navbarDropdownMenuLink'])
+
+                , ['class' => 'nav-item dropdown'])];
             if (Yii::$app->user->can('frontendCrudRepair')) {
                 $menuItems[] = ['label' => 'Repairs', 'url' => ['/repairs/index']];
             }
