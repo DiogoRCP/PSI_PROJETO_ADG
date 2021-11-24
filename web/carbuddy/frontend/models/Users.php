@@ -66,12 +66,12 @@ class Users extends \yii\db\ActiveRecord
             'status' => 'Status',
             'updated_at' => 'Updated At',
             'created_at' => 'Created At',
-            'usertype' => 'Usertype',
-            'nif' => 'Nif',
-            'birsthday' => 'Birsthday',
-            'email' => 'Email',
-            'phonenumber' => 'Phonenumber',
-            'registrationdate' => 'Registrationdate',
+            'usertype' => 'User Type',
+            'nif' => 'NIF',
+            'birsthday' => 'Birthday',
+            'email' => 'E-Mail',
+            'phonenumber' => 'Phone Number',
+            'registrationdate' => 'Registration Date',
         ];
     }
 
