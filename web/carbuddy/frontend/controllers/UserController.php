@@ -53,9 +53,14 @@ class UserController extends Controller
      */
     public function actionView()
     {
-        return $this->render('view', [
-            'model' => $this->findModel(\Yii::$app->user->getId()),
-        ]);
+        if(!\Yii::$app->user->isGuest) {
+            return $this->render('view', [
+                'model' => $this->findModel(\Yii::$app->user->getId()),
+            ]);
+        }
+        else{
+            return $this->goHome();
+        }
     }
 
     /**
@@ -89,15 +94,21 @@ class UserController extends Controller
      */
     public function actionUpdate()
     {
-        $model = $this->findModel(\Yii::$app->user->getId());
+        if(!\Yii::$app->user->isGuest) {
+            $model = $this->findModel(\Yii::$app->user->getId());
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+        else{
+            return $this->goHome();
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -107,11 +118,16 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        if(!\Yii::$app->user->isGuest) {
+            $this->findModel(\Yii::$app->user->getId())->delete();
+            \Yii::$app->user->logout();
+            return $this->redirect(['index']);
+        }
+        else{
+            return $this->goHome();
+        }
     }
 
     /**
