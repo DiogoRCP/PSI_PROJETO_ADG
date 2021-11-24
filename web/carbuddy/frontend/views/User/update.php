@@ -5,16 +5,16 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Users */
 
-$this->title = 'Update Users: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Update User: ' . $model->username.' ('.$model->nif.')';
+
 ?>
 <div class="users-update">
 
     <div class="users-content">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+        <p><?= Html::a('Back', "javascript:history.back()", ['class' => 'btn btn-light']) ?></p>
 
     <?= $this->render('_form', [
         'model' => $model,
