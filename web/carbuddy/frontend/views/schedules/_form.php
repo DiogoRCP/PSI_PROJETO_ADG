@@ -16,11 +16,6 @@ foreach ($modelCars as $modelCar) {
         $CarList += [$modelCar['id'] => $modelCar['registration']];
     }
 }
-
-$CompaniesList = ['' => ''];
-foreach ($modelCompanies as $modelCompany) {
-    $CompaniesList += [$modelCompany['id'] => $modelCompany['companyname']];
-}
 ?>
 
 <div class="schedules-form">
@@ -31,13 +26,9 @@ foreach ($modelCompanies as $modelCompany) {
 
     <?= $form->field($model, 'repairdescription')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'state')->textInput(['readonly' => true, 'value'=>"Pending"]) ?>
-
     <?= $form->field($model, 'repairtype')->dropDownList(['' => '','Repair' => 'Repair', 'Maintenance' => 'Maintenance']) ?>
 
     <?= $form->field($model, 'carId')->dropDownList($CarList) ?>
-
-    <?= $form->field($model, 'companyId')->dropDownList($CompaniesList) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-secondary']) ?>

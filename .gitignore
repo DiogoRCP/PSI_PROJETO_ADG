@@ -1,1 +1,2 @@
-﻿web/carbuddy/vendor/composer
+﻿web/carbuddy/vendor
+web/carbuddy/composer.lock

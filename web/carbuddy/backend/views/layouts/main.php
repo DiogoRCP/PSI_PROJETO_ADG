@@ -28,14 +28,14 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => '<img src="../images/logo_semnome.png" width="30"> Carbuddy Manager',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        //['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Users', 'url' => ['/user/index']],
         ['label' => 'Companies', 'url' => ['/company/index']],
         ['label' => 'Contributors', 'url' => ['/contributor/index']]

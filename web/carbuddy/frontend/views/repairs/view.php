@@ -12,11 +12,10 @@ $this->title = $model->car->brand . " " . $model->car->model;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="repairs-view">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
+        <?= Html::a('Back', "javascript:history.back()", ['class' => 'btn btn-light']) ?>
         <?php if (Yii::$app->user->can('frontendCRUDRepair')) { ?>
             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
             <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -33,7 +32,7 @@ $this->title = $model->car->brand . " " . $model->car->model;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             ['label' => 'Car',
                 'value' => $model->car->registration],
             'kilometers',

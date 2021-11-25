@@ -39,12 +39,11 @@ class CarController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->user->can('frontendCrudVehicle')) {
-            $searchModel = new CarSearch();
-            $dataProvider = $searchModel->search($this->request->queryParams);
+            $model = Cars::find()->where("userId =" . Yii::$app->getUser()->getId())->all();
 
             return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
+                'model' => $model,
+                'create' => true
             ]);
         } else {
             Yii::$app->user->logout();
@@ -60,7 +59,7 @@ class CarController extends Controller
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->can('frontendCrudVehicle')) {
+        if (Yii::$app->user->can('frontendCrudVehicle') & $this->findModel($id)->userId == Yii::$app->user->getId()) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
@@ -79,6 +78,9 @@ class CarController extends Controller
     {
         if (Yii::$app->user->can('frontendCrudVehicle')) {
             $model = new Cars();
+
+            //Faz com que assuma e preencha automaticamente o ID do utilizador logado
+            $model->userId = Yii::$app->user->getId();
 
             if ($this->request->isPost) {
                 if ($model->load($this->request->post()) && $model->save()) {
@@ -106,7 +108,7 @@ class CarController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->can('frontendCrudVehicle')) {
+        if (Yii::$app->user->can('frontendCrudVehicle')& $this->findModel($id)->userId == Yii::$app->user->getId()) {
             $model = $this->findModel($id);
 
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {

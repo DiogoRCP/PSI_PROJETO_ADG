@@ -10,10 +10,9 @@ $this->title = 'Update Vehicle: ' . $model->user->username . ' (' . $model->bran
 ?>
 <div class="cars-update">
     <div class="cars-content">
-        <img src="../images/logo_white.png" width="80">
         <h1><?= Html::encode($this->title) ?></h1>
         <p>
-            <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
         </p>
         <?= $this->render('_form', [
             'model' => $model,

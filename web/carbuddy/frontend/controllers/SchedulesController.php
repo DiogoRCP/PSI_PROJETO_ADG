@@ -7,6 +7,7 @@ use frontend\models\Companies;
 use frontend\models\Schedules;
 use frontend\models\SchedulesSearch;
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -41,13 +42,14 @@ class SchedulesController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
-        $searchModel = new SchedulesSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+            $searchModel = new SchedulesSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+
         } else {
             Yii::$app->user->logout();
             return $this->goHome();
@@ -65,7 +67,7 @@ class SchedulesController extends Controller
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
-        ]);
+            ]);
         } else {
             Yii::$app->user->logout();
             return $this->goHome();
@@ -77,24 +79,30 @@ class SchedulesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($company)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
-        $model = new Schedules();
-        $modelCompanies = Companies::find()->all();
-        $modelCars = Cars::find()->all();
+            $companyid = Yii::$app->request->get("company");
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            $model = new Schedules();
+            $modelCars = Cars::find()->all();
+            $modelCompany = Companies::findOne($companyid);
+
+            $model->state = "Pending";
+            $model->companyId = $companyid;
+
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model, 'modelCompanies' => $modelCompanies, 'modelCars' => $modelCars,
-        ]);
+            return $this->render('create', [
+                'model' => $model, 'companyName' => $modelCompany->companyname, 'modelCars' => $modelCars,
+            ]);
+
         } else {
             Yii::$app->user->logout();
             return $this->goHome();
@@ -111,17 +119,17 @@ class SchedulesController extends Controller
     public function actionUpdate($id)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
-        $model = $this->findModel($id);
-        $modelCompanies = Companies::find()->all();
-        $modelCars = Cars::find()->all();
+            $model = $this->findModel($id);
+            $modelCompanies = Companies::find()->all();
+            $modelCars = Cars::find()->all();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
 
-        return $this->render('update', [
-            'model' => $model, 'modelCompanies' => $modelCompanies, 'modelCars' => $modelCars,
-        ]);
+            return $this->render('update', [
+                'model' => $model, 'modelCompanies' => $modelCompanies, 'modelCars' => $modelCars,
+            ]);
         } else {
             Yii::$app->user->logout();
             return $this->goHome();
@@ -138,9 +146,23 @@ class SchedulesController extends Controller
     public function actionDelete($id)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
-        $this->findModel($id)->delete();
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
+    }
+
+    public function actionCompanies()
+    {
+        if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
+            $model = Companies::find()->all();
+
+            return $this->render('companies', [
+                'model' => $model,
+            ]);
         } else {
             Yii::$app->user->logout();
             return $this->goHome();

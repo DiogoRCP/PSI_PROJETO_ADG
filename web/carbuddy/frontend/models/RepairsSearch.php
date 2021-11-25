@@ -2,6 +2,8 @@
 
 namespace frontend\models;
 
+use backend\models\Contributors;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Repairs;
@@ -56,14 +58,29 @@ class RepairsSearch extends Repairs
             return $dataProvider;
         }
 
+        $user = Users::findOne(Yii::$app->user->getId());
+
+        $collaborator = Contributors::find()
+            ->where(['userId' => $user->id])
+            ->one();
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'kilometers' => $this->kilometers,
             'repairdate' => $this->repairdate,
-            'carId' => (\Yii::$app->request->get('car'))?\Yii::$app->request->get('car'):$this->carId,
-            'contributorId' => $this->contributorId,
         ]);
+
+        if(Yii::$app->request->get('car')){
+            $query->andFilterWhere([
+                'carId' => Yii::$app->request->get('car'),
+            ]);
+        }
+        else{
+            $query->andFilterWhere([
+                'contributorId' =>$collaborator->id,
+            ]);
+        }
 
         $query->andFilterWhere(['like', 'repairdescription', $this->repairdescription])
             ->andFilterWhere(['like', 'state', $this->state])

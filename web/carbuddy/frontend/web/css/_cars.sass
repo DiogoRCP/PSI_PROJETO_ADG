@@ -14,6 +14,24 @@ $topmarginForm: 2.5rem
     a
       color: beige
 
+  .body-content
+    .row
+      display: flex
+      justify-content: center
+
+      .col-md-3
+        &:hover
+          background-color: rgba(83, 92, 102, 0.3)
+          border-radius: 16px
+
+        a
+          color: white
+          &:hover
+            text-decoration: none
+
+          h4, h5
+            margin: 1rem
+
 .index-content
   background-color: rgba(0, 0, 0, 0.5)
   padding: 2rem
@@ -52,7 +70,7 @@ $topmarginForm: 2.5rem
     margin-top: $topmarginForm
     text-align: center
     border-radius: 1.8rem
-    width: 25rem
+    width: 40rem
 
 .cars-create
   @extend .cars-update

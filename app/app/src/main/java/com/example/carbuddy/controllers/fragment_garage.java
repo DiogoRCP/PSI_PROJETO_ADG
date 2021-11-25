@@ -1,5 +1,6 @@
 package com.example.carbuddy.controllers;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
 import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.CarSingleton;
+import com.example.carbuddy.models.ModeloBDHelper;
 
 import java.util.ArrayList;
 
@@ -70,7 +72,12 @@ public class fragment_garage extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         lstCar = CarSingleton.getInstance(getContext()).getCars();
-        System.out.println(CarSingleton.getInstance(getContext()).getCars());
+
+
+        ModeloBDHelper database = new ModeloBDHelper(getContext());
+
+        database.insertCars(lstCar.get(0));
+        System.out.println(database.getAllCars().toString());
     }
 
     @Override
