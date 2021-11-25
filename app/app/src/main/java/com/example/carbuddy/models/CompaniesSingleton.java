@@ -35,7 +35,7 @@ public class CompaniesSingleton {
 
     private void CarregarListaCompanies(Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://10.0.2.2:8080/api/companies";
+        String url = "http://10.0.2.2:8080/api/companieslist";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
