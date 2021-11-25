@@ -92,4 +92,9 @@ public class MainActivity extends AppCompatActivity {
         Intent signup = new Intent(this, SignupActivity.class);
         startActivity(signup);
     }
+
+    public void onClickCompanies(View view) {
+        Intent companiesView = new Intent(this, CompaniesActivity.class);
+        startActivity(companiesView);
+    }
 }
