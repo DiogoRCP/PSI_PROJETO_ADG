@@ -25,11 +25,7 @@ class CompaniesController extends ActiveController
             return $user;
         } return null;
     }
-
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+    
 
     public function actionTotal(){
         $Companiessmodel = new $this -> modelClass;
