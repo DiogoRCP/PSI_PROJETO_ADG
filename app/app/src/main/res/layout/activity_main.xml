@@ -27,6 +27,7 @@
             android:layout_height="164dp"
             android:layout_weight="1"
             android:background="#00FFFFFF"
+            android:clickable="true"
             android:onClick="onClickCompanies"
             android:scaleType="fitStart"
             app:srcCompat="@drawable/logo_white" />
