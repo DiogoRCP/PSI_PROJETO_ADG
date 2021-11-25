@@ -8,7 +8,7 @@ class CompaniesController extends ActiveController
 {
     public $modelClass = 'backend\models\Companies';
 
-    public function behaviors()
+   /* public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
@@ -16,7 +16,7 @@ class CompaniesController extends ActiveController
         ];
 
         return $behaviors;
-    }
+    }*/
     public function auth($token) {
 
         $user = User::findIdentityByAccessToken($token);
