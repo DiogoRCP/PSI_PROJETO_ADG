@@ -73,7 +73,6 @@ public class fragment_garage extends Fragment {
         }
         lstCar = CarSingleton.getInstance(getContext()).getCars();
 
-
         ModeloBDHelper database = new ModeloBDHelper(getContext());
 
         database.insertCars(lstCar.get(0));
