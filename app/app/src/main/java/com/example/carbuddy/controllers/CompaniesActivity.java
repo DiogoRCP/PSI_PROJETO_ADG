@@ -37,19 +37,11 @@ public class CompaniesActivity extends AppCompatActivity {
         database.insertCompanies(lstCompany.get(0));
         System.out.println(database.getAllCompanies().toString());
 
-    }
 
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        // return inflater.inflate(R.layout.fragment_garage, container, false);
-        // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.acitivity_companies, container, false);
         myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewCompanies);
         CompanyListAdapter listaAdapter = new CompanyListAdapter(this, lstCompany);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         myRecyclerView.setAdapter(listaAdapter);
-        return v;
+
     }
 }
