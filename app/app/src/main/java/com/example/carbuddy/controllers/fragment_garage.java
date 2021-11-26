@@ -83,7 +83,7 @@ public class fragment_garage extends Fragment {
        // return inflater.inflate(R.layout.fragment_garage, container, false);
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_garage, container, false);
-        myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewCompanies);
+        myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewCars);
         CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaAdapter);

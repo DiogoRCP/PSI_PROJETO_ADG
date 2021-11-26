@@ -122,7 +122,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return cars;
     }
 
-    public void insertComapanies(Company company){
+    public void insertCompanies(Company company){
         ContentValues values = new ContentValues();
         values.put("id", company.getId());
         values.put("companyname", company.getCompanyName());
