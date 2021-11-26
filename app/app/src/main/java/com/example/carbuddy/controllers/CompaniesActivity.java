@@ -24,7 +24,6 @@ public class CompaniesActivity extends AppCompatActivity {
 
     private RecyclerView myRecyclerView;
     private ArrayList<Company> lstCompany;
-    View v;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +31,13 @@ public class CompaniesActivity extends AppCompatActivity {
 
         lstCompany = CompaniesSingleton.getInstance(this).getCompanies();
 
-        ModeloBDHelper database = new ModeloBDHelper(this);
+        /*ModeloBDHelper database = new ModeloBDHelper(this);
 
         database.insertCompanies(lstCompany.get(0));
-        System.out.println(database.getAllCompanies().toString());
+        System.out.println(database.getAllCompanies().toString());*/
 
 
-        myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewCompanies);
+        myRecyclerView = (RecyclerView) this.findViewById(R.id.RecyclerViewCompanies);
         CompanyListAdapter listaAdapter = new CompanyListAdapter(this, lstCompany);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         myRecyclerView.setAdapter(listaAdapter);
