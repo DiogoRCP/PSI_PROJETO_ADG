@@ -31,10 +31,10 @@ public class CompaniesActivity extends AppCompatActivity {
 
         lstCompany = CompaniesSingleton.getInstance(this).getCompanies();
 
-        /*ModeloBDHelper database = new ModeloBDHelper(this);
+        ModeloBDHelper database = new ModeloBDHelper(this);
 
         database.insertCompanies(lstCompany.get(0));
-        System.out.println(database.getAllCompanies().toString());*/
+        System.out.println(database.getAllCompanies().toString());
 
 
         myRecyclerView = (RecyclerView) this.findViewById(R.id.RecyclerViewCompanies);
