@@ -348,4 +348,53 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return users;
     }
 
-    
+
+    //CRUD Contributors  "CREATE TABLE IF NOT EXISTS contributors(" +
+//                        "id INT UNSIGNED AUTO_INCREMENT," +
+//                        "speciality VARCHAR(100) NOT NULL," +
+//                        "companyId INT UNSIGNED NOT NULL," +
+//                        "userId INT UNSIGNED NOT NULL," +
+//                    "CONSTRAINT contributors_id PRIMARY KEY(id)," +
+//                    "CONSTRAINT fk_contributors_companyId FOREIGN KEY(companyId) REFERENCES companies(id)," +
+//                    "CONSTRAINT fk_contributors_userId FOREIGN KEY(userId) REFERENCES user(id)," +
+//                    "CONSTRAINT uk_contributors_userId UNIQUE (userId)" +
+//                ") ENGINE=InnoDB;";
+//
+//  public void insertContributors(Contributor contributor){
+//        ContentValues values = new ContentValues();
+//        values.put("id", );
+//        values.put("speciality", );
+//        values.put("companyId", );
+//        values.put("userId", );
+//
+//        if(!verificarContributors(contributor, values)) {
+//            database.insert("contributor", null, values);
+//        }
+//    }
+//
+//   private boolean verificarContributors(User user, ContentValues values) {
+//        return this.database.update("user", values,
+//                "id = ?", new String[]{"" + user.getId()}) > 0;
+//    }
+//
+//    public LinkedList<User> getAllUsers() {
+//        LinkedList<User> users = new LinkedList<>();
+//        Cursor cursor = this.database.rawQuery("SELECT * FROM user",
+//                null);
+//        /*if (cursor.moveToFirst()) {
+//            do {
+//                users.add(new User(cursor.getInt(0),
+//                        cursor.getString(1),
+//                        cursor.getString(2),
+//                        cursor.getString(3),
+//                        cursor.getInt(4),
+//                        Data?cursor.(5),
+//                        cursor.getString(6),
+//                        Data?cursor.(7),
+//                ));
+//            } while (cursor.moveToNext());
+//        }*/
+//        return users;
+//    }
+
+
