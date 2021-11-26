@@ -65,6 +65,62 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         "registrationdate DATETIME default Current_Timestamp " +
                         ");";
         db.execSQL(createCompaniesTable);
+
+        //Notas: Unsigned dá erro;
+        String createUserTable =
+                "CREATE TABLE IF NOT EXISTS user" +
+                        "(id INT UNSIGNED AUTO_INCREMENT, " +
+                        "username VARCHAR(100) NOT NULL," +
+                        "password_hash TEXT NOT NULL," +
+                        "verification_token TEXT NOT NULL," +
+                        "auth_key TEXT NOT NULL," +
+                        "status INT NOT NULL," +
+                        "updated_at INT NOT NULL," +
+                        "created_at INT NOT NULL," +
+                        "usertype VARCHAR(100) NOT NULL," +
+                        "nif VARCHAR(9) NOT NULL," +
+                        "birsthday DATE NOT NULL," +
+                        "email VARCHAR(100) NOT NULL," +
+                        "phonenumber VARCHAR(40) NOT NULL," +
+                        "registrationdate DATETIME default Current_Timestamp," +
+                                "CONSTRAINT users_id PRIMARY KEY(id)," +
+                                "CONSTRAINT uk_users_Nif UNIQUE (nif)" +
+                        ") ENGINE=InnoDB;";
+
+        db.execSQL(createUserTable);
+
+        String createContributorsTable =
+                "CREATE TABLE IF NOT EXISTS contributors(" +
+                        "id INT UNSIGNED AUTO_INCREMENT," +
+                        "speciality VARCHAR(100) NOT NULL," +
+                        "companyId INT UNSIGNED NOT NULL," +
+                        "userId INT UNSIGNED NOT NULL," +
+                    "CONSTRAINT contributors_id PRIMARY KEY(id)," +
+                    "CONSTRAINT fk_contributors_companyId FOREIGN KEY(companyId) REFERENCES companies(id)," +
+                    "CONSTRAINT fk_contributors_userId FOREIGN KEY(userId) REFERENCES user(id)," +
+                    "CONSTRAINT uk_contributors_userId UNIQUE (userId)" +
+                ") ENGINE=InnoDB;";
+
+        db.execSQL(createContributorsTable);
+
+
+        String createRepairsTable =
+                "CREATE TABLE IF NOT EXISTS repairs(" +
+                            "id INT UNSIGNED AUTO_INCREMENT," +
+                            "kilometers INT NOT NULL," +
+                            "repairdate DATETIME default Current_Timestamp," +
+                            "repairdescription VARCHAR(100) NOT NULL," +
+                            "state VARCHAR(100) NOT NULL," +
+                            "repairtype VARCHAR(100) NOT NULL," +
+                            "carId INT UNSIGNED NOT NULL," +
+                            "contributorId INT UNSIGNED NOT NULL," +
+                        "CONSTRAINT repairs_id PRIMARY KEY(id)," +
+                        "CONSTRAINT fk_repairs_carId FOREIGN KEY(carId) REFERENCES cars(id)," +
+                        "CONSTRAINT fk_repairs_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)" +
+                ") ENGINE=InnoDB;";
+
+        db.execSQL(createRepairsTable);
+
     }
 
     @Override
