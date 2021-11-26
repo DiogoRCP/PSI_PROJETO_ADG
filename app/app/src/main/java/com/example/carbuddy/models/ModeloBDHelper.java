@@ -286,3 +286,66 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return schedules;
     }
 
+
+//CRUD Users "CREATE TABLE IF NOT EXISTS user" +
+//                        "(id INT UNSIGNED AUTO_INCREMENT, " +
+//                        "username VARCHAR(100) NOT NULL," +
+//                        "password_hash TEXT NOT NULL," +
+//                        "verification_token TEXT NOT NULL," +
+//                        "auth_key TEXT NOT NULL," +
+//                        "status INT NOT NULL," +
+//                        "updated_at INT NOT NULL," +
+//                        "created_at INT NOT NULL," +
+//                        "usertype VARCHAR(100) NOT NULL," +
+//                        "nif VARCHAR(9) NOT NULL," +
+//                        "birsthday DATE NOT NULL," +
+//                        "email VARCHAR(100) NOT NULL," +
+//                        "phonenumber VARCHAR(40) NOT NULL," +
+//                        "registrationdate DATETIME default Current_Timestamp," +
+//                                "CONSTRAINT users_id PRIMARY KEY(id)," +
+//                                "CONSTRAINT uk_users_Nif UNIQUE (nif)" +
+//                        ") ENGINE=InnoDB;";
+
+
+    public void insertUsers(User user){
+        ContentValues values = new ContentValues();
+        values.put("id", user.getId());
+        values.put("username", user.getUsername());
+        values.put("password_hash", user.getUserPassword());
+        values.put("usertype", user.getUserType());
+        values.put("nif", user.getNif());
+        values.put("birthday", user.getBirthday());
+        values.put("phonenumber", user.getPhoneNumber());
+        values.put("registrationdate", user.getRegistrationDate());
+
+        if(!verificarUser(user, values)) {
+            database.insert("user", null, values);
+        }
+    }
+
+    private boolean verificarUser(User user, ContentValues values) {
+        return this.database.update("user", values,
+                "id = ?", new String[]{"" + user.getId()}) > 0;
+    }
+
+    public LinkedList<User> getAllUsers() {
+        LinkedList<User> users = new LinkedList<>();
+        Cursor cursor = this.database.rawQuery("SELECT * FROM user",
+                null);
+        /*if (cursor.moveToFirst()) {
+            do {
+                users.add(new User(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        Data?cursor.(5),
+                        cursor.getString(6),
+                        Data?cursor.(7),
+                ));
+            } while (cursor.moveToNext());
+        }*/
+        return users;
+    }
+
+    
