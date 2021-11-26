@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.models.LoginSingleton;
 
 /**
  * A simple {@link Fragment} subclass.

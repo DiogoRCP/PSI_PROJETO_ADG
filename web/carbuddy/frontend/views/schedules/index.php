@@ -11,11 +11,10 @@ $this->title = 'Schedules';
 
 ?>
 <div class="schedules-index">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Schedule', ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a('Create Schedule', ['companies'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,8 +25,8 @@ $this->title = 'Schedules';
         'columns' => [
 
             //'id',
-            'carId',
-            'companyId',
+            //'carId',
+            //'companyId',
             //'currentdate',
             'schedulingdate',
             'repairdescription',

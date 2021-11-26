@@ -105,6 +105,37 @@ body .site-login .contentor .buttonlogin {
 .cars-index table a {
   color: beige;
 }
+.cars-index .body-content .row {
+  display: flex;
+  justify-content: center;
+}
+.cars-index .body-content .row .col-md-3:hover {
+  background-color: rgba(83, 92, 102, 0.3);
+  border-radius: 16px;
+}
+.cars-index .body-content .row .col-md-3 a {
+  color: white;
+}
+.cars-index .body-content .row .col-md-3 a:hover {
+  text-decoration: none;
+}
+.cars-index .body-content .row .col-md-3 a h4, .cars-index .body-content .row .col-md-3 a h5 {
+  margin: 1rem;
+}
+
+.index-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 0px;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.index-content table {
+  color: white;
+}
+.index-content table a {
+  color: beige;
+}
 
 .cars-view {
   background-color: rgba(0, 0, 0, 0.5);
@@ -130,7 +161,7 @@ body .site-login .contentor .buttonlogin {
   margin-top: 2.5rem;
   text-align: center;
   border-radius: 1.8rem;
-  width: 25rem;
+  width: 40rem;
 }
 
 .repairs-index {
@@ -207,6 +238,81 @@ body .site-login .contentor .buttonlogin {
   justify-content: center;
 }
 .schedules-update .schedules-content, .schedules-create .schedules-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 2.5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+  width: 25rem;
+}
+
+@font-face {
+  font-family: BRLNSDB;
+  src: url(fonts/BRLNSDB.TTF);
+}
+@font-face {
+  font-family: WorkSans;
+  src: url(fonts/WorkSans-Regular.ttf);
+}
+:root {
+  font-size: 0.875em;
+}
+
+* {
+  font-family: WorkSans;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link {
+  font-family: BRLNSDB;
+}
+
+.site-index2 {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.site-index2 table {
+  color: white;
+}
+.site-index2 table a {
+  color: beige;
+}
+
+.dropdown-menu {
+  background-color: #343A40;
+  color: #9A9DA0;
+}
+.dropdown-menu .dropdown-item {
+  color: #9A9DA0;
+  font-family: BRLNSDB;
+  text-align: center;
+}
+.dropdown-menu .dropdown-item:hover {
+  background-color: #343A40;
+  color: #CCCECF;
+}
+
+.users-view {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 5rem;
+  text-align: center;
+  border-radius: 1.8rem;
+}
+.users-view table {
+  color: white;
+}
+.users-view table a {
+  color: beige;
+}
+
+.users-update {
+  display: flex;
+  justify-content: center;
+}
+.users-update .users-content {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2rem;
   margin-top: 2.5rem;

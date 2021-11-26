@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use backend\models\Contributors;
 use backend\models\Users;
+use common\models\User;
 use frontend\models\Cars;
 use frontend\models\Repairs;
 use frontend\models\RepairsSearch;
@@ -63,9 +64,25 @@ class RepairsController extends Controller
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->can('frontendCrudRepair')) {
+        if (Yii::$app->user->can('frontendReadRepair')) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
+            ]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
+    }
+
+    public function actionHistory($car)
+    {
+        if (Yii::$app->user->can('frontendReadRepair')) {
+            $searchModel = new RepairsSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
             ]);
         } else {
             Yii::$app->user->logout();
@@ -83,8 +100,15 @@ class RepairsController extends Controller
         if (Yii::$app->user->can('frontendCrudRepair')) {
             $model = new Repairs();
             $modelCars = Cars::find()->all();
-            $modelUsers = Users::find()->all();
-            $modelContributor = Contributors::find()->all();
+
+
+            $user = Users::findOne(\Yii::$app->user->getId());
+
+                $collaborator = Contributors::find()
+                    ->where(['userId' => $user->id])
+                    ->one();
+
+            $model->contributorId = $collaborator->id;
 
             if ($this->request->isPost) {
                 if ($model->load($this->request->post()) && $model->save()) {
@@ -95,7 +119,7 @@ class RepairsController extends Controller
             }
 
             return $this->render('create', [
-                'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor, 'modelUsers' => $modelUsers
+                'model' => $model, 'modelCars' => $modelCars,
             ]);
         } else {
             Yii::$app->user->logout();
@@ -115,15 +139,13 @@ class RepairsController extends Controller
         if (Yii::$app->user->can('frontendCrudRepair')) {
             $model = $this->findModel($id);
             $modelCars = Cars::find()->all();
-            $modelUsers = Users::find()->all();
-            $modelContributor = Contributors::find()->all();
 
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
             return $this->render('update', [
-                'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor, 'modelUsers' => $modelUsers
+                'model' => $model, 'modelCars' => $modelCars,
             ]);
         } else {
             Yii::$app->user->logout();

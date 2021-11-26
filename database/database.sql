@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS cars(
         model VARCHAR(100) NOT NULL,
         color VARCHAR(100) NOT NULL,
         carType VARCHAR(100) NOT NULL,
-        displacement FLOAT not null,
+        displacement FLOAT NOT NULL,
         fuelType VARCHAR(100) NOT NULL,
         registration VARCHAR(100) NOT NULL,
         modelyear year(4) NOT NULL,

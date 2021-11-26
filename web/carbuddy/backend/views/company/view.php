@@ -11,7 +11,6 @@ $this->title = $model->companyname.' ('.$model->nif.')';
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="companies-view">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -30,7 +29,7 @@ $this->title = $model->companyname.' ('.$model->nif.')';
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'companyname',
             'nif',
             'email:email',

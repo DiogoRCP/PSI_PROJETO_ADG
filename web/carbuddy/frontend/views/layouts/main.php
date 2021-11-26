@@ -29,16 +29,16 @@ AppAsset::register($this);
     <header>
         <?php
         NavBar::begin([
-            'brandLabel' => Yii::$app->name,
+            'brandLabel' => '<img src="../images/logo_semnome.png" width="30"> Carbuddy',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
             ],
         ]);
         $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            //['label' => 'Home', 'url' => ['/site/index']],
+            //['label' => 'About', 'url' => ['/site/about']],
+            //['label' => 'Contact', 'url' => ['/site/contact']],
         ];
         if (Yii::$app->user->isGuest) {
             $menuItems2 = [
@@ -46,21 +46,35 @@ AppAsset::register($this);
                 ['label' => 'Login', 'url' => ['/site/login']]
             ];
         } else {
-            $menuItems2 = ['<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'];
-            if(Yii::$app->user->can('frontendCrudRepair')) {
+            $menuItems2 = [Html::tag('li',
+
+                Html::a(Yii::$app->user->identity->username, '#', ['class' => 'nav-link dropdown-toggle',
+                    'id' => 'navbarDropdownMenuLink', 'data-toggle' => 'dropdown', 'aria-haspopup' => 'true',
+                    'aria-expanded' => 'false']) .
+
+                Html::tag('div', Html::beginForm(['/site/logout'], 'post')
+
+                        // Conteudo
+
+                    . Html::a('Account', ['/user/view'], ['class' => 'dropdown-item'])
+
+                    . Html::a('Contact', ['/site/contact'], ['class' => 'dropdown-item'])
+
+                    . Html::a('About', ['/site/about'], ['class' => 'dropdown-item'])
+
+                    . Html::submitButton('Logout', ['class' => 'logout dropdown-item'])
+                    . Html::endForm()
+
+                    , ['class' => 'dropdown-menu dropdown-menu-right', 'aria-labelledby' => 'navbarDropdownMenuLink'])
+
+                , ['class' => 'nav-item dropdown'])];
+            if (Yii::$app->user->can('frontendCrudRepair')) {
                 $menuItems[] = ['label' => 'Repairs', 'url' => ['/repairs/index']];
             }
-            if(Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
+            if (Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
                 $menuItems[] = ['label' => 'Schedules Manager', 'url' => ['/schedule/index']];
             }
-            $menuItems[] = ['label' => 'Vehicles', 'url' => ['/car/index']];
+            $menuItems[] = ['label' => 'Garage', 'url' => ['/car/index']];
             $menuItems[] = ['label' => 'Schedules', 'url' => ['/schedules/index']];
         }
         echo Nav::widget([
@@ -89,7 +103,7 @@ AppAsset::register($this);
 
     <footer class="footer mt-auto py-3 text-muted">
         <div class="container">
-            <p class="float-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+            <p class="float-left">&copy; <?= Html::encode("Carbuddy") ?> <?= date('Y') ?></p>
             <p class="float-right"><?= Yii::powered() ?></p>
         </div>
     </footer>

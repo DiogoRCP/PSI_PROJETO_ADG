@@ -10,7 +10,6 @@ use yii\grid\GridView;
 $this->title = 'Schedules';
 ?>
 <div class="schedules-index">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
 
@@ -21,8 +20,8 @@ $this->title = 'Schedules';
         'filterModel' => $searchModel,
         'columns' => [
             //'id',
-            'carId',
-            'companyId',
+            //'carId',
+            //'companyId',
             //'currentdate',
             'schedulingdate',
             'repairdescription',

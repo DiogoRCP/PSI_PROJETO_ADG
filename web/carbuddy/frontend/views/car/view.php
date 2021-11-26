@@ -10,11 +10,10 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="cars-view">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
+        <?= Html::a('Back', "javascript:history.back()", ['class' => 'btn btn-light']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-dark',
@@ -28,14 +27,14 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'vin',
             'brand',
             'model',
             ['label' => 'Color',
                 'attribute' => 'image',
                 'format' => 'raw',
-                'value' => $model->veicleImage()
+                'value' => $model->veicleImage(50)
             ],
             'carType',
             'displacement',
@@ -48,4 +47,5 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
         ],
     ]) ?>
 
+    <?= Html::a('Repair History', ['..\repairs\history', 'car' => $model->id], ['class' => 'btn btn-secondary']) ?>
 </div>

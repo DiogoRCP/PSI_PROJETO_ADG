@@ -9,10 +9,9 @@ $this->title = 'Update Company: ' . $model->companyname.' ('.$model->nif.')';
 ?>
 <div class="companies-update">
     <div class="companies-content">
-        <img src="../images/logo_white.png" width="80">
         <h1><?= Html::encode($this->title) ?></h1>
         <p>
-            <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-lightss']) ?>
         </p>
 
         <?= $this->render('_form', [

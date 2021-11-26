@@ -15,17 +15,6 @@ $CarList = ['' => ''];
 foreach ($modelCars as $modelCar) {
     $CarList += [$modelCar['id'] => $modelCar['vin']];
 }
-
-$UserList = ['' => ''];
-foreach ($modelUsers as $modelUser) {
-    $UserList += [$modelUser['id'] => $modelUser['username']];
-}
-
-// Carregar Contributors para a dropDownList
-$ContributorsList = ['' => ''];
-foreach ($modelContributor as $modelContributor) {
-    $ContributorsList += [$modelContributor['id'] => $modelUser['username']];
-}
 ?>
 
 <div class="repairs-form">
@@ -33,9 +22,6 @@ foreach ($modelContributor as $modelContributor) {
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'carId')->dropDownList($CarList) ?>
-
-    <?= $form->field($model, 'contributorId')->dropDownList($ContributorsList) ?>
-
 
     <?= $form->field($model, 'repairtype')->dropDownList(['' => '','Repair' => 'Repair', 'Maintenance' => 'Maintenance'])  ?>
 

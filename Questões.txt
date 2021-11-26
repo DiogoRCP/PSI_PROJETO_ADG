@@ -1,0 +1,11 @@
+Historico do carro - get=0 -> Ver
+
+
+Perguntas p/ stores
+
+- API
+.Extra patterns não funcionam ?
+
+- Android
+.Singleton
+

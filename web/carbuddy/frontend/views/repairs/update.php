@@ -15,13 +15,12 @@ $this->title = 'Update Repair: ' .$model->car->brand . " " . $model->car->model;
 ?>
 <div class="repairs-update">
     <div class="repairs-content">
-        <img src="../images/logo_white.png" width="80">
         <h1><?= Html::encode($this->title) ?></h1>
         <p>
-            <?= Html::a('Back', ['index'], ['class' => 'btn btn-dark']) ?>
+            <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
         </p>
         <?= $this->render('_form', [
-            'model' => $model, 'modelCars' => $modelCars, 'modelContributor' => $modelContributor, 'modelUsers' => $modelUsers
+            'model' => $model, 'modelCars' => $modelCars
         ]) ?>
     </div>
 </div>

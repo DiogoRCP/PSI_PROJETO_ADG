@@ -1,44 +1,31 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\CarSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-$this->title = 'Vehicles';
+/* @var $model frontend\models\Cars */
+/* @var $create */
+$this->title = 'Garage';
 ?>
 <div class="cars-index">
-    <img src="../images/logo_white.png" width="80">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Vehicle', ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= ($create)?Html::a('Create Vehicle', ['create'], ['class' => 'btn btn-secondary']):"" ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            //'id',
-            'registration',
-            'vin',
-            'brand',
-            'model',
-            //'color',
-            //'carType',
-            'displacement',
-            'fuelType',
-            'modelyear',
-            'kilometers',
-            'state',
-            //'userId',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-
+    <div class="body-content">
+        <div class="row">
+            <?php foreach ($model as $car) { ?>
+                <div class="col-md-3">
+                    <a href="<?= Url::to(['car/view', 'id' => $car->id]) ?>">
+                        <h4><?= $car->brand ?> <?= $car->model ?></h4>
+                        <?= $car->veicleImage(200) ?>
+                        <h5><?= $car->registration ?></h5>
+                    </a>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
 </div>
