@@ -1,17 +1,14 @@
 package com.example.carbuddy.controllers;
 
-import android.content.ContentValues;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
@@ -86,7 +83,7 @@ public class fragment_garage extends Fragment {
        // return inflater.inflate(R.layout.fragment_garage, container, false);
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_garage, container, false);
-        myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclesViewCars);
+        myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewCars);
         CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaAdapter);

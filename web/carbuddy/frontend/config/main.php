@@ -95,6 +95,18 @@ return [
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
 
+
+                    'controller' => 'api/companieslist',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total',
+                        'POST post' => 'post',
+                        'PUT put/{id}' => 'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => ['{id}' => '<id:\d+>',],
+
+
                     'controller' => 'api/cars',
                     'pluralize' => false,
                     'extraPatterns' => [

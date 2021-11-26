@@ -54,6 +54,17 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY (companyId) REFERENCES company(id)" +
                         ");";
         db.execSQL(createSchedulesTable);
+
+        String createCompaniesTable =
+                "CREATE TABLE IF NOT EXISTS companies" +
+                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "companyname VARCHAR(100) NOT NULL," +
+                        "nif VARCHAR(9) NOT NULL, " +
+                        "email VARCHAR(100) NOT NULL," +
+                        "phonenumber VARCHAR(40) NOT NULL," +
+                        "registrationdate DATETIME default Current_Timestamp " +
+                        ");";
+        db.execSQL(createCompaniesTable);
     }
 
     @Override
@@ -109,5 +120,42 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return cars;
+    }
+
+    public void insertCompanies(Company company){
+        ContentValues values = new ContentValues();
+        values.put("id", company.getId());
+        values.put("companyname", company.getCompanyName());
+        values.put("nif", company.getNif());
+        values.put("email", company.getEmail());
+        values.put("phonenumber", company.getPhoneNumber());
+        values.put("registrationdate", company.getRegistrationDate());
+
+        if(!verificarCompany(company, values)) {
+            database.insert("companies", null, values);
+        }
+    }
+
+    private boolean verificarCompany(Company company, ContentValues values) {
+        return this.database.update("companies", values,
+                "id = ?", new String[]{"" + company.getId()}) > 0;
+    }
+
+    public LinkedList<Company> getAllCompanies() {
+        LinkedList<Company> companies = new LinkedList<>();
+        Cursor cursor = this.database.rawQuery("SELECT * FROM companies",
+                null);
+        if (cursor.moveToFirst()) {
+            do {
+                companies.add(new Company(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5)
+                ));
+            } while (cursor.moveToNext());
+        }
+        return companies;
     }
 }
