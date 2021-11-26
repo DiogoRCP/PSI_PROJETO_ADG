@@ -1,9 +1,11 @@
 package com.example.carbuddy.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,25 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.tvRegistration.setText(listaCarros.get(position).getRegistration());
+        chooseTypeColor(holder, position);
+    }
+
+    private void chooseTypeColor(MyViewHolder holder, int position) {
+        switch (listaCarros.get(position).getCartype()) {
+            case "PASSENGER CAR":
+                holder.imgView.setImageResource(R.drawable.ic_car);
+                break;
+            case "MOTORCYCLE":
+                holder.imgView.setImageResource(R.drawable.ic_motorcycle);
+                break;
+            case "MULTIPURPOSE PASSENGER VEHICLE (MPV)":
+                holder.imgView.setImageResource(R.drawable.ic_mpv);
+                break;
+            case "TRUCK ":
+                holder.imgView.setImageResource(R.drawable.ic_truck);
+                break;
+        }
+        holder.imgView.setColorFilter(Color.parseColor(listaCarros.get(position).getColor()));
     }
 
     @Override
@@ -43,14 +64,15 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         return listaCarros.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvRegistration;
+        private ImageView imgView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvRegistration = (TextView) itemView.findViewById(R.id.textViewRegistrationValue);
-
+            tvRegistration = (TextView) itemView.findViewById(R.id.textViewCompanyNameValue);
+            imgView = (ImageView) itemView.findViewById(R.id.imgView);
         }
     }
 }
