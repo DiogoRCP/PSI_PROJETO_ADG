@@ -19,6 +19,8 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         this.database = this.getWritableDatabase();
     }
 
+
+    //DB Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createCarsTable =
@@ -127,6 +129,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
+    //CRUD Cars
     public void insertCars(Car car){
         ContentValues values = new ContentValues();
         values.put("id", car.getId());
@@ -178,6 +181,8 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return cars;
     }
 
+
+    //CRUD Companies
     public void insertCompanies(Company company){
         ContentValues values = new ContentValues();
         values.put("id", company.getId());
@@ -214,4 +219,70 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         }
         return companies;
     }
-}
+
+
+
+//CRUD Schedules  String createSchedulesTable =
+//                "CREATE TABLE IF NOT EXISTS schedules" +
+//                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                        "currentdate DATETIME default Current_Timestamp, " +
+//                        "schedulingdate DATETIME NOT NULL, " +
+//                        "repairdescription VARCHAR(100) NOT NULL, " +
+//                        "state VARCHAR(100) NOT NULL," +
+//                        "repairtype VARCHAR(100) NOT NULL," +
+//                        "carId INT NOT NULL," +
+//                        "companyId INT NOT NULL," +
+//                        "FOREIGN KEY (carId) REFERENCES car(id)," +
+//                        "FOREIGN KEY (companyId) REFERENCES company(id)" +
+//                        ");";
+//        db.execSQL(createSchedulesTable);
+
+    public void insertSchedules(Schedule schedule){
+        ContentValues values = new ContentValues();
+        values.put("id", schedule.getId());
+        values.put("currentdate", schedule.getCurrentDate());
+        values.put("schedulingdate", schedule.getSchedulingDate());
+        values.put("repairdescription", schedule.getRepairDescription());
+        values.put("state", schedule.getState());
+        values.put("repairtype", schedule.getRepairType());
+        values.put("carId", schedule.getCarId());
+        values.put("companyId",schedule.getCompanyId());
+
+        if(!verificarSchedule(schedule, values)) {
+            database.insert("schedules", null, values);
+        }
+    }
+
+
+    private boolean verificarSchedule(Schedule schedule, ContentValues values) {
+        return this.database.update("schedules", values,
+                "id = ?", new String[]{"" + schedule.getId()}) > 0;
+    }
+
+
+    public LinkedList<Schedule> getAllSchedules() {
+        LinkedList<Schedule> schedules = new LinkedList<>();
+        Cursor cursor = this.database.rawQuery("SELECT * FROM schedules",
+                null);
+        if (cursor.moveToFirst()) {
+            do {
+                //schedules.add(new Schedule(cursor.getInt(0),
+                        //Código para testar:
+                        //Cursor row = databaseHelper.query(true, TABLE_NAME, new String[] {
+                        //COLUMN_INDEX}, ID_COLUMN_INDEX + "=" + rowId,
+                        //null, null, null, null, null);
+                        //String dateTime = row.getString(row.getColumnIndexOrThrow(COLUMN_INDEX));
+                        //Tentei mas não funcionou -> cursor.getCurrentDate(1),
+                        //cursor.getString(2),
+                        //cursor.getString(3),
+                        //cursor.getString(4),
+                        //cursor.getString(5),
+                        //cursor.getFloat(6),
+                        //cursor.getString(7),
+
+                //));
+            } while (cursor.moveToNext());
+        }
+        return schedules;
+    }
+
