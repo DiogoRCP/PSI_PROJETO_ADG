@@ -372,18 +372,18 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 //        }
 //    }
 //
-//   private boolean verificarContributors(User user, ContentValues values) {
-//        return this.database.update("user", values,
-//                "id = ?", new String[]{"" + user.getId()}) > 0;
+//   private boolean verificarContributors(Contributor contributor, ContentValues values) {
+//        return this.database.update("contributor", values,
+//                "id = ?", new String[]{"" + contributor.getId()}) > 0;
 //    }
 //
-//    public LinkedList<User> getAllUsers() {
-//        LinkedList<User> users = new LinkedList<>();
-//        Cursor cursor = this.database.rawQuery("SELECT * FROM user",
+//    public LinkedList<Contributor> getAllContributors() {
+//        LinkedList<Contributor> users = new LinkedList<>();
+//        Cursor cursor = this.database.rawQuery("SELECT * FROM Contributor",
 //                null);
 //        /*if (cursor.moveToFirst()) {
 //            do {
-//                users.add(new User(cursor.getInt(0),
+//                contributors.add(new Contributor(cursor.getInt(0),
 //                        cursor.getString(1),
 //                        cursor.getString(2),
 //                        cursor.getString(3),
@@ -394,7 +394,65 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 //                ));
 //            } while (cursor.moveToNext());
 //        }*/
-//        return users;
+//        return contributors;
 //    }
+
+
+//CRUD Repairs "CREATE TABLE IF NOT EXISTS repairs(" +
+//                            "id INT UNSIGNED AUTO_INCREMENT," +
+//                            "kilometers INT NOT NULL," +
+//                            "repairdate DATETIME default Current_Timestamp," +
+//                            "repairdescription VARCHAR(100) NOT NULL," +
+//                            "state VARCHAR(100) NOT NULL," +
+//                            "repairtype VARCHAR(100) NOT NULL," +
+//                            "carId INT UNSIGNED NOT NULL," +
+//                            "contributorId INT UNSIGNED NOT NULL," +
+//                        "CONSTRAINT repairs_id PRIMARY KEY(id)," +
+//                        "CONSTRAINT fk_repairs_carId FOREIGN KEY(carId) REFERENCES cars(id)," +
+//                        "CONSTRAINT fk_repairs_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)" +
+//                ") ENGINE=InnoDB;";
+
+    public void insertRepairs(Repair repair){
+        ContentValues values = new ContentValues();
+        values.put("id", repair.getId());
+        values.put("kilometers", repair.getKilometers());
+        values.put("repairdate", repair.getRepairDate());
+        values.put("repairdescription", repair.getRepairDescription());
+        values.put("state", repair.getState());
+        values.put("repairtype", repair.getRepairtype());
+        values.put("carId", repair.getCarId());
+        values.put("contributorId", repair.getContributorId());
+
+        if(!verificarRepairs(repair, values)) {
+            database.insert("repairs", null, values);
+        }
+    }
+
+    private boolean verificarRepairs(Repair repair, ContentValues values) {
+        return this.database.update("repairs", values,
+                "id = ?", new String[]{"" + repair.getId()}) > 0;
+    }
+
+    public LinkedList<Repair> getAllRepairs() {
+        LinkedList<Repair> repairs = new LinkedList<>();
+        Cursor cursor = this.database.rawQuery("SELECT * FROM repairs",
+                null);
+        /*if (cursor.moveToFirst()) {
+            do {
+                repairs.add(new Repair(cursor.getInt(0),
+                        cursor.getInt(1),
+                        Date?cursor.(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getInt(6),
+                        cursor.getInt(7),
+                ));
+            } while (cursor.moveToNext());
+        }*/
+        return repairs;
+    }
+
+
 
 
