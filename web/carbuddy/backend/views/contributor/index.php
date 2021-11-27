@@ -19,7 +19,7 @@ $this->title = 'Contributors';
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         //Quando um dado for nulo nao mostra o not set
         'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => ''],
         'columns' => [
