@@ -65,10 +65,10 @@ class Cars extends \yii\db\ActiveRecord
             'displacement' => 'Displacement',
             'fuelType' => 'Fuel Type',
             'registration' => 'Registration',
-            'modelyear' => 'Model year',
+            'modelyear' => 'Year',
             'kilometers' => 'Kilometers',
             'state' => 'State',
-            'userId' => 'User ID',
+            'userId' => 'User',
         ];
     }
 
