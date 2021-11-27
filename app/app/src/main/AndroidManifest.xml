@@ -21,11 +21,11 @@
             android:exported="true" />
         <activity
             android:name=".controllers.MainActivity"
+            android:theme="@style/Theme.CarBuddyLogin"
             android:exported="true"
             android:fitsSystemWindows="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
