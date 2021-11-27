@@ -68,34 +68,34 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         ");";
         db.execSQL(createCompaniesTable);
 
-        //Notas: Unsigned dá erro;
-
 
         String createRepairsTable =
                 "CREATE TABLE IF NOT EXISTS repairs(" +
-                            "id INT UNSIGNED AUTO_INCREMENT," +
-                            "kilometers INT NOT NULL," +
-                            "repairdate DATETIME default Current_Timestamp," +
-                            "repairdescription VARCHAR(100) NOT NULL," +
-                            "state VARCHAR(100) NOT NULL," +
-                            "repairtype VARCHAR(100) NOT NULL," +
-                            "carId INT UNSIGNED NOT NULL," +
-                            "contributorId INT UNSIGNED NOT NULL," +
+                        "id INTEGRER PRIMARY KEY AUTOINCREMENT," +
+                        "kilometers INT NOT NULL," +
+                        "repairdate DATETIME default Current_Timestamp," +
+                        "repairdescription VARCHAR(100) NOT NULL," +
+                        "state VARCHAR(100) NOT NULL," +
+                        "repairtype VARCHAR(100) NOT NULL," +
+                        "carId INTEGRER NOT NULL," +
+                        "contributorId INTEGRER NOT NULL," +
                         "CONSTRAINT repairs_id PRIMARY KEY(id)," +
                         "CONSTRAINT fk_repairs_carId FOREIGN KEY(carId) REFERENCES cars(id)," +
                         "CONSTRAINT fk_repairs_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)" +
-                ") ENGINE=InnoDB;";
+                        ");";
 
         db.execSQL(createRepairsTable);
 
     }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
     //CRUD Cars
-    public void insertCars(Car car){
+    public void insertCars(Car car) {
         ContentValues values = new ContentValues();
         values.put("id", car.getId());
         values.put("vin", car.getVin());
@@ -111,7 +111,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         values.put("state", car.getState());
         values.put("userId", car.getUserId());
 
-        if(!verificarCar(car, values)) {
+        if (!verificarCar(car, values)) {
             database.insert("cars", null, values);
         }
     }
@@ -140,7 +140,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         cursor.getInt(10),
                         cursor.getString(11),
                         cursor.getInt(12)
-                        ));
+                ));
             } while (cursor.moveToNext());
         }
         return cars;
@@ -148,7 +148,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
 
     //CRUD Companies
-    public void insertCompanies(Company company){
+    public void insertCompanies(Company company) {
         ContentValues values = new ContentValues();
         values.put("id", company.getId());
         values.put("companyname", company.getCompanyName());
@@ -157,7 +157,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         values.put("phonenumber", company.getPhoneNumber());
         values.put("registrationdate", company.getRegistrationDate());
 
-        if(!verificarCompany(company, values)) {
+        if (!verificarCompany(company, values)) {
             database.insert("companies", null, values);
         }
     }
@@ -186,7 +186,6 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     }
 
 
-
 //CRUD Schedules  String createSchedulesTable =
 //                "CREATE TABLE IF NOT EXISTS schedules" +
 //                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -202,7 +201,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 //                        ");";
 //        db.execSQL(createSchedulesTable);
 
-    public void insertSchedules(Schedule schedule){
+    public void insertSchedules(Schedule schedule) {
         ContentValues values = new ContentValues();
         values.put("id", schedule.getId());
         values.put("currentdate", schedule.getCurrentDate());
@@ -211,9 +210,9 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         values.put("state", schedule.getState());
         values.put("repairtype", schedule.getRepairType());
         values.put("carId", schedule.getCarId());
-        values.put("companyId",schedule.getCompanyId());
+        values.put("companyId", schedule.getCompanyId());
 
-        if(!verificarSchedule(schedule, values)) {
+        if (!verificarSchedule(schedule, values)) {
             database.insert("schedules", null, values);
         }
     }
@@ -231,25 +230,20 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                 null);
         if (cursor.moveToFirst()) {
             do {
-                //schedules.add(new Schedule(cursor.getInt(0),
-                        //Código para testar:
-                        //Cursor row = databaseHelper.query(true, TABLE_NAME, new String[] {
-                        //COLUMN_INDEX}, ID_COLUMN_INDEX + "=" + rowId,
-                        //null, null, null, null, null);
-                        //String dateTime = row.getString(row.getColumnIndexOrThrow(COLUMN_INDEX));
-                        //Tentei mas não funcionou -> cursor.getCurrentDate(1),
-                        //cursor.getString(2),
-                        //cursor.getString(3),
-                        //cursor.getString(4),
-                        //cursor.getString(5),
-                        //cursor.getFloat(6),
-                        //cursor.getString(7),
-
-                //));
+                schedules.add(new Schedule(cursor.getInt(0),
+                cursor.getInt(1),
+                cursor.getInt(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5),
+                cursor.getString(6),
+                cursor.getString(7)
+                ));
             } while (cursor.moveToNext());
         }
         return schedules;
     }
+
 
 //CRUD Repairs "CREATE TABLE IF NOT EXISTS repairs(" +
 //                            "id INT UNSIGNED AUTO_INCREMENT," +
@@ -265,7 +259,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 //                        "CONSTRAINT fk_repairs_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)" +
 //                ") ENGINE=InnoDB;";
 
-    public void insertRepairs(Repair repair){
+    public void insertRepairs(Repair repair) {
         ContentValues values = new ContentValues();
         values.put("id", repair.getId());
         values.put("kilometers", repair.getKilometers());
@@ -276,7 +270,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         values.put("carId", repair.getCarId());
         values.put("contributorId", repair.getContributorId());
 
-        if(!verificarRepairs(repair, values)) {
+        if (!verificarRepairs(repair, values)) {
             database.insert("repairs", null, values);
         }
     }
@@ -305,6 +299,8 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         }*/
         return repairs;
     }
+
+}
 
 
 
