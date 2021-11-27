@@ -186,21 +186,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     }
 
 
-//CRUD Schedules  String createSchedulesTable =
-//                "CREATE TABLE IF NOT EXISTS schedules" +
-//                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//                        "currentdate DATETIME default Current_Timestamp, " +
-//                        "schedulingdate DATETIME NOT NULL, " +
-//                        "repairdescription VARCHAR(100) NOT NULL, " +
-//                        "state VARCHAR(100) NOT NULL," +
-//                        "repairtype VARCHAR(100) NOT NULL," +
-//                        "carId INT NOT NULL," +
-//                        "companyId INT NOT NULL," +
-//                        "FOREIGN KEY (carId) REFERENCES car(id)," +
-//                        "FOREIGN KEY (companyId) REFERENCES company(id)" +
-//                        ");";
-//        db.execSQL(createSchedulesTable);
-
+    //CRUD Schedules
     public void insertSchedules(Schedule schedule) {
         ContentValues values = new ContentValues();
         values.put("id", schedule.getId());
@@ -245,20 +231,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     }
 
 
-//CRUD Repairs "CREATE TABLE IF NOT EXISTS repairs(" +
-//                            "id INT UNSIGNED AUTO_INCREMENT," +
-//                            "kilometers INT NOT NULL," +
-//                            "repairdate DATETIME default Current_Timestamp," +
-//                            "repairdescription VARCHAR(100) NOT NULL," +
-//                            "state VARCHAR(100) NOT NULL," +
-//                            "repairtype VARCHAR(100) NOT NULL," +
-//                            "carId INT UNSIGNED NOT NULL," +
-//                            "contributorId INT UNSIGNED NOT NULL," +
-//                        "CONSTRAINT repairs_id PRIMARY KEY(id)," +
-//                        "CONSTRAINT fk_repairs_carId FOREIGN KEY(carId) REFERENCES cars(id)," +
-//                        "CONSTRAINT fk_repairs_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)" +
-//                ") ENGINE=InnoDB;";
-
+    //CRUD Repairs
     public void insertRepairs(Repair repair) {
         ContentValues values = new ContentValues();
         values.put("id", repair.getId());
@@ -284,19 +257,19 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         LinkedList<Repair> repairs = new LinkedList<>();
         Cursor cursor = this.database.rawQuery("SELECT * FROM repairs",
                 null);
-        /*if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             do {
                 repairs.add(new Repair(cursor.getInt(0),
                         cursor.getInt(1),
-                        Date?cursor.(2),
-                        cursor.getString(3),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
                         cursor.getString(4),
                         cursor.getString(5),
-                        cursor.getInt(6),
-                        cursor.getInt(7),
+                        cursor.getString(6),
+                        cursor.getString(7)
                 ));
             } while (cursor.moveToNext());
-        }*/
+        }
         return repairs;
     }
 
