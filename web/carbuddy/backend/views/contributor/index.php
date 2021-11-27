@@ -7,7 +7,6 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\ContributorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-
 $this->title = 'Contributors';
 ?>
 <div class="contributors-index">
@@ -21,9 +20,23 @@ $this->title = 'Contributors';
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        //Quando um dado for nulo nao mostra o not set
+        'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => ''],
         'columns' => [
-            'userId',
-            'companyId',
+
+
+            [   'label' => 'User',
+                'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+                'value' => function ($data) {
+                    return $data->user->username; // $data['name'] for array data, e.g. using SqlDataProvider.
+                },
+            ],
+            [   'label' => 'Company',
+                'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+                'value' => function ($data) {
+                    return $data->company->companyname; // $data['name'] for array data, e.g. using SqlDataProvider.
+                },
+            ],
             'speciality',
             ['class' => 'yii\grid\ActionColumn'],
         ],
