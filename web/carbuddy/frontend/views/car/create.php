@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Cars */
 
-$this->title = 'Create Vehicle';
+$this->title = 'Add Vehicle';
 ?>
 <div class="cars-create">
     <div class="cars-content">

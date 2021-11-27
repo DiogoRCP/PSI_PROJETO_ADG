@@ -13,7 +13,7 @@ $this->title = 'Contributors';
 <div class="contributors-index">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Create Contributor', ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a('Add Contributor', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>

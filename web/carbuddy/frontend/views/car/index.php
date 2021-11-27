@@ -12,7 +12,7 @@ $this->title = 'Garage';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= ($create)?Html::a('Create Vehicle', ['create'], ['class' => 'btn btn-secondary']):"" ?>
+        <?= ($create)?Html::a('Add Vehicle', ['create'], ['class' => 'btn btn-secondary']):"" ?>
     </p>
 
     <div class="body-content">
