@@ -71,17 +71,16 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
         String createRepairsTable =
                 "CREATE TABLE IF NOT EXISTS repairs(" +
-                        "id INTEGRER PRIMARY KEY AUTOINCREMENT," +
-                        "kilometers INT NOT NULL," +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "kilometers INTEGER NOT NULL," +
                         "repairdate DATETIME default Current_Timestamp," +
                         "repairdescription VARCHAR(100) NOT NULL," +
                         "state VARCHAR(100) NOT NULL," +
                         "repairtype VARCHAR(100) NOT NULL," +
                         "carId INTEGRER NOT NULL," +
                         "contributorId INTEGRER NOT NULL," +
-                        "CONSTRAINT repairs_id PRIMARY KEY(id)," +
-                        "CONSTRAINT fk_repairs_carId FOREIGN KEY(carId) REFERENCES cars(id)," +
-                        "CONSTRAINT fk_repairs_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)" +
+                        "FOREIGN KEY(carId) REFERENCES cars(id)," +
+                        "FOREIGN KEY(contributorId) REFERENCES contributors(id)" +
                         ");";
 
         db.execSQL(createRepairsTable);
