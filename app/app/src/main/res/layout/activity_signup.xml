@@ -21,23 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/roudedconers"
-            android:fontFamily="@font/berlinsansfb"
-            android:text="@string/Signup"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            android:textColor="@color/white"
-            android:textSize="34sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
         <EditText
             android:id="@+id/txusername"
             android:layout_width="match_parent"

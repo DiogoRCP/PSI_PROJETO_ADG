@@ -1,198 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
     android:orientation="vertical"
-    tools:context=".controllers.MainActivity" >
+    tools:context=".controllers.MainActivity">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="43dp" />
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="140dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:layout_weight="1"
+        android:background="#00FFFFFF"
+        android:clickable="false"
+        android:scaleType="center"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_carbuddy_svg"
+        app:tint="#FFFFFF"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Space
-            android:layout_width="450dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/imageViewLogo"
-            android:layout_width="553dp"
-            android:layout_height="164dp"
-            android:layout_weight="1"
-            android:background="#00FFFFFF"
-            android:clickable="true"
-            android:onClick="onClickCompanies"
-            android:scaleType="fitStart"
-            app:srcCompat="@drawable/logo_white" />
-
-        <Space
-            android:layout_width="450dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="181dp"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/roudedconers"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
+            android:layout_marginBottom="32dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <EditText
                 android:id="@+id/editTextTextPersonName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
+                android:fontFamily="@font/worksans"
                 android:hint="@string/TextViewUser"
-                android:fontFamily="@font/worksansbold"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="@color/white" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
+                android:textColorHint="@color/white"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/editTextTextPassword"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
+                android:fontFamily="@font/worksans"
                 android:hint="@string/TextViewPassword"
-                android:fontFamily="@font/worksansbold"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="@color/white"
+                android:textSize="16sp"
                 tools:ignore="SpeakableTextPresentCheck" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
         </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+    <Button
+        android:id="@+id/button3"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/button_states"
+        android:foreground="@drawable/ic_play_logo"
+        android:foregroundGravity="center"
+        android:onClick="onClickLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/button4"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_states"
+        android:fontFamily="@font/worksans"
+        android:onClick="onClickCompanies"
+        android:text="@string/Companies"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/button_states"
-            android:contentDescription="Login"
-            android:onClick="onClickLogin"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
-            app:layout_constraintEnd_toStartOf="@+id/ivRegister"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/loginicon" />
-
-        <ImageView
-            android:id="@+id/ivRegister"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/button_states"
-            android:onClick="onClickRegister"
-            android:scaleType="center"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/clipboard" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/berlinsansfb"
-            android:text="Register"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.552"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/ivRegister" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/berlinsansfb"
-            android:text="Login"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.287"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/worksans"
+            android:text="@string/NewAccountTxt"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
         <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="63dp"
-            tools:layout_editor_absoluteY="192dp" />
+            android:id="@+id/button5"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="103dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="-20dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/worksans"
+            android:onClick="onClickRegister"
+            android:text="@string/Signup"
+            android:textSize="12sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="247dp"
-            tools:layout_editor_absoluteY="192dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CarBuddy</string>
+    <string name="Companies">Empresas</string>
+    <string name="TextViewUser">Utilizador</string>
+    <string name="TextViewPassword">Palavra-passe</string>
+    <string name="Garage">Garagem</string>
+    <string name="Signup">Registar</string>
+    <string name="Schedules">Marcações</string>
+    <string name="Schedulesappointment">Agendar marcações</string>
+    <string name="InfoCarro">Informação do carro</string>
+    <string name="CarExample">Exemplo de carro</string>
+    <string name="NewAccountTxt">Não tem uma conta?</string>
+</resources>
