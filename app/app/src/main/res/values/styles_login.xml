@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.CarBuddyLogin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/figma1</item>
-        <item name="colorPrimaryVariant">@color/figma2</item>
+        <item name="colorPrimary">@color/figma4</item>
+        <item name="colorPrimaryVariant">@color/figma1</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/figma3</item>

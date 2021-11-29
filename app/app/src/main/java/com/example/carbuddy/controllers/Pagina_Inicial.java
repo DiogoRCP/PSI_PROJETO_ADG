@@ -39,7 +39,7 @@ public class Pagina_Inicial extends AppCompatActivity {
 
     public void onClickGaragem(View view) {
         fragment = new fragment_garage();
-        setTitle("Garage");
+        setTitle(R.string.Garage);
         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 
@@ -53,19 +53,19 @@ public class Pagina_Inicial extends AppCompatActivity {
 
     public void CarregarFragmentoInicial() {
         fragment = new fragment_schedules();
-        setTitle("Schedules");
+        setTitle(R.string.Schedules);
         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 
     public void CarregarFragmentoSchedulesAppointment() {
         fragment = new Schedules_Appointment();
-        setTitle("Schedules Appointment");
+        setTitle(R.string.Schedulesappointment);
         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 
     public void onClickCar(View view) {
         fragment = new fragment_carInfo();
-        setTitle("Schedules Appointment");
+        setTitle(R.string.InfoCarro);
         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 
