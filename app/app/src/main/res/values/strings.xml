@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CarBuddy</string>
+    <string name="app_name" translatable="false">CarBuddy</string>
     <string name="TextViewUser">Username</string>
     <string name="TextViewPassword">Password</string>
     <string name="Garage">Garage</string>
