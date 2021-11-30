@@ -11,6 +11,7 @@ use Yii;
  * @property string $username
  * @property string $password_hash
  * @property string $verification_token
+ * @property string|null $password_reset_token
  * @property string $auth_key
  * @property int $status
  * @property int $updated_at
@@ -41,14 +42,19 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password_hash', 'verification_token', 'auth_key', 'status', 'updated_at', 'created_at', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
-            [['password_hash', 'verification_token', 'auth_key'], 'string'],
+            [['username', 'password_hash', 'verification_token', 'auth_key', 'updated_at', 'created_at', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
+            [['verification_token'], 'string'],
             [['status', 'updated_at', 'created_at'], 'integer'],
             [['birsthday', 'registrationdate'], 'safe'],
-            [['username', 'usertype', 'email'], 'string', 'max' => 100],
+            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['usertype'], 'string', 'max' => 100],
             [['nif'], 'string', 'max' => 9],
             [['phonenumber'], 'string', 'max' => 40],
             [['nif'], 'unique'],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
+            [['password_reset_token'], 'unique'],
         ];
     }
 
