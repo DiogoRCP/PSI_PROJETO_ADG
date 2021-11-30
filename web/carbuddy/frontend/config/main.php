@@ -46,14 +46,16 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule',
-
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/signup',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'POST post' => 'post',
                     ],
-
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/login',
                     'pluralize' => false,
                     'extraPatterns' => [
@@ -71,7 +73,9 @@ return [
                         'DELETE  delete' => 'delete'
                     ],
                     'tokens' => ['{limit}' => '<limit:\d+>',],
-
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/repairs',
                     'pluralize' => false,
                     'extraPatterns' => [
@@ -83,7 +87,9 @@ return [
                         'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>', '{car}' => '<car:\d+>',],
-
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/companies',
                     'pluralize' => false,
                     'extraPatterns' => [
@@ -94,8 +100,9 @@ return [
                         'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
-
-
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/companieslist',
                     'pluralize' => false,
                     'extraPatterns' => [
@@ -105,8 +112,9 @@ return [
                         'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>',],
-
-
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/cars',
                     'pluralize' => false,
                     'extraPatterns' => [
@@ -119,7 +127,9 @@ return [
                         'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
-
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/contributors',
                     'pluralize' => false,
                     'extraPatterns' => [
@@ -130,7 +140,9 @@ return [
                         'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
-
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/schedules',
                     'pluralize' => false,
                     'extraPatterns' => [
@@ -141,11 +153,10 @@ return [
                         'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
-
                 ]
             ],
         ],
-        
+
 
     ],
     'params' => $params,

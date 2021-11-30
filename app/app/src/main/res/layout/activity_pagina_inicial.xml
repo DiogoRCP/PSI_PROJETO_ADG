@@ -43,24 +43,25 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/button_states"
             android:onClick="onClickGaragem"
             android:padding="10dp"
-            android:scaleType="centerInside"
+            android:scaleType="center"
+            android:tint="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnRepairs"
             app:layout_constraintStart_toEndOf="@+id/btnUser"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo_white_image" />
+            app:srcCompat="@drawable/ic_carbuddy_logo_svg" />
 
         <Button
             android:id="@+id/btnRepairs"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/button_states"
             android:onClick="onClickSchedulesAppointment"
             app:icon="@drawable/clipboard"
@@ -71,8 +72,8 @@
 
         <Button
             android:id="@+id/btnUser"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/button_states"
             android:onClick="onClickUsers"
             android:textAlignment="center"
