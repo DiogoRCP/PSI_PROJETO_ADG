@@ -2,9 +2,8 @@
 namespace backend\tests;
 
 use backend\models\Companies;
-use backend\controllers\CompanyController;
 use Yii;
-use yii\caching\DummyCache;
+
 
 
 class CompaniesTest extends \Codeception\Test\Unit
@@ -12,15 +11,16 @@ class CompaniesTest extends \Codeception\Test\Unit
     /**
      * @var \backend\tests\UnitTester
      */
-
     protected $tester;
-    
+
     protected function _before()
     {
+
     }
 
     protected function _after()
     {
+
     }
 
     // tests
@@ -41,13 +41,8 @@ class CompaniesTest extends \Codeception\Test\Unit
     }
     public function testCreateModelWithData()
     {
-        Companies::getDb();
         $model = new Companies();
-        $model->companyname = "Midas";
-        $model->email = "Midas@midas.pt";
-        $model->phonenumber = "912123049";
-        $model->nif = "123123053";
-        $model->save();
-        expect('model should blow', $model->save());
+        $post = ["Midas", "Midas@midas.pt",  "912123049", "123123053"];
+        $this->assertTrue($model->load($post), 'Load POST data');
     }
 }
