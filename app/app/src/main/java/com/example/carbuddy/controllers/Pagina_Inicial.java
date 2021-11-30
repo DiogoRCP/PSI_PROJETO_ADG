@@ -27,6 +27,9 @@ public class Pagina_Inicial extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_inicial);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_carbuddy_logo_svg);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -47,8 +50,14 @@ public class Pagina_Inicial extends AppCompatActivity {
         CarregarFragmentoSchedulesAppointment();
     }
 
-    public void onClickUsers(View view) {
+    public void onClickSchedules(View view) {
         CarregarFragmentoInicial();
+    }
+
+    public void onClickCar(View view) {
+        fragment = new fragment_carInfo();
+        setTitle(R.string.InfoCarro);
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 
     public void CarregarFragmentoInicial() {
@@ -60,12 +69,6 @@ public class Pagina_Inicial extends AppCompatActivity {
     public void CarregarFragmentoSchedulesAppointment() {
         fragment = new Schedules_Appointment();
         setTitle(R.string.Schedulesappointment);
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
-    }
-
-    public void onClickCar(View view) {
-        fragment = new fragment_carInfo();
-        setTitle(R.string.InfoCarro);
         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 
