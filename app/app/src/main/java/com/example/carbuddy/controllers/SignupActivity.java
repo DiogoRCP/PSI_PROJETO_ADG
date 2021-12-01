@@ -2,12 +2,14 @@ package com.example.carbuddy.controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.models.Signup;
@@ -20,6 +22,9 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getElements();
     }
@@ -49,12 +54,22 @@ public class SignupActivity extends AppCompatActivity {
 
             form.DoSignup();
             Toast.makeText(getApplicationContext(), "Account Created Successfully. You can start a session.", Toast.LENGTH_SHORT).show();
-            Intent login = new Intent(this, MainActivity.class);
-            startActivity(login);
+            finish();
         }
         else {
             //Mensagem de erro a endicar que as passwors não correspondem
             Toast.makeText(getApplicationContext(), "Password and its Replay are different.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

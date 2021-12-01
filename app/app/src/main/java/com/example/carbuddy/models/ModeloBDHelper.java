@@ -77,10 +77,10 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         "repairdescription VARCHAR(100) NOT NULL," +
                         "state VARCHAR(100) NOT NULL," +
                         "repairtype VARCHAR(100) NOT NULL," +
-                        "carId INTEGRER NOT NULL," +
-                        "contributorId INTEGRER NOT NULL," +
-                        "FOREIGN KEY(carId) REFERENCES cars(id)," +
-                        "FOREIGN KEY(contributorId) REFERENCES contributors(id)" +
+                        "carId INTEGER NOT NULL," +
+                        "contributorId INTEGER NOT NULL," +
+                        "CONSTRAINT fk_repairs_carId FOREIGN KEY(carId) REFERENCES cars(id)," +
+                        "CONSTRAINT fk_repairs_contributorId FOREIGN KEY(contributorId) REFERENCES contributors(id)" +
                         ");";
 
         db.execSQL(createRepairsTable);
