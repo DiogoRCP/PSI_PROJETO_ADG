@@ -64,6 +64,7 @@ public class fragment_garage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -79,6 +80,9 @@ public class fragment_garage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().setTitle(R.string.Garage);
+
         // Inflate the layout for this fragment
        // return inflater.inflate(R.layout.fragment_garage, container, false);
         // Inflate the layout for this fragment
