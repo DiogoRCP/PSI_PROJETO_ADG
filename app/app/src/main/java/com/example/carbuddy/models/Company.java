@@ -2,15 +2,15 @@ package com.example.carbuddy.models;
 
 public class Company {
     private int id;
-    private String companyName, nif, email, phoneNumber, registrationDate;
+    private String companyname, nif, email, phonenumber, registrationdate;
 
-    public Company(int id, String companyName, String nif, String email, String phoneNumber, String registrationDate) {
+    public Company(int id, String companyname, String nif, String email, String phonenumber, String registrationdate) {
         this.id = id;
-        this.companyName = companyName;
+        this.companyname = companyname;
         this.nif = nif;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.registrationDate = registrationDate;
+        this.phonenumber = phonenumber;
+        this.registrationdate = registrationdate;
     }
 
     public int getId() {
@@ -22,11 +22,11 @@ public class Company {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return companyname;
     }
 
     public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+        this.companyname = companyname;
     }
 
     public String getNif() {
@@ -46,30 +46,30 @@ public class Company {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return phonenumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phonenumber = phonenumber;
     }
 
     public String getRegistrationDate() {
-        return registrationDate;
+        return registrationdate;
     }
 
     public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
+        this.registrationdate = registrationdate;
     }
 
     @Override
     public String toString() {
         return "Company{" +
                 "id=" + id +
-                ", companyName='" + companyName + '\'' +
+                ", companyName='" + companyname + '\'' +
                 ", nif='" + nif + '\'' +
                 ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", registrationDate='" + registrationDate + '\'' +
+                ", phoneNumber='" + phonenumber + '\'' +
+                ", registrationDate='" + registrationdate + '\'' +
                 '}';
     }
 }

@@ -25,11 +25,7 @@ class CompaniesController extends ActiveController
             return $user;
         } return null;
     }
-
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+    
 
     public function actionTotal(){
         $Companiessmodel = new $this -> modelClass;
@@ -49,14 +45,14 @@ class CompaniesController extends ActiveController
 
     public function actionPost() {
 
-        $name=\Yii::$app -> request -> post('name');
+$name=\Yii::$app -> request -> post('name');
 
-        $Companiessmodel = new $this -> modelClass;
-        $Companiessmodel -> name = $name;
+$Companiessmodel = new $this -> modelClass;
+$Companiessmodel -> name = $name;
 
-        $ret = $Companiessmodel -> save(false);
-        return ['SaveError' => $ret];
-    }
+$ret = $Companiessmodel -> save(false);
+return ['SaveError' => $ret];
+}
 
     //http://localhost:8080/v1/companies/delete/id
 

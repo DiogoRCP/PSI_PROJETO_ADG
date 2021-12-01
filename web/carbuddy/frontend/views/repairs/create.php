@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $modelUsers backend\models\Users */
 /* @var $modelContributor frontend\models\Contributors */
 
-$this->title = 'Create Repair';
+$this->title = 'Add Repair';
 //$this->params['breadcrumbs'][] = ['label' => 'Repairs', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 ?>

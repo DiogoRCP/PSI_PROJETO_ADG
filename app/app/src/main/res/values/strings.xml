@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CarBuddy</string>
+    <string name="app_name" translatable="false">CarBuddy</string>
     <string name="TextViewUser">Username</string>
     <string name="TextViewPassword">Password</string>
     <string name="Garage">Garage</string>
@@ -9,6 +9,5 @@
     <string name="InfoCarro">Car Information</string>
     <string name="CarExample">Car Example</string>
     <string name="Companies">Companies</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="NewAccountTxt">Don\'t have an account?</string>
 </resources>

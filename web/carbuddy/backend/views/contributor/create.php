@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $modelUsers backend\models\Users */
 /* @var $modelCompanies backend\models\Companies */
 
-$this->title = 'Create Contributor';
+$this->title = 'Add Contributor';
 ?>
 <div class="contributors-create">
     <div class="contributors-content">

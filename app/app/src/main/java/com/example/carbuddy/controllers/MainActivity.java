@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.models.CompaniesSingleton;
 import com.example.carbuddy.models.LoginSingleton;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         editTextUser = findViewById(R.id.editTextTextPersonName);
         editTextPass = findViewById(R.id.editTextTextPassword);
+
+        CompaniesSingleton.getInstance(this);
     }
 
         private boolean efetuarLogin() {
@@ -91,5 +94,10 @@ public class MainActivity extends AppCompatActivity {
     public void onClickRegister(View view) {
         Intent signup = new Intent(this, SignupActivity.class);
         startActivity(signup);
+    }
+
+    public void onClickCompanies(View view) {
+        Intent companiesView = new Intent(this, CompaniesActivity.class);
+        startActivity(companiesView);
     }
 }

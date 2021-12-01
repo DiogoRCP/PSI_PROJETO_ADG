@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Companies */
 
-$this->title = 'Create Company';
+$this->title = 'Add Company';
 
 ?>
 <div class="companies-create">

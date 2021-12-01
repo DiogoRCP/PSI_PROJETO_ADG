@@ -40,6 +40,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.tvRegistration.setText(listaCarros.get(position).getRegistration());
+        holder.tvModel.setText(listaCarros.get(position).getBrand() + " " + listaCarros.get(position).getModel());
         chooseTypeColor(holder, position);
     }
 
@@ -68,12 +69,13 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvRegistration;
+        private TextView tvRegistration, tvModel;
         private ImageView imgView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvRegistration = (TextView) itemView.findViewById(R.id.textViewRegistrationValue);
+            tvModel = (TextView) itemView.findViewById(R.id.textViewModelValue);
             imgView = (ImageView) itemView.findViewById(R.id.imgView);
         }
     }

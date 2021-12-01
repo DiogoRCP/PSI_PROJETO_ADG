@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Schedules;
@@ -41,7 +42,19 @@ class SchedulesSearch extends Schedules
      */
     public function search($params)
     {
-        $query = Schedules::find()->innerJoin("cars", "cars.id = schedules.carId");
+        if(Yii::$app->request->get('schedule')&& Yii::$app->user->can('frontendCrudSchedulesCollaborator')){
+            $user = Users::findOne(Yii::$app->user->getId());
+
+            $collaborator = Contributors::find()
+                ->where(['userId' => $user->id])
+                ->one();
+
+            $query = Schedules::find();
+        }
+        else{
+            $query = Schedules::find()->innerJoin("cars", "cars.id = schedules.carId");
+        }
+
 
         // add conditions that should always apply here
 
@@ -57,15 +70,29 @@ class SchedulesSearch extends Schedules
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'currentdate' => $this->currentdate,
-            'schedulingdate' => $this->schedulingdate,
-            'carId' => $this->carId,
-            'companyId' => $this->companyId,
-            'cars.userId' => \Yii::$app->getUser()->getId()
-        ]);
+
+        if(Yii::$app->request->get('schedule')&& Yii::$app->user->can('frontendCrudSchedulesCollaborator')){
+            // grid filtering conditions
+            $query->andFilterWhere([
+                'id' => $this->id,
+                'currentdate' => $this->currentdate,
+                'schedulingdate' => $this->schedulingdate,
+                'carId' => $this->carId,
+                'companyId' => $collaborator->companyId,
+            ]);
+        }
+        else{
+            // grid filtering conditions
+            $query->andFilterWhere([
+                'id' => $this->id,
+                'currentdate' => $this->currentdate,
+                'schedulingdate' => $this->schedulingdate,
+                'carId' => $this->carId,
+                'companyId' => $this->companyId,
+                'cars.userId' => \Yii::$app->getUser()->getId()
+            ]);
+        }
+
 
         $query->andFilterWhere(['like', 'repairdescription', $this->repairdescription])
             ->andFilterWhere(['like', 'state', $this->state])
