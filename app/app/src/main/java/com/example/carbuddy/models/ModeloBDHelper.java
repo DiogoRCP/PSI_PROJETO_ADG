@@ -85,8 +85,14 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
         db.execSQL(createRepairsTable);
 
+            String createLoginTable =
+                    "CREATE TABLE IF NOT EXISTS login(" +
+                            "token TEXT NOT NULL," +
+                            "username VARCHAR(100) NOT NULL," +
+                            "email VARCHAR(100) NOT NULL" +
+                            ");";
+            db.execSQL(createLoginTable);
     }
-
 
 
     @Override
@@ -272,6 +278,38 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return repairs;
     }
 
+
+    //CRUD Login
+    public void insertLogin(Login login) {
+        ContentValues values = new ContentValues();
+        values.put("token", login.getToken());
+        values.put("username", login.getUsername());
+        values.put("email", login.getEmail());
+
+        if (!verificarLogin(login, values)) {
+            database.insert("login", null, values);
+        }
+    }
+
+    private boolean verificarLogin(Login login, ContentValues values) {
+        return this.database.update("login", values,
+                "token = ?", new String[]{"" + login.getToken()}) > 0;
+    }
+
+    public LinkedList<Login> getAllLogin() {
+        LinkedList<Login> login = new LinkedList<>();
+        Cursor cursor = this.database.rawQuery("SELECT * FROM login",
+                null);
+        if (cursor.moveToFirst()) {
+            do {
+                login.add(new Login(cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2)
+                ));
+            } while (cursor.moveToNext());
+        }
+        return login;
+    }
 }
 
 

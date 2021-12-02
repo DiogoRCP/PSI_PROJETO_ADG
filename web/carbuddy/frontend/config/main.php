@@ -62,7 +62,9 @@ return [
                         'GET get/{username}/{password}' => 'get'
                     ],
                     'tokens' => ['{username}' => '<username:\d+>', '{password}' => '<password:\d+>',],
-
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [
