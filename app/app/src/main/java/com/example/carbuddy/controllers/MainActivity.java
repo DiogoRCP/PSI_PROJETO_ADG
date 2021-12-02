@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.carbuddy.R;
 import com.example.carbuddy.models.CompaniesSingleton;
 import com.example.carbuddy.models.LoginSingleton;
+import com.example.carbuddy.models.ModeloBDHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,58 +36,58 @@ public class MainActivity extends AppCompatActivity {
         editTextUser = findViewById(R.id.editTextTextPersonName);
         editTextPass = findViewById(R.id.editTextTextPassword);
 
+        VerificarLogin();
         CompaniesSingleton.getInstance(this);
+
     }
 
-        private boolean efetuarLogin() {
-            user = editTextUser.getText().toString();
-            pass = editTextPass.getText().toString();
-            boolean userBool = isUserValid(user);
-            boolean passBool = isPassValid(pass);
+    private boolean efetuarLogin() {
+        user = editTextUser.getText().toString();
+        pass = editTextPass.getText().toString();
+        boolean userBool = isUserValid(user);
+        boolean passBool = isPassValid(pass);
 
-            if(userBool != true)
-                editTextUser.setError("Invalid User");
+        if (userBool != true)
+            editTextUser.setError("Invalid User");
 
-            if (passBool != true)
-                editTextPass.setError("Invalid Password");
+        if (passBool != true)
+            editTextPass.setError("Invalid Password");
 
-            if(userBool == true && passBool == true) {
-                return true;
-            }
+        if (userBool == true && passBool == true) {
+            return true;
+        }
+        return false;
+    }
+
+
+    private boolean isUserValid(String user) {
+        if (user.length() > 1 && user != "Username")
+            return true;
+        else
             return false;
-        }
+    }
+
+    private boolean isPassValid(String pass) {
+        if (pass == null)
+            return false;
+
+        if (pass.length() < 8)
+            return false;
+        else
+            return true;
+    }
 
 
-        private boolean isUserValid(String user){
-            if(user.length() > 1 && user != "Username")
-                return true;
-            else
-                return false;
-        }
-
-        private boolean isPassValid(String pass){
-            if(pass == null)
-                return false;
-
-            if (pass.length() < 8)
-                return false;
-            else
-                return true;
-        }
-
-
-    public void onClickLogin(View view ) {
-        if(efetuarLogin()==true) {
+    public void onClickLogin(View view) {
+        if (efetuarLogin() == true) {
 
             LoginSingleton.getInstance(this, user, pass);
-            if(LoginSingleton.getInstance(this, user, pass).getLogin() != null) {
-                if (LoginSingleton.getInstance(this, user, pass).getLogin().isEntrar() == true) {
-                    Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
-                    startActivity(paginaInicial);
-                } else {
-                    Toast.makeText(this, "Conta não existente", Toast.LENGTH_SHORT).show();
-                    LoginSingleton.setInstancia(null);
-                }
+            if (LoginSingleton.getInstance(this, user, pass).getLogin() != null) {
+                Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
+                startActivity(paginaInicial);
+            } else {
+                Toast.makeText(this, "Conta não existente", Toast.LENGTH_SHORT).show();
+                LoginSingleton.setInstancia(null);
             }
         }
     }
@@ -99,5 +100,13 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCompanies(View view) {
         Intent companiesView = new Intent(this, CompaniesActivity.class);
         startActivity(companiesView);
+    }
+
+    private void VerificarLogin(){
+        ModeloBDHelper database = new ModeloBDHelper(this);
+        if(database.getAllLogin().size()>0){
+            Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
+            startActivity(paginaInicial);
+        }
     }
 }

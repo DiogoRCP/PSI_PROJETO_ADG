@@ -27,10 +27,16 @@ public class LoginSingleton {
     }
 
     public LoginSingleton(Context context, String user, String pass) {
-        apiLogin(context, user, pass);
+        ModeloBDHelper database = new ModeloBDHelper(context);
+        if (database.getAllLogin().size() < 1) {
+            apiLogin(context, database, user, pass);
+        }else{
+            System.out.println(database.getAllLogin());
+            login = database.getAllLogin().get(0);
+        }
     }
 
-    public void apiLogin(Context context, String user, String pass) {
+    public void apiLogin(Context context, ModeloBDHelper database, String user, String pass) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "http://10.0.2.2:8080/api/login/get?username=" + user + "&password=" + pass;
 
@@ -42,9 +48,12 @@ public class LoginSingleton {
                         try {
                             login = new Login(response.getString("authkey"), response.getString("username"),
                                     response.getString("email"));
+
+                            database.insertLogin(login);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            login = new Login("", "","");
+                            login = new Login("", "", "");
                         }
 
                         /* this is gonna be the right way */
