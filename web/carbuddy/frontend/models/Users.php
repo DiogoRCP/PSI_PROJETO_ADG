@@ -11,6 +11,7 @@ use Yii;
  * @property string $username
  * @property string $password_hash
  * @property string $verification_token
+ * @property string|null $password_reset_token
  * @property string $auth_key
  * @property int $status
  * @property int $updated_at
@@ -41,14 +42,19 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password_hash', 'verification_token', 'auth_key', 'status', 'updated_at', 'created_at', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
-            [['password_hash', 'verification_token', 'auth_key'], 'string'],
+            [['username', 'password_hash', 'verification_token', 'auth_key', 'updated_at', 'created_at', 'usertype', 'nif', 'birsthday', 'email', 'phonenumber'], 'required'],
+            [['verification_token'], 'string'],
             [['status', 'updated_at', 'created_at'], 'integer'],
             [['birsthday', 'registrationdate'], 'safe'],
-            [['username', 'usertype', 'email'], 'string', 'max' => 100],
+            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['usertype'], 'string', 'max' => 100],
             [['nif'], 'string', 'max' => 9],
             [['phonenumber'], 'string', 'max' => 40],
             [['nif'], 'unique'],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
+            [['password_reset_token'], 'unique'],
         ];
     }
 
@@ -102,5 +108,76 @@ class Users extends \yii\db\ActiveRecord
         }
 
         return true;
+    }
+
+    //Funções e metodos dos testes
+    public function setusername($username)
+    {
+        $this->username=$username;
+    }
+
+    public function setpasswordhash($passwordhash)
+    {
+        $this->password_hash=$passwordhash;
+    }
+
+    public function setverificationtoken($verificationtoken)
+    {
+        $this->verification_token=$verificationtoken;
+    }
+
+    public function setpasswordresettoken($passwordresettoken)
+    {
+        $this->password_reset_token=$passwordresettoken;
+    }
+
+    public function setauthkey($authkey)
+    {
+        $this->auth_key=$authkey;
+    }
+
+    public function setstatus($status)
+    {
+        $this->status=$status;
+    }
+
+    public function setupdatedat($updatedat)
+    {
+        $this->updated_at=$updatedat;
+    }
+
+    public function setcreatedat($createdat)
+    {
+        $this->created_at=$createdat;
+    }
+
+    public function setusertype($usertype)
+    {
+        $this->usertype=$usertype;
+    }
+
+    public function setnif($nif)
+    {
+        $this->nif=$nif;
+    }
+
+    public function setbirsthday($birsthday)
+    {
+        $this->birsthday=$birsthday;
+    }
+
+    public function setemail($email)
+    {
+        $this->email=$email;
+    }
+
+    public function setphonenumber($phonenumber)
+    {
+        $this->phonenumber=$phonenumber;
+    }
+
+    public function setregistrationdate($registrationdate)
+    {
+        $this->registrationdate=$registrationdate;
     }
 }

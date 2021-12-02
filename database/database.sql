@@ -15,21 +15,25 @@ CREATE TABLE IF NOT EXISTS companies(
 
 CREATE TABLE IF NOT EXISTS user(
 		id INT UNSIGNED AUTO_INCREMENT,
-		username VARCHAR(100) NOT NULL,
-        password_hash TEXT NOT NULL,
+		username VARCHAR(255) NOT NULL,
+        password_hash varchar(255) NOT NULL,
         verification_token TEXT NOT NULL,
-        auth_key TEXT NOT NULL,
-        status INT NOT NULL,
+        password_reset_token varchar(255),
+        auth_key varchar(32) NOT NULL,
+        status smallint(6) NOT NULL default 10,
         updated_at INT NOT NULL,
         created_at INT NOT NULL,
         usertype VARCHAR(100) NOT NULL,
         nif VARCHAR(9) NOT NULL,
 		birsthday DATE NOT NULL,
-        email VARCHAR(100) NOT NULL,
+        email VARCHAR(255) NOT NULL,
         phonenumber VARCHAR(40) NOT NULL,
         registrationdate DATETIME default Current_Timestamp,
 	CONSTRAINT users_id PRIMARY KEY(id),
-	CONSTRAINT uk_users_Nif UNIQUE (nif)
+	CONSTRAINT uk_users_Nif UNIQUE (nif),
+    CONSTRAINT uk_users_user UNIQUE (username),
+	CONSTRAINT uk_users_passwordresettoken UNIQUE (password_reset_token),
+    CONSTRAINT uk_users_email UNIQUE (email)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS contributors(

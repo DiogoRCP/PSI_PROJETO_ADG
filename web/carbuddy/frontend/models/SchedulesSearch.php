@@ -49,6 +49,11 @@ class SchedulesSearch extends Schedules
                 ->where(['userId' => $user->id])
                 ->one();
 
+            if($collaborator==null){
+                Yii::$app->user->logout();
+                return $this->goHome();
+            }
+
             $query = Schedules::find();
         }
         else{

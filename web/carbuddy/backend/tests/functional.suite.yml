@@ -2,4 +2,5 @@ suite_namespace: backend\tests\functional
 actor: FunctionalTester
 modules:
     enabled:
+        - Filesystem
         - Yii2

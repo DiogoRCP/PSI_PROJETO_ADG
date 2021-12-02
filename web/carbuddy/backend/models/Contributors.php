@@ -83,4 +83,22 @@ class Contributors extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Users::className(), ['id' => 'userId']);
     }
+
+
+
+    //Funções e metodos dos testes
+    public function setspeciality($speciality)
+    {
+        $this->speciality=$speciality;
+    }
+
+    public function setcompanyid($companyid)
+    {
+        $this->companyId=$companyid;
+    }
+
+    public function setuserid($userid)
+    {
+        $this->userId=$userid;
+    }
 }

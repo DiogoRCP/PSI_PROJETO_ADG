@@ -133,4 +133,65 @@ class Cars extends \yii\db\ActiveRecord
                 return $this->color;
         }
     }
+
+    //Funções e metodos dos testes
+    public function setvin($vin)
+    {
+        $this->vin=$vin;
+    }
+
+    public function setbrand($brand)
+    {
+        $this->brand=$brand;
+    }
+
+    public function setmodel($model)
+    {
+        $this->model=$model;
+    }
+
+    public function setcolor($color)
+    {
+        $this->color=$color;
+    }
+
+    public function setcartype($cartype)
+    {
+        $this->carType=$cartype;
+    }
+
+    public function setdisplacement($displacement)
+    {
+        $this->displacement=$displacement;
+    }
+
+    public function setfueltype($fueltype)
+    {
+        $this->fuelType=$fueltype;
+    }
+
+    public function setregistration($registration)
+    {
+        $this->registration=$registration;
+    }
+
+    public function setmodelyear($modelyear)
+    {
+        $this->modelyear=$modelyear;
+    }
+
+    public function setkilometers($kilometers)
+    {
+        $this->kilometers=$kilometers;
+    }
+
+    public function setstate($state)
+    {
+        $this->state=$state;
+    }
+
+    public function setuserid($userid)
+    {
+        $this->userId=$userid;
+    }
 }
