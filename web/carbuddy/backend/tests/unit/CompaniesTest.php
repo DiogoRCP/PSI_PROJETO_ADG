@@ -1,10 +1,6 @@
 <?php
 namespace backend\tests;
-
 use backend\models\Companies;
-use Yii;
-
-
 
 class CompaniesTest extends \Codeception\Test\Unit
 {
@@ -39,10 +35,22 @@ class CompaniesTest extends \Codeception\Test\Unit
         $model = Companies::find($id);
 
     }
-    public function testCreateModelWithData()
+    public function testModel()
     {
         $model = new Companies();
-        $post = ["Midas", "Midas@midas.pt",  "912123049", "123123053"];
-        $this->assertTrue($model->load($post), 'Load POST data');
+
+        $model->setname('NomeEmpresa');
+        $this->assertTrue($model->validate(['companyname']));
+
+        $model->setemail('nomeempresa@nome.pt');
+        $this->assertTrue($model->validate(['email']));
+
+        $model->setnif('912912013');
+        $this->assertTrue($model->validate(['nif']));
+
+        $model->setphonenumber('912912013');
+        $this->assertTrue($model->validate(['phonenumber']));
+
+        $model->save();
     }
 }

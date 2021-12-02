@@ -65,4 +65,27 @@ class Companies extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Contributors::className(), ['companyId' => 'id']);
     }
+
+
+    //Funções e metodos dos testes
+    public function setname($name)
+    {
+        $this->companyname=$name;
+    }
+
+    public function setnif($nif)
+    {
+        $this->nif=$nif;
+    }
+
+    public function setemail($email)
+    {
+        $this->email=$email;
+    }
+
+    public function setphonenumber($phonenumber)
+    {
+        $this->phonenumber=$phonenumber;
+    }
+
 }
