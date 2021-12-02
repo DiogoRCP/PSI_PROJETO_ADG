@@ -280,8 +280,6 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
 
     //CRUD Login
-
-
     public void insertLogin(Login login) {
         ContentValues values = new ContentValues();
         values.put("token", login.getToken());

@@ -40,14 +40,16 @@ public class LoginSingleton {
                     public void onResponse(JSONObject response) {
 
                         try {
-                            login = new Login(response.getBoolean("Login"), response.getString("authkey"));
+                            login = new Login(response.getString("authkey"), response.getString("username"),
+                                    response.getString("email"));
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            login = new Login(false, "");
+                            login = new Login("", "","");
                         }
 
                         /* this is gonna be the right way */
                         // login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
