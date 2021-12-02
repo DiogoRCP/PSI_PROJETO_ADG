@@ -1,12 +1,12 @@
 <?php
-namespace backend\tests;
+namespace frontend\tests;
 
-use backend\models\Companies;
+use frontend\models\Companies;
 
 class CompaniesTest extends \Codeception\Test\Unit
 {
     /**
-     * @var \backend\tests\UnitTester
+     * @var \frontend\tests\UnitTester
      */
     protected $tester;
     

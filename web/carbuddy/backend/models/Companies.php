@@ -88,4 +88,9 @@ class Companies extends \yii\db\ActiveRecord
         $this->phonenumber=$phonenumber;
     }
 
+    public function setreistrationdate($date)
+    {
+        $this->registrationdate=$date;
+    }
+
 }
