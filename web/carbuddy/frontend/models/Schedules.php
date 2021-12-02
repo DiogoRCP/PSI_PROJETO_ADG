@@ -80,4 +80,41 @@ class Schedules extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Companies::className(), ['id' => 'companyId']);
     }
+
+
+    //Funções e metodos dos testes
+    public function setcurrentdate($currentdate)
+    {
+        $this->currentdate=$currentdate;
+    }
+
+    public function setschedulingdate($schedulingdate)
+    {
+        $this->schedulingdate=$schedulingdate;
+    }
+
+    public function setrepairdescription($repairdescription)
+    {
+        $this->repairdescription=$repairdescription;
+    }
+
+    public function setstate($state)
+    {
+        $this->state=$state;
+    }
+
+    public function setrepairstype($repairtype)
+    {
+        $this->repairtype=$repairtype;
+    }
+
+    public function setcarid($carid)
+    {
+        $this->carId=$carid;
+    }
+
+    public function setcompanyid($companyid)
+    {
+        $this->companyId=$companyid;
+    }
 }

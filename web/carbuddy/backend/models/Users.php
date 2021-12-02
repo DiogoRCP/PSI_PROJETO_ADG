@@ -103,4 +103,76 @@ class Users extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Contributors::className(), ['userId' => 'id']);
     }
+
+
+    //Funções e metodos dos testes
+    public function setusername($username)
+    {
+        $this->username=$username;
+    }
+
+    public function setpasswordhash($passwordhash)
+    {
+        $this->password_hash=$passwordhash;
+    }
+
+    public function setverificationtoken($verificationtoken)
+    {
+        $this->verification_token=$verificationtoken;
+    }
+
+    public function setpasswordresettoken($passwordresettoken)
+    {
+        $this->password_reset_token=$passwordresettoken;
+    }
+
+    public function setauthkey($authkey)
+    {
+        $this->auth_key=$authkey;
+    }
+
+    public function setstatus($status)
+    {
+        $this->status=$status;
+    }
+
+    public function setupdatedat($updatedat)
+    {
+        $this->updated_at=$updatedat;
+    }
+
+    public function setcreatedat($createdat)
+    {
+        $this->created_at=$createdat;
+    }
+
+    public function setusertype($usertype)
+    {
+        $this->usertype=$usertype;
+    }
+
+    public function setnif($nif)
+    {
+        $this->nif=$nif;
+    }
+
+    public function setbirsthday($birsthday)
+    {
+        $this->birsthday=$birsthday;
+    }
+
+    public function setemail($email)
+    {
+        $this->email=$email;
+    }
+
+    public function setphonenumber($phonenumber)
+    {
+        $this->phonenumber=$phonenumber;
+    }
+
+    public function setregistrationdate($registrationdate)
+    {
+        $this->registrationdate=$registrationdate;
+    }
 }
