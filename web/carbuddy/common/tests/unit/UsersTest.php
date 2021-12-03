@@ -77,9 +77,13 @@ class UsersTest extends \Codeception\Test\Unit
         $model->setphonenumber('912000000');
         $this->assertTrue($model->validate(['phonenumber']));
 
+        //Dado Automático na Base de Dados
         $model->setregistrationdate('2021-12-02 14:50:49');
         $this->assertTrue($model->validate(['registrationdate']));
 
         $model->save();
     }
 }
+
+//Neste teste, não utilizamos o false visto que em ambos o frontend e o backend estão a funcional, tal como também,
+//este é um modelo pré-definido

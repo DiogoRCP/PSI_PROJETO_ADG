@@ -38,12 +38,17 @@ class ContributorsTest extends \Codeception\Test\Unit
     {
         $model = new Contributors();
 
+        $model->setspeciality('');
+        $this->assertFalse($model->validate(['speciality']));
+
         $model->setspeciality('Painter');
         $this->assertTrue($model->validate(['speciality']));
 
+        //Dado que vem da dropdownlist
         $model->setcompanyid('1');
         $this->assertTrue($model->validate(['companyid']));
 
+        //Dado que vem da dropdownlist
         $model->setuserid('1');
         $this->assertTrue($model->validate(['userid']));
 

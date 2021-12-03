@@ -10,4 +10,7 @@
     <string name="CarExample">Car Example</string>
     <string name="Companies">Companies</string>
     <string name="NewAccountTxt">Don\'t have an account?</string>
+    <string name="Account">Account</string>
+    <string name="About">About</string>
+    <string name="Logout">Logout</string>
 </resources>
