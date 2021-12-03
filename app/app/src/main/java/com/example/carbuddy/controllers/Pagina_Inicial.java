@@ -12,6 +12,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -25,12 +26,14 @@ public class Pagina_Inicial extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private Fragment fragment;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_inicial);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
+        getSupportActionBar().setIcon(R.drawable.ic_action_back);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
@@ -48,6 +51,8 @@ public class Pagina_Inicial extends AppCompatActivity {
             //Title bar back press triggers onBackPressed()
             onBackPressed();
             return true;
+        }else{
+            System.out.println("ola");
         }
         return super.onOptionsItemSelected(item);
     }
@@ -100,9 +105,9 @@ public class Pagina_Inicial extends AppCompatActivity {
     }
 
     public void CarregarFragmentoInicial() {
-        fragment = new fragment_schedules();
-        fragmentManager.beginTransaction().
-                replace(R.id.fragmentContainerView, fragment)
+        fragment = new fragment_garage();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
                 .commit();
     }
 
