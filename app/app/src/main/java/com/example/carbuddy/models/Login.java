@@ -2,21 +2,21 @@ package com.example.carbuddy.models;
 
 public class Login {
 
-    private String token, username, email;
+    private String username, email, authkey;
 
-    public Login(String token, String username, String email) {
-        this.token = token;
+    public Login(String authkey, String username, String email) {
+        this.authkey = authkey;
         this.username = username;
         this.email = email;
     }
 
 
     public String getToken() {
-        return token;
+        return authkey;
     }
 
     public void setToken(String token) {
-        this.token = token;
+        this.authkey = token;
     }
 
     public String getUsername() {
@@ -38,7 +38,7 @@ public class Login {
     @Override
     public String toString() {
         return "Login{" +
-                "token='" + token + '\'' +
+                "authkey='" + authkey + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 '}';

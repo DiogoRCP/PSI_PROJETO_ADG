@@ -1,8 +1,10 @@
 package com.example.carbuddy.models;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import android.view.Display;
 
 import com.android.volley.Network;
 import com.android.volley.Request;
@@ -32,7 +34,14 @@ public class CarSingleton {
     }
 
     public CarSingleton(Context context) {
-        CarregarListaCarros(context);
+        ModeloBDHelper database = new ModeloBDHelper(context);
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if(activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            CarregarListaCarros(context);
+        }else{
+            cars.addAll(database.getAllCars());
+        }
     }
 
     private void CarregarListaCarros(Context context) {
@@ -44,12 +53,13 @@ public class CarSingleton {
                     @Override
                     public void onResponse(JSONArray response) {
                         cars = new ArrayList<Car>();
-
+                        ModeloBDHelper database = new ModeloBDHelper(context);
                         for(int i=0;i<response.length();i++){
                             try {
                                 JSONObject resp = response.getJSONObject(i);
                                 Car car = (Car) Json_Objects_Convertor.objectjsonConvert(resp, Car.class);
                                 cars.add(car);
+                                database.insertCars(car);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -58,7 +68,9 @@ public class CarSingleton {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("Error", error.toString());
+                        ModeloBDHelper database = new ModeloBDHelper(context);
+                        cars = new ArrayList<Car>();
+                        cars.addAll(database.getAllCars());
                     }
                 });
 

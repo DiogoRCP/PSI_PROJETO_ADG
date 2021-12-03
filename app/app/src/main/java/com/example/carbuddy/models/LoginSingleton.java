@@ -30,8 +30,7 @@ public class LoginSingleton {
         ModeloBDHelper database = new ModeloBDHelper(context);
         if (database.getAllLogin().size() < 1) {
             apiLogin(context, database, user, pass);
-        }else{
-            System.out.println(database.getAllLogin());
+        } else {
             login = database.getAllLogin().get(0);
         }
     }
@@ -45,19 +44,12 @@ public class LoginSingleton {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        try {
-                            login = new Login(response.getString("authkey"), response.getString("username"),
-                                    response.getString("email"));
-
-                            database.insertLogin(login);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            login = new Login("", "", "");
+                        login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
+                        if(login == null){
+                            login = new Login("","","");
                         }
 
-                        /* this is gonna be the right way */
-                        // login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
+                        database.insertLogin(login);
 
                     }
                 }, new Response.ErrorListener() {

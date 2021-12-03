@@ -70,11 +70,6 @@ public class fragment_garage extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         lstCar = CarSingleton.getInstance(getContext()).getCars();
-
-        ModeloBDHelper database = new ModeloBDHelper(getContext());
-
-        database.insertCars(lstCar.get(0));
-        System.out.println(database.getAllCars().toString());
     }
 
     @Override
