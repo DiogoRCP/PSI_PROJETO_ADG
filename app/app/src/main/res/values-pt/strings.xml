@@ -11,4 +11,7 @@
     <string name="InfoCarro">Informação do carro</string>
     <string name="CarExample">Exemplo de carro</string>
     <string name="NewAccountTxt">Não tem uma conta?</string>
+    <string name="Account">Conta</string>
+    <string name="About">Sobre</string>
+    <string name="Logout">Terminar Sessão</string>
 </resources>
