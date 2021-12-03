@@ -29,6 +29,7 @@ public class LoginSingleton {
     public LoginSingleton(Context context, String user, String pass) {
         ModeloBDHelper database = new ModeloBDHelper(context);
         if (database.getAllLogin().size() < 1) {
+            login = new Login("","","");
             apiLogin(context, database, user, pass);
         } else {
             login = database.getAllLogin().get(0);
@@ -45,10 +46,6 @@ public class LoginSingleton {
                     public void onResponse(JSONObject response) {
 
                         login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
-                        if(login == null){
-                            login = new Login("","","");
-                        }
-
                         database.insertLogin(login);
 
                     }

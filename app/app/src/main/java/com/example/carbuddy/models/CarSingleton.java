@@ -35,9 +35,11 @@ public class CarSingleton {
 
     public CarSingleton(Context context) {
         ModeloBDHelper database = new ModeloBDHelper(context);
+        cars = new ArrayList<Car>();
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if(activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            cars.addAll(database.getAllCars());
             CarregarListaCarros(context);
         }else{
             cars.addAll(database.getAllCars());
@@ -52,18 +54,18 @@ public class CarSingleton {
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        cars = new ArrayList<Car>();
                         ModeloBDHelper database = new ModeloBDHelper(context);
                         for(int i=0;i<response.length();i++){
                             try {
                                 JSONObject resp = response.getJSONObject(i);
                                 Car car = (Car) Json_Objects_Convertor.objectjsonConvert(resp, Car.class);
-                                cars.add(car);
                                 database.insertCars(car);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
+                        cars.clear();
+                        cars.addAll(database.getAllCars());
                     }
                 }, new Response.ErrorListener() {
                     @Override
