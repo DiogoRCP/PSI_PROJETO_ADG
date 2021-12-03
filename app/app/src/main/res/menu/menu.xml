@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/menu_item"
-        android:icon="@drawable/ic_menu"
-        android:menuCategory="container"
-        android:title="menu_item"
-        app:showAsAction="always">
-        <menu></menu>
-    </item>
-    <group>
-        <item android:title="@string/Logout" />
+    <group >
         <item android:title="@string/Account" />
-        <item android:title="@string/Companies" />
+        <item
+            android:actionLayout="@layout/acitivity_companies"
+            android:title="@string/Companies" />
         <item android:title="@string/About" />
+        <item android:title="@string/Logout" />
     </group>
 </menu>
 
