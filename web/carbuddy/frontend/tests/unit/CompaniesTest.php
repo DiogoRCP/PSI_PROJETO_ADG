@@ -62,9 +62,7 @@ class CompaniesTest extends \Codeception\Test\Unit
         $model->setphonenumber('912912013');
         $this->assertTrue($model->validate(['phonenumber']));
 
-        $model->setreistrationdate('2021-11-30 17:19:075555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555');
-        $this->assertTrue($model->validate(['registrationdate']));
-
+        //Data automatica nd bd
         $model->setreistrationdate('2021-11-30 17:19:07');
         $this->assertTrue($model->validate(['registrationdate']));
 
