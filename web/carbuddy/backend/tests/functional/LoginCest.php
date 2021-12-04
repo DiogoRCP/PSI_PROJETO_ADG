@@ -29,5 +29,4 @@ class LoginCest
         $I->fillField('Password', 'password_0');
         $I->click('login-button');
     }
-    
 }
