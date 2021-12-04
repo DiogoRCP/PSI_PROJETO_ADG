@@ -1,7 +1,7 @@
 <?php
-namespace frontend\tests\functional;
-use frontend\tests\FunctionalTester;
-class SignupCest
+namespace backend\tests\functional;
+use backend\tests\FunctionalTester;
+class ContributorsCest
 {
     public function _before(FunctionalTester $I)
     {
