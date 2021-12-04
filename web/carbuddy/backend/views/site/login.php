@@ -14,31 +14,30 @@ $buttonimg = '<svg xmlns="http://www.w3.org/2000/svg" width="48" fill="currentCo
             </svg>';
 
 
+
 ?>
 <div class="site-login">
 
-    <div class="mt-3 offset-lg-3.5 col-lg-6 contentor">
+    <div class="mt-4 offset-lg-3.5 col-lg-5 contentor">
 
-        <img><?= Html::img('../images/logo_white.png', ['class' => 'logo', 'width' => 100]) ?>
+        <img style="padding-left: 5px"><?= Html::img('../images/logo_white.png', ['class' => 'logo', 'width' => 100]) ?>
+
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
 
         <?= $form
             ->field($model, 'username')
-            ->label('username')
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+            ->label('Username')
+            ->textInput(['placeholder' => $model->getAttributeLabel('username'),'class' => 'form-control textform', 'autofocus' => true]) ?>
 
         <?= $form
             ->field($model, 'password')
-            ->label('password')
-            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
+            ->label('Password')
+            ->passwordInput(['placeholder' => $model->getAttributeLabel('password'), 'class' => 'form-control textform']) ?>
 
-        <div class="form-group">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+        <div class="form-group" style="margin-bottom: -10px">
+            <?= Html::submitButton($buttonimg, ['class' => 'btn btn-secondary rounded-circle buttonlogin', 'name' => 'login-button']) ?>
         </div>
         <br>
-
         <?php ActiveForm::end(); ?>
-
-
     </div>
 </div>

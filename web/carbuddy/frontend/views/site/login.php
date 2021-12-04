@@ -19,21 +19,27 @@ $buttonimg = '<svg xmlns="http://www.w3.org/2000/svg" width="48" fill="currentCo
 ?>
 
 <div class="site-login">
-    <div class="mt-3 offset-lg-3.5 col-lg-6 contentor">
-        <img><?= Html::img('../images/logo_white.png', ['class' => 'logo', 'width' => 100]) ?>
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+    <div class="mt-4 offset-lg-3.5 col-lg-5 contentor">
 
-        <?= $form->field($model, 'username')->label(false)->textInput(['class' => 'form-control is-invalid textform', 'autofocus' => true, 'placeholder' => 'Username']) ?>
+        <img style="padding-left: 5px"><?= Html::img('../images/logo_white.png', ['class' => 'logo', 'width' => 100]) ?>
 
-        <?= $form->field($model, 'password')->label(false)->passwordInput(['class' => 'form-control is-invalid textform', 'placeholder' => 'Password']) ?>
+        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
 
-        <?= $form->field($model, 'rememberMe')->checkbox() ?>
+        <?= $form
+            ->field($model, 'username')
+            ->label('Username')
+            ->textInput(['placeholder' => $model->getAttributeLabel('username'),'class' => 'form-control textform', 'autofocus' => true]) ?>
 
-        <div class="form-group">
+        <?= $form
+            ->field($model, 'password')
+            ->label('Password')
+            ->passwordInput(['placeholder' => $model->getAttributeLabel('password'), 'class' => 'form-control textform']) ?>
+
+        <div class="form-group" style="margin-bottom: -10px">
             <?= Html::submitButton($buttonimg, ['class' => 'btn btn-secondary rounded-circle buttonlogin', 'name' => 'login-button']) ?>
         </div>
-
+        <br>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
