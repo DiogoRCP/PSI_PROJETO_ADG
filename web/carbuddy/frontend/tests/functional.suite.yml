@@ -3,4 +3,9 @@ actor: FunctionalTester
 modules:
     enabled:
         - Filesystem
-        - Yii2
+        - Yii2:
+              dsn: 'mysql:host=localhost;dbname=carbuddy'
+              user: 'root'
+              password: ''
+              populate: false
+              cleanup: false
