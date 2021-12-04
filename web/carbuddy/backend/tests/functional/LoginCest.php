@@ -28,5 +28,5 @@ class LoginCest
         $I->fillField('Username', 'erau');
         $I->fillField('Password', 'password_0');
         $I->click('login-button');
-    }
+    } 
 }
