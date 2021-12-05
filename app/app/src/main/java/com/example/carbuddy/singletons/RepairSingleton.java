@@ -1,4 +1,4 @@
-package com.example.carbuddy.models;
+package com.example.carbuddy.singletons;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.models.Repair;
 import com.example.carbuddy.utils.Json_Objects_Convertor;
 
 import org.json.JSONArray;
@@ -35,7 +36,7 @@ public class RepairSingleton {
 
     private void CarregarListaRepairs(Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://10.0.2.2:8080/api/cars/carsuser?access-token="+LoginSingleton.getInstance(context).getLogin().getToken();
+        String url = "http://10.0.2.2:8080/api/cars/carsuser?access-token="+ LoginSingleton.getInstance(context).getLogin().getToken();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {

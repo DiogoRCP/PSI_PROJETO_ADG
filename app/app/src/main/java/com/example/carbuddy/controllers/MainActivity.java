@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.listeners.LoginListener;
-import com.example.carbuddy.models.CompaniesSingleton;
+import com.example.carbuddy.singletons.CompaniesSingleton;
 import com.example.carbuddy.models.Login;
-import com.example.carbuddy.models.LoginSingleton;
+import com.example.carbuddy.singletons.LoginSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
 
 public class MainActivity extends AppCompatActivity implements LoginListener {

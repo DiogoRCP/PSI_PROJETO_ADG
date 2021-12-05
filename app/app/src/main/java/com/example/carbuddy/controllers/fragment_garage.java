@@ -14,7 +14,7 @@ import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
 import com.example.carbuddy.listeners.CarsListener;
 import com.example.carbuddy.models.Car;
-import com.example.carbuddy.models.CarSingleton;
+import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
 
 import java.util.ArrayList;

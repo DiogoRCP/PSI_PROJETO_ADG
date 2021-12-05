@@ -1,7 +1,6 @@
-package com.example.carbuddy.models;
+package com.example.carbuddy.singletons;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -12,6 +11,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.carbuddy.controllers.MainActivity;
 import com.example.carbuddy.listeners.LoginListener;
+import com.example.carbuddy.models.Login;
+import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.utils.Json_Objects_Convertor;
 
 import org.json.JSONObject;
