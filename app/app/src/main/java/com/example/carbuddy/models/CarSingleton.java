@@ -3,17 +3,14 @@ package com.example.carbuddy.models;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
-import android.view.Display;
 
-import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.carbuddy.controllers.Json_Objects_Convertor;
+import com.example.carbuddy.utils.Json_Objects_Convertor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +45,7 @@ public class CarSingleton {
 
     private void CarregarListaCarros(Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://10.0.2.2:8080/api/cars/carsuser?access-token="+LoginSingleton.getInstance(context, "", "").getLogin().getToken();
+        String url = "http://10.0.2.2:8080/api/cars/carsuser?access-token="+LoginSingleton.getInstance(context).getLogin().getToken();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {

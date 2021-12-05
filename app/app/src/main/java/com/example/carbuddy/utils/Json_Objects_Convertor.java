@@ -1,7 +1,9 @@
-package com.example.carbuddy.controllers;
+package com.example.carbuddy.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -80,5 +82,11 @@ public class Json_Objects_Convertor {
             }
         });
         thread.start();
+    }
+
+    public static boolean isInternetConnection(Context context){
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
     }
 }
