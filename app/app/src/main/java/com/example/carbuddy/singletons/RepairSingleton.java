@@ -36,7 +36,7 @@ public class RepairSingleton {
 
     private void CarregarListaRepairs(Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://10.0.2.2:8080/api/cars/carsuser?access-token="+ LoginSingleton.getInstance(context).getLogin().getToken();
+        String url = Json_Objects_Convertor.IP + "cars/carsuser?access-token="+ LoginSingleton.getInstance(context).getLogin().getToken();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {

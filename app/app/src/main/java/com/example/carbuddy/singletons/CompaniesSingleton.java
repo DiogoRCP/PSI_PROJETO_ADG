@@ -33,7 +33,7 @@ public class CompaniesSingleton {
 
     private CompaniesListener companiesListener = null;
 
-    private final String URL = "http://10.0.2.2:8080/api/companieslist";
+    private final String URL = Json_Objects_Convertor.IP + "companieslist";
 
 
     /** Responsável por fazer com que se crie só uma unica vez a instância

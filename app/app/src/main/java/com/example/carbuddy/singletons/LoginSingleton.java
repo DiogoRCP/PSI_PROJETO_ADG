@@ -49,7 +49,7 @@ public class LoginSingleton {
         if (!Json_Objects_Convertor.isInternetConnection(context)) {
             Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
         } else {
-            final String URL_LOGIN = "http://10.0.2.2:8080/api/login/get?username=" + user + "&password=" + pass;
+            final String URL_LOGIN = Json_Objects_Convertor.IP + "login/get?username=" + user + "&password=" + pass;
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.GET,
