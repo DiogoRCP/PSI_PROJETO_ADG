@@ -16,6 +16,8 @@ import java.net.URL;
 
 public class Json_Objects_Convertor {
 
+    public static final String IP = "http://10.0.2.2:8080/api/";
+
     public static String jsonObjectConvert(Object object) {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
@@ -43,7 +45,7 @@ public class Json_Objects_Convertor {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://10.0.2.2:8080/api/" + uri);
+                    URL url = new URL(IP + uri);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
