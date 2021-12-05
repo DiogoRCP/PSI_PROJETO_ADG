@@ -19,10 +19,14 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.listeners.CarsListener;
+import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.CarSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
 
-public class Pagina_Inicial extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class Pagina_Inicial extends AppCompatActivity{
 
     private FragmentManager fragmentManager;
     private Fragment fragment;
@@ -41,8 +45,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             fragmentManager = getSupportFragmentManager();
             CarregarFragmentoInicial();
         }
-        CarregarSingletons();
-        ModeloBDHelper database = new ModeloBDHelper(this);
+
     }
 
     @Override
@@ -117,9 +120,5 @@ public class Pagina_Inicial extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, fragment)
                 .commit();
-    }
-
-    private void CarregarSingletons(){
-        CarSingleton.getInstance(this);
     }
 }

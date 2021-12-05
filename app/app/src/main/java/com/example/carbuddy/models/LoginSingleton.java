@@ -38,38 +38,36 @@ public class LoginSingleton {
     public LoginSingleton(Context context) {
         /** Inicializar variaveis **/
         database = new ModeloBDHelper(context);
+        if (database.getAllLogin().size() > 0) {
+            login = database.getAllLogin().getFirst();
+        }
     }
 
     public void apiLogin(Context context, final String user, final String pass) {
-        /** Verificar se database existe **/
-        if (database.getAllLogin().size() > 0) {
-            login = database.getAllLogin().get(0);
-        }else {
-            /** Verificar se existe internet **/
-            if (!Json_Objects_Convertor.isInternetConnection(context)) {
-                Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
-            } else {
-                final String URL_LOGIN = "http://10.0.2.2:8080/api/login/get?username=" + user + "&password=" + pass;
+        /** Verificar se existe internet **/
+        if (!Json_Objects_Convertor.isInternetConnection(context)) {
+            Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
+        } else {
+            final String URL_LOGIN = "http://10.0.2.2:8080/api/login/get?username=" + user + "&password=" + pass;
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                        (Request.Method.GET,
-                                URL_LOGIN,
-                                null,
-                                new Response.Listener<JSONObject>() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
-                                        loginListener.onValidateLogin(login);
-                                    }
-                                }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(context, "Error: " + error.getMessage(),Toast.LENGTH_SHORT).show();
-                            }
-                        });
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.GET,
+                            URL_LOGIN,
+                            null,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
+                                    loginListener.onValidateLogin(login);
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                volleyQueue.add(jsonObjectRequest);
-            }
+            volleyQueue.add(jsonObjectRequest);
         }
     }
 
@@ -77,7 +75,7 @@ public class LoginSingleton {
         return login;
     }
 
-    public void setLoginListener(MainActivity mainActivity){
+    public void setLoginListener(MainActivity mainActivity) {
         this.loginListener = mainActivity;
     }
 }

@@ -10,6 +10,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.controllers.Pagina_Inicial;
+import com.example.carbuddy.controllers.fragment_garage;
+import com.example.carbuddy.listeners.CarsListener;
+import com.example.carbuddy.listeners.LoginListener;
 import com.example.carbuddy.utils.Json_Objects_Convertor;
 
 import org.json.JSONArray;
@@ -20,49 +24,51 @@ import java.util.ArrayList;
 
 public class CarSingleton {
     ArrayList<Car> cars;
+    ModeloBDHelper database;
 
     private static CarSingleton instancia = null;
+
+    // volley
+    private static RequestQueue volleyQueue = null;
+
+    // listener
+    private CarsListener carsListener = null;
 
     public static synchronized CarSingleton getInstance(Context context) {
         if (instancia == null) {
             instancia = new CarSingleton(context);
+            volleyQueue = Volley.newRequestQueue(context);
         }
         return instancia;
     }
 
     public CarSingleton(Context context) {
-        ModeloBDHelper database = new ModeloBDHelper(context);
+        database = new ModeloBDHelper(context);
         cars = new ArrayList<Car>();
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if(activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            cars.addAll(database.getAllCars());
-            CarregarListaCarros(context);
-        }else{
-            cars.addAll(database.getAllCars());
+        for (Car dbCar: database.getAllCars()) {
+            cars.add(dbCar);
         }
     }
 
-    private void CarregarListaCarros(Context context) {
-        RequestQueue queue = Volley.newRequestQueue(context);
+    public void CarregarListaCarros(Context context) {
+
         String url = "http://10.0.2.2:8080/api/cars/carsuser?access-token="+LoginSingleton.getInstance(context).getLogin().getToken();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        ModeloBDHelper database = new ModeloBDHelper(context);
+                        cars.clear();
                         for(int i=0;i<response.length();i++){
                             try {
                                 JSONObject resp = response.getJSONObject(i);
                                 Car car = (Car) Json_Objects_Convertor.objectjsonConvert(resp, Car.class);
-                                database.insertCars(car);
+                                cars.add(car);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-                        cars.clear();
-                        cars.addAll(database.getAllCars());
+                        carsListener.onRefreshCars(cars);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -73,10 +79,14 @@ public class CarSingleton {
                     }
                 });
 
-        queue.add(jsonArrayRequest);
+        volleyQueue.add(jsonArrayRequest);
     }
 
     public ArrayList<Car> getCars() {
         return cars;
+    }
+
+    public void setCarsListener(fragment_garage fragment){
+        this.carsListener = fragment;
     }
 }
