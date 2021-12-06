@@ -11,7 +11,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.carbuddy.controllers.CompaniesActivity;
-import com.example.carbuddy.controllers.fragment_garage;
 import com.example.carbuddy.listeners.CompaniesListener;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.ModeloBDHelper;
