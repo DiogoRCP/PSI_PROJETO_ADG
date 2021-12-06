@@ -1,31 +1,30 @@
 package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
 import com.example.carbuddy.adapters.CompanyListAdapter;
+import com.example.carbuddy.listeners.CompaniesListener;
 import com.example.carbuddy.models.Car;
-import com.example.carbuddy.models.CarSingleton;
-import com.example.carbuddy.models.CompaniesSingleton;
+import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.singletons.CompaniesSingleton;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.ModeloBDHelper;
 
 import java.util.ArrayList;
 
-public class CompaniesActivity extends AppCompatActivity {
+
+public class CompaniesActivity extends AppCompatActivity implements CompaniesListener {
 
     private RecyclerView myRecyclerView;
     private ArrayList<Company> lstCompany;
+    private ModeloBDHelper database;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +33,16 @@ public class CompaniesActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        database = new ModeloBDHelper(this);
+
+        // Instanciar singleton
+        CompaniesSingleton.getInstance(this).setCompaniesListener(this);
+
+        // Carregar dados da api
+        CompaniesSingleton.getInstance(this).CarregarListaCompanies(this);
+
+        //Carrega os dados do Singleton provenientes da base de dados
         lstCompany = CompaniesSingleton.getInstance(this).getCompanies();
-
-        ModeloBDHelper database = new ModeloBDHelper(this);
-
-        database.insertCompanies(lstCompany.get(0));
-        System.out.println(database.getAllCompanies().toString());
-
 
         myRecyclerView = (RecyclerView) this.findViewById(R.id.RecyclerViewCompanies);
         CompanyListAdapter listaAdapter = new CompanyListAdapter(this, lstCompany);
@@ -58,5 +60,14 @@ public class CompaniesActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRefreshCompanies(ArrayList<Company> companies) {
+        for (Company company: companies) {
+            database.insertCompanies(company);
+        }
+        lstCompany = CompaniesSingleton.getInstance(this).getCompanies();
+        myRecyclerView.setAdapter(new CompanyListAdapter(this, lstCompany));
     }
 }

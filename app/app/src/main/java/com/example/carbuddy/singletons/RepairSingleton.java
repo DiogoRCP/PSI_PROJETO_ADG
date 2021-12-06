@@ -1,4 +1,4 @@
-package com.example.carbuddy.models;
+package com.example.carbuddy.singletons;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,7 +9,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.carbuddy.controllers.Json_Objects_Convertor;
+import com.example.carbuddy.models.Repair;
+import com.example.carbuddy.utils.Json_Objects_Convertor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,37 +18,37 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CompaniesSingleton {
-    ArrayList<Company> companies;
+public class RepairSingleton {
+    ArrayList<Repair> repairs;
 
-    private static CompaniesSingleton instancia = null;
+    private static RepairSingleton instancia = null;
 
-    public static synchronized CompaniesSingleton getInstance(Context context) {
+    public static synchronized RepairSingleton getInstance(Context context) {
         if (instancia == null) {
-            instancia = new CompaniesSingleton(context);
+            instancia = new RepairSingleton(context);
         }
         return instancia;
     }
 
-    public CompaniesSingleton(Context context) {
-        CarregarListaCompanies(context);
+    public RepairSingleton(Context context) {
+        CarregarListaRepairs(context);
     }
 
-    private void CarregarListaCompanies(Context context) {
+    private void CarregarListaRepairs(Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://10.0.2.2:8080/api/companieslist";
+        String url = Json_Objects_Convertor.IP + "cars/carsuser?access-token="+ LoginSingleton.getInstance(context).getLogin().getToken();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        companies = new ArrayList<Company>();
+                        repairs = new ArrayList<Repair>();
 
                         for(int i=0;i<response.length();i++){
                             try {
                                 JSONObject resp = response.getJSONObject(i);
-                                Company company = (Company) Json_Objects_Convertor.objectjsonConvert(resp, Company.class);
-                                companies.add(company);
+                                Repair repair = (Repair) Json_Objects_Convertor.objectjsonConvert(resp, Repair.class);
+                                repairs.add(repair);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -63,7 +64,9 @@ public class CompaniesSingleton {
         queue.add(jsonArrayRequest);
     }
 
-    public ArrayList<Company> getCompanies() {
-        return companies;
+    public ArrayList<Repair> getRepairs() {
+        return repairs;
     }
+
+
 }

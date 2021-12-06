@@ -1,23 +1,13 @@
-package com.example.carbuddy.controllers;
+package com.example.carbuddy.utils;
 
 import android.content.Context;
-import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.carbuddy.models.Car;
-import com.example.carbuddy.models.CarSingleton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
@@ -25,6 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Json_Objects_Convertor {
+
+    public static final String IP = "http://10.0.2.2:8000/api/";
 
     public static String jsonObjectConvert(Object object) {
         GsonBuilder builder = new GsonBuilder();
@@ -53,7 +45,7 @@ public class Json_Objects_Convertor {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://10.0.2.2:8080/api/" + uri);
+                    URL url = new URL(IP + uri);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
@@ -80,5 +72,11 @@ public class Json_Objects_Convertor {
             }
         });
         thread.start();
+    }
+
+    public static boolean isInternetConnection(Context context){
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
     }
 }

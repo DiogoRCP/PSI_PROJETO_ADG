@@ -1,15 +1,10 @@
 package com.example.carbuddy.controllers;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,19 +14,24 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.carbuddy.R;
-import com.example.carbuddy.models.CarSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
+import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.singletons.CompaniesSingleton;
+import com.example.carbuddy.singletons.LoginSingleton;
 
-public class Pagina_Inicial extends AppCompatActivity {
+public class Pagina_Inicial extends AppCompatActivity{
 
     private FragmentManager fragmentManager;
     private Fragment fragment;
+    private Menu menu;
+    private Fragment fragmentOld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_inicial);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
+        getSupportActionBar().setIcon(R.drawable.ic_action_back);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
@@ -39,8 +39,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             fragmentManager = getSupportFragmentManager();
             CarregarFragmentoInicial();
         }
-        CarregarSingletons();
-        ModeloBDHelper database = new ModeloBDHelper(this);
+
     }
 
     @Override
@@ -57,6 +56,8 @@ public class Pagina_Inicial extends AppCompatActivity {
             //Title bar back press triggers onBackPressed()
             onBackPressed();
             return true;
+        }else{
+            System.out.println("ola");
         }
         return super.onOptionsItemSelected(item);
     }
@@ -73,30 +74,54 @@ public class Pagina_Inicial extends AppCompatActivity {
     }
 
     public void onClickGaragem(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fragment = new fragment_garage();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("garage")
-                .commit();
+
+        if (fragment != fragmentOld) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Fragment fragmentOld = fragment;
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("garage")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 
     public void onClickSchedulesAppointment(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fragment = new Schedules_Appointment();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("schedulesappointment")
-                .commit();
+
+        if (fragment != fragmentOld) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Fragment fragmentOld = fragment;
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("schedulesappointment")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 
     public void onClickSchedules(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fragment = new fragment_schedules();
-        fragmentManager.beginTransaction().
-                replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("schedules")
-                .commit();
+
+        if (fragment != fragmentOld) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Fragment fragmentOld = fragment;
+            fragmentManager.beginTransaction().
+                    replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("schedules")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 
     public void onClickCar(View view) {
@@ -109,13 +134,20 @@ public class Pagina_Inicial extends AppCompatActivity {
     }
 
     public void CarregarFragmentoInicial() {
-        fragment = new fragment_schedules();
-        fragmentManager.beginTransaction().
-                replace(R.id.fragmentContainerView, fragment)
+        fragment = new fragment_garage();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
                 .commit();
     }
 
-    private void CarregarSingletons(){
-        CarSingleton.getInstance(this);
+    public void onClickCompaniesMenu(MenuItem item) {
+        Intent companiesView = new Intent(this, CompaniesActivity.class);
+        startActivity(companiesView);
     }
+
+    public void onClickLogoutMenu(MenuItem item) {
+        this.deleteDatabase("carbuddy");
+        this.finish();
+    }
+
 }

@@ -3,7 +3,6 @@ package com.example.carbuddy.controllers;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,15 +12,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.carbuddy.R;
-import com.example.carbuddy.models.CompaniesSingleton;
-import com.example.carbuddy.models.LoginSingleton;
+import com.example.carbuddy.listeners.LoginListener;
+import com.example.carbuddy.singletons.CompaniesSingleton;
+import com.example.carbuddy.models.Login;
+import com.example.carbuddy.singletons.LoginSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoginListener {
 
 
     private EditText editTextUser, editTextPass;
     private String user, pass;
+    private ModeloBDHelper database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
+        LoginSingleton.getInstance(this).setLoginListener(this);
+        database = new ModeloBDHelper(this);
         editTextUser = findViewById(R.id.editTextTextPersonName);
         editTextPass = findViewById(R.id.editTextTextPassword);
 
@@ -79,16 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickLogin(View view) {
-        if (efetuarLogin() == true) {
-
-            LoginSingleton.getInstance(this, user, pass);
-            if (LoginSingleton.getInstance(this, user, pass).getLogin() != null) {
-                Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
-                startActivity(paginaInicial);
-            } else {
-                Toast.makeText(this, "Conta não existente", Toast.LENGTH_SHORT).show();
-                LoginSingleton.setInstancia(null);
-            }
+        if (efetuarLogin()) {
+            LoginSingleton.getInstance(this).apiLogin(this, user, pass);
         }
     }
 
@@ -103,10 +99,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void VerificarLogin(){
-        ModeloBDHelper database = new ModeloBDHelper(this);
         if(database.getAllLogin().size()>0){
             Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
             startActivity(paginaInicial);
+        }
+    }
+
+    @Override
+    public void onValidateLogin(Login login) {
+        if(login.getToken() != null){
+            database.insertLogin(login);
+            Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
+            startActivity(paginaInicial);
+        }else{
+            Toast.makeText(this, "Username or password incorrect", Toast.LENGTH_SHORT).show();
         }
     }
 }

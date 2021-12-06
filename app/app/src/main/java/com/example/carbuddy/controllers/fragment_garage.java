@@ -12,8 +12,9 @@ import android.view.ViewGroup;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
+import com.example.carbuddy.listeners.CarsListener;
 import com.example.carbuddy.models.Car;
-import com.example.carbuddy.models.CarSingleton;
+import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
  * Use the {@link fragment_garage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_garage extends Fragment {
+public class fragment_garage extends Fragment implements CarsListener {
 
 
 
@@ -38,6 +39,7 @@ public class fragment_garage extends Fragment {
     private RecyclerView myRecyclerView;
     private ArrayList<Car> lstCar;
     View v;
+    private static ModeloBDHelper database;
 
     public fragment_garage() {
         // Required empty public constructor
@@ -69,6 +71,14 @@ public class fragment_garage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        database = new ModeloBDHelper(getContext());
+
+        // Instanciar singleton
+        CarSingleton.getInstance(getContext()).setCarsListener(this);
+
+        // Carregar dados da api
+        CarSingleton.getInstance(getContext()).CarregarListaCarros(getContext());
+
         lstCar = CarSingleton.getInstance(getContext()).getCars();
     }
 
@@ -89,4 +99,12 @@ public class fragment_garage extends Fragment {
         return v;
     }
 
+    @Override
+    public void onRefreshCars(ArrayList<Car> cars) {
+        for (Car car: cars) {
+            database.insertCars(car);
+        }
+        lstCar = CarSingleton.getInstance(getContext()).getCars();
+        myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar));
+    }
 }
