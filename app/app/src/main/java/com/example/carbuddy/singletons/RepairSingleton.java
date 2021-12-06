@@ -74,7 +74,7 @@ public class RepairSingleton {
                                     e.printStackTrace();
                                 }
                             }
-                            repairsListener.onRefreshRepairs(repairs);
+                            repairsListener.onRefreshRepair(repairs);
                         }
                     }, new Response.ErrorListener() {
                         @Override
