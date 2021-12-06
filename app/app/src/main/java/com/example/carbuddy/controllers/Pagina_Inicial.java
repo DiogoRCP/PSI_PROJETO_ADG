@@ -24,6 +24,7 @@ public class Pagina_Inicial extends AppCompatActivity{
     private FragmentManager fragmentManager;
     private Fragment fragment;
     private Menu menu;
+    private Fragment fragmentOld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,30 +74,54 @@ public class Pagina_Inicial extends AppCompatActivity{
     }
 
     public void onClickGaragem(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fragment = new fragment_garage();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("garage")
-                .commit();
+
+        if (fragment != fragmentOld) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Fragment fragmentOld = fragment;
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("garage")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 
     public void onClickSchedulesAppointment(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fragment = new Schedules_Appointment();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("schedulesappointment")
-                .commit();
+
+        if (fragment != fragmentOld) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Fragment fragmentOld = fragment;
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("schedulesappointment")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 
     public void onClickSchedules(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fragment = new fragment_schedules();
-        fragmentManager.beginTransaction().
-                replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("schedules")
-                .commit();
+
+        if (fragment != fragmentOld) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Fragment fragmentOld = fragment;
+            fragmentManager.beginTransaction().
+                    replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("schedules")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 
     public void onClickCar(View view) {

@@ -16,7 +16,7 @@ import java.net.URL;
 
 public class Json_Objects_Convertor {
 
-    public static final String IP = "http://10.0.2.2:8080/api/";
+    public static final String IP = "http://10.0.2.2:8000/api/";
 
     public static String jsonObjectConvert(Object object) {
         GsonBuilder builder = new GsonBuilder();
