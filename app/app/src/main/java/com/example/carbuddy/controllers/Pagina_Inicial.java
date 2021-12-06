@@ -14,6 +14,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.models.ModeloBDHelper;
+import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.singletons.CompaniesSingleton;
+import com.example.carbuddy.singletons.LoginSingleton;
 
 public class Pagina_Inicial extends AppCompatActivity{
 
@@ -111,8 +115,14 @@ public class Pagina_Inicial extends AppCompatActivity{
                 .commit();
     }
 
-    //public void onClickCompanies(View view) {
-       // Intent companiesView = new Intent(this, CompaniesActivity.class);
-      //  startActivity(companiesView);
-    //}
+    public void onClickCompaniesMenu(MenuItem item) {
+        Intent companiesView = new Intent(this, CompaniesActivity.class);
+        startActivity(companiesView);
+    }
+
+    public void onClickLogoutMenu(MenuItem item) {
+        this.deleteDatabase("carbuddy");
+        this.finish();
+    }
+
 }

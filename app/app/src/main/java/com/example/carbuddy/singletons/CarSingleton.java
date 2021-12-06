@@ -90,4 +90,5 @@ public class CarSingleton {
     public void setCarsListener(fragment_garage fragment){
         this.carsListener = fragment;
     }
+
 }

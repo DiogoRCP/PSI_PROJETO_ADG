@@ -64,7 +64,9 @@ public class RepairSingleton {
         queue.add(jsonArrayRequest);
     }
 
-    public ArrayList<Repair> getCars() {
+    public ArrayList<Repair> getRepairs() {
         return repairs;
     }
+
+
 }
