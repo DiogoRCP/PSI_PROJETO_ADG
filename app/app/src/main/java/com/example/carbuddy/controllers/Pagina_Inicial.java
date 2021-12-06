@@ -24,7 +24,7 @@ public class Pagina_Inicial extends AppCompatActivity{
     private FragmentManager fragmentManager;
     private Fragment fragment;
     private Menu menu;
-    private Fragment fragmentOld;
+    private int fragmentNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +74,10 @@ public class Pagina_Inicial extends AppCompatActivity{
     }
 
     public void onClickGaragem(View view) {
-        fragment = new fragment_garage();
-
-        if (fragment != fragmentOld) {
+        if (fragmentNumber != 1) {
+            fragment = new fragment_garage();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            Fragment fragmentOld = fragment;
+            fragmentNumber = 1;
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)
                     .addToBackStack("garage")
@@ -91,11 +90,10 @@ public class Pagina_Inicial extends AppCompatActivity{
     }
 
     public void onClickSchedulesAppointment(View view) {
-        fragment = new Schedules_Appointment();
-
-        if (fragment != fragmentOld) {
+        if (fragmentNumber != 2) {
+            fragment = new Schedules_Appointment();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            Fragment fragmentOld = fragment;
+            fragmentNumber = 2;
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)
                     .addToBackStack("schedulesappointment")
@@ -108,11 +106,10 @@ public class Pagina_Inicial extends AppCompatActivity{
     }
 
     public void onClickSchedules(View view) {
-        fragment = new fragment_schedules();
-
-        if (fragment != fragmentOld) {
+        if (fragmentNumber != 3) {
+            fragment = new fragment_schedules();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            Fragment fragmentOld = fragment;
+            fragmentNumber = 3;
             fragmentManager.beginTransaction().
                     replace(R.id.fragmentContainerView, fragment)
                     .addToBackStack("schedules")
@@ -134,6 +131,7 @@ public class Pagina_Inicial extends AppCompatActivity{
     }
 
     public void CarregarFragmentoInicial() {
+        fragmentNumber = 1;
         fragment = new fragment_garage();
         fragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, fragment)
