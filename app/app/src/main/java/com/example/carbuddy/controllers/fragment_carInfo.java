@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.models.Car;
+import com.example.carbuddy.singletons.CarSingleton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +27,8 @@ public class fragment_carInfo extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private int position;
+    private Car car;
 
     public fragment_carInfo() {
         // Required empty public constructor
@@ -54,6 +58,13 @@ public class fragment_carInfo extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            car = CarSingleton.getInstance(getContext()).getCars().get(position);
+        }else{
+            car = null;
         }
     }
 

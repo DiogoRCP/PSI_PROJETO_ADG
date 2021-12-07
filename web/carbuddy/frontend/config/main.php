@@ -154,7 +154,7 @@ return [
                         'PUT put/{id}' => 'put',
                         'DELETE  delete/{id}' => 'delete'
                     ],
-                    'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
+                      'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ]
             ],
         ],
