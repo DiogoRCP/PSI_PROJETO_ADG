@@ -13,7 +13,7 @@ $this->title = 'Signup';
     <div class="row">
         <div class="col-lg-9">
             <h2>Sign Up</h2>
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+            <?php $form = ActiveForm::begin(['id' => 'form-signup', 'enableClientValidation' => false]); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 

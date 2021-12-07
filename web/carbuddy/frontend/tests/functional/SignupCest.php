@@ -8,7 +8,19 @@ class SignupCest
     }
 
     // tests
-    public function tryToTest(FunctionalTester $I)
+
+    /**
+     * @param FunctionalTester $I
+     */
+    public function signupUser(FunctionalTester $I)
     {
+        $I->amOnPage('/site/signup');
+        $I->fillField('Username', 'erau');
+        $I->fillField('Password', 'password_0');
+        $I->fillField('E-mail', 'teste@teste.pt');
+        $I->fillField('NIF', '123123000');
+        $I->fillField('Birthday', '2021-12-06');
+        $I->fillField('Phone Number', '911000111');
+        $I->click('signup-button');
     }
 }
