@@ -86,7 +86,7 @@ public class fragment_carInfo extends Fragment {
             {
                 Fragment fragment = new RepairFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("position", position);
+                bundle.putInt("carId", car.getId());
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainerView, fragment)

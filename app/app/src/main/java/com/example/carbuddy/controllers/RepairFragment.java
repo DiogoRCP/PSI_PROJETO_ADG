@@ -41,6 +41,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
     private ArrayList<Repair> lstRepair;
     View v;
     private static ModeloBDHelper database;
+    private int carId;
 
     public RepairFragment() {
         // Required empty public constructor
@@ -77,9 +78,17 @@ public class RepairFragment extends Fragment implements RepairsListener{
         RepairSingleton.getInstance(getContext()).setRepairsListener(this);
 
         //Carregar os Dados da API
-        RepairSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), 5);
+        RepairSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), carId);
 
         lstRepair = RepairSingleton.getInstance(getContext()).getRepairs();
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            carId = bundle.getInt("carId");
+        }else{
+            carId = 0;
+        }
+
     }
 
     @Override
