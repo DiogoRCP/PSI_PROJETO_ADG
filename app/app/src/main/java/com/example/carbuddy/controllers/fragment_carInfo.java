@@ -64,6 +64,7 @@ public class fragment_carInfo extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
+            position = bundle.getInt("position");
             car = CarSingleton.getInstance(getContext()).getCars().get(position);
         }else{
             car = null;
