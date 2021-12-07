@@ -53,12 +53,12 @@ public class RepairSingleton {
         }
     }
 
-    public void CarregarListaRepairs(Context context) {
+    public void CarregarListaRepairs(Context context, int carId) {
         if (!Json_Objects_Convertor.isInternetConnection(context)) {
             Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = Json_Objects_Convertor.IP + "cars/carsuser?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = Json_Objects_Convertor.IP + "repairs/history/" + carId + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                     (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {

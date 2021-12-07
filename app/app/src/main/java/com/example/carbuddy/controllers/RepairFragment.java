@@ -14,6 +14,7 @@ import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
 import com.example.carbuddy.adapters.RepairListAdapter;
 import com.example.carbuddy.listeners.RepairsListener;
+import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.models.Repair;
 import com.example.carbuddy.singletons.CarSingleton;
@@ -76,7 +77,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
         RepairSingleton.getInstance(getContext()).setRepairsListener(this);
 
         //Carregar os Dados da API
-        RepairSingleton.getInstance(getContext()).CarregarListaRepairs(getContext());
+        RepairSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), 5);
 
         lstRepair = RepairSingleton.getInstance(getContext()).getRepairs();
     }
@@ -100,6 +101,10 @@ public class RepairFragment extends Fragment implements RepairsListener{
 
     @Override
     public void onRefreshRepair(ArrayList<Repair> repairs) {
-
+        for (Repair repair: repairs) {
+            database.insertRepairs(repair);
+        }
+        lstRepair = RepairSingleton.getInstance(getContext()).getRepairs();
+        myRecyclerView.setAdapter(new RepairListAdapter(getContext(), lstRepair));
     }
 }
