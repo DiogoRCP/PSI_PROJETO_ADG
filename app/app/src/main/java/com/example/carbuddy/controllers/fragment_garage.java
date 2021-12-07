@@ -2,6 +2,7 @@ package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -93,7 +94,7 @@ public class fragment_garage extends Fragment implements CarsListener {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_garage, container, false);
         myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclesViewCars);
-        CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), getActivity().getActionBar());
+        CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity)getActivity()).getSupportActionBar());
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaAdapter);
         return v;
@@ -105,6 +106,6 @@ public class fragment_garage extends Fragment implements CarsListener {
             database.insertCars(car);
         }
         lstCar = CarSingleton.getInstance(getContext()).getCars();
-        myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), getActivity().getActionBar()));
+        myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity)getActivity()).getSupportActionBar()));
     }
 }
