@@ -12,19 +12,22 @@ import android.view.ViewGroup;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
-import com.example.carbuddy.listeners.CarsListener;
+import com.example.carbuddy.adapters.RepairListAdapter;
+import com.example.carbuddy.listeners.RepairsListener;
 import com.example.carbuddy.models.Car;
-import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
+import com.example.carbuddy.models.Repair;
+import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.singletons.RepairSingleton;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragment_garage#newInstance} factory method to
+ * Use the {@link RepairFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_garage extends Fragment implements CarsListener {
+public class RepairFragment extends Fragment implements RepairsListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,11 +38,11 @@ public class fragment_garage extends Fragment implements CarsListener {
     private String mParam1;
     private String mParam2;
     private RecyclerView myRecyclerView;
-    private ArrayList<Car> lstCar;
+    private ArrayList<Repair> lstRepair;
     View v;
     private static ModeloBDHelper database;
 
-    public fragment_garage() {
+    public RepairFragment() {
         // Required empty public constructor
     }
 
@@ -49,11 +52,11 @@ public class fragment_garage extends Fragment implements CarsListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_garage.
+     * @return A new instance of fragment RepairFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_garage newInstance(String param1, String param2) {
-        fragment_garage fragment = new fragment_garage();
+    public static RepairFragment newInstance(String param1, String param2) {
+        RepairFragment fragment = new RepairFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,45 +67,44 @@ public class fragment_garage extends Fragment implements CarsListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         database = new ModeloBDHelper(getContext());
 
-        // Instanciar singleton
-        CarSingleton.getInstance(getContext()).setCarsListener(this);
+        //Instanciar a Singleton
+        RepairSingleton.getInstance(getContext()).setRepairsListener(this);
 
-        // Carregar dados da api
-        CarSingleton.getInstance(getContext()).CarregarListaCarros(getContext());
+        //Carregar os Dados da API
+        RepairSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), 5);
 
-        lstCar = CarSingleton.getInstance(getContext()).getCars();
+        lstRepair = RepairSingleton.getInstance(getContext()).getRepairs();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle(R.string.Garage);
+        getActivity().setTitle("Repairs");
 
         // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_garage, container, false);
+        // return inflater.inflate(R.layout.fragment_garage, container, false);
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_garage, container, false);
-        myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclesViewCars);
-        CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar);
+        v = inflater.inflate(R.layout.fragment_repair, container, false);
+        myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewRepairs);
+        RepairListAdapter listaRepairs = new RepairListAdapter(getContext(), lstRepair);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myRecyclerView.setAdapter(listaAdapter);
+        myRecyclerView.setAdapter(listaRepairs);
         return v;
     }
 
     @Override
-    public void onRefreshCars(ArrayList<Car> cars) {
-        for (Car car: cars) {
-            database.insertCars(car);
+    public void onRefreshRepair(ArrayList<Repair> repairs) {
+        for (Repair repair: repairs) {
+            database.insertRepairs(repair);
         }
-        lstCar = CarSingleton.getInstance(getContext()).getCars();
-        myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar));
+        lstRepair = RepairSingleton.getInstance(getContext()).getRepairs();
+        myRecyclerView.setAdapter(new RepairListAdapter(getContext(), lstRepair));
     }
 }

@@ -8,11 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carbuddy.R;
-import com.example.carbuddy.adapters.CarListAdapter;
 import com.example.carbuddy.adapters.CompanyListAdapter;
 import com.example.carbuddy.listeners.CompaniesListener;
-import com.example.carbuddy.models.Car;
-import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.singletons.CompaniesSingleton;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.ModeloBDHelper;
