@@ -24,10 +24,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'color')->input('color', ['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'carType')->dropDownList(['' => '', 'PASSENGER CAR' => 'PASSENGER CAR',
-        'MULTIPURPOSE PASSENGER VEHICLE (MPV)' => 'MULTIPURPOSE PASSENGER VEHICLE (MPV)',
-        'TRUCK ' => 'TRUCK ',
-        'MOTORCYCLE' => 'MOTORCYCLE']) ?>
     <!--'Small' => 'Small',
         'HatchBack' => 'HatchBack', 'SUV' => 'SUV', '4x4' => '4x4', 'Performance' => 'Performance', 'Pick-up' => 'Pick-up'
     ,'Motorcycle'=>'Motorcycle'-->
@@ -44,8 +40,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'kilometers')->input('number') ?>
 
-    <?= $form->field($model, 'state')->dropDownList(['' => '', 'Under Repair' => 'Under Repair', 'Repaired' => 'Repaired', 'To Repair' => 'To Repair', 'Pending' => 'Pending']) ?>
-            
+    <?= $form->field($model, 'carType')->dropDownList(['' => '', 'PASSENGER CAR' => 'PASSENGER CAR',
+        'MULTIPURPOSE PASSENGER VEHICLE (MPV)' => 'MULTIPURPOSE PASSENGER VEHICLE (MPV)',
+        'TRUCK ' => 'TRUCK ',
+        'MOTORCYCLE' => 'MOTORCYCLE']) ?>
 
         </div>
     </div>

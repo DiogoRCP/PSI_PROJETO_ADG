@@ -81,6 +81,7 @@ class CarController extends Controller
 
             //Faz com que assuma e preencha automaticamente o ID do utilizador logado
             $model->userId = Yii::$app->user->getId();
+            $model->state = "Accepted";
 
             if ($this->request->isPost) {
                 if ($model->load($this->request->post()) && $model->save()) {
