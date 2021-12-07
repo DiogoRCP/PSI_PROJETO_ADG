@@ -42,7 +42,7 @@ $this->title = $model->user->username.' ('.$model->brand.' '.$model->model.')';
             'registration',
             'modelyear',
             'kilometers',
-            'state',
+            //'state',
             //'userId',
         ],
     ]) ?>
