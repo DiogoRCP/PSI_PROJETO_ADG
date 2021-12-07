@@ -3,14 +3,21 @@ package com.example.carbuddy.controllers;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.adapters.CarListAdapter;
+import com.example.carbuddy.adapters.RepairListAdapter;
 import com.example.carbuddy.listeners.RepairsListener;
+import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.models.Repair;
+import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.singletons.RepairSingleton;
 
 import java.util.ArrayList;
 
@@ -29,6 +36,10 @@ public class RepairFragment extends Fragment implements RepairsListener{
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView myRecyclerView;
+    private ArrayList<Repair> lstRepair;
+    View v;
+    private static ModeloBDHelper database;
 
     public RepairFragment() {
         // Required empty public constructor
@@ -59,13 +70,32 @@ public class RepairFragment extends Fragment implements RepairsListener{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        database = new ModeloBDHelper(getContext());
+
+        //Instanciar a Singleton
+        RepairSingleton.getInstance(getContext()).setRepairsListener(this);
+
+        //Carregar os Dados da API
+        RepairSingleton.getInstance(getContext()).CarregarListaRepairs(getContext());
+
+        lstRepair = RepairSingleton.getInstance(getContext()).getRepairs();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().setTitle("Repairs");
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_repair, container, false);
+        // return inflater.inflate(R.layout.fragment_garage, container, false);
+        // Inflate the layout for this fragment
+        v = inflater.inflate(R.layout.fragment_repair, container, false);
+        myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewRepairs);
+        RepairListAdapter listaRepairs = new RepairListAdapter(getContext(), lstRepair);
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        myRecyclerView.setAdapter(listaRepairs);
+        return v;
     }
 
     @Override

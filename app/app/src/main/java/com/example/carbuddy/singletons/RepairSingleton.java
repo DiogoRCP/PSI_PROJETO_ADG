@@ -53,7 +53,7 @@ public class RepairSingleton {
         }
     }
 
-    private void CarregarListaRepairs(Context context) {
+    public void CarregarListaRepairs(Context context) {
         if (!Json_Objects_Convertor.isInternetConnection(context)) {
             Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
         } else {
