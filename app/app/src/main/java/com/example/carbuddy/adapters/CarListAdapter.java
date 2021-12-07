@@ -1,7 +1,7 @@
 package com.example.carbuddy.adapters;
-
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,11 +24,13 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
     private Context context;
     private ArrayList<Car> listaCarros;
     private FragmentManager manager;
+    private ActionBar actionbar;
 
-    public CarListAdapter(Context context, ArrayList<Car> listaCarros, FragmentManager manager) {
+    public CarListAdapter(Context context, ArrayList<Car> listaCarros, FragmentManager manager, ActionBar actionBar) {
         this.context = context;
         this.listaCarros = listaCarros;
         this.manager = manager;
+        this.actionbar = actionBar;
     }
 
     @NonNull
@@ -36,7 +38,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(context).inflate(R.layout.item_list_car, parent, false);
-        MyViewHolder vHolder = new MyViewHolder(v, manager);
+        MyViewHolder vHolder = new MyViewHolder(v, manager, actionbar);
         return vHolder;
     }
 
@@ -77,20 +79,25 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         private ImageView imgView;
         Fragment fragment;
         FragmentManager manager;
+        ActionBar actionBar;
 
-        public MyViewHolder(@NonNull View itemView, FragmentManager manager) {
+        public MyViewHolder(@NonNull View itemView, FragmentManager manager, ActionBar actionBar) {
             super(itemView);
             tvRegistration = (TextView) itemView.findViewById(R.id.textViewRegistrationValue);
             tvModel = (TextView) itemView.findViewById(R.id.textViewModelValue);
             imgView = (ImageView) itemView.findViewById(R.id.imgView);
             this.manager = manager;
+            this.actionBar = actionBar;
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
             fragment = new fragment_carInfo();
-            System.out.println(getAdapterPosition());
+            Bundle bundle = new Bundle();
+            bundle.putInt("position", getAdapterPosition());
+            fragment.setArguments(bundle);
             manager.beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)
                     .addToBackStack("infocar")

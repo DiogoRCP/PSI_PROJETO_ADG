@@ -120,16 +120,7 @@ public class Pagina_Inicial extends AppCompatActivity{
                     .commit();
         }
     }
-
-    public void onClickCar(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fragment = new fragment_carInfo();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("infocar")
-                .commit();
-    }
-
+    
     public void CarregarFragmentoInicial() {
         fragmentNumber = 1;
         fragment = new fragment_garage();
