@@ -3,10 +3,12 @@ package com.example.carbuddy.controllers;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.models.Car;
@@ -72,9 +74,25 @@ public class fragment_carInfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle(R.string.InfoCarro);
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_car_info, container, false);
+        getActivity().setTitle(car.getBrand());
+        View view = inflater.inflate(R.layout.fragment_car_info,
+                container, false);
+        Button button = (Button) view.findViewById(R.id.btRepairs);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Fragment fragment = new RepairFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("Repair")
+                        .commit();
+            }
+        });
+        return view;
     }
 }
