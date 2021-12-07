@@ -18,5 +18,10 @@ class ContactCest
         $I->see('Email cannot be blank');
         $I->see('Subject cannot be blank');
         $I->see('Body cannot be blank');
+        $I->fillField('Name', 'erau');
+        $I->fillField('E-mail', 'erau@mail.com');
+        $I->fillField('Subject', 'subject');
+        $I->fillField('Body', 'Message');
+        $I->fillField('Verify Code', '#ADAF$$#');
     }
 }
