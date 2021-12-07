@@ -14,4 +14,15 @@
     <string name="Account">Conta</string>
     <string name="About">Sobre</string>
     <string name="Logout">Terminar Sessão</string>
+    <string name="brand">Marca</string>
+    <string name="model">Modelo</string>
+    <string name="color">Cor</string>
+    <string name="carType">Tipo de carro</string>
+    <string name="displacement">Potência</string>
+    <string name="fuelType">Combustivel</string>
+    <string name="registration">Matricula</string>
+    <string name="modelYear">Ano de modelo</string>
+    <string name="kilometers">Kilometros</string>
+    <string name="state">Estado</string>
+    <string name="repairs">Reparações</string>
 </resources>
