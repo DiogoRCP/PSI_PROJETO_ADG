@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.controllers.RepairFragment;
 import com.example.carbuddy.listeners.RepairsListener;
 import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.ModeloBDHelper;
@@ -85,12 +86,13 @@ public class RepairSingleton {
 
             queue.add(jsonArrayRequest);
         }
+    }
 
-        public ArrayList<Repair> getRepairs() {
+        public ArrayList<Repair> getRepairs(){
             return repairs;
         }
 
-        public void setRepairsListener(RepairsActivity activity){
-            this.repairsListener = activity;
+        public void setRepairsListener(RepairFragment fragment){
+            this.repairsListener = fragment;
         }
     }

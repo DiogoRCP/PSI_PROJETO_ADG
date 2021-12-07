@@ -1,4 +1,4 @@
-package com.example.carbuddy;
+package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
 
@@ -8,12 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.carbuddy.R;
+import com.example.carbuddy.listeners.RepairsListener;
+import com.example.carbuddy.models.Repair;
+
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link RepairFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RepairFragment extends Fragment {
+public class RepairFragment extends Fragment implements RepairsListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +66,10 @@ public class RepairFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_repair, container, false);
+    }
+
+    @Override
+    public void onRefreshRepair(ArrayList<Repair> repairs) {
+
     }
 }
