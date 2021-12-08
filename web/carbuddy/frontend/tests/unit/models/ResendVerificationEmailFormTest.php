@@ -11,7 +11,7 @@ class ResendVerificationEmailFormTest extends Unit
 {
     /**
      * @var \frontend\tests\UnitTester
-     */
+
     protected $tester;
 
 
@@ -82,4 +82,5 @@ class ResendVerificationEmailFormTest extends Unit
         expect($mail->getSubject())->equals('Account registration at ' . \Yii::$app->name);
         expect($mail->toString())->stringContainsString('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
     }
+     * */
 }

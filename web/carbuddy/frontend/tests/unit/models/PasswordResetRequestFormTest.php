@@ -11,7 +11,7 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
 {
     /**
      * @var \frontend\tests\UnitTester
-     */
+
     protected $tester;
 
 
@@ -56,4 +56,5 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
         expect($emailMessage->getTo())->hasKey($model->email);
         expect($emailMessage->getFrom())->hasKey(Yii::$app->params['supportEmail']);
     }
+     * */
 }
