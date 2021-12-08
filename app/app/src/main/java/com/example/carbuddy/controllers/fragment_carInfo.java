@@ -1,5 +1,6 @@
 package com.example.carbuddy.controllers;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.adapters.CarListAdapter;
 import com.example.carbuddy.models.Car;
 import com.example.carbuddy.singletons.CarSingleton;
 
@@ -31,6 +34,8 @@ public class fragment_carInfo extends Fragment {
     private String mParam2;
     private int position;
     private Car car;
+
+    ImageView imageCar;
 
     public fragment_carInfo() {
         // Required empty public constructor
@@ -78,6 +83,10 @@ public class fragment_carInfo extends Fragment {
         getActivity().setTitle(car.getBrand());
         View view = inflater.inflate(R.layout.fragment_car_info,
                 container, false);
+
+        imageCar = view.findViewById(R.id.imageViewCar);
+        chooseTypeColor();
+
         Button button = (Button) view.findViewById(R.id.btRepairs);
         button.setOnClickListener(new View.OnClickListener()
         {
@@ -95,5 +104,23 @@ public class fragment_carInfo extends Fragment {
             }
         });
         return view;
+    }
+
+    private void chooseTypeColor() {
+        switch (car.getCartype()) {
+            case "PASSENGER CAR":
+                imageCar.setImageResource(R.drawable.ic_car);
+                break;
+            case "MOTORCYCLE":
+                imageCar.setImageResource(R.drawable.ic_motorcycle);
+                break;
+            case "MULTIPURPOSE PASSENGER VEHICLE (MPV)":
+                imageCar.setImageResource(R.drawable.ic_mpv);
+                break;
+            case "TRUCK ":
+                imageCar.setImageResource(R.drawable.ic_truck);
+                break;
+        }
+        imageCar.setColorFilter(Color.parseColor(car.getColor()));
     }
 }

@@ -13,16 +13,15 @@
     <string name="Account">Account</string>
     <string name="About">About</string>
     <string name="Logout">Logout</string>
-    <string name="vin" translatable="false">VIN</string>
-    <string name="brand">Brand</string>
-    <string name="model">Model</string>
-    <string name="color">Color</string>
-    <string name="carType">Car Type</string>
-    <string name="displacement">Displacement</string>
-    <string name="fuelType">Fuel Type</string>
-    <string name="registration">Registration</string>
-    <string name="modelYear">Model Year</string>
-    <string name="kilometers">Kilometers</string>
-    <string name="state">State</string>
+    <string name="vin" translatable="false">VIN:</string>
+    <string name="brand">Brand:</string>
+    <string name="model">Model:</string>
+    <string name="color">Color:</string>
+    <string name="carType">Car Type:</string>
+    <string name="displacement">Displacement:</string>
+    <string name="fuelType">Fuel Type:</string>
+    <string name="registration">Registration:</string>
+    <string name="modelYear">Model Year:</string>
+    <string name="kilometers">Kilometers:</string>
     <string name="repairs">Repairs</string>
 </resources>
