@@ -9,7 +9,7 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
 {
     /**
      * @var \frontend\tests\UnitTester
-     */
+
     protected $tester;
 
 
@@ -41,4 +41,5 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
         expect_that($form->resetPassword());
     }
 
+     * */
 }

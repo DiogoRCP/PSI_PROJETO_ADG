@@ -92,6 +92,20 @@ body .site-login .contentor .buttonlogin {
   border-radius: 1.8rem;
 }
 
+.site-contact {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 5rem;
+}
+.site-contact .row {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 1.8rem;
+  justify-content: center;
+  width: 30rem;
+}
+
 .cars-index {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2rem;
