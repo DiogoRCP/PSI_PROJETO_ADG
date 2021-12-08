@@ -12,6 +12,8 @@ class SignupCest
     /**
      * @param FunctionalTester $I
      */
+    //Para este teste não dar erro
+    //É necessário a tabela user da BD estar vazia
     public function signupUser(FunctionalTester $I)
     {
         $I->amOnPage('/site/signup');
