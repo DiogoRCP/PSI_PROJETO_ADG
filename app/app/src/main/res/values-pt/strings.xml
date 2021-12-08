@@ -24,4 +24,5 @@
     <string name="modelYear">Ano de modelo:</string>
     <string name="kilometers">Kilometros:</string>
     <string name="repairs">Reparações:</string>
+    <string name="textViewRepairDate">textview</string>
 </resources>
