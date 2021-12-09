@@ -4,55 +4,163 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/roudedconers">
+    android:layout_margin="16dp"
+    android:background="@drawable/roudedconers"
+    android:padding="8dp"
+    tools:context=".controllers.RepairFragment">
+
+    <TextView
+        android:id="@+id/tVRepairDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/tVRepairDate"
+        android:textSize = "20sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewRepairDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/textViewRepairDate"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltVRepairDate"
+        android:textSize = "16sp"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tVRepairDate" />
+
+
+    <TextView
+        android:id="@+id/tVRepairType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltVRepairType"
+        android:textSize = "20sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRepairDate" />
+
+
 
     <TextView
         android:id="@+id/textViewRepairType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/textViewRepairType"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltextViewRepairType"
+        android:textSize = "16sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tVRepairType" />
+
+
+    <TextView
+        android:id="@+id/tVRepairDescp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/LtvRepairDescp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRepairDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRepairType" />
+
 
     <TextView
         android:id="@+id/textViewRepairDescp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/textViewRepairDescp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltextViewRepairDescp"
+        android:textSize = "16sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tVRepairDescp" />
+
+    <TextView
+        android:id="@+id/tVRepairKm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltVRepairKm"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRepairType" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRepairDescp" />
 
     <TextView
         android:id="@+id/textViewRepairKm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/textViewRepairKm"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltextViewRepairKm"
+        android:textSize = "16sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tVRepairKm" />
+
+    <TextView
+        android:id="@+id/tVRepairState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltVRepairState"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRepairDescp" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRepairKm" />
 
     <TextView
         android:id="@+id/textViewRepairState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/textViewRepairState"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltextViewRepairState"
+        android:textSize = "16sp"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRepairKm" />
+        app:layout_constraintTop_toBottomOf="@+id/tVRepairState" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
