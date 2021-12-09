@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.controllers.AccountFragment;
 import com.example.carbuddy.controllers.MainActivity;
 import com.example.carbuddy.listeners.LoginListener;
 import com.example.carbuddy.models.Login;
@@ -27,6 +28,8 @@ public class LoginSingleton {
 
     // listener
     private LoginListener loginListener = null;
+    private LoginListener AccountFragment = null;
+    private LoginListener loginListenerAccount;
 
     public static synchronized LoginSingleton getInstance(Context context) {
         if (instancia == null) {
@@ -80,4 +83,8 @@ public class LoginSingleton {
     public void setLoginListener(MainActivity mainActivity) {
         this.loginListener = mainActivity;
     }
+    public void setLoginListenerAccount(AccountFragment accountFragment) {
+        this.loginListenerAccount = AccountFragment;
+    }
+
 }
