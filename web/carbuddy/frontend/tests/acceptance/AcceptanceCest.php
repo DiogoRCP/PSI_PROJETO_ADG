@@ -8,6 +8,9 @@ use yii\helpers\Url;
 
 class AcceptanceCest
 {
+    //Para correr estes testes
+    //php yii serve 127.0.0.1:8000 --docroot="frontend/web"
+
     public function checkHome(AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/site/index'));
@@ -18,10 +21,8 @@ class AcceptanceCest
     {
         $I->amOnPage(Url::toRoute('/site/index'));
         $I->see('Carbuddy');
-
-        $I->seeLink('Sign Up');
-        $I->click('Sign Up');
-        $I->wait(2); // wait for page to be opened
+        $I->seeLink('Signup');
+        $I->click('Signup');
         $I->see('Sign up', 'h2');
     }
 
@@ -29,10 +30,8 @@ class AcceptanceCest
     {
         $I->amOnPage(Url::toRoute('/site/index'));
         $I->see('Carbuddy');
-
         $I->seeLink('Login');
         $I->click('Login');
-        $I->wait(2); // wait for page to be opened
         $I->see('Username', 'label');
         $I->see('Password', 'label');
     }
@@ -41,7 +40,6 @@ class AcceptanceCest
     {
         $I->amOnPage(Url::toRoute('/site/about'));
         $I->see('Carbuddy');
-
         $I->see('About', 'h1');
         $I->see('GitHub and Jira', 'h2');
         $I->see('Development of a website for product management by the application manager and mechanics.
