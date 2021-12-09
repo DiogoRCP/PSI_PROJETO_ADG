@@ -40,7 +40,7 @@ public class RepairListAdapter extends RecyclerView.Adapter<RepairListAdapter.My
         holder.textViewRepairDate.setText(listaRepairs.get(position).getRepairDate());
         holder.textViewRepairType.setText(listaRepairs.get(position).getRepairtype());
         holder.textViewRepairDescp.setText(listaRepairs.get(position).getRepairDescription());
-        holder.textViewRepairKm.setText(listaRepairs.get(position).getKilometers());
+        holder.textViewRepairKm.setText(String.valueOf(listaRepairs.get(position).getKilometers()));
         holder.textViewRepairState.setText(listaRepairs.get(position).getState());
     }
 
