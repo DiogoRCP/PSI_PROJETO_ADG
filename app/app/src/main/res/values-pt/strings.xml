@@ -29,4 +29,5 @@
     <string name="LtvRepairDescp">Descrição da Reparação</string>
     <string name="ltVRepairKm">Quilómetro</string>
     <string name="ltVRepairState">Estado da Reparação</string>
+    <string name="Repairs">Reparações</string>
 </resources>

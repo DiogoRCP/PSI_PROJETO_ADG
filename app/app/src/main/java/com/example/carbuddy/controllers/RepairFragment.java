@@ -97,8 +97,8 @@ public class RepairFragment extends Fragment implements RepairsListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle("Repairs");
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Repairs");
+        getActivity().setTitle(getString(R.string.Repairs));
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Repairs);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
 
         // Inflate the layout for this fragment
