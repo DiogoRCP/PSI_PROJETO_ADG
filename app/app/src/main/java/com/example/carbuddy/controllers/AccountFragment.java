@@ -27,6 +27,7 @@ public class AccountFragment extends Fragment implements LoginListenerAccount {
     public void onValidateLogin(Login login) {}
 
     private static Login login;
+    private userPosition;
 
     /**
      * A simple {@link Fragment} subclass.
@@ -91,7 +92,7 @@ public class AccountFragment extends Fragment implements LoginListenerAccount {
         LoginSingleton.getInstance(getContext()).setLoginListenerAccount(this);
 
         //Carregar os Dados da API
-        LoginSingleton.getInstance(getContext()).apiLogin(getContext(), userPosition);
+        LoginSingleton.getInstance(getContext()).apiLogin(getContext(), );
 
         if(LoginSingleton.getInstance(getContext()).getLogin(userPosition) != null) {
             lstAccount = LoginSingleton.getInstance(getContext()).getLogin(userPosition);
@@ -122,7 +123,7 @@ public class AccountFragment extends Fragment implements LoginListenerAccount {
     @Override
     public void onRefreshRepair(ArrayList<Account> accounts) {
         for (Account: accounts) {
-            database.insertRepairs(accounts);
+            database.insertAccount(accounts);
         }
         lstAccount = LoginSingleton.getInstance(getContext()).getLogin(userPosition);
         myRecyclerView.setAdapter(new AccountListAdapter(getContext(), lstAccount));
