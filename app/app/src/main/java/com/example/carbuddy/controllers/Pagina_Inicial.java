@@ -30,6 +30,7 @@ public class Pagina_Inicial extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_inicial);
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
         getSupportActionBar().setIcon(R.drawable.ic_action_back);
 
@@ -57,7 +58,6 @@ public class Pagina_Inicial extends AppCompatActivity{
             onBackPressed();
             return true;
         }else{
-            System.out.println("ola");
         }
         return super.onOptionsItemSelected(item);
     }
@@ -77,6 +77,8 @@ public class Pagina_Inicial extends AppCompatActivity{
         if (fragmentNumber != 1) {
             fragment = new fragment_garage();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.Garage);
+
             fragmentNumber = 1;
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)
@@ -93,6 +95,8 @@ public class Pagina_Inicial extends AppCompatActivity{
         if (fragmentNumber != 2) {
             fragment = new Schedules_Appointment();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.Schedulesappointment);
+
             fragmentNumber = 2;
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)
@@ -109,6 +113,8 @@ public class Pagina_Inicial extends AppCompatActivity{
         if (fragmentNumber != 3) {
             fragment = new fragment_schedules();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.Schedules);
+
             fragmentNumber = 3;
             fragmentManager.beginTransaction().
                     replace(R.id.fragmentContainerView, fragment)
@@ -124,6 +130,9 @@ public class Pagina_Inicial extends AppCompatActivity{
     public void CarregarFragmentoInicial() {
         fragmentNumber = 1;
         fragment = new fragment_garage();
+
+        getSupportActionBar().setTitle(R.string.Garage);
+
         fragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, fragment)
                 .commit();
@@ -138,5 +147,4 @@ public class Pagina_Inicial extends AppCompatActivity{
         this.deleteDatabase("carbuddy");
         this.finish();
     }
-
 }

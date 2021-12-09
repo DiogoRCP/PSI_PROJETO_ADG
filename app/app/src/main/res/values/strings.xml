@@ -13,7 +13,7 @@
     <string name="Account">Account</string>
     <string name="About">About</string>
     <string name="Logout">Logout</string>
-    <string name="vin" translatable="false">VIN:</string>
+    <string name="vin" translatable="false">VIN</string>
     <string name="brand">Brand</string>
     <string name="model">Model</string>
     <string name="color">Color</string>

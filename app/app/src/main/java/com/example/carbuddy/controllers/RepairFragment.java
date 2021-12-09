@@ -2,6 +2,7 @@ package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -97,6 +98,8 @@ public class RepairFragment extends Fragment implements RepairsListener{
                              Bundle savedInstanceState) {
 
         getActivity().setTitle("Repairs");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Repairs");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
 
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_garage, container, false);

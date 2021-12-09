@@ -94,6 +94,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         @Override
         public void onClick(View v) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+
             fragment = new fragment_carInfo();
             Bundle bundle = new Bundle();
             bundle.putInt("position", getAdapterPosition());

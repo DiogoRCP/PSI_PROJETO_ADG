@@ -3,6 +3,7 @@ package com.example.carbuddy.controllers;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -84,8 +85,9 @@ public class fragment_carInfo extends Fragment {
                              Bundle savedInstanceState) {
 
         getActivity().setTitle(car.getBrand());
-        System.out.println(super.getActivity().getActionBar());
-        //getActivity().getActionBar().setSubtitle(car.getModel());
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(car.getBrand());
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(car.getModel());
+
         View view = inflater.inflate(R.layout.fragment_car_info,
                 container, false);
 
