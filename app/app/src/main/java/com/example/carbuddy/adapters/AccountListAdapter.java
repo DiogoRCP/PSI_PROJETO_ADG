@@ -40,7 +40,6 @@ public class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.
     public void onBindViewHolder(@NonNull RepairListAdapter.MyViewHolder holder, int position) {
         holder.textViewAccUserName.setText(listaAccount.get(position).getRepairDate());
         holder.textViewAccuUserPass.setText(listaAccount.get(position).getRepairtype());
-        holder.textViewUserType.setText(listaAccount.get(position).getRepairDescription());
         holder.textViewNif.setText(String.valueOf(listaAccount.get(position).getKilometers()));
         holder.textViewBirthday.setText(listaAccount.get(position).getState());
         holder.textViewPhoneNumber.setText(listaAccount.get(position).getState());
