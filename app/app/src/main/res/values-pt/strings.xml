@@ -24,4 +24,9 @@
     <string name="modelYear">Ano de modelo</string>
     <string name="kilometers">Kilometros</string>
     <string name="repairs">Reparações</string>
+    <string name="tVRepairDate">Data de Reparação:</string>
+    <string name="ltVRepairType">Tipo de Reparação:</string>
+    <string name="LtvRepairDescp">Descrição da Reparação:</string>
+    <string name="ltVRepairKm">Quilómetro:</string>
+    <string name="ltVRepairState">Estado da Reparação:</string>
 </resources>
