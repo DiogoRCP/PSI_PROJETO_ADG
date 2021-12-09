@@ -1,58 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/roudedconers">
+    android:layout_margin="16dp"
+    android:background="@drawable/roudedconers"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".controllers.RepairFragment">
+
+    <TextView
+        android:id="@+id/tVRepairDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/tVRepairDate"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textViewRepairDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/textViewRepairDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/tVRepairType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltVRepairType"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
 
     <TextView
         android:id="@+id/textViewRepairType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="10dp"
-        android:text="@string/textViewRepairType"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRepairDate" />
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/tVRepairDescp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/LtvRepairDescp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
 
     <TextView
         android:id="@+id/textViewRepairDescp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="10dp"
-        android:text="@string/textViewRepairDescp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRepairType" />
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tVRepairKm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltVRepairKm"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textViewRepairKm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="10dp"
-        android:text="@string/textViewRepairKm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRepairDescp" />
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tVRepairState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/worksansbold"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/ltVRepairState"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textViewRepairState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="10dp"
-        android:text="@string/textViewRepairState"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRepairKm" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:fontFamily="@font/worksans"
+        android:lineSpacingExtra="12sp"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+</LinearLayout>

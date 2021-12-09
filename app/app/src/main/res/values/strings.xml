@@ -24,10 +24,10 @@
     <string name="modelYear">Model Year</string>
     <string name="kilometers">Kilometers</string>
     <string name="repairs">Repairs</string>
-    <string name="textViewRepairDate">textview</string>
-    <string name="textViewRepairType" translatable="false">textview</string>
-    <string name="textViewRepairDescp" translatable="false">textview</string>
-    <string name="textViewRepairKm" translatable="false">textview</string>
-    <string name="textViewRepairState" translatable="false">textview</string>
+    <string name="tVRepairDate">Repair Date:</string>
+    <string name="ltVRepairType">Repair Type:</string>
+    <string name="LtvRepairDescp">Repair Description:</string>
+    <string name="ltVRepairKm">Kilometers:</string>
+    <string name="ltVRepairState">Repair State:</string>
 
 </resources>
