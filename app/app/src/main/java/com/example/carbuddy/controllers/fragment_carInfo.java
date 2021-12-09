@@ -84,6 +84,8 @@ public class fragment_carInfo extends Fragment {
                              Bundle savedInstanceState) {
 
         getActivity().setTitle(car.getBrand());
+        System.out.println(super.getActivity().getActionBar());
+        //getActivity().getActionBar().setSubtitle(car.getModel());
         View view = inflater.inflate(R.layout.fragment_car_info,
                 container, false);
 
