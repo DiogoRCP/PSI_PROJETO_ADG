@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextClock;
+import android.widget.TextView;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
@@ -35,7 +37,8 @@ public class fragment_carInfo extends Fragment {
     private int position;
     private Car car;
 
-    ImageView imageCar;
+    private ImageView imageCar;
+    private TextView txtVin, txtRegistration, txtCarType, txtFuelType, txtDisplacement, txtModelYear, txtKilometers;
 
     public fragment_carInfo() {
         // Required empty public constructor
@@ -71,7 +74,7 @@ public class fragment_carInfo extends Fragment {
         if (bundle != null) {
             position = bundle.getInt("position");
             car = CarSingleton.getInstance(getContext()).getCars().get(position);
-        }else{
+        } else {
             car = null;
         }
     }
@@ -85,14 +88,27 @@ public class fragment_carInfo extends Fragment {
                 container, false);
 
         imageCar = view.findViewById(R.id.imageViewCar);
+        txtVin = view.findViewById(R.id.textViewVin);
+        txtRegistration = view.findViewById(R.id.textViewRegistration);
+        txtCarType = view.findViewById(R.id.textViewCarType);
+        txtFuelType = view.findViewById(R.id.textViewFuelType);
+        txtDisplacement = view.findViewById(R.id.textViewDisplacement);
+        txtModelYear = view.findViewById(R.id.textViewModelYear);
+        txtKilometers = view.findViewById(R.id.textViewKilometers);
+
         chooseTypeColor();
+        txtVin.setText(car.getVin());
+        txtRegistration.setText(car.getRegistration());
+        txtCarType.setText(car.getCartype());
+        txtFuelType.setText(car.getFueltype());
+        txtDisplacement.setText(String.valueOf(car.getDisplacement()));
+        txtModelYear.setText(car.getModelyear());
+        txtKilometers.setText(String.valueOf(car.getKilometers()));
 
         Button button = (Button) view.findViewById(R.id.btRepairs);
-        button.setOnClickListener(new View.OnClickListener()
-        {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Fragment fragment = new RepairFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("carPosition", position);
