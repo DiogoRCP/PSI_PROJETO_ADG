@@ -25,7 +25,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createCarsTable =
                 "CREATE TABLE IF NOT EXISTS cars" +
-                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(id INTEGER PRIMARY KEY, " +
                         "vin VARCHAR(100) NOT NULL UNIQUE, " +
                         "brand VARCHAR(100) NOT NULL," +
                         "model VARCHAR(100) NOT NULL," +
@@ -44,8 +44,8 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
         String createSchedulesTable =
                 "CREATE TABLE IF NOT EXISTS schedules" +
-                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "currentdate DATETIME default Current_Timestamp, " +
+                        "(id INTEGER PRIMARY KEY, " +
+                        "currentdate DATETIME NOT NULL, " +
                         "schedulingdate DATETIME NOT NULL, " +
                         "repairdescription VARCHAR(100) NOT NULL, " +
                         "state VARCHAR(100) NOT NULL," +
@@ -59,21 +59,21 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
         String createCompaniesTable =
                 "CREATE TABLE IF NOT EXISTS companies" +
-                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(id INTEGER PRIMARY KEY, " +
                         "companyname VARCHAR(100) NOT NULL," +
                         "nif VARCHAR(9) NOT NULL, " +
                         "email VARCHAR(100) NOT NULL," +
                         "phonenumber VARCHAR(40) NOT NULL," +
-                        "registrationdate DATETIME default Current_Timestamp " +
+                        "registrationdate DATETIME  " +
                         ");";
         db.execSQL(createCompaniesTable);
 
 
         String createRepairsTable =
                 "CREATE TABLE IF NOT EXISTS repairs(" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "id INTEGER PRIMARY KEY," +
                         "kilometers INTEGER NOT NULL," +
-                        "repairdate DATETIME default Current_Timestamp," +
+                        "repairdate DATETIME," +
                         "repairdescription VARCHAR(100) NOT NULL," +
                         "state VARCHAR(100) NOT NULL," +
                         "repairtype VARCHAR(100) NOT NULL," +
@@ -235,7 +235,6 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return schedules;
     }
 
-
     //CRUD Repairs
     public void insertRepairs(Repair repair) {
         ContentValues values = new ContentValues();
@@ -258,10 +257,10 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                 "id = ?", new String[]{"" + repair.getId()}) > 0;
     }
 
-    public LinkedList<Repair> getAllRepairs() {
+    public LinkedList<Repair> getAllRepairs(int carId) {
         LinkedList<Repair> repairs = new LinkedList<>();
-        Cursor cursor = this.database.rawQuery("SELECT * FROM repairs",
-                null);
+        Cursor cursor = this.database.rawQuery("SELECT * FROM repairs WHERE carId = ?",
+                new String[]{String.valueOf(carId)});
         if (cursor.moveToFirst()) {
             do {
                 repairs.add(new Repair(cursor.getInt(0),

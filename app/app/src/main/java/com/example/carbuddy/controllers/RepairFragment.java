@@ -2,6 +2,7 @@ package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,14 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.carbuddy.R;
-import com.example.carbuddy.adapters.CarListAdapter;
 import com.example.carbuddy.adapters.RepairListAdapter;
 import com.example.carbuddy.listeners.RepairsListener;
 import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.models.Repair;
 import com.example.carbuddy.singletons.CarSingleton;
-import com.example.carbuddy.singletons.RepairSingleton;
 
 import java.util.ArrayList;
 
@@ -41,6 +40,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
     private ArrayList<Repair> lstRepair;
     View v;
     private static ModeloBDHelper database;
+    private int carPosition;
 
     public RepairFragment() {
         // Required empty public constructor
@@ -73,20 +73,33 @@ public class RepairFragment extends Fragment implements RepairsListener{
         }
         database = new ModeloBDHelper(getContext());
 
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            carPosition = bundle.getInt("carPosition");
+        }else{
+            carPosition = 0;
+        }
+
         //Instanciar a Singleton
-        RepairSingleton.getInstance(getContext()).setRepairsListener(this);
+        CarSingleton.getInstance(getContext()).setRepairsListener(this);
 
         //Carregar os Dados da API
-        RepairSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), 5);
+        CarSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), carPosition);
 
-        lstRepair = RepairSingleton.getInstance(getContext()).getRepairs();
+        if(CarSingleton.getInstance(getContext()).getRepairs(carPosition) != null) {
+            lstRepair = CarSingleton.getInstance(getContext()).getRepairs(carPosition);
+        }else{
+            lstRepair = new ArrayList<>();
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle("Repairs");
+        getActivity().setTitle(getString(R.string.Repairs));
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Repairs);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
 
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_garage, container, false);
@@ -104,7 +117,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
         for (Repair repair: repairs) {
             database.insertRepairs(repair);
         }
-        lstRepair = RepairSingleton.getInstance(getContext()).getRepairs();
+        lstRepair = CarSingleton.getInstance(getContext()).getRepairs(carPosition);
         myRecyclerView.setAdapter(new RepairListAdapter(getContext(), lstRepair));
     }
 }

@@ -1,14 +1,22 @@
 package com.example.carbuddy.controllers;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextClock;
+import android.widget.TextView;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.adapters.CarListAdapter;
 import com.example.carbuddy.models.Car;
 import com.example.carbuddy.singletons.CarSingleton;
 
@@ -29,6 +37,9 @@ public class fragment_carInfo extends Fragment {
     private String mParam2;
     private int position;
     private Car car;
+
+    private ImageView imageCar;
+    private TextView txtVin, txtRegistration, txtCarType, txtFuelType, txtDisplacement, txtModelYear, txtKilometers;
 
     public fragment_carInfo() {
         // Required empty public constructor
@@ -62,8 +73,9 @@ public class fragment_carInfo extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
+            position = bundle.getInt("position");
             car = CarSingleton.getInstance(getContext()).getCars().get(position);
-        }else{
+        } else {
             car = null;
         }
     }
@@ -72,9 +84,63 @@ public class fragment_carInfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle(R.string.InfoCarro);
+        getActivity().setTitle(car.getBrand());
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(car.getBrand());
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(car.getModel());
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_car_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_car_info,
+                container, false);
+
+        imageCar = view.findViewById(R.id.imageViewCar);
+        txtVin = view.findViewById(R.id.textViewVin);
+        txtRegistration = view.findViewById(R.id.textViewRegistration);
+        txtCarType = view.findViewById(R.id.textViewCarType);
+        txtFuelType = view.findViewById(R.id.textViewFuelType);
+        txtDisplacement = view.findViewById(R.id.textViewDisplacement);
+        txtModelYear = view.findViewById(R.id.textViewModelYear);
+        txtKilometers = view.findViewById(R.id.textViewKilometers);
+
+        chooseTypeColor();
+        txtVin.setText(car.getVin());
+        txtRegistration.setText(car.getRegistration());
+        txtCarType.setText(car.getCartype());
+        txtFuelType.setText(car.getFueltype());
+        txtDisplacement.setText(String.valueOf(car.getDisplacement()));
+        txtModelYear.setText(car.getModelyear());
+        txtKilometers.setText(String.valueOf(car.getKilometers()));
+
+        Button button = (Button) view.findViewById(R.id.btRepairs);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new RepairFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("carPosition", position);
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("Repair")
+                        .commit();
+            }
+        });
+        return view;
+    }
+
+    private void chooseTypeColor() {
+        switch (car.getCartype()) {
+            case "PASSENGER CAR":
+                imageCar.setImageResource(R.drawable.ic_car);
+                break;
+            case "MOTORCYCLE":
+                imageCar.setImageResource(R.drawable.ic_motorcycle);
+                break;
+            case "MULTIPURPOSE PASSENGER VEHICLE (MPV)":
+                imageCar.setImageResource(R.drawable.ic_mpv);
+                break;
+            case "TRUCK ":
+                imageCar.setImageResource(R.drawable.ic_truck);
+                break;
+        }
+        imageCar.setColorFilter(Color.parseColor(car.getColor()));
     }
 }

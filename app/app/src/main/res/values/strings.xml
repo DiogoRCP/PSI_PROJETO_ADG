@@ -23,6 +23,12 @@
     <string name="registration">Registration</string>
     <string name="modelYear">Model Year</string>
     <string name="kilometers">Kilometers</string>
-    <string name="state">State</string>
     <string name="repairs">Repairs</string>
+    <string name="tVRepairDate">Repair Date</string>
+    <string name="ltVRepairType">Repair Type</string>
+    <string name="LtvRepairDescp">Repair Description</string>
+    <string name="ltVRepairKm">Kilometers</string>
+    <string name="ltVRepairState">Repair State</string>
+    <string name="Repairs">Repairs</string>
+
 </resources>

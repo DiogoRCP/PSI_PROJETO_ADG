@@ -40,6 +40,8 @@ public class RepairListAdapter extends RecyclerView.Adapter<RepairListAdapter.My
         holder.textViewRepairDate.setText(listaRepairs.get(position).getRepairDate());
         holder.textViewRepairType.setText(listaRepairs.get(position).getRepairtype());
         holder.textViewRepairDescp.setText(listaRepairs.get(position).getRepairDescription());
+        holder.textViewRepairKm.setText(String.valueOf(listaRepairs.get(position).getKilometers()));
+        holder.textViewRepairState.setText(listaRepairs.get(position).getState());
     }
 
     @Override
@@ -49,13 +51,15 @@ public class RepairListAdapter extends RecyclerView.Adapter<RepairListAdapter.My
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView textViewRepairDate, textViewRepairType, textViewRepairDescp;
+        private TextView textViewRepairDate, textViewRepairType, textViewRepairDescp, textViewRepairKm, textViewRepairState;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewRepairDate = (TextView) itemView.findViewById(R.id.textViewRepairDate);
             textViewRepairType = (TextView) itemView.findViewById(R.id.textViewRepairType);
             textViewRepairDescp = (TextView) itemView.findViewById(R.id.textViewRepairDescp);
+            textViewRepairKm = (TextView) itemView.findViewById(R.id.textViewRepairKm);
+            textViewRepairState = (TextView) itemView.findViewById(R.id.textViewRepairState);
         }
     }
 }

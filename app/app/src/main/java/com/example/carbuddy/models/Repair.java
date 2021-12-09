@@ -2,15 +2,15 @@ package com.example.carbuddy.models;
 
 public class Repair {
     private int id, kilometers, carId, contributorId;
-    private String repairDate, repairDescription, state, repairtype;
+    private String repairdate, repairdescription, state, repairtype;
 
-    public Repair(int id, int kilometers, int carId, int contributorId, String repairDate, String repairDescription, String state, String repairtype) {
+    public Repair(int id, int kilometers, int carId, int contributorId, String repairdate, String repairdescription, String state, String repairtype) {
         this.id = id;
         this.kilometers = kilometers;
         this.carId = carId;
         this.contributorId = contributorId;
-        this.repairDate = repairDate;
-        this.repairDescription = repairDescription;
+        this.repairdate = repairdate;
+        this.repairdescription = repairdescription;
         this.state = state;
         this.repairtype = repairtype;
     }
@@ -48,19 +48,19 @@ public class Repair {
     }
 
     public String getRepairDate() {
-        return repairDate;
+        return repairdate;
     }
 
     public void setRepairDate(String repairDate) {
-        this.repairDate = repairDate;
+        this.repairdate = repairDate;
     }
 
     public String getRepairDescription() {
-        return repairDescription;
+        return repairdescription;
     }
 
     public void setRepairDescription(String repairDescription) {
-        this.repairDescription = repairDescription;
+        this.repairdescription = repairDescription;
     }
 
     public String getState() {
@@ -86,8 +86,8 @@ public class Repair {
                 ", kilometers=" + kilometers +
                 ", carId=" + carId +
                 ", contributorId=" + contributorId +
-                ", repairDate='" + repairDate + '\'' +
-                ", repairDescription='" + repairDescription + '\'' +
+                ", repairDate='" + repairdate + '\'' +
+                ", repairDescription='" + repairdescription + '\'' +
                 ", state='" + state + '\'' +
                 ", repairtype='" + repairtype + '\'' +
                 '}';
