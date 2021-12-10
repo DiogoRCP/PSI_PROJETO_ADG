@@ -8,6 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.SurfaceControl;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -78,6 +82,30 @@ public class fragment_carInfo extends Fragment {
         } else {
             car = null;
         }
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.car_repair, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.bt_repairs_menu:
+            Fragment fragment = new RepairFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("carPosition", position);
+            fragment.setArguments(bundle);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("Repair")
+                    .commit();
+            break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -109,20 +137,6 @@ public class fragment_carInfo extends Fragment {
         txtModelYear.setText(car.getModelyear());
         txtKilometers.setText(String.valueOf(car.getKilometers()));
 
-        Button button = (Button) view.findViewById(R.id.btRepairs);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new RepairFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("carPosition", position);
-                fragment.setArguments(bundle);
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.fragmentContainerView, fragment)
-                        .addToBackStack("Repair")
-                        .commit();
-            }
-        });
         return view;
     }
 

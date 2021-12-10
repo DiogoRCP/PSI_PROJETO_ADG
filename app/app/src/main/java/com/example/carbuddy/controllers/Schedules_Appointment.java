@@ -2,6 +2,7 @@ package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -62,6 +63,8 @@ public class Schedules_Appointment extends Fragment {
                              Bundle savedInstanceState) {
 
         getActivity().setTitle(R.string.Schedulesappointment);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Schedulesappointment);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_schedules__appointment, container, false);

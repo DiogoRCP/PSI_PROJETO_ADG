@@ -29,6 +29,8 @@ public class CompaniesActivity extends AppCompatActivity implements CompaniesLis
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.Companies);
+        getSupportActionBar().setSubtitle(null);
 
         database = new ModeloBDHelper(this);
 
