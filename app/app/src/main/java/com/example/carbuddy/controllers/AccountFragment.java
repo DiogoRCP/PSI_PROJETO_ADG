@@ -14,20 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.AccountListAdapter;
 import com.example.carbuddy.adapters.RepairListAdapter;
-import com.example.carbuddy.listeners.LoginListenerAccount;
+import com.example.carbuddy.listeners.LoginListener;
 import com.example.carbuddy.models.Login;
 import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.singletons.LoginSingleton;
 
 import java.util.ArrayList;
 
-public class AccountFragment extends Fragment implements LoginListenerAccount {
-
-    @Override
-    public void onValidateLogin(Login login) {}
+public class AccountFragment extends Fragment implements LoginListener {
 
     private static Login login;
-    private userPosition;
 
     /**
      * A simple {@link Fragment} subclass.
@@ -43,11 +39,7 @@ public class AccountFragment extends Fragment implements LoginListenerAccount {
         // TODO: Rename and change types of parameters
         private String mParam1;
         private String mParam2;
-        private RecyclerView myRecyclerView;
-        private ArrayList<Account> lstAccount;
-        View v;
         private static ModeloBDHelper database;
-        private int userPosition;
 
         public AccountFragment() {
             // Required empty public constructor
@@ -81,65 +73,36 @@ public class AccountFragment extends Fragment implements LoginListenerAccount {
         }
         database = new ModeloBDHelper(getContext());
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            userPosition = bundle.getInt("userPosition");
-        }else{
-            userPosition = 0;
-        }
 
         //Instanciar a Singleton
         LoginSingleton.getInstance(getContext()).setLoginListenerAccount(this);
 
         //Carregar os Dados da API
-        LoginSingleton.getInstance(getContext()).apiLogin(getContext(), );
+        LoginSingleton.getInstance(getContext()).apiLogin(getContext());
 
-        if(LoginSingleton.getInstance(getContext()).getLogin(userPosition) != null) {
-            lstAccount = LoginSingleton.getInstance(getContext()).getLogin(userPosition);
-        }else{
-            lstAccount = new ArrayList<>();
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle(getString(R.string.Repairs));
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Repairs);
+        View view = inflater.inflate(R.layout.fragment_account,
+                container, false);
+
+
+        getActivity().setTitle(getString(R.string.Account));
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Account);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
 
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_garage, container, false);
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_repair, container, false);
-        myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewRepairs);
-        RepairListAdapter listaAccount = new AccountListAdapter(getContext(), lstAccount);
-        myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myRecyclerView.setAdapter(listaAccount);
-        return v;
+        return view;
     }
 
     @Override
-    public void onRefreshRepair(ArrayList<Account> accounts) {
-        for (Account: accounts) {
-            database.insertAccount(accounts);
-        }
-        lstAccount = LoginSingleton.getInstance(getContext()).getLogin(userPosition);
-        myRecyclerView.setAdapter(new AccountListAdapter(getContext(), lstAccount));
+    public void onValidateLogin(Login login) {
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 

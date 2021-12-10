@@ -10,9 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carbuddy.R;
-import com.example.carbuddy.adapters.RepairListAdapter;
-import com.example.carbuddy.models.Account;
-import com.example.carbuddy.models.Repair;
 
 import java.util.ArrayList;
 
