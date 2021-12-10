@@ -2,6 +2,16 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/bt_apagar_menu_car"
+        android:icon="@drawable/ic_car_delete"
+        android:title="Apagar"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/bt_editar_menu_car"
+        android:icon="@drawable/ic_car_edit"
+        android:title="Editar"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/bt_repairs_menu"
         android:icon="@drawable/ic_car_repair"
         android:title="@string/repairs"
