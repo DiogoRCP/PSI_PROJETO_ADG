@@ -145,4 +145,9 @@ public class Pagina_Inicial extends AppCompatActivity{
         this.deleteDatabase("carbuddy");
         this.finish();
     }
+
+    public void onClickAccountMenu(MenuItem item) {
+        Intent accountView = new Intent(this, AccountFragment.class);
+        startActivity(accountView);
+    }
 }

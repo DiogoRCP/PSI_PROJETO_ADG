@@ -34,7 +34,7 @@ public class AccountFragment extends Fragment implements LoginListener {
         private String mParam2;
         private ModeloBDHelper database;
         private Login login;
-        private TextView textViewAccUserName, textViewAccuUserPass, textViewNif, textViewBirthday, textViewPhoneNumber;
+        private TextView textViewAccUserName, textViewAccEmail, ;
 
         public AccountFragment() {
             // Required empty public constructor
@@ -94,6 +94,11 @@ public class AccountFragment extends Fragment implements LoginListener {
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_garage, container, false);
         // Inflate the layout for this fragment
+
+        textViewAccUserName = view.findViewById(R.id.textViewAccUserName);
+        textViewAccEmail =
+
+
         return view;
     }
 

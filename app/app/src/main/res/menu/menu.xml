@@ -2,7 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group >
-        <item android:title="@string/Account" />
+        <item android:title="@string/Account"
+            android:actionLayout="@layout/fragment_account"
+
+            />
         <item
             android:actionLayout="@layout/acitivity_companies"
             android:onClick="onClickCompaniesMenu"

@@ -30,5 +30,10 @@
     <string name="ltVRepairKm">Kilometers</string>
     <string name="ltVRepairState">Repair State</string>
     <string name="Repairs">Repairs</string>
+    <string name="tVUsername">Username</string>
+    <string name="tVEmail" translatable="false">E-mail</string>
+    <string name="tVNif" translatable="false">NIF</string>
+    <string name="tVBirthday">Birthday</string>
+    <string name="tVPNumber">Phone Number</string>
 
 </resources>

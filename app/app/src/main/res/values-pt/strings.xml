@@ -30,4 +30,7 @@
     <string name="ltVRepairKm">Quilómetro</string>
     <string name="ltVRepairState">Estado da Reparação</string>
     <string name="Repairs">Reparações</string>
+    <string name="tVUsername">Nome de Utilizador</string>
+    <string name="tVBirthday">Data de Nascimento</string>
+    <string name="tVPNumber">Contacto Telefónico</string>
 </resources>
