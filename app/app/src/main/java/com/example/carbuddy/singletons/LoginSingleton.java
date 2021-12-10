@@ -76,6 +76,36 @@ public class LoginSingleton {
         }
     }
 
+    public void apiAccount(Context context) {
+        /** Verificar se existe internet **/
+        if (!Json_Objects_Convertor.isInternetConnection(context)) {
+            Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
+        } else {
+            System.out.println(Json_Objects_Convertor.IP);
+            final String URL_LOGIN = Json_Objects_Convertor.IP + "user/account?access-token=" + this.getLogin().getToken();
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.GET,
+                            URL_LOGIN,
+                            null,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
+                                    loginListener.onValidateLogin(login);
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            volleyQueue.add(jsonObjectRequest);
+        }
+    }
+
+
     public Login getLogin() {
         return login;
     }

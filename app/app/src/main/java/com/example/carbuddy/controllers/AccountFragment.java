@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class AccountFragment extends Fragment implements LoginListener {
 
-    private static Login login;
+
 
     /**
      * A simple {@link Fragment} subclass.
@@ -39,7 +39,8 @@ public class AccountFragment extends Fragment implements LoginListener {
         // TODO: Rename and change types of parameters
         private String mParam1;
         private String mParam2;
-        private static ModeloBDHelper database;
+        private ModeloBDHelper database;
+        private Login login;
 
         public AccountFragment() {
             // Required empty public constructor
@@ -78,8 +79,10 @@ public class AccountFragment extends Fragment implements LoginListener {
         LoginSingleton.getInstance(getContext()).setLoginListenerAccount(this);
 
         //Carregar os Dados da API
-        LoginSingleton.getInstance(getContext()).apiLogin(getContext());
+        LoginSingleton.getInstance(getContext()).apiAccount(getContext());
 
+        //Variavel fica inicialmente carregada com o Singleton
+        login = LoginSingleton.getInstance(getContext()).getLogin();
     }
 
     @Override
@@ -102,6 +105,7 @@ public class AccountFragment extends Fragment implements LoginListener {
 
     @Override
     public void onValidateLogin(Login login) {
+
 
     }
 }
