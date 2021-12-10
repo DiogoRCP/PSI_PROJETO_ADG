@@ -13,7 +13,7 @@ import com.example.carbuddy.R;
 
 import java.util.ArrayList;
 
-public class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.MyViewHolder> {
+/*public class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.MyViewHolder> {
 
     private Context context;
     private ArrayList<Account> listaAccount;
@@ -60,4 +60,4 @@ public class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.
             textViewRepairState = (TextView) itemView.findViewById(R.id.textViewRepairState);
         }
     }
-}
+}*/

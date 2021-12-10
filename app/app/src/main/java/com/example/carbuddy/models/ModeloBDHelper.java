@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.DatePicker;
 
 import java.util.LinkedList;
 
@@ -89,7 +90,10 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                     "CREATE TABLE IF NOT EXISTS login(" +
                             "token TEXT NOT NULL," +
                             "username VARCHAR(100) NOT NULL," +
-                            "email VARCHAR(100) NOT NULL" +
+                            "email VARCHAR(100) NOT NULL," +
+                            "nif VARCHAR(9) NOT NULL," +
+                            "phonenumber VARCHAR(40) NOT NULL," +
+                            "birsthday DATETIME NOT NULL" +
                             ");";
             db.execSQL(createLoginTable);
     }
@@ -278,12 +282,18 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     }
 
 
+
     //CRUD Login
+
     public void insertLogin(Login login) {
         ContentValues values = new ContentValues();
         values.put("token", login.getToken());
         values.put("username", login.getUsername());
         values.put("email", login.getEmail());
+        values.put("nif", login.getNif());
+        values.put("phonenumber", login.getPhonenumber());
+        values.put("birsthday", String.valueOf(login.getBirsthday()));
+    //String.valueOf -> Conversão para String
 
         if (!verificarLogin(login, values)) {
             database.insert("login", null, values);
@@ -303,7 +313,10 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
             do {
                 login.add(new Login(cursor.getString(0),
                         cursor.getString(1),
-                        cursor.getString(2)
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5)
                 ));
             } while (cursor.moveToNext());
         }

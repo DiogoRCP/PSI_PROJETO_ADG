@@ -30,8 +30,5 @@
     <string name="ltVRepairKm">Kilometers</string>
     <string name="ltVRepairState">Repair State</string>
     <string name="Repairs">Repairs</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="Account">Account</string>
 
 </resources>
