@@ -21,7 +21,7 @@
     <string name="displacement">Potência</string>
     <string name="fuelType">Combustivel</string>
     <string name="registration">Matricula</string>
-    <string name="modelYear">Ano de modelo</string>
+    <string name="modelYear">Ano</string>
     <string name="kilometers">Kilometros</string>
     <string name="repairs">Reparações</string>
     <string name="tVRepairDate">Data de Reparação</string>

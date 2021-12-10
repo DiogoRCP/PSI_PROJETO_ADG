@@ -43,7 +43,7 @@ public class fragment_carInfo extends Fragment {
     private Car car;
 
     private ImageView imageCar;
-    private TextView txtVin, txtRegistration, txtCarType, txtFuelType, txtDisplacement, txtModelYear, txtKilometers;
+    private TextView txtVin, txtBrand, txtModel, txtRegistration, txtCarType, txtFuelType, txtDisplacement, txtModelYear, txtKilometers;
 
     public fragment_carInfo() {
         // Required empty public constructor
@@ -112,15 +112,17 @@ public class fragment_carInfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle(car.getBrand());
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(car.getBrand());
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(car.getModel());
+        getActivity().setTitle(R.string.InfoCarro);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.InfoCarro);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
 
         View view = inflater.inflate(R.layout.fragment_car_info,
                 container, false);
 
         imageCar = view.findViewById(R.id.imageViewCar);
         txtVin = view.findViewById(R.id.textViewVin);
+        txtBrand = view.findViewById(R.id.textViewBrand);
+        txtModel = view.findViewById(R.id.textViewModel);
         txtRegistration = view.findViewById(R.id.textViewRegistration);
         txtCarType = view.findViewById(R.id.textViewCarType);
         txtFuelType = view.findViewById(R.id.textViewFuelType);
@@ -129,6 +131,8 @@ public class fragment_carInfo extends Fragment {
         txtKilometers = view.findViewById(R.id.textViewKilometers);
 
         chooseTypeColor();
+        txtBrand.setText(car.getBrand());
+        txtModel.setText(car.getModel());
         txtVin.setText(car.getVin());
         txtRegistration.setText(car.getRegistration());
         txtCarType.setText(car.getCartype());

@@ -21,7 +21,7 @@
     <string name="displacement">Displacement</string>
     <string name="fuelType">Fuel Type</string>
     <string name="registration">Registration</string>
-    <string name="modelYear">Model Year</string>
+    <string name="modelYear">Year</string>
     <string name="kilometers">Kilometers</string>
     <string name="repairs">Repairs</string>
     <string name="tVRepairDate">Repair Date</string>
