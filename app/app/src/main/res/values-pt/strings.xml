@@ -30,4 +30,5 @@
     <string name="ltVRepairKm">Quilómetro</string>
     <string name="ltVRepairState">Estado da Reparação</string>
     <string name="Repairs">Reparações</string>
+    <string name="delete_confirmation">Tem a certeza que deseja apagar este carro?</string>
 </resources>

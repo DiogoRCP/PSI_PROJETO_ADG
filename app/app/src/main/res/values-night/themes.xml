@@ -17,7 +17,6 @@
     </style>
 
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
-        <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">@font/berlinsansfb</item>
     </style>
 

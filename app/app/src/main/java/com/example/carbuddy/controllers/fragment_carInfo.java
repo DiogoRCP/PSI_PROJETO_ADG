@@ -23,6 +23,7 @@ import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
 import com.example.carbuddy.models.Car;
 import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.utils.DeleteConfirmationDialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,15 +96,19 @@ public class fragment_carInfo extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.bt_repairs_menu:
-            Fragment fragment = new RepairFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt("carPosition", position);
-            fragment.setArguments(bundle);
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .addToBackStack("Repair")
-                    .commit();
-            break;
+                Fragment fragment = new RepairFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("carPosition", position);
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("Repair")
+                        .commit();
+                break;
+            case R.id.bt_apagar_menu_car:
+                new DeleteConfirmationDialogFragment().show(
+                        getChildFragmentManager(), DeleteConfirmationDialogFragment.TAG);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -113,8 +118,8 @@ public class fragment_carInfo extends Fragment {
                              Bundle savedInstanceState) {
 
         getActivity().setTitle(R.string.InfoCarro);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.InfoCarro);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.InfoCarro);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         View view = inflater.inflate(R.layout.fragment_car_info,
                 container, false);

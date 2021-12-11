@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/imageViewCar"
         android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:src="@drawable/ic_car"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
