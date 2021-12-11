@@ -35,5 +35,7 @@
     <string name="tVNif" translatable="false">NIF</string>
     <string name="tVBirthday">Birthday</string>
     <string name="tVPNumber">Phone Number</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -16,8 +16,6 @@ import com.example.carbuddy.singletons.LoginSingleton;
 
 public class AccountFragment extends Fragment implements LoginListener {
 
-
-
     /**
      * A simple {@link Fragment} subclass.
      * Use the {@link com.example.carbuddy.controllers.RepairFragment#newInstance} factory method to
@@ -34,7 +32,7 @@ public class AccountFragment extends Fragment implements LoginListener {
         private String mParam2;
         private ModeloBDHelper database;
         private Login login;
-        private TextView textViewAccUserName, textViewAccEmail, ;
+        public TextView textViewAccUserName, textViewAccEmail, textViewNif, textViewBirthday, textViewPhoneNumber;
 
         public AccountFragment() {
             // Required empty public constructor
@@ -83,20 +81,23 @@ public class AccountFragment extends Fragment implements LoginListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_account,
-                container, false);
-
-
         getActivity().setTitle(getString(R.string.Account));
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Account);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
+
+        View view = inflater.inflate(R.layout.fragment_account,
+                container, false);
 
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_garage, container, false);
         // Inflate the layout for this fragment
 
         textViewAccUserName = view.findViewById(R.id.textViewAccUserName);
-        textViewAccEmail =
+        textViewAccEmail = view.findViewById(R.id.textViewAccEmail);
+        textViewNif = view.findViewById(R.id.textViewNif);
+        textViewBirthday = view.findViewById(R.id.textViewBirthday);
+        textViewPhoneNumber = view.findViewById(R.id.textViewPhoneNumber);
+
 
 
         return view;

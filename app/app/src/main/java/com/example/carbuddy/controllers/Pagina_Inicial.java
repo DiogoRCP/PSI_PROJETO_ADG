@@ -40,7 +40,6 @@ public class Pagina_Inicial extends AppCompatActivity{
             fragmentManager = getSupportFragmentManager();
             CarregarFragmentoInicial();
         }
-
     }
 
     @Override
@@ -136,6 +135,11 @@ public class Pagina_Inicial extends AppCompatActivity{
                 .commit();
     }
 
+    public void onClickAccountMenu(MenuItem item) {
+        Intent accountView = new Intent(this, AccountFragment.class);
+        startActivity(accountView);
+    }
+
     public void onClickCompaniesMenu(MenuItem item) {
         Intent companiesView = new Intent(this, CompaniesActivity.class);
         startActivity(companiesView);
@@ -146,8 +150,4 @@ public class Pagina_Inicial extends AppCompatActivity{
         this.finish();
     }
 
-    public void onClickAccountMenu(MenuItem item) {
-        Intent accountView = new Intent(this, AccountFragment.class);
-        startActivity(accountView);
-    }
 }
