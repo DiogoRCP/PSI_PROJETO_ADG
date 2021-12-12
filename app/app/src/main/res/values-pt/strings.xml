@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CarBuddy</string>
     <string name="Companies">Empresas</string>
     <string name="TextViewUser">Utilizador</string>
     <string name="TextViewPassword">Palavra-passe</string>
@@ -8,7 +7,7 @@
     <string name="Signup">Registar</string>
     <string name="Schedules">Marcações</string>
     <string name="Schedulesappointment">Agendar marcações</string>
-    <string name="InfoCarro">Informação do carro</string>
+    <string name="InfoCarro">Veículo</string>
     <string name="CarExample">Exemplo de carro</string>
     <string name="NewAccountTxt">Não tem uma conta?</string>
     <string name="Account">Conta</string>
@@ -31,4 +30,7 @@
     <string name="ltVRepairState">Estado da Reparação</string>
     <string name="Repairs">Reparações</string>
     <string name="delete_confirmation">Tem a certeza que deseja apagar este carro?</string>
+    <string name="Deleted">Apagado</string>
+    <string name="AddVehicle">Veiculo novo</string>
+    <string name="Save">Guardar</string>
 </resources>
