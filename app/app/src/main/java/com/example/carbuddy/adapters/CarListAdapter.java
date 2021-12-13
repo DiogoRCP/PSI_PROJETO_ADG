@@ -46,7 +46,8 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.tvRegistration.setText(listaCarros.get(position).getRegistration());
-        holder.tvModel.setText(listaCarros.get(position).getBrand() + " " + listaCarros.get(position).getModel());
+        holder.tvBrand.setText(listaCarros.get(position).getBrand());
+        holder.tvModel.setText(listaCarros.get(position).getModel());
         chooseTypeColor(holder, position);
     }
 
@@ -75,7 +76,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView tvRegistration, tvModel;
+        private TextView tvRegistration, tvBrand, tvModel;
         private ImageView imgView;
         Fragment fragment;
         FragmentManager manager;
@@ -84,6 +85,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         public MyViewHolder(@NonNull View itemView, FragmentManager manager, ActionBar actionBar) {
             super(itemView);
             tvRegistration = (TextView) itemView.findViewById(R.id.textViewRegistrationValue);
+            tvBrand = (TextView) itemView.findViewById(R.id.textViewBrandValue);
             tvModel = (TextView) itemView.findViewById(R.id.textViewModelValue);
             imgView = (ImageView) itemView.findViewById(R.id.imgView);
             this.manager = manager;

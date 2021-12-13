@@ -155,6 +155,10 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return cars;
     }
 
+    public boolean deleteCar(int id)
+    {
+        return database.delete("cars", "id" + "=?", new String[]{String.valueOf(id)}) > 0;
+    }
 
     //CRUD Companies
     public void insertCompanies(Company company) {

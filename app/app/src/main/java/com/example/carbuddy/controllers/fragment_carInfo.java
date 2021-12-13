@@ -18,18 +18,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
+import com.example.carbuddy.listeners.CarsListener;
+import com.example.carbuddy.listeners.DeleteDialogListener;
 import com.example.carbuddy.models.Car;
+import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.utils.DeleteConfirmationDialogFragment;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link fragment_carInfo#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_carInfo extends Fragment {
+public class fragment_carInfo extends Fragment implements DeleteDialogListener, CarsListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +50,7 @@ public class fragment_carInfo extends Fragment {
     private Car car;
 
     private ImageView imageCar;
-    private TextView txtVin, txtRegistration, txtCarType, txtFuelType, txtDisplacement, txtModelYear, txtKilometers;
+    private TextView txtVin, txtBrand, txtModel, txtRegistration, txtCarType, txtFuelType, txtDisplacement, txtModelYear, txtKilometers;
 
     public fragment_carInfo() {
         // Required empty public constructor
@@ -83,6 +90,8 @@ public class fragment_carInfo extends Fragment {
             car = null;
         }
         setHasOptionsMenu(true);
+
+        CarSingleton.getInstance(getContext()).setDeleteListener(this);
     }
 
     @Override
@@ -95,15 +104,20 @@ public class fragment_carInfo extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.bt_repairs_menu:
-            Fragment fragment = new RepairFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt("carPosition", position);
-            fragment.setArguments(bundle);
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .addToBackStack("Repair")
-                    .commit();
-            break;
+                Fragment fragment = new RepairFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("carPosition", position);
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("Repair")
+                        .commit();
+                break;
+            case R.id.bt_apagar_menu_car:
+                DeleteConfirmationDialogFragment deleteFragment = new DeleteConfirmationDialogFragment();
+                deleteFragment.setDeleteYesListener(this);
+                deleteFragment.show(getChildFragmentManager(), DeleteConfirmationDialogFragment.TAG);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -112,15 +126,17 @@ public class fragment_carInfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle(car.getBrand());
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(car.getBrand());
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(car.getModel());
+        getActivity().setTitle(R.string.InfoCarro);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.InfoCarro);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         View view = inflater.inflate(R.layout.fragment_car_info,
                 container, false);
 
         imageCar = view.findViewById(R.id.imageViewCar);
         txtVin = view.findViewById(R.id.textViewVin);
+        txtBrand = view.findViewById(R.id.textViewBrand);
+        txtModel = view.findViewById(R.id.textViewModel);
         txtRegistration = view.findViewById(R.id.textViewRegistration);
         txtCarType = view.findViewById(R.id.textViewCarType);
         txtFuelType = view.findViewById(R.id.textViewFuelType);
@@ -129,6 +145,8 @@ public class fragment_carInfo extends Fragment {
         txtKilometers = view.findViewById(R.id.textViewKilometers);
 
         chooseTypeColor();
+        txtBrand.setText(car.getBrand());
+        txtModel.setText(car.getModel());
         txtVin.setText(car.getVin());
         txtRegistration.setText(car.getRegistration());
         txtCarType.setText(car.getCartype());
@@ -156,5 +174,32 @@ public class fragment_carInfo extends Fragment {
                 break;
         }
         imageCar.setColorFilter(Color.parseColor(car.getColor()));
+    }
+
+    @Override
+    public void onDeleteYes(int id) {
+        switch (id) {
+            case -1:
+                CarSingleton.getInstance(getContext()).DeleteCar(getContext(), car.getId());
+                break;
+            case -2:
+                // Botão não apagar
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onRefreshCars(ArrayList<Car> cars) {
+
+    }
+
+    @Override
+    public void onDeleteCar() {
+        ModeloBDHelper database = new ModeloBDHelper(getContext());
+        database.deleteCar(car.getId());
+        Toast.makeText(getContext(), car.getBrand()+" "+car.getModel()+" "+R.string.Deleted, Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 }

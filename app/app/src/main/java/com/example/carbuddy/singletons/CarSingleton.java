@@ -9,14 +9,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.carbuddy.controllers.RepairFragment;
+import com.example.carbuddy.controllers.fragment_carInfo;
 import com.example.carbuddy.controllers.fragment_garage;
 import com.example.carbuddy.listeners.CarsListener;
 import com.example.carbuddy.listeners.RepairsListener;
 import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.models.Repair;
+import com.example.carbuddy.utils.DeleteConfirmationDialogFragment;
 import com.example.carbuddy.utils.Json_Objects_Convertor;
 
 import org.json.JSONArray;
@@ -131,6 +134,30 @@ public class CarSingleton {
         }
     }
 
+    public void DeleteCar(Context context, int carId) {
+        if (!Json_Objects_Convertor.isInternetConnection(context)) {
+            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+        } else {
+            RequestQueue queue = Volley.newRequestQueue(context);
+            String url = Json_Objects_Convertor.IP + "cars/" + carId + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.i("Error", error.toString());
+                            carsListener.onDeleteCar();
+                        }
+                    });
+
+            queue.add(jsonObjectRequest);
+        }
+    }
+
     public ArrayList<Car> getCars() {
         return cars;
     }
@@ -147,4 +174,7 @@ public class CarSingleton {
         this.repairsListener = fragment;
     }
 
+    public void setDeleteListener(fragment_carInfo fragment){
+        this.carsListener = fragment;
+    }
 }

@@ -97,6 +97,19 @@ public class fragment_garage extends Fragment implements CarsListener {
         CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity)getActivity()).getSupportActionBar());
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaAdapter);
+
+        v.findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new fragment_form_car();
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("form_car")
+                        .commit();
+            }
+        });
+
         return v;
     }
 
@@ -107,5 +120,20 @@ public class fragment_garage extends Fragment implements CarsListener {
         }
         lstCar = CarSingleton.getInstance(getContext()).getCars();
         myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity)getActivity()).getSupportActionBar()));
+    }
+
+    @Override
+    public void onDeleteCar() {
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        CarSingleton.getInstance(getContext()).setCarsListener(this);
+        // Carregar dados da api
+        CarSingleton.getInstance(getContext()).CarregarListaCarros(getContext());
     }
 }
