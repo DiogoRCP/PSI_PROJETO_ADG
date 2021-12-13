@@ -33,4 +33,6 @@
     <string name="tVUsername">Nome de Utilizador</string>
     <string name="tVBirthday">Data de Nascimento</string>
     <string name="tVPNumber">Contacto Telefónico</string>
+    <string name="delete">Apagar</string>
+    <string name="edit">Editar</string>
 </resources>
