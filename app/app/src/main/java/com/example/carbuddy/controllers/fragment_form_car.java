@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,41 +132,55 @@ public class fragment_form_car extends Fragment {
     }
 
     private void vinSearch(View view) {
-        txtVin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        txtVin.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (!Json_Objects_Convertor.isInternetConnection(getContext())) {
-                        Toast.makeText(getContext(), "No internet", Toast.LENGTH_SHORT).show();
-                    } else {
-                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                                (Request.Method.GET,
-                                        "https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/" + txtVin.getText() + "?format=json",
-                                        null, new Response.Listener<JSONObject>() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        try {
-                                            txtBrand.setText(response.getJSONArray("Results").getJSONObject(6).getString("Value"));
-                                            txtModel.setText(response.getJSONArray("Results").getJSONObject(8).getString("Value"));
-                                            txtYear.setText(response.getJSONArray("Results").getJSONObject(9).getString("Value"));
-                                            txtDisplacement.setText(response.getJSONArray("Results").getJSONObject(69).getString("Value"));
-                                            //spCarType.(response.getJSONArray("Results").getJSONObject(13).getString("Value"));
-                                            //spFuelType.(response.getJSONArray("Results").getJSONObject(75).getString("Value"));
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                        volleyQueue.add(jsonObjectRequest);
-                    }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(txtVin.getText().length() == 17){
+                    vinAPI();
                 }
             }
         });
+    }
+
+    private void vinAPI(){
+        if (!Json_Objects_Convertor.isInternetConnection(getContext())) {
+            Toast.makeText(getContext(), "No internet", Toast.LENGTH_SHORT).show();
+        } else {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.GET,
+                            "https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/" + txtVin.getText() + "?format=json",
+                            null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                txtBrand.setText(response.getJSONArray("Results").getJSONObject(6).getString("Value"));
+                                txtModel.setText(response.getJSONArray("Results").getJSONObject(8).getString("Value"));
+                                txtYear.setText(response.getJSONArray("Results").getJSONObject(9).getString("Value"));
+                                txtDisplacement.setText(response.getJSONArray("Results").getJSONObject(69).getString("Value"));
+                                //spCarType.(response.getJSONArray("Results").getJSONObject(13).getString("Value"));
+                                //spFuelType.(response.getJSONArray("Results").getJSONObject(75).getString("Value"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            volleyQueue.add(jsonObjectRequest);
+        }
     }
 }
