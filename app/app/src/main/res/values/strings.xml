@@ -34,6 +34,8 @@
     <string name="Deleted">Deleted</string>
     <string name="AddVehicle">New Vehicle</string>
     <string name="Save">Save</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>

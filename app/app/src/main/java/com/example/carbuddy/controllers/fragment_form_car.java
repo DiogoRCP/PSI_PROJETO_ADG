@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.azeesoft.lib.colorpicker.ColorPickerDialog;
 import com.example.carbuddy.R;
 
 /**
@@ -67,6 +68,23 @@ public class fragment_form_car extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_form_car,
                 container, false);
+
+        ColorPickerDialog colorPickerDialog= ColorPickerDialog.createColorPickerDialog(getContext(), ColorPickerDialog.DARK_THEME);
+        colorPickerDialog.setOnColorPickedListener(new ColorPickerDialog.OnColorPickedListener() {
+            @Override
+            public void onColorPicked(int color, String hexVal) {
+                view.findViewById(R.id.bt_choose_color).setBackgroundColor(color);
+            }
+        });
+
+        colorPickerDialog.hideOpacityBar();
+
+        view.findViewById(R.id.bt_choose_color).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                colorPickerDialog.show();
+            }
+        });
         return view;
     }
 }
