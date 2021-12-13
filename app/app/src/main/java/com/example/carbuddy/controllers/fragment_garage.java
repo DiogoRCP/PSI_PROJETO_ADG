@@ -115,13 +115,11 @@ public class fragment_garage extends Fragment implements CarsListener {
 
     @Override
     public void onRefreshCars(ArrayList<Car> cars) {
-        if (!cars.equals(lstCar)) {
-            for (Car car : cars) {
-                database.insertCars(car);
-            }
-            lstCar = cars;
-            myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity) getActivity()).getSupportActionBar()));
+        for (Car car : cars) {
+            database.insertCars(car);
         }
+        lstCar = cars;
+        myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity) getActivity()).getSupportActionBar()));
     }
 
     @Override

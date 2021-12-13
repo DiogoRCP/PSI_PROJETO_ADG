@@ -158,7 +158,6 @@ public class fragment_form_car extends Fragment {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                         Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                        System.out.println("Ola");
                                     }
                                 });
 
