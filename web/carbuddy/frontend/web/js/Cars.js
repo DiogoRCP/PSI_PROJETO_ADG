@@ -1,4 +1,4 @@
-function SearchCar(vin) {
+SearchCar = (vin) => {
     $.ajax({
         url: `https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}`,
         type: "GET",

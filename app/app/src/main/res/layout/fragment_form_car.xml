@@ -28,7 +28,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/txtVin"
                 style="@android:style/Widget.Material.Light.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName6"
+                android:id="@+id/txtBrand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -51,7 +51,7 @@
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/txtModel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -62,7 +62,7 @@
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextNumberSigned"
+                android:id="@+id/txtYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -74,7 +74,7 @@
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextNumberDecimal"
+                android:id="@+id/txtDisplacement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -86,7 +86,7 @@
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName4"
+                android:id="@+id/txtRegistration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -96,7 +96,7 @@
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextNumberDecimal2"
+                android:id="@+id/txtKilometers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -107,7 +107,7 @@
                 android:textColorHint="#FFFFFF" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/spFuelType"
                 style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 android:spinnerMode="dropdown" />
 
             <Spinner
-                android:id="@+id/spinner3"
+                android:id="@+id/spCarType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/carType_array"
@@ -138,7 +138,7 @@
                 android:textColor="#E8E3D3" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/btAddCar"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
