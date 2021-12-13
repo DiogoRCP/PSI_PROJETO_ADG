@@ -86,15 +86,15 @@ public class fragment_garage extends Fragment implements CarsListener {
                              Bundle savedInstanceState) {
 
         getActivity().setTitle(R.string.Garage);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Garage);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.Garage);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_garage, container, false);
+        // return inflater.inflate(R.layout.fragment_garage, container, false);
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_garage, container, false);
         myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclesViewCars);
-        CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity)getActivity()).getSupportActionBar());
+        CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity) getActivity()).getSupportActionBar());
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaAdapter);
 
@@ -102,7 +102,7 @@ public class fragment_garage extends Fragment implements CarsListener {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new fragment_form_car();
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainerView, fragment)
                         .addToBackStack("form_car")
@@ -115,11 +115,13 @@ public class fragment_garage extends Fragment implements CarsListener {
 
     @Override
     public void onRefreshCars(ArrayList<Car> cars) {
-        for (Car car: cars) {
-            database.insertCars(car);
+        if (!cars.equals(lstCar)) {
+            for (Car car : cars) {
+                database.insertCars(car);
+            }
+            lstCar = cars;
+            myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity) getActivity()).getSupportActionBar()));
         }
-        lstCar = CarSingleton.getInstance(getContext()).getCars();
-        myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity)getActivity()).getSupportActionBar()));
     }
 
     @Override
@@ -130,7 +132,7 @@ public class fragment_garage extends Fragment implements CarsListener {
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         CarSingleton.getInstance(getContext()).setCarsListener(this);
         // Carregar dados da api
