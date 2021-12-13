@@ -24,12 +24,12 @@ public class DeleteConfirmationDialogFragment extends DialogFragment {
         return new AlertDialog.Builder(requireContext())
                 .setTitle("Delete?")
                 .setMessage(getString(R.string.delete_confirmation))
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         deleteListener.onDeleteYes(id);
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.No, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         deleteListener.onDeleteYes(id);
                     }

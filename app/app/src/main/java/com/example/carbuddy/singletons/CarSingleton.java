@@ -54,12 +54,9 @@ public class CarSingleton {
         cars = new ArrayList<>();
         for (Car dbCar: database.getAllCars()) {
             ArrayList<Repair> carRepairs = new ArrayList<>();
-            for(Repair dbRepair: database.getAllRepairs(dbCar.getId())){
-                carRepairs.add(dbRepair);
-            }
+            carRepairs.addAll(database.getAllRepairs(dbCar.getId()));
             dbCar.setRepairs(carRepairs);
             cars.add(dbCar);
-
         }
     }
 

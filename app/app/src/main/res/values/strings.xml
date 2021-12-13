@@ -43,6 +43,8 @@
     <string name="tVPNumber">Phone Number</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>
