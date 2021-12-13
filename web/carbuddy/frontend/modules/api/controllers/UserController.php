@@ -37,7 +37,7 @@ class UserController extends ActiveController
             $Usersmodel = new $this->modelClass;
             $user = $Usersmodel::findOne(Yii::$app->user->getId());
 
-            return [$user];
+            return $user;
         }
         else{
             return self::noPermission;

@@ -23,11 +23,12 @@ class LoginController extends ActiveController
         $type = "frontend";
         if ($loginmodel->load($login) && $loginmodel->login($type)) {
             $user = Yii::$app->user->getIdentity();
-            return [
-                'username' => $user->username,
+            return
+                /*'username' => $user->username,
                 'email' => $user->email,
-                'authkey' => $user->getAuthKey()
-            ];
+                'authkey' => $user->getAuthKey()*/
+                $user
+            ;
         }
 
         return ['Login' => false];
