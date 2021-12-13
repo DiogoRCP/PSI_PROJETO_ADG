@@ -2,12 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group >
-        <item android:title="@string/Account" />
+        <item
+            android:actionLayout="@layout/fragment_account"
+            android:onClick="onClickAccountMenu"
+            android:title="@string/Account"
+            />
         <item
             android:actionLayout="@layout/acitivity_companies"
             android:onClick="onClickCompaniesMenu"
             android:title="@string/Companies" />
+
         <item android:title="@string/About" />
+
         <item
             android:onClick="onClickLogoutMenu"
             android:title="@string/Logout" />

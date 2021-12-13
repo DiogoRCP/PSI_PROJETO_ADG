@@ -40,7 +40,6 @@ public class Pagina_Inicial extends AppCompatActivity{
             fragmentManager = getSupportFragmentManager();
             CarregarFragmentoInicial();
         }
-
     }
 
     @Override
@@ -136,6 +135,15 @@ public class Pagina_Inicial extends AppCompatActivity{
                 .commit();
     }
 
+    public void onClickAccountMenu(MenuItem item) {
+        fragment = new AccountFragment();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .addToBackStack("Account")
+                .commit();
+    }
+
     public void onClickCompaniesMenu(MenuItem item) {
         Intent companiesView = new Intent(this, CompaniesActivity.class);
         startActivity(companiesView);
@@ -145,4 +153,5 @@ public class Pagina_Inicial extends AppCompatActivity{
         this.deleteDatabase("carbuddy");
         this.finish();
     }
+
 }
