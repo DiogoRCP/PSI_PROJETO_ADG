@@ -4,10 +4,10 @@ import android.widget.DatePicker;
 
 public class Login {
 
-    private String username, email, authkey, nif, phonenumber, birsthday;
+    private String username, email, auth_key, nif, phonenumber, birsthday;
 
-    public Login(String authkey, String username, String email, String nif, String phonenumber, String birsthday) {
-        this.authkey = authkey;
+    public Login(String auth_key, String username, String email, String nif, String phonenumber, String birsthday) {
+        this.auth_key = auth_key;
         this.username = username;
         this.email = email;
         this.nif = nif;
@@ -17,11 +17,11 @@ public class Login {
 
 
     public String getToken() {
-        return authkey;
+        return auth_key;
     }
 
     public void setToken(String token) {
-        this.authkey = token;
+        this.auth_key = token;
     }
 
     public String getUsername() {
@@ -69,7 +69,7 @@ public class Login {
         return "Login{" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", authkey='" + authkey + '\'' +
+                ", authkey='" + auth_key + '\'' +
                 ", nif='" + nif + '\'' +
                 ", phonenumber='" + phonenumber + '\'' +
                 ", birsthday=" + birsthday +

@@ -136,8 +136,12 @@ public class Pagina_Inicial extends AppCompatActivity{
     }
 
     public void onClickAccountMenu(MenuItem item) {
-        Intent accountView = new Intent(this, AccountFragment.class);
-        startActivity(accountView);
+        fragment = new AccountFragment();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .addToBackStack("Account")
+                .commit();
     }
 
     public void onClickCompaniesMenu(MenuItem item) {

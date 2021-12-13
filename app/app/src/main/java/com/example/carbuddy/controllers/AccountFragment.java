@@ -2,6 +2,9 @@ package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -75,6 +78,25 @@ public class AccountFragment extends Fragment implements LoginListener {
 
         //Variavel fica inicialmente carregada com o Singleton
         login = LoginSingleton.getInstance(getContext()).getLogin();
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.account, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.bt_acc_edit:
+                break;
+            case R.id.bt_acc_delete:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -98,7 +120,7 @@ public class AccountFragment extends Fragment implements LoginListener {
         textViewBirthday = view.findViewById(R.id.textViewBirthday);
         textViewPhoneNumber = view.findViewById(R.id.textViewPhoneNumber);
 
-
+        updateAccount();
 
         return view;
     }
@@ -110,6 +132,15 @@ public class AccountFragment extends Fragment implements LoginListener {
         //Fazer o update à base de dados
         database.insertLogin(this.login);
 
+        updateAccount();
+    }
+
+    private void updateAccount(){
+        textViewAccUserName.setText(login.getUsername());
+        textViewAccEmail.setText(login.getEmail());
+        textViewNif.setText(login.getNif());
+        textViewBirthday.setText(login.getBirsthday());
+        textViewPhoneNumber.setText(login.getPhonenumber());
     }
 }
 

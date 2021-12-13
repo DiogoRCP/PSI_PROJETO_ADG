@@ -114,7 +114,7 @@ public class LoginSingleton {
         this.loginListener = mainActivity;
     }
     public void setLoginListenerAccount(AccountFragment accountFragment) {
-        this.loginListener = AccountFragment;
+        this.loginListener = accountFragment;
     }
 
 }
