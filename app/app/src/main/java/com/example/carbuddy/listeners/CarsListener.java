@@ -6,5 +6,5 @@ import java.util.ArrayList;
 
 public interface CarsListener {
     void onRefreshCars(final ArrayList<Car> cars);
-    void onDeleteCar();
+    void onDeleteCreateCar();
 }

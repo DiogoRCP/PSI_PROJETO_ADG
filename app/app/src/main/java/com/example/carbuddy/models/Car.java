@@ -6,12 +6,12 @@ import android.graphics.Color;
 import java.util.ArrayList;
 
 public class Car {
-    private int id, kilometers, userId;
-    private String vin, brand, model, color, carType, fuelType, registration, modelyear, state;
+    private int id, kilometers, userId, modelyear;
+    private String vin, brand, model, color, carType, fuelType, registration, state;
     private float displacement;
     private ArrayList<Repair> repairs;
 
-    public Car(int id, String vin, String brand, String model, String color, String carType, float displacement, String fuelType, String registration, String modelyear, int kilometers, String state, int userId) {
+    public Car(int id, String vin, String brand, String model, String color, String carType, float displacement, String fuelType, String registration, int modelyear, int kilometers, String state, int userId) {
         this.id = id;
         this.kilometers = kilometers;
         this.userId = userId;
@@ -27,6 +27,21 @@ public class Car {
         this.displacement = displacement;
 
         this.repairs = new ArrayList<>();
+    }
+
+    /** Construtor sem id e sem UserId **/
+    public Car(String vin, String brand, String model, String color, String carType, float displacement, String fuelType, String registration, int modelyear, int kilometers){
+        this.vin = vin;
+        this.brand = brand;
+        this.model = model;
+        this.color = color;
+        this.carType = carType;
+        this.displacement = displacement;
+        this.fuelType = fuelType;
+        this.registration = registration;
+        this.modelyear = modelyear;
+        this.kilometers = kilometers;
+        this.state = "Accepted";
     }
 
     public int getId() {
@@ -109,11 +124,11 @@ public class Car {
         this.registration = registration;
     }
 
-    public String getModelyear() {
+    public int getModelyear() {
         return modelyear;
     }
 
-    public void setModelyear(String modelyear) {
+    public void setModelyear(int modelyear) {
         this.modelyear = modelyear;
     }
 

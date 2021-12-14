@@ -24,7 +24,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.azeesoft.lib.colorpicker.ColorPickerDialog;
 import com.example.carbuddy.R;
+import com.example.carbuddy.listeners.CarsListener;
+import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.Company;
+import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.utils.Json_Objects_Convertor;
 
 import org.json.JSONArray;
@@ -38,7 +41,7 @@ import java.util.ArrayList;
  * Use the {@link fragment_form_car#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_form_car extends Fragment {
+public class fragment_form_car extends Fragment implements CarsListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,7 +54,9 @@ public class fragment_form_car extends Fragment {
     private EditText txtVin, txtBrand, txtModel, txtYear, txtDisplacement,
             txtRegistration, txtKilometers;
     private Spinner spFuelType, spCarType;
+    ColorPickerDialog colorPickerDialog;
     public static RequestQueue volleyQueue = null;
+    Car car;
 
     public fragment_form_car() {
         // Required empty public constructor
@@ -83,6 +88,7 @@ public class fragment_form_car extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         volleyQueue = Volley.newRequestQueue(getContext());
+        CarSingleton.getInstance(getContext()).setCreateListener(this);
     }
 
     @Override
@@ -99,6 +105,26 @@ public class fragment_form_car extends Fragment {
         findId(view);
         vinSearch(view);
 
+        view.findViewById(R.id.btAddCar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                car = new Car(txtVin.getText().toString(), txtBrand.getText().toString(),
+                        txtModel.getText().toString(), colorPickerDialog.getCurrentColorAsHexa(),
+                        spCarType.getSelectedItem().toString(),
+                        Float.parseFloat(txtDisplacement.getText().toString()),
+                        spFuelType.getSelectedItem().toString(),
+                        txtRegistration.getText().toString(), Integer.parseInt(txtYear.getText().toString()),
+                        Integer.parseInt(txtKilometers.getText().toString()));
+
+                System.out.println(car);
+                try {
+                    CarSingleton.getInstance(getContext()).AddCar(getContext(), car);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         return view;
     }
 
@@ -110,10 +136,15 @@ public class fragment_form_car extends Fragment {
         txtDisplacement = view.findViewById(R.id.txtDisplacement);
         txtRegistration = view.findViewById(R.id.txtRegistration);
         txtKilometers = view.findViewById(R.id.txtKilometers);
+        spCarType = view.findViewById(R.id.spCarType);
+        spFuelType = view.findViewById(R.id.spFuelType);
+
+        spCarType.setSelection(-1);
+        spFuelType.setSelection(-1);
     }
 
     private void ColorPicker(View view) {
-        ColorPickerDialog colorPickerDialog = ColorPickerDialog.createColorPickerDialog(getContext(), ColorPickerDialog.DARK_THEME);
+        colorPickerDialog = ColorPickerDialog.createColorPickerDialog(getContext(), ColorPickerDialog.DARK_THEME);
         colorPickerDialog.setOnColorPickedListener(new ColorPickerDialog.OnColorPickedListener() {
             @Override
             public void onColorPicked(int color, String hexVal) {
@@ -145,14 +176,14 @@ public class fragment_form_car extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(txtVin.getText().length() == 17){
+                if (txtVin.getText().length() == 17) {
                     vinAPI();
                 }
             }
         });
     }
 
-    private void vinAPI(){
+    private void vinAPI() {
         if (!Json_Objects_Convertor.isInternetConnection(getContext())) {
             Toast.makeText(getContext(), "No internet", Toast.LENGTH_SHORT).show();
         } else {
@@ -167,8 +198,36 @@ public class fragment_form_car extends Fragment {
                                 txtModel.setText(response.getJSONArray("Results").getJSONObject(8).getString("Value"));
                                 txtYear.setText(response.getJSONArray("Results").getJSONObject(9).getString("Value"));
                                 txtDisplacement.setText(response.getJSONArray("Results").getJSONObject(69).getString("Value"));
-                                //spCarType.(response.getJSONArray("Results").getJSONObject(13).getString("Value"));
-                                //spFuelType.(response.getJSONArray("Results").getJSONObject(75).getString("Value"));
+
+                                switch (response.getJSONArray("Results").getJSONObject(13).getString("Value")) {
+                                    case "PASSENGER CAR":
+                                        spCarType.setSelection(0);
+                                        break;
+                                    case "MULTIPURPOSE PASSENGER VEHICLE (MPV)":
+                                        spCarType.setSelection(1);
+                                        break;
+                                    case "TRUCK ":
+                                        spCarType.setSelection(2);
+                                        break;
+                                    case "MOTORCYCLE":
+                                        spCarType.setSelection(3);
+                                        break;
+                                }
+
+                                switch (response.getJSONArray("Results").getJSONObject(75).getString("Value")) {
+                                    case "Diesel":
+                                        spFuelType.setSelection(0);
+                                        break;
+                                    case "Hybrid":
+                                        spFuelType.setSelection(1);
+                                        break;
+                                    case "Electric":
+                                        spFuelType.setSelection(2);
+                                        break;
+                                    case "Gasoline":
+                                        spFuelType.setSelection(3);
+                                        break;
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -182,5 +241,16 @@ public class fragment_form_car extends Fragment {
 
             volleyQueue.add(jsonObjectRequest);
         }
+    }
+
+    @Override
+    public void onRefreshCars(ArrayList<Car> cars) {
+
+    }
+
+    @Override
+    public void onDeleteCreateCar() {
+        Toast.makeText(getContext(), car.getBrand()+" "+car.getModel()+" "+getString(R.string.Added), Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 }

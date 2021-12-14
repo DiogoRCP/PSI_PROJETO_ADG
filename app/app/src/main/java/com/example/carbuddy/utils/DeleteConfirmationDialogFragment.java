@@ -22,7 +22,6 @@ public class DeleteConfirmationDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new AlertDialog.Builder(requireContext())
-                .setTitle("Delete?")
                 .setMessage(getString(R.string.delete_confirmation))
                 .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.carbuddy.controllers.RepairFragment;
 import com.example.carbuddy.controllers.fragment_carInfo;
+import com.example.carbuddy.controllers.fragment_form_car;
 import com.example.carbuddy.controllers.fragment_garage;
 import com.example.carbuddy.listeners.CarsListener;
 import com.example.carbuddy.listeners.RepairsListener;
@@ -21,6 +22,7 @@ import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.models.Repair;
 import com.example.carbuddy.utils.DeleteConfirmationDialogFragment;
 import com.example.carbuddy.utils.Json_Objects_Convertor;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -147,7 +149,45 @@ public class CarSingleton {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.i("Error", error.toString());
-                            carsListener.onDeleteCar();
+                            carsListener.onDeleteCreateCar();
+                        }
+                    });
+
+            queue.add(jsonObjectRequest);
+        }
+    }
+
+    public void AddCar(Context context, Car car) throws JSONException {
+        if (!Json_Objects_Convertor.isInternetConnection(context)) {
+            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+        } else {
+            RequestQueue queue = Volley.newRequestQueue(context);
+            String url = Json_Objects_Convertor.IP + "cars/post?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+
+            JSONObject carData = new JSONObject();
+            carData.put("vin", car.getVin());
+            carData.put("brand", car.getBrand());
+            carData.put("model", car.getModel());
+            carData.put("color", car.getColor());
+            carData.put("cartype", car.getCartype());
+            carData.put("fueltype", car.getFueltype());
+            carData.put("registration", car.getRegistration());
+            carData.put("modelyear", car.getModelyear());
+            carData.put("kilometers", car.getKilometers());
+            carData.put("displacement", car.getDisplacement());
+            carData.put("state", car.getState());
+
+            System.out.println(carData);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.POST, url, carData, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            carsListener.onDeleteCreateCar();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.i("Error", error.toString());
                         }
                     });
 
@@ -172,6 +212,10 @@ public class CarSingleton {
     }
 
     public void setDeleteListener(fragment_carInfo fragment){
+        this.carsListener = fragment;
+    }
+
+    public void setCreateListener(fragment_form_car fragment){
         this.carsListener = fragment;
     }
 }

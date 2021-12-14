@@ -127,7 +127,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
     private boolean verificarCar(Car car, ContentValues values) {
         return this.database.update("cars", values,
-                "id = ?", new String[]{"" + car.getId()}) > 0;
+                "id = ? OR vin = ?", new String[]{"" + car.getId(), "" + car.getVin()}) > 0;
     }
 
     public LinkedList<Car> getAllCars() {
@@ -145,7 +145,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         cursor.getFloat(6),
                         cursor.getString(7),
                         cursor.getString(8),
-                        cursor.getString(9),
+                        cursor.getInt(9),
                         cursor.getInt(10),
                         cursor.getString(11),
                         cursor.getInt(12)

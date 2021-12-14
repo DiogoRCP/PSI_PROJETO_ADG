@@ -37,7 +37,7 @@
                 android:hint="@string/vin"
                 android:minHeight="48dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF" />
+                android:textColorHint="#A0A0A0" />
 
             <EditText
                 android:id="@+id/txtBrand"
@@ -48,7 +48,7 @@
                 android:hint="@string/brand"
                 android:minHeight="48dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF" />
+                android:textColorHint="#A0A0A0" />
 
             <EditText
                 android:id="@+id/txtModel"
@@ -59,7 +59,7 @@
                 android:hint="@string/model"
                 android:minHeight="48dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF" />
+                android:textColorHint="#A0A0A0" />
 
             <EditText
                 android:id="@+id/txtYear"
@@ -71,7 +71,7 @@
                 android:inputType="numberSigned"
                 android:minHeight="48dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF" />
+                android:textColorHint="#A0A0A0" />
 
             <EditText
                 android:id="@+id/txtDisplacement"
@@ -83,28 +83,7 @@
                 android:inputType="numberDecimal"
                 android:minHeight="48dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF" />
-
-            <EditText
-                android:id="@+id/txtRegistration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:ems="10"
-                android:hint="@string/registration"
-                android:minHeight="48dp"
-                android:textColorHint="#FFFFFF" />
-
-            <EditText
-                android:id="@+id/txtKilometers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:ems="10"
-                android:hint="@string/kilometers"
-                android:inputType="numberDecimal"
-                android:minHeight="48dp"
-                android:textColorHint="#FFFFFF" />
+                android:textColorHint="#A0A0A0" />
 
             <Spinner
                 android:id="@+id/spFuelType"
@@ -121,19 +100,40 @@
                 android:id="@+id/spCarType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:entries="@array/carType_array"
                 android:foregroundTint="#FFFFFF"
                 android:foregroundTintMode="add"
                 android:minHeight="48dp"
                 android:spinnerMode="dropdown" />
 
+            <EditText
+                android:id="@+id/txtRegistration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/registration"
+                android:minHeight="48dp"
+                android:textColorHint="#A0A0A0" />
+
+            <EditText
+                android:id="@+id/txtKilometers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/kilometers"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                android:textColorHint="#A0A0A0" />
+
             <Button
                 android:id="@+id/bt_choose_color"
                 style="@android:style/Widget.Holo.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/color"
                 android:textColor="#E8E3D3" />
 

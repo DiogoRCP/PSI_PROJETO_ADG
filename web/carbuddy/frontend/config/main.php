@@ -20,6 +20,7 @@ return [
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
+
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -124,9 +125,7 @@ return [
                         'GET total' => 'total',
                         'GET totaluser' => 'totaluser',
                         'GET set/{limit}' => 'set',
-                        'POST post' => 'post',
-                        'PUT put/{id}' => 'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'POST post' => 'post'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],

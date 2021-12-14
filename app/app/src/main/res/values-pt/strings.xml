@@ -30,7 +30,7 @@
     <string name="ltVRepairState">Estado da Reparação</string>
     <string name="Repairs">Reparações</string>
     <string name="delete_confirmation">Tem a certeza que deseja apagar este carro?</string>
-    <string name="Deleted">Apagado</string>
+    <string name="Deleted">apagado</string>
     <string name="AddVehicle">Veiculo novo</string>
     <string name="Save">Guardar</string>
     <string name="tVUsername">Nome de Utilizador</string>
@@ -42,4 +42,5 @@
     <string name="cancel">Cancelar</string>
     <string name="Yes">Sim</string>
     <string name="No">Não</string>
+    <string name="Added">adicionado</string>
 </resources>

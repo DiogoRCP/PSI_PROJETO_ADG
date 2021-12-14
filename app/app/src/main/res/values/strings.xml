@@ -31,7 +31,7 @@
     <string name="ltVRepairState">Repair State</string>
     <string name="Repairs">Repairs</string>
     <string name="delete_confirmation">Are you sure you want to delete this car?</string>
-    <string name="Deleted">Deleted</string>
+    <string name="Deleted">deleted</string>
     <string name="AddVehicle">New Vehicle</string>
     <string name="Save">Save</string>
     <string name="confirm">Confirm</string>
@@ -45,6 +45,7 @@
     <string name="edit">Edit</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
+    <string name="Added">added</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>

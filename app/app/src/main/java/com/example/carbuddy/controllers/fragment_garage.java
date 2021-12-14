@@ -123,7 +123,7 @@ public class fragment_garage extends Fragment implements CarsListener {
     }
 
     @Override
-    public void onDeleteCar() {
+    public void onDeleteCreateCar() {
 
     }
 

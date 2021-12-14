@@ -152,7 +152,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         txtCarType.setText(car.getCartype());
         txtFuelType.setText(car.getFueltype());
         txtDisplacement.setText(String.valueOf(car.getDisplacement()));
-        txtModelYear.setText(car.getModelyear());
+        txtModelYear.setText(String.valueOf(car.getModelyear()));
         txtKilometers.setText(String.valueOf(car.getKilometers()));
 
         return view;
@@ -196,10 +196,10 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
     }
 
     @Override
-    public void onDeleteCar() {
+    public void onDeleteCreateCar() {
         ModeloBDHelper database = new ModeloBDHelper(getContext());
         database.deleteCar(car.getId());
-        Toast.makeText(getContext(), car.getBrand()+" "+car.getModel()+" "+R.string.Deleted, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), car.getBrand()+" "+car.getModel()+" "+getString(R.string.Deleted), Toast.LENGTH_SHORT).show();
         getActivity().getSupportFragmentManager().popBackStack();
     }
 }
