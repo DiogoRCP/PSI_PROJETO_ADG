@@ -209,6 +209,9 @@ public class fragment_form_car extends Fragment implements CarsListener {
                                     case "TRUCK ":
                                         spCarType.setSelection(2);
                                         break;
+                                    case "TRUCK":
+                                        spCarType.setSelection(2);
+                                        break;
                                     case "MOTORCYCLE":
                                         spCarType.setSelection(3);
                                         break;
