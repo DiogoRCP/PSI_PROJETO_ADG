@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 // Carregar Cars para a dropDownList
 $CarList = ['' => ''];
 foreach ($modelCars as $modelCar) {
-    $CarList += [$modelCar['id'] => $modelCar['vin']];
+    $CarList += [$modelCar['id'] => $modelCar['registration']];
 }
 ?>
 

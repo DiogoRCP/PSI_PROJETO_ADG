@@ -20,6 +20,7 @@ return [
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
+
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -62,7 +63,9 @@ return [
                         'GET get/{username}/{password}' => 'get'
                     ],
                     'tokens' => ['{username}' => '<username:\d+>', '{password}' => '<password:\d+>',],
-
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [
@@ -122,9 +125,7 @@ return [
                         'GET total' => 'total',
                         'GET totaluser' => 'totaluser',
                         'GET set/{limit}' => 'set',
-                        'POST post' => 'post',
-                        'PUT put/{id}' => 'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'POST post' => 'post'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
@@ -152,7 +153,7 @@ return [
                         'PUT put/{id}' => 'put',
                         'DELETE  delete/{id}' => 'delete'
                     ],
-                    'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
+                      'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ]
             ],
         ],

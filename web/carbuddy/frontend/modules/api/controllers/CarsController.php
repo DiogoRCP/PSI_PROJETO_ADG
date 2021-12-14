@@ -4,8 +4,10 @@ namespace frontend\modules\api\controllers;
 
 use frontend\models\User;
 use phpDocumentor\Reflection\PseudoTypes\NonEmptyLowercaseString;
+use Yii;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
+use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
 
 class CarsController extends ActiveController
@@ -83,29 +85,24 @@ class CarsController extends ActiveController
 
     public function actionPost()
     {
+        $car = json_decode(Yii::$app->request->rawBody);
 
-        $name = \Yii::$app->request->post('name');
+        $carssmodel = new $this->modelClass;
 
-        $Carssmodel = new $this->modelClass;
-        $Carssmodel->name = $name;
+        $carssmodel->userId = Yii::$app->user->getId();
+        $carssmodel->vin = $car->vin;
+        $carssmodel->brand = $car->brand;
+        $carssmodel->model = $car->model;
+        $carssmodel->color = $car->color;
+        $carssmodel->carType = $car->cartype;
+        $carssmodel->fuelType = $car->fueltype;
+        $carssmodel->registration = $car->registration;
+        $carssmodel->modelyear = $car->modelyear;
+        $carssmodel->kilometers = $car->kilometers;
+        $carssmodel->displacement = $car->displacement;
+        $carssmodel->state = $car->state;
 
-        $ret = $Carssmodel->save(false);
+        $ret = $carssmodel->save(false);
         return ['SaveError' => $ret];
-    }
-
-    //http://localhost:8080/api/cars/delete/id
-
-    public function actionDelete($id)
-    {
-        $Carssmodel = new $this->modelClass;
-        $ret = $Carssmodel->deleteAll("id=" . $id);
-        if ($ret) {
-            if (\Yii::$app->user->getId() == $ret->userId) {
-                return ['DelError' => $ret];
-            } else {
-                return self::noPermission;
-            }
-        }
-        throw new \yii\web\NotFoundHttpException("Car id not found!");
     }
 }

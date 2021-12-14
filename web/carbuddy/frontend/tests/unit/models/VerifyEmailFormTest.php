@@ -9,7 +9,7 @@ class VerifyEmailFormTest extends \Codeception\Test\Unit
 {
     /**
      * @var \frontend\tests\UnitTester
-     */
+
     protected $tester;
 
 
@@ -52,4 +52,5 @@ class VerifyEmailFormTest extends \Codeception\Test\Unit
         expect($user->status)->equals(\common\models\User::STATUS_ACTIVE);
         expect($user->validatePassword('Test1234'))->true();
     }
+     * */
 }

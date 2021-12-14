@@ -3,6 +3,7 @@
 namespace frontend\modules\api\controllers;
 
 use common\models\User;
+use Yii;
 use yii\rest\ActiveController;
 use yii\filters\auth\QueryParamAuth;
 
@@ -30,18 +31,22 @@ class UserController extends ActiveController
         return null;
     }
 
-    public function actionIndex()
+    public function actionAccount()
     {
-        if (\Yii::$app->user->can('backendCrudUser')) {
-            return $this->render('index');
-        } else {
+        if(!Yii::$app->user->isGuest) {
+            $Usersmodel = new $this->modelClass;
+            $user = $Usersmodel::findOne(Yii::$app->user->getId());
+
+            return $user;
+        }
+        else{
             return self::noPermission;
         }
     }
 
     public function actionTotal()
     {
-        if (\Yii::$app->user->can('backendCrudUser')) {
+        if (Yii::$app->user->can('backendCrudUser')) {
             $Usersmodel = new $this->modelClass;
             $recs = $Usersmodel::find()->all();
             return ['total' => count($recs)];
@@ -54,7 +59,7 @@ class UserController extends ActiveController
 
     public function actionSet($limit)
     {
-        if (\Yii::$app->user->can('backendCrudUser')) {
+        if (Yii::$app->user->can('backendCrudUser')) {
             $Usersmodel = new $this->modelClass;
             $rec = $Usersmodel::find()->limit($limit)->all();
             return ['limite' => $limit, 'Records' => $rec];
@@ -68,7 +73,7 @@ class UserController extends ActiveController
     public function actionPost()
     {
         // lembrar que para fazer post de um user, nessa altura ainda não existe access-token
-        $username = \Yii::$app->request->post('username');
+        $username = Yii::$app->request->post('username');
         $Usersmodel = new $this->modelClass;
         $Usersmodel->username = $username;
 
@@ -80,9 +85,9 @@ class UserController extends ActiveController
 
     public function actionDelete()
     {
-        if (\Yii::$app->user->can('client')) {
+        if (Yii::$app->user->can('client')) {
             $Usersmodel = new $this->modelClass;
-            $ret = $Usersmodel->deleteAll("id=" . \Yii::$app->user->getId());
+            $ret = $Usersmodel->deleteAll("id=" . Yii::$app->user->getId());
             if ($ret)
                 return ['DelError' => $ret];
             throw new \yii\web\NotFoundHttpException("Client id not found!");
@@ -93,11 +98,11 @@ class UserController extends ActiveController
 
     public function actionPut()
     {
-        if (\Yii::$app->user->can('client')) {
-            $user = json_decode(\Yii::$app->request->rawBody);
+        if (Yii::$app->user->can('client')) {
+            $user = json_decode(Yii::$app->request->rawBody);
 
             $Usermodel = new $this->modelClass;
-            $rec = $Usermodel::find()->where('id = ' . \Yii::$app->user->getId())->one();
+            $rec = $Usermodel::find()->where('id = ' . Yii::$app->user->getId())->one();
 
             if (isset($user->username)) $rec->username = $user->username;
             if (isset($user->usertype)) $rec->usertype = $user->usertype;

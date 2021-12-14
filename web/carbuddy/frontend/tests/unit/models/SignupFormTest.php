@@ -9,7 +9,7 @@ class SignupFormTest extends \Codeception\Test\Unit
 {
     /**
      * @var \frontend\tests\UnitTester
-     */
+
     protected $tester;
 
 
@@ -34,7 +34,7 @@ class SignupFormTest extends \Codeception\Test\Unit
         $user = $model->signup();
         expect($user)->true();
 
-        /** @var \common\models\User $user */
+        /** @var \common\models\User $user
         $user = $this->tester->grabRecord('common\models\User', [
             'username' => 'some_username',
             'email' => 'some_email@example.com',
@@ -69,4 +69,5 @@ class SignupFormTest extends \Codeception\Test\Unit
         expect($model->getFirstError('email'))
             ->equals('This email address has already been taken.');
     }
+     * */
 }

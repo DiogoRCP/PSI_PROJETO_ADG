@@ -1,36 +1,38 @@
 package com.example.carbuddy.controllers;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.carbuddy.R;
-import com.example.carbuddy.models.CarSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
+import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.singletons.CompaniesSingleton;
+import com.example.carbuddy.singletons.LoginSingleton;
 
-public class Pagina_Inicial extends AppCompatActivity {
+public class Pagina_Inicial extends AppCompatActivity{
 
     private FragmentManager fragmentManager;
     private Fragment fragment;
+    private Menu menu;
+    private int fragmentNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_inicial);
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
+        getSupportActionBar().setIcon(R.drawable.ic_action_back);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
@@ -38,8 +40,12 @@ public class Pagina_Inicial extends AppCompatActivity {
             fragmentManager = getSupportFragmentManager();
             CarregarFragmentoInicial();
         }
-        CarregarSingletons();
-        ModeloBDHelper database = new ModeloBDHelper(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -48,6 +54,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             //Title bar back press triggers onBackPressed()
             onBackPressed();
             return true;
+        }else{
         }
         return super.onOptionsItemSelected(item);
     }
@@ -64,49 +71,87 @@ public class Pagina_Inicial extends AppCompatActivity {
     }
 
     public void onClickGaragem(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fragment = new fragment_garage();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("garage")
-                .commit();
+        if (fragmentNumber != 1) {
+            fragment = new fragment_garage();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.Garage);
+
+            fragmentNumber = 1;
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("garage")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 
     public void onClickSchedulesAppointment(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fragment = new Schedules_Appointment();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("schedulesappointment")
-                .commit();
+        if (fragmentNumber != 2) {
+            fragment = new Schedules_Appointment();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.Schedulesappointment);
+
+            fragmentNumber = 2;
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("schedulesappointment")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 
     public void onClickSchedules(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fragment = new fragment_schedules();
-        fragmentManager.beginTransaction().
-                replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("schedules")
-                .commit();
-    }
+        if (fragmentNumber != 3) {
+            fragment = new fragment_schedules();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.Schedules);
 
-    public void onClickCar(View view) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fragment = new fragment_carInfo();
+            fragmentNumber = 3;
+            fragmentManager.beginTransaction().
+                    replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("schedules")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
+    }
+    
+    public void CarregarFragmentoInicial() {
+        fragmentNumber = 1;
+        fragment = new fragment_garage();
+
+        getSupportActionBar().setTitle(R.string.Garage);
+
         fragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("infocar")
                 .commit();
     }
 
-    public void CarregarFragmentoInicial() {
-        fragment = new fragment_schedules();
-        fragmentManager.beginTransaction().
-                replace(R.id.fragmentContainerView, fragment)
+    public void onClickAccountMenu(MenuItem item) {
+        fragment = new AccountFragment();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .addToBackStack("Account")
                 .commit();
     }
 
-    private void CarregarSingletons(){
-        CarSingleton.getInstance(this);
+    public void onClickCompaniesMenu(MenuItem item) {
+        Intent companiesView = new Intent(this, CompaniesActivity.class);
+        startActivity(companiesView);
     }
+
+    public void onClickLogoutMenu(MenuItem item) {
+        this.deleteDatabase("carbuddy");
+        this.finish();
+    }
+
 }

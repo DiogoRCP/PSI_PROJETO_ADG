@@ -3,6 +3,7 @@
 namespace frontend\modules\api\controllers;
 
 use Yii;
+use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
 
 class LoginController extends ActiveController
@@ -12,7 +13,7 @@ class LoginController extends ActiveController
     public function actionGet($username, $password)
     {
 
-        $login = ['LoginForm' =>[
+        $login = ['LoginForm' => [
             'username' => $username,
             'password' => $password]
         ];
@@ -21,7 +22,13 @@ class LoginController extends ActiveController
 
         $type = "frontend";
         if ($loginmodel->load($login) && $loginmodel->login($type)) {
-            return ['Login' => true, 'authkey' => Yii::$app->user->getIdentity()->getAuthKey()];
+            $user = Yii::$app->user->getIdentity();
+            return
+                /*'username' => $user->username,
+                'email' => $user->email,
+                'authkey' => $user->getAuthKey()*/
+                $user
+            ;
         }
 
         return ['Login' => false];

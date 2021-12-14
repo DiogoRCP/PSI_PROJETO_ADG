@@ -6,8 +6,59 @@
     <string name="Signup">Sign Up</string>
     <string name="Schedules">Schedules</string>
     <string name="Schedulesappointment">Scheduling Appointment</string>
-    <string name="InfoCarro">Car Information</string>
+    <string name="InfoCarro">Vehicle</string>
     <string name="CarExample">Car Example</string>
     <string name="Companies">Companies</string>
     <string name="NewAccountTxt">Don\'t have an account?</string>
+    <string name="Account">Account</string>
+    <string name="About">About</string>
+    <string name="Logout">Logout</string>
+    <string name="vin" translatable="false">VIN</string>
+    <string name="brand">Brand</string>
+    <string name="model">Model</string>
+    <string name="color">Color</string>
+    <string name="carType">Car Type</string>
+    <string name="displacement">Displacement</string>
+    <string name="fuelType">Fuel Type</string>
+    <string name="registration">Registration</string>
+    <string name="modelYear">Year</string>
+    <string name="kilometers">Kilometers</string>
+    <string name="repairs">Repairs</string>
+    <string name="tVRepairDate">Repair Date</string>
+    <string name="ltVRepairType">Repair Type</string>
+    <string name="LtvRepairDescp">Repair Description</string>
+    <string name="ltVRepairKm">Kilometers</string>
+    <string name="ltVRepairState">Repair State</string>
+    <string name="Repairs">Repairs</string>
+    <string name="delete_confirmation">Are you sure you want to delete this car?</string>
+    <string name="Deleted">deleted</string>
+    <string name="AddVehicle">New Vehicle</string>
+    <string name="Save">Save</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="tVUsername">Username</string>
+    <string name="tVEmail" translatable="false">E-mail</string>
+    <string name="tVNif" translatable="false">NIF</string>
+    <string name="tVBirthday">Birthday</string>
+    <string name="tVPNumber">Phone Number</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="Added">added</string>
+
+    <string-array name="fuelType_array">
+        <item>Diesel</item>
+        <item>Hybrid</item>
+        <item>Electric</item>
+        <item>Gasoline</item>
+    </string-array>
+
+    <string-array name="carType_array">
+        <item>PASSENGER CAR</item>
+        <item>MULTIPURPOSE PASSENGER VEHICLE (MPV)</item>
+        <item>TRUCK </item>
+        <item>MOTORCYCLE</item>
+    </string-array>
+
 </resources>

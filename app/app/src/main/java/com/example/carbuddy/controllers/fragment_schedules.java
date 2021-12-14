@@ -2,6 +2,7 @@ package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.carbuddy.R;
-import com.example.carbuddy.models.LoginSingleton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +63,8 @@ public class fragment_schedules extends Fragment {
                              Bundle savedInstanceState) {
 
         getActivity().setTitle(R.string.Schedules);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Schedules);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_schedules, container, false);

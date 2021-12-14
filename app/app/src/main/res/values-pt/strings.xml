@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CarBuddy</string>
     <string name="Companies">Empresas</string>
     <string name="TextViewUser">Utilizador</string>
     <string name="TextViewPassword">Palavra-passe</string>
@@ -8,7 +7,40 @@
     <string name="Signup">Registar</string>
     <string name="Schedules">Marcações</string>
     <string name="Schedulesappointment">Agendar marcações</string>
-    <string name="InfoCarro">Informação do carro</string>
+    <string name="InfoCarro">Veículo</string>
     <string name="CarExample">Exemplo de carro</string>
     <string name="NewAccountTxt">Não tem uma conta?</string>
+    <string name="Account">Conta</string>
+    <string name="About">Sobre</string>
+    <string name="Logout">Terminar Sessão</string>
+    <string name="brand">Marca</string>
+    <string name="model">Modelo</string>
+    <string name="color">Cor</string>
+    <string name="carType">Tipo de carro</string>
+    <string name="displacement">Potência</string>
+    <string name="fuelType">Combustivel</string>
+    <string name="registration">Matricula</string>
+    <string name="modelYear">Ano</string>
+    <string name="kilometers">Kilometros</string>
+    <string name="repairs">Reparações</string>
+    <string name="tVRepairDate">Data de Reparação</string>
+    <string name="ltVRepairType">Tipo de Reparação</string>
+    <string name="LtvRepairDescp">Descrição da Reparação</string>
+    <string name="ltVRepairKm">Quilómetro</string>
+    <string name="ltVRepairState">Estado da Reparação</string>
+    <string name="Repairs">Reparações</string>
+    <string name="delete_confirmation">Tem a certeza que deseja apagar este carro?</string>
+    <string name="Deleted">apagado</string>
+    <string name="AddVehicle">Veiculo novo</string>
+    <string name="Save">Guardar</string>
+    <string name="tVUsername">Nome de Utilizador</string>
+    <string name="tVBirthday">Data de Nascimento</string>
+    <string name="tVPNumber">Contacto Telefónico</string>
+    <string name="delete">Apagar</string>
+    <string name="edit">Editar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="Yes">Sim</string>
+    <string name="No">Não</string>
+    <string name="Added">adicionado</string>
 </resources>

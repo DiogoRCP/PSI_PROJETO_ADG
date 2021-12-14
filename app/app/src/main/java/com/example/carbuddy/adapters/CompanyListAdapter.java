@@ -19,6 +19,7 @@ public class CompanyListAdapter extends RecyclerView.Adapter<CompanyListAdapter.
     private Context context;
     private ArrayList<Company> listaCompanies;
 
+    /** Recebe os dados e dispõe-nos no recycler view **/
     public CompanyListAdapter(Context context, ArrayList<Company> listaCompanies) {
         this.context = context;
         this.listaCompanies = listaCompanies;

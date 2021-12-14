@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.fragment_form_car">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/roudedconers"
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/txtVin"
+                style="@android:style/Widget.Material.Light.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/vin"
+                android:minHeight="48dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#A0A0A0" />
+
+            <EditText
+                android:id="@+id/txtBrand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/brand"
+                android:minHeight="48dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#A0A0A0" />
+
+            <EditText
+                android:id="@+id/txtModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/model"
+                android:minHeight="48dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#A0A0A0" />
+
+            <EditText
+                android:id="@+id/txtYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/modelYear"
+                android:inputType="numberSigned"
+                android:minHeight="48dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#A0A0A0" />
+
+            <EditText
+                android:id="@+id/txtDisplacement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/displacement"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#A0A0A0" />
+
+            <Spinner
+                android:id="@+id/spFuelType"
+                style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:entries="@array/fuelType_array"
+                android:foregroundTint="#FFFFFF"
+                android:minHeight="48dp"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/spCarType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:entries="@array/carType_array"
+                android:foregroundTint="#FFFFFF"
+                android:foregroundTintMode="add"
+                android:minHeight="48dp"
+                android:spinnerMode="dropdown" />
+
+            <EditText
+                android:id="@+id/txtRegistration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/registration"
+                android:minHeight="48dp"
+                android:textColorHint="#A0A0A0" />
+
+            <EditText
+                android:id="@+id/txtKilometers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/kilometers"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                android:textColorHint="#A0A0A0" />
+
+            <Button
+                android:id="@+id/bt_choose_color"
+                style="@android:style/Widget.Holo.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/color"
+                android:textColor="#E8E3D3" />
+
+            <Button
+                android:id="@+id/btAddCar"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_states"
+                android:text="@string/Save"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

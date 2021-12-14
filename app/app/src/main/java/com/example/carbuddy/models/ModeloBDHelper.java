@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.DatePicker;
 
 import java.util.LinkedList;
 
@@ -25,7 +26,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createCarsTable =
                 "CREATE TABLE IF NOT EXISTS cars" +
-                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(id INTEGER PRIMARY KEY, " +
                         "vin VARCHAR(100) NOT NULL UNIQUE, " +
                         "brand VARCHAR(100) NOT NULL," +
                         "model VARCHAR(100) NOT NULL," +
@@ -44,8 +45,8 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
         String createSchedulesTable =
                 "CREATE TABLE IF NOT EXISTS schedules" +
-                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "currentdate DATETIME default Current_Timestamp, " +
+                        "(id INTEGER PRIMARY KEY, " +
+                        "currentdate DATETIME NOT NULL, " +
                         "schedulingdate DATETIME NOT NULL, " +
                         "repairdescription VARCHAR(100) NOT NULL, " +
                         "state VARCHAR(100) NOT NULL," +
@@ -59,21 +60,21 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
         String createCompaniesTable =
                 "CREATE TABLE IF NOT EXISTS companies" +
-                        "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "(id INTEGER PRIMARY KEY, " +
                         "companyname VARCHAR(100) NOT NULL," +
                         "nif VARCHAR(9) NOT NULL, " +
                         "email VARCHAR(100) NOT NULL," +
                         "phonenumber VARCHAR(40) NOT NULL," +
-                        "registrationdate DATETIME default Current_Timestamp " +
+                        "registrationdate DATETIME  " +
                         ");";
         db.execSQL(createCompaniesTable);
 
 
         String createRepairsTable =
                 "CREATE TABLE IF NOT EXISTS repairs(" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "id INTEGER PRIMARY KEY," +
                         "kilometers INTEGER NOT NULL," +
-                        "repairdate DATETIME default Current_Timestamp," +
+                        "repairdate DATETIME," +
                         "repairdescription VARCHAR(100) NOT NULL," +
                         "state VARCHAR(100) NOT NULL," +
                         "repairtype VARCHAR(100) NOT NULL," +
@@ -85,8 +86,17 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
         db.execSQL(createRepairsTable);
 
+            String createLoginTable =
+                    "CREATE TABLE IF NOT EXISTS login(" +
+                            "token TEXT NOT NULL," +
+                            "username VARCHAR(100) NOT NULL," +
+                            "email VARCHAR(100) NOT NULL," +
+                            "nif VARCHAR(9) NOT NULL," +
+                            "phonenumber VARCHAR(40) NOT NULL," +
+                            "birsthday DATETIME NOT NULL" +
+                            ");";
+            db.execSQL(createLoginTable);
     }
-
 
 
     @Override
@@ -117,7 +127,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
     private boolean verificarCar(Car car, ContentValues values) {
         return this.database.update("cars", values,
-                "id = ?", new String[]{"" + car.getId()}) > 0;
+                "id = ? OR vin = ?", new String[]{"" + car.getId(), "" + car.getVin()}) > 0;
     }
 
     public LinkedList<Car> getAllCars() {
@@ -135,7 +145,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         cursor.getFloat(6),
                         cursor.getString(7),
                         cursor.getString(8),
-                        cursor.getString(9),
+                        cursor.getInt(9),
                         cursor.getInt(10),
                         cursor.getString(11),
                         cursor.getInt(12)
@@ -145,6 +155,10 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return cars;
     }
 
+    public boolean deleteCar(int id)
+    {
+        return database.delete("cars", "id" + "=?", new String[]{String.valueOf(id)}) > 0;
+    }
 
     //CRUD Companies
     public void insertCompanies(Company company) {
@@ -229,7 +243,6 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return schedules;
     }
 
-
     //CRUD Repairs
     public void insertRepairs(Repair repair) {
         ContentValues values = new ContentValues();
@@ -252,10 +265,10 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                 "id = ?", new String[]{"" + repair.getId()}) > 0;
     }
 
-    public LinkedList<Repair> getAllRepairs() {
+    public LinkedList<Repair> getAllRepairs(int carId) {
         LinkedList<Repair> repairs = new LinkedList<>();
-        Cursor cursor = this.database.rawQuery("SELECT * FROM repairs",
-                null);
+        Cursor cursor = this.database.rawQuery("SELECT * FROM repairs WHERE carId = ?",
+                new String[]{String.valueOf(carId)});
         if (cursor.moveToFirst()) {
             do {
                 repairs.add(new Repair(cursor.getInt(0),
@@ -272,6 +285,47 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return repairs;
     }
 
+
+
+    //CRUD Login
+
+    public void insertLogin(Login login) {
+        ContentValues values = new ContentValues();
+        values.put("token", login.getToken());
+        values.put("username", login.getUsername());
+        values.put("email", login.getEmail());
+        values.put("nif", login.getNif());
+        values.put("phonenumber", login.getPhonenumber());
+        values.put("birsthday", String.valueOf(login.getBirsthday()));
+    //String.valueOf -> Conversão para String
+
+        if (!verificarLogin(login, values)) {
+            database.insert("login", null, values);
+        }
+    }
+
+    private boolean verificarLogin(Login login, ContentValues values) {
+        return this.database.update("login", values,
+                "token = ?", new String[]{"" + login.getToken()}) > 0;
+    }
+
+    public LinkedList<Login> getAllLogin() {
+        LinkedList<Login> login = new LinkedList<>();
+        Cursor cursor = this.database.rawQuery("SELECT * FROM login",
+                null);
+        if (cursor.moveToFirst()) {
+            do {
+                login.add(new Login(cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5)
+                ));
+            } while (cursor.moveToNext());
+        }
+        return login;
+    }
 }
 
 

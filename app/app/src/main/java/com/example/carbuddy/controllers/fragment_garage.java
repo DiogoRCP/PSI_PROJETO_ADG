@@ -2,6 +2,7 @@ package com.example.carbuddy.controllers;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,8 +13,9 @@ import android.view.ViewGroup;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
+import com.example.carbuddy.listeners.CarsListener;
 import com.example.carbuddy.models.Car;
-import com.example.carbuddy.models.CarSingleton;
+import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
 
 import java.util.ArrayList;
@@ -23,9 +25,7 @@ import java.util.ArrayList;
  * Use the {@link fragment_garage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_garage extends Fragment {
-
-
+public class fragment_garage extends Fragment implements CarsListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,6 +38,7 @@ public class fragment_garage extends Fragment {
     private RecyclerView myRecyclerView;
     private ArrayList<Car> lstCar;
     View v;
+    private static ModeloBDHelper database;
 
     public fragment_garage() {
         // Required empty public constructor
@@ -69,12 +70,15 @@ public class fragment_garage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        database = new ModeloBDHelper(getContext());
+
+        // Instanciar singleton
+        CarSingleton.getInstance(getContext()).setCarsListener(this);
+
+        // Carregar dados da api
+        CarSingleton.getInstance(getContext()).CarregarListaCarros(getContext());
+
         lstCar = CarSingleton.getInstance(getContext()).getCars();
-
-        ModeloBDHelper database = new ModeloBDHelper(getContext());
-
-        database.insertCars(lstCar.get(0));
-        System.out.println(database.getAllCars().toString());
     }
 
     @Override
@@ -82,16 +86,54 @@ public class fragment_garage extends Fragment {
                              Bundle savedInstanceState) {
 
         getActivity().setTitle(R.string.Garage);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.Garage);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_garage, container, false);
+        // return inflater.inflate(R.layout.fragment_garage, container, false);
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_garage, container, false);
         myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclesViewCars);
-        CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar);
+        CarListAdapter listaAdapter = new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity) getActivity()).getSupportActionBar());
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaAdapter);
+
+        v.findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new fragment_form_car();
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("form_car")
+                        .commit();
+            }
+        });
+
         return v;
     }
 
+    @Override
+    public void onRefreshCars(ArrayList<Car> cars) {
+        for (Car car : cars) {
+            database.insertCars(car);
+        }
+        lstCar = cars;
+        myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity) getActivity()).getSupportActionBar()));
+    }
+
+    @Override
+    public void onDeleteCreateCar() {
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        CarSingleton.getInstance(getContext()).setCarsListener(this);
+        // Carregar dados da api
+        CarSingleton.getInstance(getContext()).CarregarListaCarros(getContext());
+    }
 }

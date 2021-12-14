@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bt_acc_edit"
+        android:icon="@drawable/ic_car_edit"
+        android:title="@string/edit"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/bt_acc_delete"
+        android:icon="@drawable/ic_car_delete"
+        android:title="@string/delete"
+        app:showAsAction="always" />
+</menu>

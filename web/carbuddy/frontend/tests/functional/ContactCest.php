@@ -1,60 +1,48 @@
 <?php
-
 namespace frontend\tests\functional;
-
 use frontend\tests\FunctionalTester;
-
-/* @var $scenario \Codeception\Scenario */
-
 class ContactCest
 {
     public function _before(FunctionalTester $I)
     {
+    }
+
+    // tests
+    public function contactWithoutLogin(FunctionalTester $I)
+    {
         $I->amOnPage(['site/contact']);
-    }
-
-    public function checkContact(FunctionalTester $I)
-    {
-        $I->see('Contact', 'h1');
-    }
-
-    public function checkContactSubmitNoData(FunctionalTester $I)
-    {
         $I->submitForm('#contact-form', []);
+        $I->expectTo('see validations errors');
         $I->see('Contact', 'h1');
-        $I->seeValidationError('Name cannot be blank');
-        $I->seeValidationError('Email cannot be blank');
-        $I->seeValidationError('Subject cannot be blank');
-        $I->seeValidationError('Body cannot be blank');
-        $I->seeValidationError('The verification code is incorrect');
+        $I->see('Name cannot be blank');
+        $I->see('Email cannot be blank');
+        $I->see('Subject cannot be blank');
+        $I->see('Body cannot be blank');
+        $I->fillField('Name', 'erau');
+        $I->fillField('E-mail', 'erau@mail.com');
+        $I->fillField('Subject', 'subject');
+        $I->fillField('Body', 'Message');
+        $I->fillField('Verify Code', '#ADAF$$#');
     }
 
-    public function checkContactSubmitNotCorrectEmail(FunctionalTester $I)
+    public function contactWithLogin(FunctionalTester $I)
     {
-        $I->submitForm('#contact-form', [
-            'ContactForm[name]' => 'tester',
-            'ContactForm[email]' => 'tester.email',
-            'ContactForm[subject]' => 'test subject',
-            'ContactForm[body]' => 'test content',
-            'ContactForm[verifyCode]' => 'testme',
-        ]);
-        $I->seeValidationError('Email is not a valid email address.');
-        $I->dontSeeValidationError('Name cannot be blank');
-        $I->dontSeeValidationError('Subject cannot be blank');
-        $I->dontSeeValidationError('Body cannot be blank');
-        $I->dontSeeValidationError('The verification code is incorrect');
-    }
-
-    public function checkContactSubmitCorrectData(FunctionalTester $I)
-    {
-        $I->submitForm('#contact-form', [
-            'ContactForm[name]' => 'tester',
-            'ContactForm[email]' => 'tester@example.com',
-            'ContactForm[subject]' => 'test subject',
-            'ContactForm[body]' => 'test content',
-            'ContactForm[verifyCode]' => 'testme',
-        ]);
-        $I->seeEmailIsSent();
-        $I->see('Thank you for contacting us. We will respond to you as soon as possible.');
+        $I->amOnPage('/site/login');
+        $I->fillField('Username', 'erau');
+        $I->fillField('Password', 'password_0');
+        $I->click('login-button');
+        $I->amOnPage(['site/contact']);
+        $I->submitForm('#contact-form', []);
+        $I->expectTo('see validations errors');
+        $I->see('Contact', 'h1');
+        $I->see('Name cannot be blank');
+        $I->see('Email cannot be blank');
+        $I->see('Subject cannot be blank');
+        $I->see('Body cannot be blank');
+        $I->fillField('Name', 'erau');
+        $I->fillField('E-mail', 'erau@mail.com');
+        $I->fillField('Subject', 'subject');
+        $I->fillField('Body', 'Message');
+        $I->fillField('Verify Code', '#ADAF$$#');
     }
 }

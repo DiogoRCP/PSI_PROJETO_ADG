@@ -1,6 +1,6 @@
 package com.example.carbuddy.models;
 
-import com.example.carbuddy.controllers.Json_Objects_Convertor;
+import com.example.carbuddy.utils.Json_Objects_Convertor;
 
 public class Signup {
     String username;

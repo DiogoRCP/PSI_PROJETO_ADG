@@ -28,7 +28,7 @@ $this->title = 'About';
                 <a href="https://psi-da-mds-ga.atlassian.net/jira/software/projects/PPA/boards/4/backlog"><img class="imgAbout" src="../images/jira.svg"></a>
                 <br>
                 <br>
-                <a  href="https://github.com/DiogoRCP/PSI_PROJETO_ADG"><img class="imgAbout" src="../images/github.svg"></a>
+                <a href="https://github.com/DiogoRCP/PSI_PROJETO_ADG"><img class="imgAbout" src="../images/github.svg"></a>
                </div>
         </div>
 
