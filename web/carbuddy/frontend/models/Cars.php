@@ -111,7 +111,7 @@ class Cars extends \yii\db\ActiveRecord
                 ';
                 break;
 
-            case 'TRUCK ':
+            case 'TRUCK':
                 return '
                 <svg style="fill: ' . $this->color . ';" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 593.77 300.84" width="'.$size.'" height="'.($size/2).'">
                 <title>' . $this->color . '</title>
