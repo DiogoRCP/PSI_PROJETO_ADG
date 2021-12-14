@@ -110,8 +110,11 @@ class ScheduleController extends Controller
     public function actionDelete($id)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
-            $this->findModel($id)->delete();
-
+            try {
+                $this->findModel($id)->delete();
+            } catch(\yii\db\IntegrityException $e) {
+                Yii::$app->session->setFlash('error', 'You can´t delete this Schedule');
+            }
             return $this->redirect(['index']);
         } else {
             Yii::$app->user->logout();

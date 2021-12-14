@@ -139,7 +139,11 @@ class ContributorController extends Controller
     public function actionDelete($id)
     {
         if (Yii::$app->user->can('backendCrudContributor')) {
-            $this->findModel($id)->delete();
+            try {
+                $this->findModel($id)->delete();
+            } catch(\yii\db\IntegrityException $e) {
+                Yii::$app->session->setFlash('error', 'You can´t delete a Contributor with Repairs');
+            }
             return $this->redirect(['index']);
         } else {
             Yii::$app->user->logout();

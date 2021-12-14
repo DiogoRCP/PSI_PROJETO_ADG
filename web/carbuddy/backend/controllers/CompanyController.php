@@ -132,7 +132,11 @@ class CompanyController extends Controller
     public function actionDelete($id)
     {
         if (Yii::$app->user->can('backendCrudCompany')) {
-            $this->findModel($id)->delete();
+            try {
+                $this->findModel($id)->delete();
+            } catch(\yii\db\IntegrityException $e) {
+                Yii::$app->session->setFlash('error', 'You can´t delete a Company with Contributors');
+            }
             return $this->redirect(['index']);
         } else {
             Yii::$app->user->logout();
