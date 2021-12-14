@@ -53,5 +53,7 @@ class ContributorsTest extends \Codeception\Test\Unit
         $this->assertTrue($model->validate(['userid']));
 
         $model->save();
+
+        $this->tester->seeInDatabase('Contributors', ['speciality'=>'Mechanical', 'companyId'=>'1', 'userId'=>'14']);
     }
 }
