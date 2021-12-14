@@ -73,5 +73,8 @@ class SchedulesTest extends \Codeception\Test\Unit
         $this->assertTrue($model->validate(['companyid']));
 
         $model->save();
+
+        //Este teste varia consoante os dados da base de dados
+        $this->tester->seeInDatabase('Schedules', ['carId'=>'2']);
     }
 }

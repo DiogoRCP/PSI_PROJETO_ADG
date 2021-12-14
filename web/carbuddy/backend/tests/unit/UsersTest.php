@@ -121,5 +121,8 @@ class UsersTest extends \Codeception\Test\Unit
         $this->assertTrue($model->validate(['registrationdate']));
 
         $model->save();
+
+        //Este teste varia consoante os dados da base de dados
+        $this->tester->seeInDatabase('User', ['username'=>'Goncalo']);
     }
 }

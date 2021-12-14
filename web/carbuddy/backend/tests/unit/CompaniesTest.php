@@ -67,5 +67,8 @@ class CompaniesTest extends \Codeception\Test\Unit
         $this->assertTrue($model->validate(['registrationdate']));
 
         $model->save();
+
+        //Este teste varia consoante os dados da base de dados
+        $this->tester->seeInDatabase('Companies', ['companyname'=>'Banix']);
     }
 }
