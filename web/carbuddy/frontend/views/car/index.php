@@ -20,7 +20,7 @@ $this->title = 'Garage';
             <?php foreach ($model as $car) { ?>
                 <div class="col-md-3">
                     <a href="<?= Url::to(['car/view', 'id' => $car->id]) ?>">
-                        <h4><?= $car->brand ?> <?= $car->model ?></h4>
+                        <h4><?= $car->brand ?><br/><?= $car->model ?></h4>
                         <?= $car->veicleImage(200) ?>
                         <h5><?= $car->registration ?></h5>
                     </a>
