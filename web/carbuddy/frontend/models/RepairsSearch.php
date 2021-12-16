@@ -7,6 +7,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Repairs;
+use yii\helpers\VarDumper;
 
 /**
  * RepairsSearch represents the model behind the search form of `frontend\models\Repairs`.
@@ -77,9 +78,16 @@ class RepairsSearch extends Repairs
             ]);
         }
         else{
-            $query->andFilterWhere([
-                'contributorId' =>$collaborator->id,
-            ]);
+            try {
+                $query->andFilterWhere([
+                    'contributorId' =>$collaborator->id,
+                ]);
+            } catch(\yii\db\IntegrityException $e) {
+                $query->andFilterWhere([
+                    'id' =>'0',
+                ]);
+                Yii::$app->session->setFlash('error', 'You must have an associated company');
+            }
         }
 
         $query->andFilterWhere(['like', 'repairdescription', $this->repairdescription])
