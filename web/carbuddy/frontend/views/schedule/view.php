@@ -14,7 +14,7 @@ $this->title = $model->car->brand." ".$model->car->model." (".$model->company->c
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Back', ['index'], ['class' => 'btn btn-light']) ?>
+        <?= Html::a('Back', "javascript:history.back()", ['class' => 'btn btn-light']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-secondary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-dark',
