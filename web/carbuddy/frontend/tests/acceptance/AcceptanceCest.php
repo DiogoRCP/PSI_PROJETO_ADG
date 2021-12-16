@@ -49,9 +49,7 @@ class AcceptanceCest
         $I->see('Goals', 'h2');
         $I->see('To manage the project, we use Jira and GitHub.', 'p');
     }
-
-    //Para este teste não dar erro
-    //É necessário a tabela user da BD estar vazia
+    
     public function doSignup(AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/site/signup'));
