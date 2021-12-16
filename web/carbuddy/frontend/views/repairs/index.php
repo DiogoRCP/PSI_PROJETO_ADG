@@ -17,7 +17,7 @@ $this->title = 'Repairs';
     <p>
         <?= Html::a('Back', "javascript:history.back()", ['class' => 'btn btn-light']) ?>
 
-        <?php if (Yii::$app->user->can('frontendCRUDRepair')) { ?>
+        <?php if (Yii::$app->user->can('frontendCrudRepair')) { ?>
 
             <?= Html::a('Add Repair', ['repairs/create'], ['class' => 'btn btn-secondary']) ?>
 
