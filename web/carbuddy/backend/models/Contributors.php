@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use frontend\models\Repairs;
 use Yii;
 
 /**
@@ -84,7 +85,13 @@ class Contributors extends \yii\db\ActiveRecord
         return $this->hasOne(Users::className(), ['id' => 'userId']);
     }
 
-
+    /**
+     * @return int
+     */
+    public function getCompanyId()
+    {
+        return $this->companyId;
+    }
 
     //Funções e metodos dos testes
     public function setspeciality($speciality)

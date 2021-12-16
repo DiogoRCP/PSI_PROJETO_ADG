@@ -66,6 +66,29 @@ class Companies extends \yii\db\ActiveRecord
         return $this->hasMany(Contributors::className(), ['companyId' => 'id']);
     }
 
+    public function getRepair(){
+        $reparacoesTotal = [];
+        $contributor = $this->getContributors()->all();
+        foreach($contributor as $each){
+            $reparacoes = $each->getRepairs()->all();
+            foreach ($reparacoes as $rep){
+                $reparacoesTotal[] = $rep;
+            }
+        }
+        return $reparacoesTotal;
+    }
+
+    public function getRepairCount(){
+        $reparacoesTotal = [];
+        $contributor = $this->getContributors()->all();
+        foreach($contributor as $each){
+            $reparacoes = $each->getRepairs()->all();
+            foreach ($reparacoes as $rep){
+                $reparacoesTotal[] = $rep;
+            }
+        }
+        return sizeof($reparacoesTotal);
+    }
 
     //Funções e metodos dos testes
     public function setname($name)

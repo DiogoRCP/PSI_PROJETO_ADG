@@ -3,10 +3,13 @@
 namespace frontend\models;
 
 use backend\models\Contributors;
+use Exception;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Repairs;
+use yii\helpers\Url;
+use yii\helpers\VarDumper;
 
 /**
  * RepairsSearch represents the model behind the search form of `frontend\models\Repairs`.
@@ -77,9 +80,17 @@ class RepairsSearch extends Repairs
             ]);
         }
         else{
-            $query->andFilterWhere([
-                'contributorId' =>$collaborator->id,
-            ]);
+            try {
+                $query->andFilterWhere([
+                    'contributorId' =>$collaborator->id,
+                ]);
+            } catch(Exception $e) {
+                $query->andFilterWhere([
+                    'id' =>'0',
+                ]);
+                Yii::$app->user->logout();
+                Yii::$app->session->setFlash('error', 'You must have an associated company');
+            }
         }
 
         $query->andFilterWhere(['like', 'repairdescription', $this->repairdescription])

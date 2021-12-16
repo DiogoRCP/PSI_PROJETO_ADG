@@ -66,7 +66,7 @@ return [
                     'extraPatterns' => [
                         'GET get/{username}/{password}' => 'get'
                     ],
-                    'tokens' => ['{username}' => '<username:\d+>', '{password}' => '<password:\d+>',],
+                    'tokens' => ['{username}' => '<username:\w+>', '{password}' => '<password:\w+>',],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
