@@ -19,7 +19,7 @@ $this->title = 'Repairs';
 
         <?php if (Yii::$app->user->can('frontendCRUDRepair')) { ?>
 
-            <?= Html::a('Add Repair', ['create'], ['class' => 'btn btn-secondary']) ?>
+            <?= Html::a('Add Repair', ['repairs/create'], ['class' => 'btn btn-secondary']) ?>
 
         <?php } ?>
     </p>
