@@ -8,6 +8,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Repairs;
+use yii\helpers\Url;
 use yii\helpers\VarDumper;
 
 /**
@@ -87,6 +88,7 @@ class RepairsSearch extends Repairs
                 $query->andFilterWhere([
                     'id' =>'0',
                 ]);
+                Yii::$app->user->logout();
                 Yii::$app->session->setFlash('error', 'You must have an associated company');
             }
         }
