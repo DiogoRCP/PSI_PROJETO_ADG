@@ -87,7 +87,7 @@ class Repairs extends \yii\db\ActiveRecord
         $query = $this::find()
             ->innerJoin("contributors", "repairs.contributorId = contributors.id")
             ->innerJoin("companies", "contributors.companyId = companies.id")
-            ->distinct()
+            ->distinct("companyId")
             ->count('*');
         VarDumper::dump($query);
         exit();
