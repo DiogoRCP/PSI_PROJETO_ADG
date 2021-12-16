@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use backend\models\Contributors;
+use Exception;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -82,7 +83,7 @@ class RepairsSearch extends Repairs
                 $query->andFilterWhere([
                     'contributorId' =>$collaborator->id,
                 ]);
-            } catch(\yii\db\IntegrityException $e) {
+            } catch(Exception $e) {
                 $query->andFilterWhere([
                     'id' =>'0',
                 ]);
