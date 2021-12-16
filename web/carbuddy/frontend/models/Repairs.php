@@ -82,6 +82,12 @@ class Repairs extends \yii\db\ActiveRecord
         return $this->hasOne(Contributors::className(), ['id' => 'contributorId']);
     }
 
+    public function getCompany(){
+        $contributor = $this->getContributor()->one();
+        $company = $contributor->getCompany()->one();
+        return $company;
+    }
+
     //Funções e metodos dos testes
     public function setkilometers($kilometers)
     {

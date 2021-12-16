@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\Companies;
 use common\models\LoginForm;
 use backend\models\Users;
 use backend\models\Charts;
@@ -69,14 +70,14 @@ class SiteController extends Controller
     {
         $usertypes = Users::find()->select('usertype')->distinct()->all();
         $cartypes = Cars::find()->select('cartype')->distinct()->all();
-        $repairsCompany = Repairs::find()
-            ->InnerJoin("contributors", "repairs.contributorId = contributors.id")
-            ->InnerJoin("companies", "contributors.companyId = companies.id")
-            ->distinct("companyId")
-            ->all();
+        $repairsCompany = Companies::find()->all();
 
-        VarDumper::dump($repairsCompany);
-        exit();
+        $totalRepairs = [];
+        $totalRepairsCount = [];
+        foreach ($repairsCompany as $comp){
+            $totalRepairs[] = $comp->companyname;
+            $totalRepairsCount[] = $comp->getRepairCount();
+        }
 
         /**Aqui adiciona-se graficos novos
          * - Tipos de gráficos: line, bar, radar, polarArea, pie, doughnut
@@ -84,7 +85,7 @@ class SiteController extends Controller
         $charts = [
             new Charts("pie", "User Types", Charts::LabelAndData($usertypes, "user"), true),
             new Charts("pie", "Car Types", Charts::LabelAndData($cartypes, "car"), true),
-            new Charts("pie", "Repairs per Companies", ['data' => ["testar", "testamento", "valores"], 'values' => [10, 55, 23]], true)
+            new Charts("pie", "Repairs per Companies", ['data' => $totalRepairs, 'values' => $totalRepairsCount], true)
         ];
 
         if (Yii::$app->user->can('admin')) {
