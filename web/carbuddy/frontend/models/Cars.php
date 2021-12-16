@@ -92,6 +92,17 @@ class Cars extends \yii\db\ActiveRecord
         return $this->hasOne(Users::className(), ['id' => 'userId']);
     }
 
+    /**
+     * @return string
+     */
+    public function getCarType()
+    {
+        $query = $this::find()
+            ->where(['cartype' => $this->carType])
+            ->count('cartype');
+        return $query;
+    }
+
     public function veicleImage($size)
     {
         switch ($this->carType) {

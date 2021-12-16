@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "repairs".
@@ -81,40 +82,51 @@ class Repairs extends \yii\db\ActiveRecord
         return $this->hasOne(Contributors::className(), ['id' => 'contributorId']);
     }
 
+    public function getRepairsPerCompany()
+    {
+        $query = $this::find()
+            ->innerJoin("contributors", "repairs.contributorId = contributors.id")
+            ->innerJoin("companies", "contributors.companyId = companies.id")
+            ->distinct()
+            ->count('*');
+        VarDumper::dump($query);
+        exit();
+        return $query;
+    }
 
     //Funções e metodos dos testes
     public function setkilometers($kilometers)
     {
-        $this->kilometers=$kilometers;
+        $this->kilometers = $kilometers;
     }
 
     public function setrepairdate($repairdate)
     {
-        $this->repairdate=$repairdate;
+        $this->repairdate = $repairdate;
     }
 
     public function setrepairdescription($repairdescription)
     {
-        $this->repairdescription=$repairdescription;
+        $this->repairdescription = $repairdescription;
     }
 
     public function setstate($state)
     {
-        $this->state=$state;
+        $this->state = $state;
     }
 
     public function setrepairstype($repairtype)
     {
-        $this->repairtype=$repairtype;
+        $this->repairtype = $repairtype;
     }
 
     public function setcarid($carid)
     {
-        $this->carId=$carid;
+        $this->carId = $carid;
     }
 
     public function setcontributorid($contributorid)
     {
-        $this->contributorId=$contributorid;
+        $this->contributorId = $contributorid;
     }
 }

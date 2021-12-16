@@ -5,6 +5,8 @@ namespace backend\controllers;
 use common\models\LoginForm;
 use backend\models\Users;
 use backend\models\Charts;
+use frontend\models\Cars;
+use frontend\models\Repairs;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -66,14 +68,19 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $usertypes = Users::find()->select('usertype')->distinct()->all();
+        $cartypes = Cars::find()->select('cartype')->distinct()->all();
+        $repairsCompany = Repairs::find()->all();
 
-        /*Aqui adiciona-se graficos novos
+        VarDumper::dump($repairsCompany[0]->getRepairsPerCompany());
+        exit();
+
+        /**Aqui adiciona-se graficos novos
             - Tipos de gráficos: line, bar, radar, polarArea, pie, doughnut
-        */
+        **/
         $charts = [
-            new Charts("pie", "Tipos de utilizador", Charts::LabelAndData($usertypes), true),
-            new Charts("bar", "Teste", ['data' => ["teste", "testado", "dados"], 'values' => [4, 7, 2]], false),
-            new Charts("line", "Mais um teste", ['data' => ["testar", "testamento", "valores"], 'values' => [10, 55, 23]], false)
+            new Charts("pie", "User Types", Charts::LabelAndData($usertypes, "user"), true),
+            new Charts("pie", "Car Types", Charts::LabelAndData($cartypes, "car"), true),
+            new Charts("pie", "Repairs per Companies", ['data' => ["testar", "testamento", "valores"], 'values' => [10, 55, 23]], true)
         ];
 
         if (Yii::$app->user->can('admin')) {
