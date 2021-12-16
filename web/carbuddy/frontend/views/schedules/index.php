@@ -32,8 +32,12 @@ $this->title = 'Schedules';
             'repairdescription',
             'state',
             'repairtype',
-
-
+            [   'label' => 'Car',
+                'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+                'value' => function ($data) {
+                    return $data->car->registration; // $data['name'] for array data, e.g. using SqlDataProvider.
+                },
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
