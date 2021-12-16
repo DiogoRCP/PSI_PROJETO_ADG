@@ -69,14 +69,18 @@ class SiteController extends Controller
     {
         $usertypes = Users::find()->select('usertype')->distinct()->all();
         $cartypes = Cars::find()->select('cartype')->distinct()->all();
-        $repairsCompany = Repairs::find()->all();
+        $repairsCompany = Repairs::find()
+            ->InnerJoin("contributors", "repairs.contributorId = contributors.id")
+            ->InnerJoin("companies", "contributors.companyId = companies.id")
+            ->distinct("companyId")
+            ->all();
 
-        VarDumper::dump($repairsCompany[0]->getRepairsPerCompany());
+        VarDumper::dump($repairsCompany);
         exit();
 
         /**Aqui adiciona-se graficos novos
-            - Tipos de gráficos: line, bar, radar, polarArea, pie, doughnut
-        **/
+         * - Tipos de gráficos: line, bar, radar, polarArea, pie, doughnut
+         **/
         $charts = [
             new Charts("pie", "User Types", Charts::LabelAndData($usertypes, "user"), true),
             new Charts("pie", "Car Types", Charts::LabelAndData($cartypes, "car"), true),

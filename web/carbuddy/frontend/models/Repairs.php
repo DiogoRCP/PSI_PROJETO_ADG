@@ -82,18 +82,6 @@ class Repairs extends \yii\db\ActiveRecord
         return $this->hasOne(Contributors::className(), ['id' => 'contributorId']);
     }
 
-    public function getRepairsPerCompany()
-    {
-        $query = $this::find()
-            ->innerJoin("contributors", "repairs.contributorId = contributors.id")
-            ->innerJoin("companies", "contributors.companyId = companies.id")
-            ->distinct("companyId")
-            ->count('*');
-        VarDumper::dump($query);
-        exit();
-        return $query;
-    }
-
     //Funções e metodos dos testes
     public function setkilometers($kilometers)
     {
