@@ -135,7 +135,8 @@ class Repairs extends \yii\db\ActiveRecord
         $myObg = [
             'id'=>$this->id,
             'state' => $this->state,
-            'date' => $this->repairdate
+            'user' => $this->car->userId,
+            'date' => date("d/m/y")
         ];
 
         $myJSON = json_encode($myObg);
