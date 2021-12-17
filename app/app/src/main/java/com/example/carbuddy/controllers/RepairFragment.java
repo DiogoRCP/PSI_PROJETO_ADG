@@ -41,6 +41,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
     View v;
     private static ModeloBDHelper database;
     private int carPosition;
+    private String carRegistration;
 
     public RepairFragment() {
         // Required empty public constructor
@@ -76,6 +77,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             carPosition = bundle.getInt("carPosition");
+            carRegistration = bundle.getString("carRegistration");
         }else{
             carPosition = 0;
         }
@@ -99,7 +101,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
 
         getActivity().setTitle(getString(R.string.Repairs));
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Repairs);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(carRegistration);
 
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_garage, container, false);
