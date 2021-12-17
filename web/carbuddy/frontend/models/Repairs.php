@@ -142,12 +142,11 @@ class Repairs extends \yii\db\ActiveRecord
         $myJSON = json_encode($myObg);
 
         if ($insert) {
-            $this->FazPublish("REPAIR", $myJSON);
+            $this->FazPublish("REPAIR-".$this->car->userId, $myJSON);
         } else {
-            $this->FazPublish("REPAIR", $myJSON);
+            $this->FazPublish("REPAIR-".$this->car->userId, $myJSON);
         }
     }
-
 
     public function FazPublish($canal, $msg)
     {
@@ -158,7 +157,7 @@ class Repairs extends \yii\db\ActiveRecord
         $client_id = "phpMQTT-publisher"; // unique!
         $mqtt = new phpMQTT($server, $port, $client_id);
         if ($mqtt->connect(true, NULL, $username, $password)) {
-            $mqtt->publish($canal, $msg, 0);
+            $mqtt->publish($canal, $msg, 0, true);
             $mqtt->close();
         } else {
             file_put_contents('debug.output', 'Time out!');

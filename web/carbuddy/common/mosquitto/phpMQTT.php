@@ -303,9 +303,7 @@ class phpMQTT
             ]
         );
 
-        do {
             $return = $this->proc();
-        } while ($return === true);
 
         return $return;
     }
