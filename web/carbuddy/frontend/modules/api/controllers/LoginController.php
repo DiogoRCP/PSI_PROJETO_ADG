@@ -25,7 +25,7 @@ class LoginController extends ActiveController
         if ($loginmodel->load($login) && $loginmodel->login($type)) {
             $user = Yii::$app->user->getIdentity();
 
-            return [$user, "REPAIR" => $this->FazSubscribe("REPAIR-".Yii::$app->user->getId())];
+            return ["user" => $user, "repair" => $this->FazSubscribe("REPAIR-".Yii::$app->user->getId())];
         }
 
         return ['Login' => false];
