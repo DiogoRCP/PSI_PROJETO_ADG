@@ -142,9 +142,9 @@ class Repairs extends \yii\db\ActiveRecord
         $myJSON = json_encode($myObg);
 
         if ($insert) {
-            $this->FazPublish("INSERT", $myJSON);
+            $this->FazPublish("REPAIR", $myJSON);
         } else {
-            $this->FazPublish("UPDATE", $myJSON);
+            $this->FazPublish("REPAIR", $myJSON);
         }
     }
 
