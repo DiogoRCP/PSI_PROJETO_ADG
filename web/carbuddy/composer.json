@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap4": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "2amigos/yii2-chartjs-widget": "~2.0",
-      "ext-json": "*"
+      "ext-json": "*",
+        "php-mqtt/client": "^0.3.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
