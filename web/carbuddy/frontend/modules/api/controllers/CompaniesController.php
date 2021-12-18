@@ -1,12 +1,17 @@
 <?php
 
 namespace frontend\modules\api\controllers;
-use backend\models\User;
+use common\models\User;
+use Yii;
 use yii\filters\auth\QueryParamAuth;
+use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
+use yii\web\ForbiddenHttpException;
+
 class CompaniesController extends ActiveController
 {
     public $modelClass = 'backend\models\Companies';
+    const noPermission = 'Access denied';
 
     public function behaviors()
     {
@@ -25,14 +30,34 @@ class CompaniesController extends ActiveController
             return $user;
         } return null;
     }
-    
 
-    public function actionTotal(){
-        $Companiessmodel = new $this -> modelClass;
-        $recs = $Companiessmodel::find() -> all();
-        return ['total' => count($recs)];
+    public function checkAccess($action, $model = null, $params = [])
+    {
+        if ($action === 'index') {
+            if (!Yii::$app->user->can('client')) {
+                throw new ForbiddenHttpException(self::noPermission);
+            }
+        } else {
+            if (!Yii::$app->user->can('backendCrudCompany')) {
+                throw new ForbiddenHttpException(self::noPermission);
+            }
+        }
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
+    public function actionTotal(){
+        if (Yii::$app->user->can('backendCrudCompany')) {
+            $Companiessmodel = new $this->modelClass;
+            $recs = $Companiessmodel::find()->all();
+            return ['total' => count($recs)];
+        }else{
+            throw new ForbiddenHttpException(self::noPermission);
+        }
+    }
+
+    // todo ía aqui a alterar as permissões de accesso pelo rbac
     //http://localhost:8080/v1/companies/set/3
 
     public function actionSet($limit){
@@ -45,7 +70,7 @@ class CompaniesController extends ActiveController
 
     public function actionPost() {
 
-$name=\Yii::$app -> request -> post('name');
+$name= Yii::$app -> request -> post('name');
 
 $Companiessmodel = new $this -> modelClass;
 $Companiessmodel -> name = $name;
