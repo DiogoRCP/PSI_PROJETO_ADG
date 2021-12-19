@@ -35,7 +35,7 @@ class CarsController extends ActiveController
 
     public function checkAccess($action, $model = null, $params = [])
     {
-        if ($action === 'index') {
+        if ($action === 'index' or $action === 'create') {
             if (!Yii::$app->user->can('admin')) {
                 throw new ForbiddenHttpException(self::noPermission);
             }
@@ -106,6 +106,10 @@ class CarsController extends ActiveController
 
 // http://localhost:8080/api/cars/post
 
+    /**
+     * Garantir que o utilizador só adiciona os seus proprios carros
+     * @throws ForbiddenHttpException
+     */
     public function actionPost()
     {
         if (Yii::$app->user->can('frontendCrudVehicle')) {

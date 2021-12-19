@@ -66,7 +66,7 @@ return [
                     'extraPatterns' => [
                         'GET get/{username}/{password}' => 'get'
                     ],
-                    'tokens' => ['{username}' => '<username:\w+>', '{password}' => '<password:\w+>',],
+                    'tokens' => ['{id}' => '<id:\d+>', '{username}' => '<username:\w+>', '{password}' => '<password:\w+>',],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -79,7 +79,7 @@ return [
                         'PUT put' => 'put',
                         'DELETE  delete' => 'delete'
                     ],
-                    'tokens' => ['{limit}' => '<limit:\d+>',],
+                    'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -102,9 +102,6 @@ return [
                     'extraPatterns' => [
                         'GET total' => 'total',
                         'GET set/{limit}' => 'set',
-                        'POST post' => 'post',
-                        'PUT put/{id}' => 'put',
-                        'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
@@ -114,11 +111,9 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
-                        'POST post' => 'post',
-                        'PUT put/{id}' => 'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'GET set/{limit}' => 'set',
                     ],
-                    'tokens' => ['{id}' => '<id:\d+>',],
+                    'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
