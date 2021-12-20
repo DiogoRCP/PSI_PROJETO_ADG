@@ -3,7 +3,7 @@
 namespace frontend\modules\api\controllers;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
-use backend\models\User;
+use common\models\User;
 
 class ContributorsController extends ActiveController
 {

@@ -61,7 +61,6 @@ class CompaniesController extends ActiveController
         }
     }
 
-    // todo ía aqui a alterar as permissões de accesso pelo rbac
     //http://localhost:8080/v1/companies/set/3
 
     /**

@@ -35,7 +35,7 @@ class CarsController extends ActiveController
 
     public function checkAccess($action, $model = null, $params = [])
     {
-        if ($action === 'index' or $action === 'create') {
+        if ($action === 'index' or $action === 'create' or $action === 'delete') {
             if (!Yii::$app->user->can('admin')) {
                 throw new ForbiddenHttpException(self::noPermission);
             }
@@ -115,6 +115,8 @@ class CarsController extends ActiveController
         if (Yii::$app->user->can('frontendCrudVehicle')) {
             $car = json_decode(Yii::$app->request->rawBody);
 
+            VarDumper::dump($car);
+            exit();
             $carssmodel = new $this->modelClass;
 
             $carssmodel->userId = Yii::$app->user->getId();
@@ -132,6 +134,16 @@ class CarsController extends ActiveController
 
             $ret = $carssmodel->save(false);
             return ['SaveError' => $ret];
+        }else{
+            throw new ForbiddenHttpException(self::noPermission);
+        }
+    }
+
+    public function actionDelete($id){
+        if (Yii::$app->user->can('frontendCrudVehicle')) {
+            $CarsModel = new $this->modelClass;
+            $recs = $CarsModel::find()->where('userId = ' . Yii::$app->user->getId())->where('id = ' . $id)->all();
+            $recs->delete();
         }else{
             throw new ForbiddenHttpException(self::noPermission);
         }

@@ -77,7 +77,7 @@ return [
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put' => 'put',
-                        'DELETE  delete' => 'delete'
+                        'DELETE delete' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
@@ -91,7 +91,7 @@ return [
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put/{id}' => 'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'DELETE delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>', '{car}' => '<car:\d+>',],
                 ],
@@ -124,7 +124,8 @@ return [
                         'GET total' => 'total',
                         'GET totaluser' => 'totaluser',
                         'GET set/{limit}' => 'set',
-                        'POST post' => 'post'
+                        'POST post' => 'post',
+                        'DELETE delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
@@ -137,7 +138,7 @@ return [
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put/{id}' => 'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'DELETE delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
@@ -150,7 +151,7 @@ return [
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put/{id}' => 'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'DELETE delete/{id}' => 'delete'
                     ],
                       'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ]
