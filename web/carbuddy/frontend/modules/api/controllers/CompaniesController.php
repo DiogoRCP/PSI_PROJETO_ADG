@@ -26,7 +26,6 @@ class CompaniesController extends ActiveController
 
     public function auth($token)
     {
-
         $user = User::findIdentityByAccessToken($token);
         if ($user != null) {
             return $user;
@@ -36,14 +35,8 @@ class CompaniesController extends ActiveController
 
     public function checkAccess($action, $model = null, $params = [])
     {
-        if ($action === 'index') {
-            if (!Yii::$app->user->can('client')) {
-                throw new ForbiddenHttpException(self::noPermission);
-            }
-        } else {
-            if (!Yii::$app->user->can('backendCrudCompany')) {
-                throw new ForbiddenHttpException(self::noPermission);
-            }
+        if (!Yii::$app->user->can('backendCrudCompany')) {
+            throw new ForbiddenHttpException(self::noPermission);
         }
     }
 

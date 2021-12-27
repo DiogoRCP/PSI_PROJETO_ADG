@@ -77,7 +77,7 @@ return [
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put' => 'put',
-                        'DELETE delete' => 'delete'
+                        'DELETE delete/{id}' => 'delete'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
@@ -89,7 +89,7 @@ return [
                         'GET history/{car}' => 'history',
                         'GET total' => 'total',
                         'GET set/{limit}' => 'set',
-                        'POST post' => 'post',
+                        'GET repaircontributor' => 'repaircontributor',
                         'PUT put/{id}' => 'put',
                         'DELETE delete/{id}' => 'delete'
                     ],
@@ -109,11 +109,6 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/companieslist',
                     'pluralize' => false,
-                    'extraPatterns' => [
-                        'GET total' => 'total',
-                        'GET set/{limit}' => 'set',
-                    ],
-                    'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -125,7 +120,7 @@ return [
                         'GET totaluser' => 'totaluser',
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
-                        'DELETE delete/{id}' => 'delete'
+                        'DELETE deleted/{id}' => 'deleted'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],
@@ -135,10 +130,7 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
-                        'GET set/{limit}' => 'set',
-                        'POST post' => 'post',
-                        'PUT put/{id}' => 'put',
-                        'DELETE delete/{id}' => 'delete'
+                        'GET set/{limit}' => 'set'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],

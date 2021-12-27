@@ -3,7 +3,6 @@
 namespace frontend\modules\api\controllers;
 
 use Yii;
-use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
 use common\mosquitto\phpMQTT;
 
@@ -13,7 +12,6 @@ class LoginController extends ActiveController
 
     public function actionGet($username, $password)
     {
-
         $login = ['LoginForm' => [
             'username' => $username,
             'password' => $password]
@@ -25,7 +23,7 @@ class LoginController extends ActiveController
         if ($loginmodel->load($login) && $loginmodel->login($type)) {
             $user = Yii::$app->user->getIdentity();
 
-            return ["user" => $user, "repair" => $this->FazSubscribe("REPAIR-".Yii::$app->user->getId())];
+            return ["user" => $user, "repair" => $this->FazSubscribe("REPAIR-" . Yii::$app->user->getId())];
         }
 
         return ['Login' => false];

@@ -3,7 +3,9 @@
 namespace frontend\modules\api\controllers;
 
 use common\models\User;
+use Exception;
 use Yii;
+use yii\db\IntegrityException;
 use yii\filters\auth\QueryParamAuth;
 use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
@@ -55,7 +57,7 @@ class CarsController extends ActiveController
             $CarsModel = new $this->modelClass;
             $recs = $CarsModel::find()->where('userId = ' . Yii::$app->user->getId())->all();
             return $recs;
-        }else{
+        } else {
             throw new ForbiddenHttpException(self::noPermission);
         }
     }
@@ -69,7 +71,7 @@ class CarsController extends ActiveController
             $Carssmodel = new $this->modelClass;
             $recs = $Carssmodel::find()->all();
             return ['total' => count($recs)];
-        }else{
+        } else {
             throw new ForbiddenHttpException(self::noPermission);
         }
     }
@@ -83,7 +85,7 @@ class CarsController extends ActiveController
             $Carssmodel = new $this->modelClass;
             $recs = $Carssmodel::find()->where('userId = ' . Yii::$app->user->getId())->all();
             return ['total' => count($recs)];
-        }else{
+        } else {
             throw new ForbiddenHttpException(self::noPermission);
         }
     }
@@ -99,7 +101,7 @@ class CarsController extends ActiveController
             $Carssmodel = new $this->modelClass;
             $rec = $Carssmodel::find()->limit($limit)->all();
             return ['limite' => $limit, 'Records' => $rec];
-        }else{
+        } else {
             throw new ForbiddenHttpException(self::noPermission);
         }
     }
@@ -113,38 +115,42 @@ class CarsController extends ActiveController
     public function actionPost()
     {
         if (Yii::$app->user->can('frontendCrudVehicle')) {
-            $car = json_decode(Yii::$app->request->rawBody);
+            $car = Yii::$app->request->post();
 
-            VarDumper::dump($car);
-            exit();
             $carssmodel = new $this->modelClass;
 
             $carssmodel->userId = Yii::$app->user->getId();
-            $carssmodel->vin = $car->vin;
-            $carssmodel->brand = $car->brand;
-            $carssmodel->model = $car->model;
-            $carssmodel->color = $car->color;
-            $carssmodel->carType = $car->cartype;
-            $carssmodel->fuelType = $car->fueltype;
-            $carssmodel->registration = $car->registration;
-            $carssmodel->modelyear = $car->modelyear;
-            $carssmodel->kilometers = $car->kilometers;
-            $carssmodel->displacement = $car->displacement;
-            $carssmodel->state = $car->state;
+            $carssmodel->vin = $car['vin'];
+            $carssmodel->brand = $car['brand'];
+            $carssmodel->model = $car['model'];
+            $carssmodel->color = $car['color'];
+            $carssmodel->carType = $car['carType'];
+            $carssmodel->fuelType = $car['fuelType'];
+            $carssmodel->registration = $car['registration'];
+            $carssmodel->modelyear = $car['modelyear'];
+            $carssmodel->kilometers = $car['kilometers'];
+            $carssmodel->displacement = $car['displacement'];
+            $carssmodel->state = $car['state'];
 
-            $ret = $carssmodel->save(false);
+            $ret = $carssmodel->save();
             return ['SaveError' => $ret];
-        }else{
+        } else {
             throw new ForbiddenHttpException(self::noPermission);
         }
     }
 
-    public function actionDelete($id){
+    public function actionDeleted($id)
+    {
         if (Yii::$app->user->can('frontendCrudVehicle')) {
             $CarsModel = new $this->modelClass;
-            $recs = $CarsModel::find()->where('userId = ' . Yii::$app->user->getId())->where('id = ' . $id)->all();
-            $recs->delete();
-        }else{
+            try {
+                $recs = $CarsModel->deleteAll("id=" . $id . " and userId = " . Yii::$app->user->getId());
+                return ['SaveError' => $recs];
+
+            } catch (IntegrityException $e) {
+                Yii::$app->session->setFlash('error', 'You can´t delete this Car');
+            }
+        } else {
             throw new ForbiddenHttpException(self::noPermission);
         }
     }

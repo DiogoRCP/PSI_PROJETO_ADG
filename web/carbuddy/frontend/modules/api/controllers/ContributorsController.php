@@ -1,13 +1,16 @@
 <?php
 
 namespace frontend\modules\api\controllers;
+use Yii;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use common\models\User;
+use yii\web\ForbiddenHttpException;
 
 class ContributorsController extends ActiveController
 {
     public $modelClass = 'backend\models\Contributors';
+    const noPermission = 'Access denied';
 
     public function behaviors()
     {
@@ -27,45 +30,34 @@ class ContributorsController extends ActiveController
         } return null;
     }
 
-    public function actionIndex()
+    public function checkAccess($action, $model = null, $params = [])
     {
-        return $this->render('index');
+        if (!Yii::$app->user->can('backendCrudContributor')) {
+            throw new ForbiddenHttpException(self::noPermission);
+        }
     }
-    public function actionTotal(){
-        $Contributorssmodel = new $this -> modelClass;
-        $recs = $Contributorssmodel::find() -> all();
-        return ['total' => count($recs)];
-    }
-
-    //http://localhost:8080/v1/contributors/set/3
 
     public function actionSet($limit){
-        $Contributorssmodel = new $this -> modelClass;
-        $rec = $Contributorssmodel::find() -> limit($limit) -> all();
-        return ['limite' => $limit, 'Records' => $rec ];
+        if (Yii::$app->user->can('backendCrudContributor')) {
+            $Contributormodel = new $this->modelClass;
+            $rec = $Contributormodel::find()->limit($limit)->all();
+            return ['limite' => $limit, 'Records' => $rec];
+        } else {
+            throw new ForbiddenHttpException(self::noPermission);
+        }
     }
 
-// http://localhost:8080/v1/contributors/post
-
-    public function actionPost() {
-
-        $name=\Yii::$app -> request -> post('name');
-
-        $Contributorssmodel = new $this -> modelClass;
-        $Contributorssmodel -> name = $name;
-
-        $ret = $Contributorssmodel -> save(false);
-        return ['SaveError' => $ret];
-    }
-
-    //http://localhost:8080/v1/contributors/delete/id
-
-    public function actionDelete($id)
+    /**
+     * @throws ForbiddenHttpException
+     */
+    public function actionTotal()
     {
-        $Contributorssmodel = new $this->modelClass;
-        $ret=$Contributorssmodel->deleteAll("id=".$id);
-        if($ret)
-            return ['DelError' => $ret];
-        throw new \yii\web\NotFoundHttpException("Client id not found!");
+        if (Yii::$app->user->can('backendCrudContributor')) {
+            $Contributormodel = new $this->modelClass;
+            $recs = $Contributormodel::find()->all();
+            return ['total' => count($recs)];
+        } else {
+            throw new ForbiddenHttpException(self::noPermission);
+        }
     }
 }
