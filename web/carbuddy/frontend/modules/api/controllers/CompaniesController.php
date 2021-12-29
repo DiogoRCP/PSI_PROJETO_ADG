@@ -54,7 +54,6 @@ class CompaniesController extends ActiveController
         }
     }
 
-    //http://localhost:8080/v1/companies/set/3
 
     /**
      * @throws ForbiddenHttpException

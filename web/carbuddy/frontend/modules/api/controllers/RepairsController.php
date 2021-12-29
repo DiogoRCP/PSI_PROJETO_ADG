@@ -122,7 +122,6 @@ class RepairsController extends ActiveController
         return ['total' => count($recs)];
     }
 
-    //http://localhost:8080/v1/repairs/set/3
 
     public function actionSet($limit)
     {

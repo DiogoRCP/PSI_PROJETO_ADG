@@ -128,4 +128,47 @@ class SchedulesController extends ActiveController
             throw new ForbiddenHttpException(self::noPermission);
         }
     }
+
+    public function actionPutclient($id)
+    {
+        if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
+            $schedule = Yii::$app->request->post();
+            $scheduleModel = Schedules::findOne($id);
+
+                $car = $scheduleModel::findOne($id)->car;
+                if ($car->userId === Yii::$app->user->getId()) {
+                    $scheduleModel->schedulingdate = $schedule['schedulingdate'];
+                    $scheduleModel->repairdescription = $schedule['repairdescription'];
+                    $scheduleModel->repairtype = $schedule['repairtype'];
+                    $scheduleModel->carId = $schedule['carId'];
+                    $rec = $scheduleModel->save();
+                    return ['PUT' => $rec];
+                }else {
+                    throw new ForbiddenHttpException(self::noPermission);
+                }
+        } else {
+            throw new ForbiddenHttpException(self::noPermission);
+        }
+    }
+
+    public function actionPutcontributor($id)
+    {
+        if (Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
+            $schedule = Yii::$app->request->post();
+            $scheduleModel = Schedules::findOne($id);
+
+            $company = $scheduleModel::findOne($id)->companyId;
+            $contributor = Contributors::find()->where("userId = " . Yii::$app->user->getId())->one();
+            if ($company === $contributor->companyId) {
+                $scheduleModel->schedulingdate = $schedule['schedulingdate'];
+                $scheduleModel->state = $schedule['state'];
+                $rec = $scheduleModel->save();
+                return ['PUT' => $rec];
+            }else {
+                throw new ForbiddenHttpException(self::noPermission);
+            }
+        } else {
+            throw new ForbiddenHttpException(self::noPermission);
+        }
+    }
 }

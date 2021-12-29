@@ -61,7 +61,6 @@ class UserController extends ActiveController
         }
     }
 
-    //http://localhost:8080/api/user/set/3
 
     public function actionSet($limit)
     {
@@ -75,7 +74,6 @@ class UserController extends ActiveController
     }
 
 
-    //http://localhost:8080/api/user/delete/id
 
     public function actionDeleted()
     {

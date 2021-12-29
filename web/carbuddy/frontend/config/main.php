@@ -142,7 +142,8 @@ return [
                         'GET total' => 'total',
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
-                        'PUT put/{id}' => 'put',
+                        'PUT putclient/{id}' => 'putclient',
+                        'PUT putcontributor/{id}' => 'putcontributor',
                         'DELETE deleteclient/{id}' => 'deleteclient',
                         'DELETE deletecontributor/{id}' => 'deletecontributor'
                     ],
