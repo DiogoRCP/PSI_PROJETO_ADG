@@ -9,6 +9,7 @@ use frontend\models\Cars;
 use frontend\models\Repairs;
 use frontend\models\RepairsSearch;
 use Yii;
+use yii\db\IntegrityException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -165,7 +166,7 @@ class RepairsController extends Controller
         if (Yii::$app->user->can('frontendCrudRepair')) {
             try {
                 $this->findModel($id)->delete();
-            } catch(\yii\db\IntegrityException $e) {
+            } catch(IntegrityException $e) {
                 Yii::$app->session->setFlash('error', 'You can´t delete this Repair');
             }
             return $this->redirect(['index']);
