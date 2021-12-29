@@ -119,6 +119,7 @@ return [
                         'GET totaluser' => 'totaluser',
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
+                        'PUT put/{id}' => 'put',
                         'DELETE deleted/{id}' => 'deleted'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
@@ -142,7 +143,8 @@ return [
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put/{id}' => 'put',
-                        'DELETE delete/{id}' => 'delete'
+                        'DELETE deleteclient/{id}' => 'deleteclient',
+                        'DELETE deletecontributor/{id}' => 'deletecontributor'
                     ],
                       'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ]

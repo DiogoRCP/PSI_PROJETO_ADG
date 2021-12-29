@@ -4,6 +4,7 @@ namespace frontend\modules\api\controllers;
 
 use common\models\User;
 use Exception;
+use frontend\models\Cars;
 use Yii;
 use yii\db\IntegrityException;
 use yii\filters\auth\QueryParamAuth;
@@ -84,8 +85,6 @@ class CarsController extends ActiveController
         }
     }
 
-    //http://localhost:8080/api/cars/set/3
-
     /**
      * @throws ForbiddenHttpException
      */
@@ -99,8 +98,6 @@ class CarsController extends ActiveController
             throw new ForbiddenHttpException(self::noPermission);
         }
     }
-
-// http://localhost:8080/api/cars/post
 
     /**
      * Garantir que o utilizador só adiciona os seus proprios carros
@@ -133,35 +130,49 @@ class CarsController extends ActiveController
         }
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionPut($id)
     {
         if (Yii::$app->user->can('frontendCrudVehicle')) {
             $car = Yii::$app->request->post();
 
-            $carsmodel = new $this->modelClass;
+            $carssmodel = new $this->modelClass;
 
-            $rec = $carsmodel::find()->where('id = ' . Yii::$app->user->getId())->one();
+            if (Cars::findOne($id)->userId === Yii::$app->user->getId()) {
+                $carssmodel->vin = $car['vin'];
+                $carssmodel->brand = $car['brand'];
+                $carssmodel->model = $car['model'];
+                $carssmodel->color = $car['color'];
+                $carssmodel->carType = $car['carType'];
+                $carssmodel->fuelType = $car['fuelType'];
+                $carssmodel->registration = $car['registration'];
+                $carssmodel->modelyear = $car['modelyear'];
+                $carssmodel->kilometers = $car['kilometers'];
+                $carssmodel->displacement = $car['displacement'];
+                $carssmodel->state = $car['state'];
 
-            if (isset($user->username)) $rec->username = $user->username;
-            if (isset($user->usertype)) $rec->usertype = $user->usertype;
-            if (isset($user->nif)) $rec->nif = $user->nif;
-            if (isset($user->birsthday)) $rec->birsthday = $user->birsthday;
-            if (isset($user->email)) $rec->email = $user->email;
-            if (isset($user->phonenumber)) $rec->phonenumber = $user->phonenumber;
-
-            $rec->save(false);
-            //return ['SaveError1' => $rec];
-            //throw new \yii\web\NotFoundHttpException("Client id not found!");
+                $rec = $carssmodel->save();
+                return ['Save' => $rec];
+            }else{
+                throw new ForbiddenHttpException(self::noPermission);
+            }
+        }else{
+            throw new ForbiddenHttpException(self::noPermission);
         }
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionDeleted($id)
     {
         if (Yii::$app->user->can('frontendCrudVehicle')) {
             $CarsModel = new $this->modelClass;
             try {
                 $recs = $CarsModel->deleteAll("id=" . $id . " and userId = " . Yii::$app->user->getId());
-                return ['SaveError' => $recs];
+                return ['DEL' => $recs];
 
             } catch (IntegrityException $e) {
                 Yii::$app->session->setFlash('error', 'You can´t delete this Car');

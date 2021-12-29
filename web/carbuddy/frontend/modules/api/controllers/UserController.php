@@ -7,6 +7,7 @@ use Yii;
 use yii\rest\ActiveController;
 use yii\filters\auth\QueryParamAuth;
 use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 
 class UserController extends ActiveController
 {
@@ -39,13 +40,12 @@ class UserController extends ActiveController
 
     public function actionAccount()
     {
-        if(!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) {
             $Usersmodel = new $this->modelClass;
             $user = $Usersmodel::findOne(Yii::$app->user->getId());
 
             return $user;
-        }
-        else{
+        } else {
             return self::noPermission;
         }
     }
@@ -82,9 +82,7 @@ class UserController extends ActiveController
         if (Yii::$app->user->can('client')) {
             $Usersmodel = new $this->modelClass;
             $ret = $Usersmodel->deleteAll("id=" . Yii::$app->user->getId());
-            if ($ret)
-                return ['DelError' => $ret];
-            throw new \yii\web\NotFoundHttpException("Client id not found!");
+            return ['Del' => $ret];
         } else {
             return self::noPermission;
         }
@@ -101,8 +99,7 @@ class UserController extends ActiveController
             $rec->email = $user['email'];
             $rec->password_hash = Yii::$app->security->generatePasswordHash($user['password']);
             $rec->save();
-            return ['SaveError1' => $rec];
-            //throw new \yii\web\NotFoundHttpException("Client id not found!");
+            return ['Save' => $rec];
         } else {
             return self::noPermission;
         }
