@@ -75,9 +75,8 @@ return [
                     'extraPatterns' => [
                         'GET total' => 'total',
                         'GET set/{limit}' => 'set',
-                        'POST post' => 'post',
                         'PUT put' => 'put',
-                        'DELETE delete/{id}' => 'delete'
+                        'DELETE deleted' => 'deleted'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>',],
                 ],

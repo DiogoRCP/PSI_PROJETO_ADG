@@ -2,11 +2,14 @@
 
 namespace frontend\modules\api\controllers;
 use backend\models\User;
+use frontend\models\Schedules;
+use Yii;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 class SchedulesController extends ActiveController
 {
     public $modelClass = 'frontend\models\Schedules';
+    const noPermission = 'Access denied';
 
     public function behaviors()
     {
@@ -32,29 +35,42 @@ class SchedulesController extends ActiveController
     }
 
     public function actionTotal(){
-        $Schedulessmodel = new $this -> modelClass;
-        $recs = $Schedulessmodel::find() -> all();
-        return ['total' => count($recs)];
+        if (Yii::$app->user->can('admin')) {
+            $Schedulessmodel = new $this -> modelClass;
+            $recs = $Schedulessmodel::find() -> all();
+            return ['total' => count($recs)];
+        } else {
+            return self::noPermission;
+        }
     }
 
     //http://localhost:8080/v1/schedules/set/3
 
     public function actionSet($limit){
-        $Schedulessmodel = new $this -> modelClass;
-        $rec = $Schedulessmodel::find() -> limit($limit) -> all();
+        if (Yii::$app->user->can('admin')) {
+            $Schedulessmodel = new $this -> modelClass;
+            $rec = $Schedulessmodel::find() -> limit($limit) -> all();
         return ['limite' => $limit, 'Records' => $rec ];
+        } else {
+            return self::noPermission;
+        }
     }
 
 // http://localhost:8080/v1/schedules/post
 
     public function actionPost() {
+        $schedule = Yii::$app->request->post();
 
-        $name=\Yii::$app -> request -> post('name');
+        $schedulemodel = new $this->modelClass;
 
-        $Schedulessmodel = new $this -> modelClass;
-        $Schedulessmodel -> name = $name;
+        $schedulemodel->schedulingdate = $schedule['schedulingdate'];
+        $schedulemodel->repairdescription = $schedule['repairdescription'];
+        $schedulemodel->state = $schedule['state'];
+        $schedulemodel->repairtype = $schedule['repairtype'];
+        $schedulemodel->carId = $schedule['carId'];
+        $schedulemodel->carId = $schedule['companyId'];
 
-        $ret = $Schedulessmodel -> save(false);
+        $ret = $schedulemodel->save();
         return ['SaveError' => $ret];
     }
 
