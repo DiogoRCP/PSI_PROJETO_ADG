@@ -37,14 +37,8 @@ class CarsController extends ActiveController
 
     public function checkAccess($action, $model = null, $params = [])
     {
-        if ($action === 'index' or $action === 'create' or $action === 'delete') {
-            if (!Yii::$app->user->can('admin')) {
-                throw new ForbiddenHttpException(self::noPermission);
-            }
-        } else {
-            if (!Yii::$app->user->can('frontendCrudVehicle')) {
-                throw new ForbiddenHttpException(self::noPermission);
-            }
+        if (!Yii::$app->user->can('admin')) {
+            throw new ForbiddenHttpException(self::noPermission);
         }
     }
 
@@ -136,6 +130,28 @@ class CarsController extends ActiveController
             return ['SaveError' => $ret];
         } else {
             throw new ForbiddenHttpException(self::noPermission);
+        }
+    }
+
+    public function actionPut($id)
+    {
+        if (Yii::$app->user->can('frontendCrudVehicle')) {
+            $car = Yii::$app->request->post();
+
+            $carsmodel = new $this->modelClass;
+
+            $rec = $carsmodel::find()->where('id = ' . Yii::$app->user->getId())->one();
+
+            if (isset($user->username)) $rec->username = $user->username;
+            if (isset($user->usertype)) $rec->usertype = $user->usertype;
+            if (isset($user->nif)) $rec->nif = $user->nif;
+            if (isset($user->birsthday)) $rec->birsthday = $user->birsthday;
+            if (isset($user->email)) $rec->email = $user->email;
+            if (isset($user->phonenumber)) $rec->phonenumber = $user->phonenumber;
+
+            $rec->save(false);
+            //return ['SaveError1' => $rec];
+            //throw new \yii\web\NotFoundHttpException("Client id not found!");
         }
     }
 
