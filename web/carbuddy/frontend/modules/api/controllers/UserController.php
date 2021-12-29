@@ -6,11 +6,12 @@ use common\models\User;
 use Yii;
 use yii\rest\ActiveController;
 use yii\filters\auth\QueryParamAuth;
+use yii\web\ForbiddenHttpException;
 
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
-    const noPermission = 'Access denied';
+    const noPermission = 'Access denied - Use Custom Methods';
 
     public function behaviors()
     {
@@ -29,6 +30,11 @@ class UserController extends ActiveController
             return $user;
         }
         return null;
+    }
+
+    public function checkAccess($action, $model = null, $params = [])
+    {
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
     public function actionAccount()
@@ -68,22 +74,10 @@ class UserController extends ActiveController
         }
     }
 
-// http://localhost:8080/api/user/post
-
-    public function actionPost()
-    {
-        // lembrar que para fazer post de um user, nessa altura ainda não existe access-token
-        $username = Yii::$app->request->post('username');
-        $Usersmodel = new $this->modelClass;
-        $Usersmodel->username = $username;
-
-        $ret = $Usersmodel->save(false);
-        return ['SaveError' => $ret];
-    }
 
     //http://localhost:8080/api/user/delete/id
 
-    public function actionDelete()
+    public function actionDeleted()
     {
         if (Yii::$app->user->can('client')) {
             $Usersmodel = new $this->modelClass;
@@ -99,20 +93,15 @@ class UserController extends ActiveController
     public function actionPut()
     {
         if (Yii::$app->user->can('client')) {
-            $user = json_decode(Yii::$app->request->rawBody);
+            $user = Yii::$app->request->post();
 
             $Usermodel = new $this->modelClass;
             $rec = $Usermodel::find()->where('id = ' . Yii::$app->user->getId())->one();
 
-            if (isset($user->username)) $rec->username = $user->username;
-            if (isset($user->usertype)) $rec->usertype = $user->usertype;
-            if (isset($user->nif)) $rec->nif = $user->nif;
-            if (isset($user->birsthday)) $rec->birsthday = $user->birsthday;
-            if (isset($user->email)) $rec->email = $user->email;
-            if (isset($user->phonenumber)) $rec->phonenumber = $user->phonenumber;
-
-            $rec->save(false);
-            //return ['SaveError1' => $rec];
+            $rec->email = $user['email'];
+            $rec->password_hash = Yii::$app->security->generatePasswordHash($user['password']);
+            $rec->save();
+            return ['SaveError1' => $rec];
             //throw new \yii\web\NotFoundHttpException("Client id not found!");
         } else {
             return self::noPermission;
