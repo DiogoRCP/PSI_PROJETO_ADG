@@ -85,10 +85,7 @@ class SiteController extends Controller
             $searchModel = new RepairsSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 
-            return $this->render('..\repairs\index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+            return $this->redirect(['repairs/index']);
         }
         if (Yii::$app->user->can('frontendCrudVehicle')) {
             $model = Cars::find()->where("userId =" . Yii::$app->getUser()->getId())->all();
