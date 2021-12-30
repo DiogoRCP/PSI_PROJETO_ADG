@@ -64,7 +64,7 @@ class SchedulesController extends Controller
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
+        if (Yii::$app->user->can('frontendCrudSchedulesClient') & $this->findModel($id)->car->userId == Yii::$app->user->getId()) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
@@ -118,7 +118,7 @@ class SchedulesController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
+        if (Yii::$app->user->can('frontendCrudSchedulesClient') & $this->findModel($id)->car->userId == Yii::$app->user->getId()) {
             $model = $this->findModel($id);
             $modelCompanies = Companies::find()->all();
             $modelCars = Cars::find()->all();

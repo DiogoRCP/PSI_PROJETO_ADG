@@ -109,7 +109,6 @@ class UserController extends Controller
         else{
             return $this->goHome();
         }
-
     }
 
     /**

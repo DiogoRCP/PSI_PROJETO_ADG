@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use frontend\models\Cars;
 use frontend\models\Companies;
+use frontend\models\Contributors;
 use frontend\models\Schedules;
 use frontend\models\SchedulesSearch;
 use Yii;
@@ -63,9 +64,17 @@ class ScheduleController extends Controller
     public function actionView($id)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-            ]);
+            $model = $this->findModel($id);
+            $contributor = Contributors::find()->where("userId = " . Yii::$app->user->getId())->one();
+            if($contributor->companyId === $model->companyId){
+                return $this->render('view', [
+                    'model' => $this->findModel($id),
+                ]);
+            }
+            else {
+                Yii::$app->user->logout();
+                return $this->goHome();
+            }
         } else {
             Yii::$app->user->logout();
             return $this->goHome();
@@ -84,16 +93,23 @@ class ScheduleController extends Controller
     {
         if (Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
             $model = $this->findModel($id);
-            $modelCompanies = Companies::find()->all();
-            $modelCars = Cars::find()->all();
+            $contributor = Contributors::find()->where("userId = " . Yii::$app->user->getId())->one();
+            if($contributor->companyId === $model->companyId){
+                $modelCompanies = Companies::find()->all();
+                $modelCars = Cars::find()->all();
 
-            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+
+                return $this->render('update', [
+                    'model' => $model, 'modelCompanies' => $modelCompanies, 'modelCars' => $modelCars,
+                ]);
             }
-
-            return $this->render('update', [
-                'model' => $model, 'modelCompanies' => $modelCompanies, 'modelCars' => $modelCars,
-            ]);
+            else {
+                Yii::$app->user->logout();
+                return $this->goHome();
+            }
         } else {
             Yii::$app->user->logout();
             return $this->goHome();
