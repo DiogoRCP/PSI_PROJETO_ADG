@@ -2,7 +2,9 @@
 
 namespace frontend\models;
 
+use common\mosquitto\phpMQTT;
 use Yii;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "repairs".
@@ -81,40 +83,84 @@ class Repairs extends \yii\db\ActiveRecord
         return $this->hasOne(Contributors::className(), ['id' => 'contributorId']);
     }
 
+    public function getCompany()
+    {
+        $contributor = $this->getContributor()->one();
+        $company = $contributor->getCompany()->one();
+        return $company;
+    }
 
     //Funções e metodos dos testes
     public function setkilometers($kilometers)
     {
-        $this->kilometers=$kilometers;
+        $this->kilometers = $kilometers;
     }
 
     public function setrepairdate($repairdate)
     {
-        $this->repairdate=$repairdate;
+        $this->repairdate = $repairdate;
     }
 
     public function setrepairdescription($repairdescription)
     {
-        $this->repairdescription=$repairdescription;
+        $this->repairdescription = $repairdescription;
     }
 
     public function setstate($state)
     {
-        $this->state=$state;
+        $this->state = $state;
     }
 
     public function setrepairstype($repairtype)
     {
-        $this->repairtype=$repairtype;
+        $this->repairtype = $repairtype;
     }
 
     public function setcarid($carid)
     {
-        $this->carId=$carid;
+        $this->carId = $carid;
     }
 
     public function setcontributorid($contributorid)
     {
-        $this->contributorId=$contributorid;
+        $this->contributorId = $contributorid;
+    }
+
+
+    //Mosquitto
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        $myObg = [
+            'id'=>$this->id,
+            'state' => $this->state,
+            'user' => $this->car->userId,
+            'date' => date("d/m/Y")
+        ];
+
+        $myJSON = json_encode($myObg);
+
+        if ($insert) {
+            $this->FazPublish("REPAIR-".$this->car->userId, $myJSON);
+        } else {
+            $this->FazPublish("REPAIR-".$this->car->userId, $myJSON);
+        }
+    }
+
+    public function FazPublish($canal, $msg)
+    {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = ""; // set your username
+        $password = ""; // set your password
+        $client_id = "phpMQTT-publisher"; // unique!
+        $mqtt = new phpMQTT($server, $port, $client_id);
+        if ($mqtt->connect(true, NULL, $username, $password)) {
+            $mqtt->publish($canal, $msg, 0, true);
+            $mqtt->close();
+        } else {
+            file_put_contents('debug.output', 'Time out!');
+        }
     }
 }

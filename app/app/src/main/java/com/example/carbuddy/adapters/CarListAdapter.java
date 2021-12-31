@@ -62,9 +62,11 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
             case "MULTIPURPOSE PASSENGER VEHICLE (MPV)":
                 holder.imgView.setImageResource(R.drawable.ic_mpv);
                 break;
-            case "TRUCK ":
+            case "TRUCK":
                 holder.imgView.setImageResource(R.drawable.ic_truck);
                 break;
+            default:
+                holder.imgView.setImageResource(R.drawable.ic_car);
         }
         holder.imgView.setColorFilter(Color.parseColor(listaCarros.get(position).getColor()));
     }

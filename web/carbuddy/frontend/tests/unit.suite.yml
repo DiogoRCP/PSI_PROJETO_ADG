@@ -5,3 +5,11 @@ modules:
         - Yii2:
             part: [orm, email, fixtures]
         - Asserts
+        - Db
+    config:
+        Db:
+            dsn: 'mysql:host=localhost;dbname=carbuddy'
+            user: 'root'
+            password: ''
+            cleanup: true
+

@@ -16,6 +16,7 @@ import com.example.carbuddy.models.Login;
 import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.utils.Json_Objects_Convertor;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginSingleton {
@@ -53,7 +54,7 @@ public class LoginSingleton {
             Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
         } else {
             System.out.println(Json_Objects_Convertor.IP);
-            final String URL_LOGIN = Json_Objects_Convertor.IP + "login/get?username=" + user + "&password=" + pass;
+            final String URL_LOGIN = Json_Objects_Convertor.IP+"login/get/"+user+"/"+pass;
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.GET,
@@ -62,7 +63,12 @@ public class LoginSingleton {
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
+                                    System.out.println(response);
+                                    try {
+                                        login = (Login) Json_Objects_Convertor.objectjsonConvert(response.getJSONObject("user"), Login.class);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                     loginListener.onValidateLogin(login);
                                 }
                             }, new Response.ErrorListener() {

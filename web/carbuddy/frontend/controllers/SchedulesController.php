@@ -64,7 +64,7 @@ class SchedulesController extends Controller
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
+        if (Yii::$app->user->can('frontendCrudSchedulesClient') & $this->findModel($id)->car->userId == Yii::$app->user->getId()) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
@@ -118,7 +118,7 @@ class SchedulesController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
+        if (Yii::$app->user->can('frontendCrudSchedulesClient') & $this->findModel($id)->car->userId == Yii::$app->user->getId()) {
             $model = $this->findModel($id);
             $modelCompanies = Companies::find()->all();
             $modelCars = Cars::find()->all();
@@ -146,8 +146,11 @@ class SchedulesController extends Controller
     public function actionDelete($id)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
-            $this->findModel($id)->delete();
-
+            try {
+                $this->findModel($id)->delete();
+            } catch(\yii\db\IntegrityException $e) {
+                Yii::$app->session->setFlash('error', 'You can´t delete this Schedule');
+            }
             return $this->redirect(['index']);
         } else {
             Yii::$app->user->logout();

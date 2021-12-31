@@ -9,6 +9,7 @@ use frontend\models\Cars;
 use frontend\models\Repairs;
 use frontend\models\RepairsSearch;
 use Yii;
+use yii\db\IntegrityException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,9 +66,17 @@ class RepairsController extends Controller
     public function actionView($id)
     {
         if (Yii::$app->user->can('frontendReadRepair')) {
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-            ]);
+            $model = $this->findModel($id);
+            $contributor = Contributors::find()->where("userId = " . Yii::$app->user->getId())->one();
+            if($contributor->id === $model->contributorId) {
+                return $this->render('view', [
+                    'model' => $this->findModel($id),
+                ]);
+            }
+            else {
+                Yii::$app->user->logout();
+                return $this->goHome();
+            }
         } else {
             Yii::$app->user->logout();
             return $this->goHome();
@@ -138,15 +147,22 @@ class RepairsController extends Controller
     {
         if (Yii::$app->user->can('frontendCrudRepair')) {
             $model = $this->findModel($id);
+            $contributor = Contributors::find()->where("userId = " . Yii::$app->user->getId())->one();
             $modelCars = Cars::find()->all();
 
-            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+            if($contributor->id === $model->contributorId) {
+                if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
 
-            return $this->render('update', [
-                'model' => $model, 'modelCars' => $modelCars,
-            ]);
+                return $this->render('update', [
+                    'model' => $model, 'modelCars' => $modelCars,
+                ]);
+            }
+            else {
+                Yii::$app->user->logout();
+                return $this->goHome();
+            }
         } else {
             Yii::$app->user->logout();
             return $this->goHome();
@@ -163,8 +179,11 @@ class RepairsController extends Controller
     public function actionDelete($id)
     {
         if (Yii::$app->user->can('frontendCrudRepair')) {
-            $this->findModel($id)->delete();
-
+            try {
+                $this->findModel($id)->delete();
+            } catch(IntegrityException $e) {
+                Yii::$app->session->setFlash('error', 'You can´t delete this Repair');
+            }
             return $this->redirect(['index']);
         } else {
             Yii::$app->user->logout();

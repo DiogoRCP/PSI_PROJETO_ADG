@@ -135,7 +135,11 @@ class CarController extends Controller
     public function actionDelete($id)
     {
         if (Yii::$app->user->can('frontendCrudVehicle')) {
-            $this->findModel($id)->delete();
+            try {
+                $this->findModel($id)->delete();
+            } catch(\yii\db\IntegrityException $e) {
+                Yii::$app->session->setFlash('error', 'You can´t delete a Car with Repairs');
+            }
             return $this->redirect(['index']);
         } else {
             Yii::$app->user->logout();

@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -54,7 +55,8 @@ public class fragment_form_car extends Fragment implements CarsListener {
     private EditText txtVin, txtBrand, txtModel, txtYear, txtDisplacement,
             txtRegistration, txtKilometers;
     private Spinner spFuelType, spCarType;
-    ColorPickerDialog colorPickerDialog;
+    private Button btColor;
+    private ColorPickerDialog colorPickerDialog;
     public static RequestQueue volleyQueue = null;
     Car car;
 
@@ -109,7 +111,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
             @Override
             public void onClick(View v) {
                 car = new Car(txtVin.getText().toString(), txtBrand.getText().toString(),
-                        txtModel.getText().toString(), colorPickerDialog.getCurrentColorAsHexa(),
+                        txtModel.getText().toString(), "#"+colorPickerDialog.getCurrentColorAsHexa().substring(3, 9),
                         spCarType.getSelectedItem().toString(),
                         Float.parseFloat(txtDisplacement.getText().toString()),
                         spFuelType.getSelectedItem().toString(),
@@ -141,6 +143,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
 
         spCarType.setSelection(-1);
         spFuelType.setSelection(-1);
+        btColor = view.findViewById(R.id.bt_choose_color);
     }
 
     private void ColorPicker(View view) {
@@ -148,7 +151,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         colorPickerDialog.setOnColorPickedListener(new ColorPickerDialog.OnColorPickedListener() {
             @Override
             public void onColorPicked(int color, String hexVal) {
-                view.findViewById(R.id.bt_choose_color).setBackgroundColor(color);
+                btColor.setBackgroundColor(color);
             }
         });
 
@@ -207,6 +210,9 @@ public class fragment_form_car extends Fragment implements CarsListener {
                                         spCarType.setSelection(1);
                                         break;
                                     case "TRUCK ":
+                                        spCarType.setSelection(2);
+                                        break;
+                                    case "TRUCK":
                                         spCarType.setSelection(2);
                                         break;
                                     case "MOTORCYCLE":

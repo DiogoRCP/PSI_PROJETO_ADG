@@ -43,4 +43,5 @@
     <string name="Yes">Sim</string>
     <string name="No">Não</string>
     <string name="Added">adicionado</string>
+    <string name="NotDeleteCar">Não pode apagar um veículo com reparações</string>
 </resources>

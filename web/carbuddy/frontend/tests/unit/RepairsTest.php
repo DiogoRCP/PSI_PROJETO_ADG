@@ -79,5 +79,8 @@ class RepairsTest extends \Codeception\Test\Unit
         $this->assertTrue($model->validate(['contributorid']));
 
         $model->save();
+
+        //Este teste varia consoante os dados da base de dados
+        $this->tester->seeInDatabase('Repairs', ['carId'=>'2']);
     }
 }

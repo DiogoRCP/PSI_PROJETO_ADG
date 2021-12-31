@@ -1,5 +1,7 @@
 <?php
+
 namespace backend\models;
+
 use dosamigos\chartjs\ChartJs;
 use yii\helpers\VarDumper;
 
@@ -27,17 +29,28 @@ class Charts
     }
 
     /**
-        Método previsório, neste momento prepara o array tipos de user para criar uma instância desta class
-        utilizando a variável que tem os dados distinct e um método que devolve o número de utilizadores com esse tipo
-    **/
-    public static function LabelAndData($data){
+     * Método previsório, neste momento prepara o array tipos de user para criar uma instância desta class
+     * utilizando a variável que tem os dados distinct e um método que devolve o número de utilizadores com esse tipo
+     **/
+    public static function LabelAndData($data, $type)
+    {
         $LabelAndData = [
             'data' => [],
-            'values' =>[]
+            'values' => []
         ];
-        foreach ($data as $item) {
-            array_push($LabelAndData['data'], $item['usertype']);
-            array_push($LabelAndData['values'], $item->getUserTypes());
+        switch ($type) {
+            case "user":
+                foreach ($data as $item) {
+                    $LabelAndData['data'][] = $item['usertype'];
+                    $LabelAndData['values'][] = $item->getUserTypes();
+                }
+                break;
+            case "car":
+                foreach ($data as $item) {
+                    $LabelAndData['data'][] = $item['carType'];
+                    $LabelAndData['values'][] = $item->getCarType();
+                }
+                break;
         }
         return $LabelAndData;
     }

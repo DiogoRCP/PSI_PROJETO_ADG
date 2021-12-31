@@ -107,6 +107,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
                 Fragment fragment = new RepairFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("carPosition", position);
+                bundle.putString("carRegistration", car.getRegistration());
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainerView, fragment)
@@ -169,7 +170,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
             case "MULTIPURPOSE PASSENGER VEHICLE (MPV)":
                 imageCar.setImageResource(R.drawable.ic_mpv);
                 break;
-            case "TRUCK ":
+            case "TRUCK":
                 imageCar.setImageResource(R.drawable.ic_truck);
                 break;
         }

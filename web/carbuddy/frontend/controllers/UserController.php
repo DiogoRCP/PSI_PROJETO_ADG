@@ -109,7 +109,6 @@ class UserController extends Controller
         else{
             return $this->goHome();
         }
-
     }
 
     /**
@@ -122,7 +121,11 @@ class UserController extends Controller
     public function actionDelete()
     {
         if(!\Yii::$app->user->isGuest) {
-            $this->findModel(\Yii::$app->user->getId())->delete();
+            try {
+                $this->findModel(\Yii::$app->user->getId())->delete();
+            } catch(\yii\db\IntegrityException $e) {
+                Yii::$app->session->setFlash('error', 'You can´t delete your account');
+            }
             \Yii::$app->user->logout();
             return $this->redirect(['index']);
         }

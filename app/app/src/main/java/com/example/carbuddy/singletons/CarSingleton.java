@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.R;
 import com.example.carbuddy.controllers.RepairFragment;
 import com.example.carbuddy.controllers.fragment_carInfo;
 import com.example.carbuddy.controllers.fragment_form_car;
@@ -148,8 +149,20 @@ public class CarSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.i("Error", error.toString());
-                            carsListener.onDeleteCreateCar();
+                            try {
+                                switch (error.networkResponse.statusCode) {
+                                    case 200:
+                                        carsListener.onDeleteCreateCar();
+                                        break;
+                                    case 500:
+                                        Toast.makeText(context, R.string.NotDeleteCar, Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            }catch (Exception ex){
+                                carsListener.onDeleteCreateCar();
+                            }
                         }
                     });
 
