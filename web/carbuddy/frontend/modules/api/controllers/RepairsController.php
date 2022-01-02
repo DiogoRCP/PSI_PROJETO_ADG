@@ -63,7 +63,7 @@ class RepairsController extends ActiveController
         if (Yii::$app->user->can('frontendCrudRepair')) {
             $repair = Yii::$app->request->post();
 
-            $contributorModel = Contributors::findOne(Yii::$app->user->getId());
+            $contributorModel = Contributors::find()->where("userId=".Yii::$app->user->getId())->one();
             $repairsmodel = new $this->modelClass;
 
             $repairsmodel->contributorId = $contributorModel->id;
@@ -88,7 +88,7 @@ class RepairsController extends ActiveController
         if (Yii::$app->user->can('frontendCrudRepair')) {
             $repair = Yii::$app->request->post();
 
-            $contributorModel = Contributors::findOne(Yii::$app->user->getId());
+            $contributorModel = Contributors::find()->where("userId=".Yii::$app->user->getId())->one();
             $repairsmodel = Repairs::findOne($id);
 
             if ($repairsmodel->contributorId === $contributorModel->id) {
@@ -139,18 +139,30 @@ class RepairsController extends ActiveController
         throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionTotal()
     {
-        $Repairssmodel = new $this->modelClass;
-        $recs = $Repairssmodel::find()->all();
-        return ['total' => count($recs)];
+        if(Yii::$app->user->can("admin")) {
+            $Repairssmodel = new $this->modelClass;
+            $recs = $Repairssmodel::find()->all();
+            return ['total' => count($recs)];
+        }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionSet($limit)
     {
-        $Repairssmodel = new $this->modelClass;
-        $rec = $Repairssmodel::find()->limit($limit)->all();
-        return ['limite' => $limit, 'Records' => $rec];
+        if(Yii::$app->user->can("admin")) {
+            $Repairssmodel = new $this->modelClass;
+            $rec = $Repairssmodel::find()->limit($limit)->all();
+            return ['limite' => $limit, 'Records' => $rec];
+        }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
 }
