@@ -20,17 +20,13 @@ class CompaniesController extends ActiveController
         $behaviors['authenticator'] = [
             'class' => QueryParamAuth::className()
         ];
-
         return $behaviors;
     }
 
     public function auth($token)
     {
         $user = User::findIdentityByAccessToken($token);
-        if ($user != null) {
-            return $user;
-        }
-        return null;
+        return $user;
     }
 
     public function checkAccess($action, $model = null, $params = [])
@@ -49,9 +45,8 @@ class CompaniesController extends ActiveController
             $Companiessmodel = new $this->modelClass;
             $recs = $Companiessmodel::find()->all();
             return ['total' => count($recs)];
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
 
@@ -64,8 +59,7 @@ class CompaniesController extends ActiveController
             $Companiessmodel = new $this->modelClass;
             $rec = $Companiessmodel::find()->limit($limit)->all();
             return ['limite' => $limit, 'Records' => $rec];
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 }

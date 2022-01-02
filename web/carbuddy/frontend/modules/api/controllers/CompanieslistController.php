@@ -2,7 +2,6 @@
 
 namespace frontend\modules\api\controllers;
 
-use backend\models\User;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
 

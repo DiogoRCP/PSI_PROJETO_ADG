@@ -23,18 +23,13 @@ class SchedulesController extends ActiveController
         $behaviors['authenticator'] = [
             'class' => QueryParamAuth::className()
         ];
-
         return $behaviors;
     }
 
     public function auth($token)
     {
-
         $user = User::findIdentityByAccessToken($token);
-        if ($user != null) {
-            return $user;
-        }
-        return null;
+        return $user;
     }
 
     public function checkAccess($action, $model = null, $params = [])
@@ -42,28 +37,35 @@ class SchedulesController extends ActiveController
         throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionTotal()
     {
         if (Yii::$app->user->can('admin')) {
             $Schedulessmodel = new $this->modelClass;
             $recs = $Schedulessmodel::find()->all();
             return ['total' => count($recs)];
-        } else {
-            return self::noPermission;
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionSet($limit)
     {
         if (Yii::$app->user->can('admin')) {
             $Schedulessmodel = new $this->modelClass;
             $rec = $Schedulessmodel::find()->limit($limit)->all();
             return ['limite' => $limit, 'Records' => $rec];
-        } else {
-            return self::noPermission;
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionPost()
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
@@ -84,6 +86,7 @@ class SchedulesController extends ActiveController
                 return ['Save' => $ret];
             }
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
     /**
@@ -104,11 +107,13 @@ class SchedulesController extends ActiveController
             } catch (IntegrityException $e) {
                 throw new ForbiddenHttpException(self::noPermission);
             }
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionDeletecontributor($id)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
@@ -120,37 +125,38 @@ class SchedulesController extends ActiveController
                     $recs = $schedulemodel->deleteAll("id=" . $id);
                     return ['DEL' => $recs];
                 }
-
             } catch (IntegrityException $e) {
                 throw new ForbiddenHttpException(self::noPermission);
             }
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionPutclient($id)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
             $schedule = Yii::$app->request->post();
             $scheduleModel = Schedules::findOne($id);
 
-                $car = $scheduleModel::findOne($id)->car;
-                if ($car->userId === Yii::$app->user->getId()) {
-                    $scheduleModel->schedulingdate = $schedule['schedulingdate'];
-                    $scheduleModel->repairdescription = $schedule['repairdescription'];
-                    $scheduleModel->repairtype = $schedule['repairtype'];
-                    $scheduleModel->carId = $schedule['carId'];
-                    $rec = $scheduleModel->save();
-                    return ['PUT' => $rec];
-                }else {
-                    throw new ForbiddenHttpException(self::noPermission);
-                }
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
+            $car = $scheduleModel::findOne($id)->car;
+            if ($car->userId === Yii::$app->user->getId()) {
+                $scheduleModel->schedulingdate = $schedule['schedulingdate'];
+                $scheduleModel->repairdescription = $schedule['repairdescription'];
+                $scheduleModel->repairtype = $schedule['repairtype'];
+                $scheduleModel->carId = $schedule['carId'];
+                $rec = $scheduleModel->save();
+                return ['PUT' => $rec];
+            }
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionPutcontributor($id)
     {
         if (Yii::$app->user->can('frontendCrudSchedulesCollaborator')) {
@@ -164,11 +170,8 @@ class SchedulesController extends ActiveController
                 $scheduleModel->state = $schedule['state'];
                 $rec = $scheduleModel->save();
                 return ['PUT' => $rec];
-            }else {
-                throw new ForbiddenHttpException(self::noPermission);
             }
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 }

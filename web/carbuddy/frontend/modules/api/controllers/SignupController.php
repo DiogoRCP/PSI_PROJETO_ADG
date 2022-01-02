@@ -3,8 +3,6 @@
 namespace frontend\modules\api\controllers;
 
 use Yii;
-use yii\filters\auth\QueryParamAuth;
-use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
 
 class SignupController extends ActiveController
@@ -25,8 +23,7 @@ class SignupController extends ActiveController
         $signupmodel->birsthday = $user['birsthday'];
 
         $ret = $signupmodel->signup();
-        if($ret == true) $signupmodel->AssignUser();
-        echo json_encode(["message" => $ret]);
+        if($ret) $signupmodel->AssignUser();
         return ['Save' => $ret];
     }
 

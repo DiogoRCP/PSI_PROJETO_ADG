@@ -25,7 +25,6 @@ class LoginController extends ActiveController
 
             return ["user" => $user, "repair" => $this->FazSubscribe("REPAIR-" . Yii::$app->user->getId())];
         }
-
         return ['Login' => false];
     }
 

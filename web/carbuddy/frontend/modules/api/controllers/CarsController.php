@@ -30,10 +30,7 @@ class CarsController extends ActiveController
     public function auth($token)
     {
         $user = User::findIdentityByAccessToken($token);
-        if ($user != null) {
-            return $user;
-        }
-        return null;
+        return $user;
     }
 
     public function checkAccess($action, $model = null, $params = [])
@@ -52,9 +49,8 @@ class CarsController extends ActiveController
             $CarsModel = new $this->modelClass;
             $recs = $CarsModel::find()->where('userId = ' . Yii::$app->user->getId())->all();
             return $recs;
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
     /**
@@ -66,9 +62,8 @@ class CarsController extends ActiveController
             $Carssmodel = new $this->modelClass;
             $recs = $Carssmodel::find()->all();
             return ['total' => count($recs)];
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
     /**
@@ -80,9 +75,8 @@ class CarsController extends ActiveController
             $Carssmodel = new $this->modelClass;
             $recs = $Carssmodel::find()->where('userId = ' . Yii::$app->user->getId())->all();
             return ['total' => count($recs)];
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
     /**
@@ -94,9 +88,8 @@ class CarsController extends ActiveController
             $Carssmodel = new $this->modelClass;
             $rec = $Carssmodel::find()->limit($limit)->all();
             return ['limite' => $limit, 'Records' => $rec];
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
     /**
@@ -125,9 +118,8 @@ class CarsController extends ActiveController
 
             $ret = $carssmodel->save();
             return ['SaveError' => $ret];
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
     /**
@@ -155,12 +147,9 @@ class CarsController extends ActiveController
 
                 $rec = $carssmodel->save();
                 return ['Save' => $rec];
-            }else{
-                throw new ForbiddenHttpException(self::noPermission);
             }
-        }else{
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
     /**
@@ -177,8 +166,7 @@ class CarsController extends ActiveController
             } catch (IntegrityException $e) {
                 Yii::$app->session->setFlash('error', 'You can´t delete this Car');
             }
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 }
