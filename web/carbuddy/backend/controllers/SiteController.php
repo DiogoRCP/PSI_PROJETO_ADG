@@ -84,7 +84,7 @@ class SiteController extends Controller
          **/
         $charts = [
             new Charts("pie", "User Types", Charts::LabelAndData($usertypes, "user"), true),
-            new Charts("pie", "Car Types", Charts::LabelAndData($cartypes, "car"), true),
+            new Charts("pie", "Vehicle Types", Charts::LabelAndData($cartypes, "car"), true),
             new Charts("pie", "Repairs per Company", ['data' => $totalRepairs, 'values' => $totalRepairsCount], true)
         ];
 
