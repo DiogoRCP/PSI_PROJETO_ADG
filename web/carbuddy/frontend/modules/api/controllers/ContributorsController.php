@@ -18,16 +18,12 @@ class ContributorsController extends ActiveController
         $behaviors['authenticator'] = [
             'class' => QueryParamAuth::className()
         ];
-
         return $behaviors;
     }
     public function auth($token) {
 
         $user = User::findIdentityByAccessToken($token);
-        if ($user !=null)
-        {
-            return $user;
-        } return null;
+        return $user;
     }
 
     public function checkAccess($action, $model = null, $params = [])
@@ -37,14 +33,16 @@ class ContributorsController extends ActiveController
         }
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionSet($limit){
         if (Yii::$app->user->can('backendCrudContributor')) {
             $Contributormodel = new $this->modelClass;
             $rec = $Contributormodel::find()->limit($limit)->all();
             return ['limite' => $limit, 'Records' => $rec];
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
     /**
@@ -56,8 +54,7 @@ class ContributorsController extends ActiveController
             $Contributormodel = new $this->modelClass;
             $recs = $Contributormodel::find()->all();
             return ['total' => count($recs)];
-        } else {
-            throw new ForbiddenHttpException(self::noPermission);
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 }

@@ -89,8 +89,9 @@ return [
                         'GET total' => 'total',
                         'GET set/{limit}' => 'set',
                         'GET repaircontributor' => 'repaircontributor',
+                        'POST post' => 'post',
                         'PUT put/{id}' => 'put',
-                        'DELETE delete/{id}' => 'delete'
+                        'DELETE deleted/{id}' => 'deleted'
                     ],
                     'tokens' => ['{id}' => '<id:\d+>', '{limit}' => '<limit:\d+>', '{car}' => '<car:\d+>',],
                 ],
@@ -151,8 +152,6 @@ return [
                 ]
             ],
         ],
-
-
     ],
     'params' => $params,
 ];

@@ -27,10 +27,7 @@ class UserController extends ActiveController
     public function auth($token)
     {
         $user = User::findIdentityByAccessToken($token);
-        if ($user != null) {
-            return $user;
-        }
-        return null;
+        return $user;
     }
 
     public function checkAccess($action, $model = null, $params = [])
@@ -38,6 +35,9 @@ class UserController extends ActiveController
         throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionAccount()
     {
         if (!Yii::$app->user->isGuest) {
@@ -45,47 +45,55 @@ class UserController extends ActiveController
             $user = $Usersmodel::findOne(Yii::$app->user->getId());
 
             return $user;
-        } else {
-            return self::noPermission;
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionTotal()
     {
         if (Yii::$app->user->can('backendCrudUser')) {
             $Usersmodel = new $this->modelClass;
             $recs = $Usersmodel::find()->all();
             return ['total' => count($recs)];
-        } else {
-            return self::noPermission;
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionSet($limit)
     {
         if (Yii::$app->user->can('backendCrudUser')) {
             $Usersmodel = new $this->modelClass;
             $rec = $Usersmodel::find()->limit($limit)->all();
             return ['limite' => $limit, 'Records' => $rec];
-        } else {
-            return self::noPermission;
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
 
-
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionDeleted()
     {
         if (Yii::$app->user->can('client')) {
             $Usersmodel = new $this->modelClass;
             $ret = $Usersmodel->deleteAll("id=" . Yii::$app->user->getId());
             return ['Del' => $ret];
-        } else {
-            return self::noPermission;
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 
+    /**
+     * @throws \yii\base\Exception
+     * @throws ForbiddenHttpException
+     */
     public function actionPut()
     {
         if (Yii::$app->user->can('client')) {
@@ -98,8 +106,7 @@ class UserController extends ActiveController
             $rec->password_hash = Yii::$app->security->generatePasswordHash($user['password']);
             $rec->save();
             return ['Save' => $rec];
-        } else {
-            return self::noPermission;
         }
+        throw new ForbiddenHttpException(self::noPermission);
     }
 }

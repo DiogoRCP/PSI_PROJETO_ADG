@@ -1,5 +1,8 @@
 package com.example.carbuddy.singletons;
 
+import static com.example.carbuddy.utils.Json_Objects_Convertor.IP;
+import static com.example.carbuddy.utils.Json_Objects_Convertor.objectjsonConvert;
+
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -32,7 +35,7 @@ public class CompaniesSingleton {
 
     private CompaniesListener companiesListener = null;
 
-    private final String URL = Json_Objects_Convertor.IP + "companieslist";
+    private final String URL = IP + "companieslist";
 
 
     /** Responsável por fazer com que se crie só uma unica vez a instância
@@ -67,7 +70,7 @@ public class CompaniesSingleton {
                             for (int i = 0; i < response.length(); i++) {
                                 try {
                                     JSONObject resp = response.getJSONObject(i);
-                                    Company company = (Company) Json_Objects_Convertor.objectjsonConvert(resp, Company.class);
+                                    Company company = (Company) objectjsonConvert(resp, Company.class);
                                     companies.add(company);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
