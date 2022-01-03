@@ -143,7 +143,7 @@ public class CarSingleton {
             Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = IP + "cars/" + carId + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "cars/deleted/" + carId + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
@@ -158,7 +158,7 @@ public class CarSingleton {
                                     case 200:
                                         carsListener.onDeleteCreateCar();
                                         break;
-                                    case 500:
+                                    case 403:
                                         Toast.makeText(context, R.string.NotDeleteCar, Toast.LENGTH_SHORT).show();
                                         break;
                                     default:
