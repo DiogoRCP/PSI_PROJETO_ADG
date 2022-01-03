@@ -40,40 +40,6 @@ public class Json_Objects_Convertor {
         return object;
     }
 
-    public static void sendPost(String uri, String jsonObject) {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(IP + uri);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                    conn.setRequestProperty("Accept", "application/json");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-
-                    Log.i("JSON", jsonObject);
-                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                    //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
-                    os.writeBytes(jsonObject);
-
-                    os.flush();
-                    os.close();
-
-                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
-                    Log.i("MSG", conn.getResponseMessage());
-
-                    conn.disconnect();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-    }
-
     public static boolean isInternetConnection(Context context){
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();

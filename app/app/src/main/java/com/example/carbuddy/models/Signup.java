@@ -1,6 +1,35 @@
 package com.example.carbuddy.models;
 
-import com.example.carbuddy.utils.Json_Objects_Convertor;
+import static com.android.volley.Request.Method.POST;
+import static com.example.carbuddy.utils.Json_Objects_Convertor.IP;
+import static com.example.carbuddy.utils.Json_Objects_Convertor.isInternetConnection;
+import static com.example.carbuddy.utils.Json_Objects_Convertor.jsonObjectConvert;
+
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Network;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class Signup {
     String username;
@@ -79,14 +108,42 @@ public class Signup {
                 '}';
     }
 
-    public static boolean PasswordVerify(String password1, String password2){
-        if(password1.matches(password2)){
+    public static boolean PasswordVerify(String password1, String password2) {
+        if (password1.matches(password2)) {
             return true;
         }
         return false;
     }
 
-    public void DoSignup(){
-        Json_Objects_Convertor.sendPost("signup/post", Json_Objects_Convertor.jsonObjectConvert(this));
+    public void DoSignup(Context context) throws JSONException {
+
+        if (!isInternetConnection(context)) {
+            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+        } else {
+            RequestQueue queue = Volley.newRequestQueue(context);
+            String url = IP + "signup/post";
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("username", this.getUsername());
+            jsonBody.put("email", this.getEmail());
+            jsonBody.put("nif", this.getNif());
+            jsonBody.put("phonenumber", this.getPhonenumber());
+            jsonBody.put("password", this.getPassword());
+            jsonBody.put("birsthday", this.getBirsthday());
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.i("VOLLEY", response.toString());
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("VOLLEY", error.toString());
+                        }
+                    });
+
+            queue.add(jsonObjectRequest);
+        }
     }
 }

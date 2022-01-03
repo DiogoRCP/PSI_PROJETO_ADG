@@ -14,6 +14,8 @@ import androidx.core.app.NavUtils;
 import com.example.carbuddy.R;
 import com.example.carbuddy.models.Signup;
 
+import org.json.JSONException;
+
 public class SignupActivity extends AppCompatActivity {
 
     private EditText username, email, nif, phonenumber, password, passwordR;
@@ -40,19 +42,19 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    public void btSignup(View view) {
+    public void btSignup(View view) throws JSONException {
         if (Signup.PasswordVerify(password.getText().toString(), passwordR.getText().toString())) {
 
             Signup form = new Signup(
                     username.getText().toString(),
                     email.getText().toString(),
                     nif.getText().toString(),
-                    birsthday.getYear()+"/"+birsthday.getMonth()+"/"+birsthday.getDayOfMonth(),
+                    birsthday.getYear()+"/"+(birsthday.getMonth()+1)+"/"+birsthday.getDayOfMonth(),
                     phonenumber.getText().toString(),
                     password.getText().toString()
             );
 
-            form.DoSignup();
+            form.DoSignup(this);
             Toast.makeText(getApplicationContext(), "Account Created Successfully. You can start a session.", Toast.LENGTH_SHORT).show();
             finish();
         }

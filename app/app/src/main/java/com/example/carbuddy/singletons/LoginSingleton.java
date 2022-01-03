@@ -1,5 +1,8 @@
 package com.example.carbuddy.singletons;
 
+import static com.example.carbuddy.utils.Json_Objects_Convertor.IP;
+import static com.example.carbuddy.utils.Json_Objects_Convertor.objectjsonConvert;
+
 import android.content.Context;
 import android.widget.Toast;
 
@@ -53,8 +56,8 @@ public class LoginSingleton {
         if (!Json_Objects_Convertor.isInternetConnection(context)) {
             Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
         } else {
-            System.out.println(Json_Objects_Convertor.IP);
-            final String URL_LOGIN = Json_Objects_Convertor.IP+"login/get/"+user+"/"+pass;
+            System.out.println(IP);
+            final String URL_LOGIN = IP+"login/get/"+user+"/"+pass;
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.GET,
@@ -65,7 +68,7 @@ public class LoginSingleton {
                                 public void onResponse(JSONObject response) {
                                     System.out.println(response);
                                     try {
-                                        login = (Login) Json_Objects_Convertor.objectjsonConvert(response.getJSONObject("user"), Login.class);
+                                        login = (Login) objectjsonConvert(response.getJSONObject("user"), Login.class);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -87,8 +90,8 @@ public class LoginSingleton {
         if (!Json_Objects_Convertor.isInternetConnection(context)) {
             Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
         } else {
-            System.out.println(Json_Objects_Convertor.IP);
-            final String URL_LOGIN = Json_Objects_Convertor.IP + "user/account?access-token=" + this.getLogin().getToken();
+            System.out.println(IP);
+            final String URL_LOGIN = IP + "user/account?access-token=" + this.getLogin().getToken();
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.GET,
@@ -97,7 +100,7 @@ public class LoginSingleton {
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    login = (Login) Json_Objects_Convertor.objectjsonConvert(response, Login.class);
+                                    login = (Login) objectjsonConvert(response, Login.class);
                                     loginListener.onValidateLogin(login);
                                 }
                             }, new Response.ErrorListener() {
