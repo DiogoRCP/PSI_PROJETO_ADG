@@ -1,4 +1,9 @@
 Credenciais de Acesso
+
+
+Atenção:
+Necessário Fazer composer install 
+
 ------------------
 Backend
 
@@ -24,3 +29,4 @@ Password: 12345678
 Client
 User: Goncalo12345678
 Password: 12345678
+
