@@ -64,9 +64,9 @@ return [
                     'controller' => 'api/login',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET get/{username}/{password}' => 'get'
+                        'POST do' => 'do'
                     ],
-                    'tokens' => ['{id}' => '<id:\d+>', '{username}' => '<username:\w+>', '{password}' => '<password:\w+>',],
+                    'tokens' => ['{id}' => '<id:\d+>',],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',

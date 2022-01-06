@@ -3,6 +3,7 @@
 namespace frontend\modules\api\controllers;
 
 use Yii;
+use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
 use common\mosquitto\phpMQTT;
 
@@ -10,11 +11,11 @@ class LoginController extends ActiveController
 {
     public $modelClass = 'common\models\LoginForm';
 
-    public function actionGet($username, $password)
+    public function actionDo()
     {
         $login = ['LoginForm' => [
-            'username' => $username,
-            'password' => $password]
+            'username' => Yii::$app->request->post('username'),
+            'password' => Yii::$app->request->post('password')]
         ];
 
         $loginmodel = new $this->modelClass;

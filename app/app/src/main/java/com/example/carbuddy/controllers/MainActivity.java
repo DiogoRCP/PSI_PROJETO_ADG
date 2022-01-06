@@ -18,6 +18,8 @@ import com.example.carbuddy.models.Login;
 import com.example.carbuddy.singletons.LoginSingleton;
 import com.example.carbuddy.models.ModeloBDHelper;
 
+import org.json.JSONException;
+
 public class MainActivity extends AppCompatActivity implements LoginListener {
 
 
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
     }
 
 
-    public void onClickLogin(View view) {
+    public void onClickLogin(View view) throws JSONException {
         if (efetuarLogin()) {
             LoginSingleton.getInstance(this).apiLogin(this, user, pass);
         }
