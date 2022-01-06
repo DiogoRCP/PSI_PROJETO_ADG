@@ -24,7 +24,7 @@ foreach ($modelCompanies as $modelCompany) {
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'schedulingdate')->input('datetime-local') ?>
+    <?= $form->field($model, 'schedulingdate')->input('datetime-local', ['value'=>str_replace(' ','T',$model->schedulingdate)]) ?>
 
     <?= $form->field($model, 'repairdescription')->textInput(['readonly' => true, 'maxlength' => true]) ?>
 

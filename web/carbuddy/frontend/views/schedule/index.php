@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\models\SchedulesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Schedules';
+$this->title = 'Schedules Manager';
 ?>
 <div class="schedules-index">
     <h1><?= Html::encode($this->title) ?></h1>
