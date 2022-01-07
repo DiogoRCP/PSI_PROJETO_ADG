@@ -47,7 +47,7 @@ public class LoginSingleton {
     }
 
     public LoginSingleton(Context context) {
-        /** Inicializar variaveis **/
+        /* Inicializar variaveis **/
         database = new ModeloBDHelper(context);
         if (database.getAllLogin().size() > 0) {
             login = database.getAllLogin().getFirst();
@@ -88,7 +88,7 @@ public class LoginSingleton {
     }
 
     public void apiAccount(Context context) {
-        /** Verificar se existe internet **/
+        /* Verificar se existe internet **/
         if (!Json_Objects_Convertor.isInternetConnection(context)) {
             Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
         } else {
