@@ -88,16 +88,16 @@ public class Pagina_Inicial extends AppCompatActivity{
         }
     }
 
-    public void onClickSchedulesAppointment(View view) {
+    public void onClickAccount(View view) {
         if (fragmentNumber != 2) {
-            fragment = new Schedules_Appointment();
+            fragment = new AccountFragment();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.Schedulesappointment);
+            getSupportActionBar().setTitle(R.string.Account);
 
             fragmentNumber = 2;
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)
-                    .addToBackStack("schedulesappointment")
+                    .addToBackStack("Account")
                     .commit();
         } else {
             fragmentManager.beginTransaction()
