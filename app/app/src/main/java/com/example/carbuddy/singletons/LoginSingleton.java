@@ -54,12 +54,12 @@ public class LoginSingleton {
         }
     }
 
-    public void apiLogin (Context context, final String user, final String pass) throws JSONException {
+    public void apiLogin(Context context, final String user, final String pass) throws JSONException {
         if (!isInternetConnection(context)) {
             Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            final String URL_LOGIN = IP+"login/do";
+            final String URL_LOGIN = IP + "login/do";
 
             JSONObject loginData = new JSONObject();
             loginData.put("username", user);
@@ -124,6 +124,7 @@ public class LoginSingleton {
     public void setLoginListener(MainActivity mainActivity) {
         this.loginListener = mainActivity;
     }
+
     public void setLoginListenerAccount(AccountFragment accountFragment) {
         this.loginListener = accountFragment;
     }

@@ -44,4 +44,5 @@
     <string name="No">Não</string>
     <string name="Added">adicionado</string>
     <string name="NotDeleteCar">Não pode apagar um veículo com reparações</string>
+    <string name="RepeatPassword">Repetir Password</string>
 </resources>

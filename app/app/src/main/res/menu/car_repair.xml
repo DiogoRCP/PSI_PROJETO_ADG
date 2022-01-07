@@ -7,6 +7,10 @@
         android:title="@string/repairs"
         app:showAsAction="always" />
     <item
+        android:icon="@drawable/ic_car_schedule"
+        android:title="Item"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/bt_editar_menu_car"
         android:icon="@drawable/ic_car_edit"
         android:title="Editar"

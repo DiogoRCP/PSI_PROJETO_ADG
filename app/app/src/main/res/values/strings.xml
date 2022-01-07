@@ -61,5 +61,6 @@
         <item>MOTORCYCLE</item>
     </string-array>
     <string name="NotDeleteCar">You can\'t delete a vehicle with repairs</string>
+    <string name="RepeatPassword">Repeat Password</string>
 
 </resources>
