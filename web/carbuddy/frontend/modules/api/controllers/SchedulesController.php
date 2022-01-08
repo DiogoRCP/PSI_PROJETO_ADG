@@ -174,4 +174,21 @@ class SchedulesController extends ActiveController
         }
         throw new ForbiddenHttpException(self::noPermission);
     }
+
+
+    /**
+     * @throws ForbiddenHttpException
+     */
+    public function actionGetschedulesclient()
+    {
+        if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
+            $cars = Cars::find()->where("userId = " . Yii::$app->user->getId())->all();
+            $recs = array();
+            foreach($cars as $car){
+                array_push($recs, $car->getSchedules());
+            }
+            return $recs;
+        }
+        throw new ForbiddenHttpException(self::noPermission);
+    }
 }

@@ -142,6 +142,7 @@ return [
                     'extraPatterns' => [
                         'GET total' => 'total',
                         'GET set/{limit}' => 'set',
+                        'GET getschedulesclient' => 'getschedulesclient',
                         'POST post' => 'post',
                         'PUT putclient/{id}' => 'putclient',
                         'PUT putcontributor/{id}' => 'putcontributor',
