@@ -102,16 +102,28 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Fragment fragment;
+        Bundle bundle;
         switch (item.getItemId()) {
             case R.id.bt_repairs_menu:
-                Fragment fragment = new RepairFragment();
-                Bundle bundle = new Bundle();
+                fragment = new RepairFragment();
+                bundle = new Bundle();
                 bundle.putInt("carPosition", position);
                 bundle.putString("carRegistration", car.getRegistration());
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainerView, fragment)
                         .addToBackStack("Repair")
+                        .commit();
+                break;
+            case R.id.bt_schedules_menu:
+                fragment = new Schedules_Appointment();
+                bundle = new Bundle();
+                bundle.putInt("carPosition", position);
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("SchedulesAppointment")
                         .commit();
                 break;
             case R.id.bt_apagar_menu_car:
