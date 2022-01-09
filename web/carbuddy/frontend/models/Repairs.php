@@ -132,7 +132,7 @@ class Repairs extends \yii\db\ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
 
-        $message = $this->car->id.":".$this->car->brand . " " . $this->car->model . ":" . $this->state;
+        $message = $this->car->id.":::".$this->car->brand . " " . $this->car->model . ":::is " . $this->state;
 
         if ($insert) {
             $this->FazPublish("REPAIR-".$this->car->userId, $message);

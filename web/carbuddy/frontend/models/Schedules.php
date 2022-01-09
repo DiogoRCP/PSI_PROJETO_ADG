@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\mosquitto\phpMQTT;
 use Yii;
 
 /**
@@ -116,5 +117,37 @@ class Schedules extends \yii\db\ActiveRecord
     public function setcompanyid($companyid)
     {
         $this->companyId=$companyid;
+    }
+
+    //Mosquitto
+    public function afterSave($insert, $changedAttributes)
+    {
+        if(Yii::$app->user->can('collaborator')) {
+            parent::afterSave($insert, $changedAttributes);
+
+            $message = $this->car->id . ":::" . $this->car->brand . " " . $this->car->model . ":::is " . $this->state . ":::" . $this->schedulingdate;
+
+            if ($insert) {
+                $this->FazPublish("SCHEDULE-" . $this->car->userId, $message);
+            } else {
+                $this->FazPublish("SCHEDULE-" . $this->car->userId, $message);
+            }
+        }
+    }
+
+    public function FazPublish($canal, $msg)
+    {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = ""; // set your username
+        $password = ""; // set your password
+        $client_id = "phpMQTT-publisher"; // unique!
+        $mqtt = new phpMQTT($server, $port, $client_id);
+        if ($mqtt->connect(true, NULL, $username, $password)) {
+            $mqtt->publish($canal, $msg, 0, true);
+            $mqtt->close();
+        } else {
+            file_put_contents('debug.output', 'Time out!');
+        }
     }
 }
