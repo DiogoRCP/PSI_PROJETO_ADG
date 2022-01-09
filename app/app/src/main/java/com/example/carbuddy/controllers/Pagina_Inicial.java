@@ -1,6 +1,7 @@
 package com.example.carbuddy.controllers;
 
-import static com.example.carbuddy.utils.MQTT.connectionMQTT;
+import static com.example.carbuddy.utils.MQTT.connectionMQTTRepair;
+import static com.example.carbuddy.utils.MQTT.connectionMQTTSchedule;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -59,12 +60,15 @@ public class Pagina_Inicial extends AppCompatActivity {
         }
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("VehicleRepair", "VehicleRepair", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channelRepair = new NotificationChannel("VehicleRepair", "VehicleRepair", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channelSchedule = new NotificationChannel("VehicleSchedule", "VehicleSchedule", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
+            manager.createNotificationChannel(channelRepair);
+            manager.createNotificationChannel(channelSchedule);
         }
 
-        connectionMQTT(this);
+        connectionMQTTRepair(this);
+        connectionMQTTSchedule(this);
     }
 
     @Override
