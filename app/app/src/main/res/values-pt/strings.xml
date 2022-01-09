@@ -45,4 +45,6 @@
     <string name="Added">adicionado</string>
     <string name="NotDeleteCar">Não pode apagar um veículo com reparações</string>
     <string name="RepeatPassword">Repetir Password</string>
+    <string name="Schedule_Date">Data de Marcação</string>
+    <string name="VehicleRepair">Reparação do veículo</string>
 </resources>

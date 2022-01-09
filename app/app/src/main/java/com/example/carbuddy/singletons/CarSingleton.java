@@ -194,7 +194,6 @@ public class CarSingleton {
             carData.put("displacement", car.getDisplacement());
             carData.put("state", car.getState());
 
-            System.out.println(carData);
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.POST, url, carData, new Response.Listener<JSONObject>() {
                         @Override

@@ -7,6 +7,7 @@
         android:title="@string/repairs"
         app:showAsAction="always" />
     <item
+        android:id="@+id/bt_schedules_menu"
         android:icon="@drawable/ic_car_schedule"
         android:title="Item"
         app:showAsAction="always" />

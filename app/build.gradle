@@ -3,9 +3,8 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url 'https://dl.bintray.com/azeesoft/maven'
-        }
+        maven {url 'https://dl.bintray.com/azeesoft/maven'}
+        maven {url "https://repo.eclipse.org/content/repositories/paho-releases/"}
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.4'
