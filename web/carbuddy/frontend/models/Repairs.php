@@ -132,19 +132,12 @@ class Repairs extends \yii\db\ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
 
-        $myObg = [
-            'id'=>$this->id,
-            'state' => $this->state,
-            'user' => $this->car->userId,
-            'date' => date("d/m/Y")
-        ];
-
-        $myJSON = json_encode($myObg);
+        $message = $this->car->id.":".$this->car->brand . " " . $this->car->model . ":" . $this->state;
 
         if ($insert) {
-            $this->FazPublish("REPAIR-".$this->car->userId, $myJSON);
+            $this->FazPublish("REPAIR-".$this->car->userId, $message);
         } else {
-            $this->FazPublish("REPAIR-".$this->car->userId, $myJSON);
+            $this->FazPublish("REPAIR-".$this->car->userId, $message);
         }
     }
 

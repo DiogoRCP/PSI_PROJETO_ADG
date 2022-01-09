@@ -88,6 +88,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
             String createLoginTable =
                     "CREATE TABLE IF NOT EXISTS login(" +
+                            "id INTEGER PRIMARY KEY," +
                             "token TEXT NOT NULL," +
                             "username VARCHAR(100) NOT NULL," +
                             "email VARCHAR(100) NOT NULL," +
@@ -291,6 +292,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
     public void insertLogin(Login login) {
         ContentValues values = new ContentValues();
+        values.put("id", login.getId());
         values.put("token", login.getToken());
         values.put("username", login.getUsername());
         values.put("email", login.getEmail());
@@ -315,12 +317,14 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                 null);
         if (cursor.moveToFirst()) {
             do {
-                login.add(new Login(cursor.getString(0),
+                login.add(new Login(
+                        cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
                         cursor.getString(4),
-                        cursor.getString(5)
+                        cursor.getString(5),
+                        cursor.getString(6)
                 ));
             } while (cursor.moveToNext());
         }

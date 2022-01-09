@@ -1,17 +1,25 @@
 package com.example.carbuddy.controllers;
 
+import static com.example.carbuddy.utils.MQTT.connectionMQTT;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.models.ModeloBDHelper;
@@ -19,7 +27,16 @@ import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.singletons.CompaniesSingleton;
 import com.example.carbuddy.singletons.LoginSingleton;
 
-public class Pagina_Inicial extends AppCompatActivity{
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+public class Pagina_Inicial extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private Fragment fragment;
@@ -40,6 +57,14 @@ public class Pagina_Inicial extends AppCompatActivity{
             fragmentManager = getSupportFragmentManager();
             CarregarFragmentoInicial();
         }
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("VehicleRepair", "VehicleRepair", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        connectionMQTT(this);
     }
 
     @Override
@@ -54,7 +79,7 @@ public class Pagina_Inicial extends AppCompatActivity{
             //Title bar back press triggers onBackPressed()
             onBackPressed();
             return true;
-        }else{
+        } else {
         }
         return super.onOptionsItemSelected(item);
     }
@@ -62,9 +87,9 @@ public class Pagina_Inicial extends AppCompatActivity{
     //Both navigation bar back press and title bar back press will trigger this method
     @Override
     public void onBackPressed() {
-        if (fragmentManager.getBackStackEntryCount() > 0 ) {
+        if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStack();
-            if(fragmentManager.getBackStackEntryCount() == 1){
+            if (fragmentManager.getBackStackEntryCount() == 1) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             }
         }
@@ -123,7 +148,7 @@ public class Pagina_Inicial extends AppCompatActivity{
                     .commit();
         }
     }
-    
+
     public void CarregarFragmentoInicial() {
         fragmentNumber = 1;
         fragment = new fragment_garage();
@@ -153,5 +178,6 @@ public class Pagina_Inicial extends AppCompatActivity{
         this.deleteDatabase("carbuddy");
         this.finish();
     }
+
 
 }
