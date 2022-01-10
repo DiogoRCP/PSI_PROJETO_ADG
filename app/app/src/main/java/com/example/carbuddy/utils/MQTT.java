@@ -76,7 +76,6 @@ public class MQTT {
 
     private static void subscribeMQTTRepair(MqttAndroidClient client, Context context) {
         String topic = "REPAIR-" + LoginSingleton.getInstance(context).getLogin().getId();
-        String topic2 = "SCHEDULE-" + LoginSingleton.getInstance(context).getLogin().getId();
         int qos = 0;
         try {
             client.subscribe(topic, qos);
@@ -97,7 +96,7 @@ public class MQTT {
                     builder.setAutoCancel(true);
 
                     NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-                    managerCompat.notify(1+Integer.parseInt(separated[0]), builder.build());
+                    managerCompat.notify(1 + Integer.parseInt(separated[0]), builder.build());
                 }
 
                 @Override
@@ -124,17 +123,20 @@ public class MQTT {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     String mensagem = new String(message.getPayload());
+                    // Mensagem em array
                     String[] separated = mensagem.split(":::");
+                    // Data e hora
                     String[] separatedDate = separated[3].split("T");
+                    // Hora separada por hora, minutos e segundos
                     String[] separatedTime = separatedDate[1].split(":");
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "VehicleSchedule");
                     builder.setContentTitle("Schedule " + separated[1]);
-                    builder.setContentText(separated[2] + " - " + separatedDate[0]+" | "+separatedTime[0]+":"+separatedTime[1]);
+                    builder.setContentText(separated[2] + " - " + separatedDate[0] + " | " + separatedTime[0] + ":" + separatedTime[1]);
                     builder.setSmallIcon(R.drawable.ic_car_schedule);
                     builder.setAutoCancel(true);
 
                     NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-                    managerCompat.notify(2+Integer.parseInt(separated[0]), builder.build());
+                    managerCompat.notify(2 + Integer.parseInt(separated[0]), builder.build());
                 }
 
                 @Override
