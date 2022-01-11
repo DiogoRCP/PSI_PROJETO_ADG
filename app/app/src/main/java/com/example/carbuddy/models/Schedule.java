@@ -1,95 +1,115 @@
 package com.example.carbuddy.models;
 
 public class Schedule {
-    private int id, carId, companyId;
-    private String currentDate, schedulingDate, repairDescription, state, repairType;
+    private int id;
+    private String currentdate, schedulingdate, repairdescription, state, repairtype, company, carregistration, carbrand, carmodel;
 
-    public Schedule(int id, int carId, int companyId, String currentDate, String schedulingDate, String repairDescription, String state, String repairType) {
+    public Schedule(int id, String currentdate, String schedulingdate, String repairdescription, String state, String repairtype, String company, String carregistration, String carbrand, String carmodel) {
         this.id = id;
-        this.carId = carId;
-        this.companyId = companyId;
-        this.currentDate = currentDate;
-        this.schedulingDate = schedulingDate;
-        this.repairDescription = repairDescription;
+        this.currentdate = currentdate;
+        this.schedulingdate = schedulingdate;
+        this.repairdescription = repairdescription;
         this.state = state;
-        this.repairType = repairType;
+        this.repairtype = repairtype;
+        this.company = company;
+        this.carregistration = carregistration;
+        this.carbrand = carbrand;
+        this.carmodel = carmodel;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getCurrentdate() {
+        return currentdate;
     }
 
-    public int getCarId() {
-        return carId;
+    public String getSchedulingdate() {
+        return schedulingdate;
     }
 
-    public void setCarId(int carId) {
-        this.carId = carId;
-    }
-
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getCurrentDate() {
-        return currentDate;
-    }
-
-    public void setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
-    }
-
-    public String getSchedulingDate() {
-        return schedulingDate;
-    }
-
-    public void setSchedulingDate(String schedulingDate) {
-        this.schedulingDate = schedulingDate;
-    }
-
-    public String getRepairDescription() {
-        return repairDescription;
-    }
-
-    public void setRepairDescription(String repairDescription) {
-        this.repairDescription = repairDescription;
+    public String getRepairdescription() {
+        return repairdescription;
     }
 
     public String getState() {
         return state;
     }
 
+    public String getRepairtype() {
+        return repairtype;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public String getCarregistration() {
+        return carregistration;
+    }
+
+    public String getCarbrand() {
+        return carbrand;
+    }
+
+    public String getCarmodel() {
+        return carmodel;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCurrentdate(String currentdate) {
+        this.currentdate = currentdate;
+    }
+
+    public void setSchedulingdate(String schedulingdate) {
+        this.schedulingdate = schedulingdate;
+    }
+
+    public void setRepairdescription(String repairdescription) {
+        this.repairdescription = repairdescription;
+    }
+
     public void setState(String state) {
         this.state = state;
     }
 
-    public String getRepairType() {
-        return repairType;
+    public void setRepairtype(String repairtype) {
+        this.repairtype = repairtype;
     }
 
-    public void setRepairType(String repairType) {
-        this.repairType = repairType;
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public void setCarregistration(String carregistration) {
+        this.carregistration = carregistration;
+    }
+
+    public void setCarbrand(String carbrand) {
+        this.carbrand = carbrand;
+    }
+
+    public void setCarmodel(String carmodel) {
+        this.carmodel = carmodel;
     }
 
     @Override
     public String toString() {
-        return "Schedules{" +
+        return "Schedule{" +
                 "id=" + id +
-                ", carId=" + carId +
-                ", companyId=" + companyId +
-                ", currentDate='" + currentDate + '\'' +
-                ", schedulingDate='" + schedulingDate + '\'' +
-                ", repairDescription='" + repairDescription + '\'' +
+                ", currentdate='" + currentdate + '\'' +
+                ", schedulingdate='" + schedulingdate + '\'' +
+                ", repairdescription='" + repairdescription + '\'' +
                 ", state='" + state + '\'' +
-                ", repairType='" + repairType + '\'' +
+                ", repairtype='" + repairtype + '\'' +
+                ", company='" + company + '\'' +
+                ", carregistration='" + carregistration + '\'' +
+                ", carbrand='" + carbrand + '\'' +
+                ", carmodel='" + carmodel + '\'' +
                 '}';
     }
 }

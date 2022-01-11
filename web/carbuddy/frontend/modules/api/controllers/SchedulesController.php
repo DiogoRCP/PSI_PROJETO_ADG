@@ -9,6 +9,7 @@ use frontend\models\Schedules;
 use Yii;
 use yii\db\IntegrityException;
 use yii\filters\auth\QueryParamAuth;
+use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
 
@@ -183,9 +184,24 @@ class SchedulesController extends ActiveController
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
             $cars = Cars::find()->where("userId = " . Yii::$app->user->getId())->all();
-            $recs = array();
+            $recs = [];
             foreach($cars as $car){
-                array_push($recs, $car->getSchedules());
+                foreach ($car->getSchedules() as $schedule){
+                    $objSchedule = [
+                        'id' => $schedule->id,
+                        'currentdate' => $schedule->currentdate,
+                        'schedulingdate' => $schedule->schedulingdate,
+                        'repairdescription' => $schedule->repairdescription,
+                        'state' => $schedule->state,
+                        'repairtype' => $schedule->repairtype,
+                        'company' => $schedule->getCompany()->one()->companyname,
+                        'carregistration' => $car->registration,
+                        'carbrand' => $car->brand,
+                        'carmodel' => $car->model
+                    ];
+                    $recs[] = $objSchedule;
+                }
+
             }
             return $recs;
         }
