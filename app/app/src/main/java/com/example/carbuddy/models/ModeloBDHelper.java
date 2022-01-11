@@ -51,10 +51,10 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         "repairdescription VARCHAR(100) NOT NULL, " +
                         "state VARCHAR(100) NOT NULL," +
                         "repairtype VARCHAR(100) NOT NULL," +
-                        "carId INT NOT NULL," +
-                        "companyId INT NOT NULL," +
-                        "FOREIGN KEY (carId) REFERENCES car(id)," +
-                        "FOREIGN KEY (companyId) REFERENCES company(id)" +
+                        "company VARCHAR(100) NOT NULL," +
+                        "carregistration VARCHAR(100) NOT NULL," +
+                        "carbrand VARCHAR(100) NOT NULL," +
+                        "carmodel VARCHAR(100) NOT NULL" +
                         ");";
         db.execSQL(createSchedulesTable);
 
@@ -209,8 +209,10 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         values.put("repairdescription", schedule.getRepairdescription());
         values.put("state", schedule.getState());
         values.put("repairtype", schedule.getRepairtype());
-        values.put("carId", schedule.getCarId());
-        values.put("companyId", schedule.getCompanyId());
+        values.put("company", schedule.getCompany());
+        values.put("carregistration", schedule.getCarregistration());
+        values.put("carbrand", schedule.getCarbrand());
+        values.put("carmodel", schedule.getCarmodel());
 
         if (!verificarSchedule(schedule, values)) {
             database.insert("schedules", null, values);
@@ -231,13 +233,16 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 schedules.add(new Schedule(cursor.getInt(0),
-                cursor.getInt(1),
-                cursor.getInt(2),
+                cursor.getString(1),
+                cursor.getString(2),
                 cursor.getString(3),
                 cursor.getString(4),
                 cursor.getString(5),
                 cursor.getString(6),
-                cursor.getString(7)
+                cursor.getString(7),
+                cursor.getString(8),
+                cursor.getString(9)
+
                 ));
             } while (cursor.moveToNext());
         }

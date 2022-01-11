@@ -73,5 +73,15 @@
             android:text=""
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewCar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/worksans"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
