@@ -2,17 +2,17 @@ package com.example.carbuddy.models;
 
 public class Schedule {
     private int id, carId, companyId;
-    private String currentDate, schedulingDate, repairDescription, state, repairType;
+    private String currentdate, schedulingdate, repairdescription, state, repairtype;
 
-    public Schedule(int id, int carId, int companyId, String currentDate, String schedulingDate, String repairDescription, String state, String repairType) {
+    public Schedule(int id, int carId, int companyId, String currentdate, String schedulingdate, String repairdescription, String state, String repairtype) {
         this.id = id;
         this.carId = carId;
         this.companyId = companyId;
-        this.currentDate = currentDate;
-        this.schedulingDate = schedulingDate;
-        this.repairDescription = repairDescription;
+        this.currentdate = currentdate;
+        this.schedulingdate = schedulingdate;
+        this.repairdescription = repairdescription;
         this.state = state;
-        this.repairType = repairType;
+        this.repairtype = repairtype;
     }
 
     public int getId() {
@@ -39,28 +39,28 @@ public class Schedule {
         this.companyId = companyId;
     }
 
-    public String getCurrentDate() {
-        return currentDate;
+    public String getCurrentdate() {
+        return currentdate;
     }
 
-    public void setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
+    public void setCurrentdate(String currentdate) {
+        this.currentdate = currentdate;
     }
 
-    public String getSchedulingDate() {
-        return schedulingDate;
+    public String getSchedulingdate() {
+        return schedulingdate;
     }
 
-    public void setSchedulingDate(String schedulingDate) {
-        this.schedulingDate = schedulingDate;
+    public void setSchedulingdate(String schedulingdate) {
+        this.schedulingdate = schedulingdate;
     }
 
-    public String getRepairDescription() {
-        return repairDescription;
+    public String getRepairdescription() {
+        return repairdescription;
     }
 
-    public void setRepairDescription(String repairDescription) {
-        this.repairDescription = repairDescription;
+    public void setRepairdescription(String repairdescription) {
+        this.repairdescription = repairdescription;
     }
 
     public String getState() {
@@ -71,25 +71,25 @@ public class Schedule {
         this.state = state;
     }
 
-    public String getRepairType() {
-        return repairType;
+    public String getRepairtype() {
+        return repairtype;
     }
 
-    public void setRepairType(String repairType) {
-        this.repairType = repairType;
+    public void setRepairtype(String repairtype) {
+        this.repairtype = repairtype;
     }
 
     @Override
     public String toString() {
-        return "Schedules{" +
+        return "Schedule{" +
                 "id=" + id +
                 ", carId=" + carId +
                 ", companyId=" + companyId +
-                ", currentDate='" + currentDate + '\'' +
-                ", schedulingDate='" + schedulingDate + '\'' +
-                ", repairDescription='" + repairDescription + '\'' +
+                ", currentdate='" + currentdate + '\'' +
+                ", schedulingdate='" + schedulingdate + '\'' +
+                ", repairdescription='" + repairdescription + '\'' +
                 ", state='" + state + '\'' +
-                ", repairType='" + repairType + '\'' +
+                ", repairtype='" + repairtype + '\'' +
                 '}';
     }
 }

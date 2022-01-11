@@ -204,11 +204,11 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     public void insertSchedules(Schedule schedule) {
         ContentValues values = new ContentValues();
         values.put("id", schedule.getId());
-        values.put("currentdate", schedule.getCurrentDate());
-        values.put("schedulingdate", schedule.getSchedulingDate());
-        values.put("repairdescription", schedule.getRepairDescription());
+        values.put("currentdate", schedule.getCurrentdate());
+        values.put("schedulingdate", schedule.getSchedulingdate());
+        values.put("repairdescription", schedule.getRepairdescription());
         values.put("state", schedule.getState());
-        values.put("repairtype", schedule.getRepairType());
+        values.put("repairtype", schedule.getRepairtype());
         values.put("carId", schedule.getCarId());
         values.put("companyId", schedule.getCompanyId());
 
