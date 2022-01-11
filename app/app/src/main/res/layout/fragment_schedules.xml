@@ -4,4 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controllers.fragment_schedules" />
+    tools:context=".controllers.fragment_schedules" >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerViewSchedules"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

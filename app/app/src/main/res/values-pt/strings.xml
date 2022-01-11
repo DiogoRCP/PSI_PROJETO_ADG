@@ -47,4 +47,5 @@
     <string name="RepeatPassword">Repetir Password</string>
     <string name="Schedule_Date">Data de Marcação</string>
     <string name="VehicleRepair">Reparação do veículo</string>
+    <string name="Company">Empresa</string>
 </resources>
