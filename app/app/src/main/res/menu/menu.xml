@@ -12,8 +12,6 @@
             android:onClick="onClickCompaniesMenu"
             android:title="@string/Companies" />
 
-        <item android:title="@string/About" />
-
         <item
             android:onClick="onClickLogoutMenu"
             android:title="@string/Logout" />
