@@ -1,35 +1,21 @@
 package com.example.carbuddy.models;
 
-import static com.android.volley.Request.Method.POST;
-import static com.example.carbuddy.utils.Json_Objects_Convertor.IP;
-import static com.example.carbuddy.utils.Json_Objects_Convertor.isInternetConnection;
-import static com.example.carbuddy.utils.Json_Objects_Convertor.jsonObjectConvert;
+import static com.example.carbuddy.utils.libs.IP;
+import static com.example.carbuddy.utils.libs.isInternetConnection;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Network;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.DataOutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 public class Signup {
     String username;

@@ -46,6 +46,13 @@
     <string name="Yes">Yes</string>
     <string name="No">No</string>
     <string name="Added">added</string>
+    <string name="NotDeleteCar">You can\'t delete a vehicle with repairs</string>
+    <string name="RepeatPassword">Repeat Password</string>
+    <string name="Schedule_Date">Schedule Date</string>
+    <string name="VehicleRepair">Vehicle Repair</string>
+    <string name="Company">Company</string>
+    <string name="Schedule_Description">Description</string>
+    <string name="Submit">Submit</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>
@@ -61,9 +68,8 @@
         <item>MOTORCYCLE</item>
     </string-array>
 
-    <string name="NotDeleteCar">You can\'t delete a vehicle with repairs</string>
-    <string name="RepeatPassword">Repeat Password</string>
-    <string name="Schedule_Date">Schedule Date</string>
-    <string name="VehicleRepair">Vehicle Repair</string>
-
+    <string-array name="repairtype_array">
+        <item>Maintenance</item>
+        <item>Repair</item>
+    </string-array>
 </resources>

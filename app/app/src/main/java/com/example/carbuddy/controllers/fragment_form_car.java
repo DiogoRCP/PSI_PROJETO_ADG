@@ -1,6 +1,7 @@
 package com.example.carbuddy.controllers;
 
-import android.graphics.Color;
+import static com.example.carbuddy.utils.libs.spinnerTheme;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,18 +21,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.azeesoft.lib.colorpicker.ColorPickerDialog;
 import com.example.carbuddy.R;
 import com.example.carbuddy.listeners.CarsListener;
 import com.example.carbuddy.models.Car;
-import com.example.carbuddy.models.Company;
 import com.example.carbuddy.singletons.CarSingleton;
-import com.example.carbuddy.utils.Json_Objects_Convertor;
+import com.example.carbuddy.utils.libs;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -106,6 +104,9 @@ public class fragment_form_car extends Fragment implements CarsListener {
         ColorPicker(view);
         findId(view);
         vinSearch(view);
+
+        spinnerTheme(getContext(), spCarType, R.array.carType_array);
+        spinnerTheme(getContext(), spFuelType, R.array.fuelType_array);
 
         view.findViewById(R.id.btAddCar).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,7 +188,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
     }
 
     private void vinAPI() {
-        if (!Json_Objects_Convertor.isInternetConnection(getContext())) {
+        if (!libs.isInternetConnection(getContext())) {
             Toast.makeText(getContext(), "No internet", Toast.LENGTH_SHORT).show();
         } else {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
