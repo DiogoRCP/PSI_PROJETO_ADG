@@ -1,5 +1,9 @@
 package com.example.carbuddy.models;
 
+import android.content.Context;
+
+import com.example.carbuddy.singletons.CompaniesSingleton;
+
 public class Schedule {
     private int id;
     private String currentdate, schedulingdate, repairdescription, state, repairtype, company, carregistration, carbrand, carmodel;
@@ -15,6 +19,18 @@ public class Schedule {
         this.carregistration = carregistration;
         this.carbrand = carbrand;
         this.carmodel = carmodel;
+    }
+
+    /** Construtor para receber os dados do formulário **/
+    public Schedule(int carId, String companyName, String schedulingDate, String repairDescription, String repairType, Context context){
+        this.id = 0;
+        this.carId = carId;
+        this.companyId = checkCompanyIdByName(companyName, context);
+        this.currentDate = "";
+        this.schedulingDate = schedulingDate;
+        this.repairDescription = repairDescription;
+        this.state = "Pending";
+        this.repairType = repairType;
     }
 
     public int getId() {
@@ -95,6 +111,16 @@ public class Schedule {
 
     public void setCarmodel(String carmodel) {
         this.carmodel = carmodel;
+    }
+
+    private int checkCompanyIdByName(String name, Context context){
+        int CompId = 0;
+        for (Company company : CompaniesSingleton.getInstance(context).getCompanies()) {
+            if(company.getCompanyName().equals(name)){
+                CompId = company.getId();
+            }
+        }
+        return CompId;
     }
 
     @Override

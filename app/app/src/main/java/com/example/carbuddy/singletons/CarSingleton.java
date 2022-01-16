@@ -1,8 +1,8 @@
 package com.example.carbuddy.singletons;
 
-import static com.example.carbuddy.utils.Json_Objects_Convertor.IP;
-import static com.example.carbuddy.utils.Json_Objects_Convertor.isInternetConnection;
-import static com.example.carbuddy.utils.Json_Objects_Convertor.objectjsonConvert;
+import static com.example.carbuddy.utils.libs.IP;
+import static com.example.carbuddy.utils.libs.isInternetConnection;
+import static com.example.carbuddy.utils.libs.objectjsonConvert;
 
 import android.content.Context;
 import android.util.Log;
@@ -25,9 +25,6 @@ import com.example.carbuddy.listeners.RepairsListener;
 import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.models.Repair;
-import com.example.carbuddy.utils.DeleteConfirmationDialogFragment;
-import com.example.carbuddy.utils.Json_Objects_Convertor;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;

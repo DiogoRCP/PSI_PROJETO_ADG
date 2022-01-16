@@ -1,5 +1,7 @@
 package com.example.carbuddy.controllers;
 
+import static com.example.carbuddy.utils.libs.spinnerTheme;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -10,16 +12,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.carbuddy.R;
-
-import org.w3c.dom.Text;
+import com.example.carbuddy.models.Company;
+import com.example.carbuddy.models.Schedule;
+import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.singletons.CompaniesSingleton;
 
 import java.text.SimpleDateFormat;
-import java.time.Clock;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -39,9 +46,14 @@ public class Schedules_Appointment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private int carPosition;
     private TextView tvDate;
     private TextView tvHour;
     final Calendar myCalendar = Calendar.getInstance();
+    private Spinner spCompany;
+    private Spinner spRepairType;
+    private Button btSubmit;
+    private EditText edtxtDescription;
 
     public Schedules_Appointment() {
         // Required empty public constructor
@@ -72,6 +84,13 @@ public class Schedules_Appointment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            carPosition = bundle.getInt("carPosition");
+        }else{
+            carPosition = 0;
+        } System.out.println(carPosition);
     }
 
     @Override
@@ -84,11 +103,18 @@ public class Schedules_Appointment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_schedules__appointment, container, false);
 
+        spCompany = view.findViewById(R.id.spCompany);
+        spRepairType = view.findViewById(R.id.spRepairType);
+        edtxtDescription = view.findViewById(R.id.edtxtDescription);
+        ChargeCompanies(view);
         // Alterar data
         dateManagement(view);
 
         // Alterar hora
         hourManagement(view);
+
+        btSubmit = view.findViewById(R.id.btSubmitSchedule);
+        btSubmitClick();
 
         return view;
     }
@@ -144,5 +170,25 @@ public class Schedules_Appointment extends Fragment {
         String myFormat = "HH:mm";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
         tvHour.setText(dateFormat.format(myCalendar.getTime()));
+    }
+
+    private void ChargeCompanies(View view){
+        ArrayList<String> companies = new ArrayList<>();
+        for (Company company : CompaniesSingleton.getInstance(getContext()).getCompanies()) {
+            companies.add(company.getCompanyName());
+        }
+
+        spinnerTheme(getContext(), spCompany, companies);
+        spinnerTheme(getContext(), spRepairType, R.array.repairtype_array);
+    }
+
+    private void btSubmitClick(){
+        btSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Schedule schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText()+"T"+tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+
+            }
+        });
     }
 }

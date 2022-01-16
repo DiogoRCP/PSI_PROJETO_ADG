@@ -48,4 +48,6 @@
     <string name="Schedule_Date">Data de Marcação</string>
     <string name="VehicleRepair">Reparação do veículo</string>
     <string name="Company">Empresa</string>
+    <string name="Schedule_Description">Descrição</string>
+    <string name="Submit">Submeter</string>
 </resources>

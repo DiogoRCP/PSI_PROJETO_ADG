@@ -165,12 +165,21 @@ public class Pagina_Inicial extends AppCompatActivity {
     }
 
     public void onClickAccountMenu(MenuItem item) {
-        fragment = new AccountFragment();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack("Account")
-                .commit();
+        if (fragmentNumber != 2) {
+            fragment = new AccountFragment();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.Account);
+
+            fragmentNumber = 2;
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .addToBackStack("Account")
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 
     public void onClickCompaniesMenu(MenuItem item) {
