@@ -2,7 +2,10 @@ package com.example.carbuddy.models;
 
 import android.content.Context;
 
+import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.singletons.CompaniesSingleton;
+
+import java.util.ArrayList;
 
 public class Schedule {
     private int id, carId, companyId;
@@ -103,6 +106,30 @@ public class Schedule {
             }
         }
         return CompId;
+    }
+
+    public String getCompanyName(Context context){
+        for (Company company : CompaniesSingleton.getInstance(context).getCompanies()) {
+            if(company.getId() == this.companyId)
+                return company.getCompanyName();
+        }
+        return "";
+    }
+
+    /** Devolve uma lista de três informações do carro
+     * (0 - marca),
+     * (1 - modelo),
+     * (2 - matrícula) **/
+    public ArrayList<String> getCarInfo(Context context){
+        ArrayList<String> info = new ArrayList<>();
+        for (Car car : CarSingleton.getInstance(context).getCars()) {
+            if(car.getId() == this.carId) {
+                info.add(car.getBrand());
+                info.add(car.getModel());
+                info.add(car.getRegistration());
+            }
+        }
+        return info;
     }
 
     @Override
