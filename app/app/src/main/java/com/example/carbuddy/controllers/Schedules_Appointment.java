@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.listeners.SchedulesListener;
@@ -59,6 +60,8 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     private Button btSubmit;
     private EditText edtxtDescription;
 
+    private Schedule schedule;
+
     public Schedules_Appointment() {
         // Required empty public constructor
     }
@@ -92,7 +95,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             carPosition = bundle.getInt("carPosition");
-        }else{
+        } else {
             carPosition = 0;
         }
 
@@ -178,7 +181,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         tvHour.setText(dateFormat.format(myCalendar.getTime()));
     }
 
-    private void ChargeCompanies(View view){
+    private void ChargeCompanies(View view) {
         ArrayList<String> companies = new ArrayList<>();
         for (Company company : CompaniesSingleton.getInstance(getContext()).getCompanies()) {
             companies.add(company.getCompanyName());
@@ -188,18 +191,29 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         spinnerTheme(getContext(), spRepairType, R.array.repairtype_array);
     }
 
-    private void btSubmitClick(){
+    private void btSubmitClick() {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Schedule schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText()+" "+tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
-                try {
-                    SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedule);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                verificarDescricao();
+                if (verificarDescricao()) {
+                    schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+                    try {
+                        SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedule);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
+    }
+
+    private boolean verificarDescricao() {
+        if (edtxtDescription.getText().toString().isEmpty()) {
+            edtxtDescription.setError(getString(R.string.WriteDescription));
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -209,6 +223,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
     @Override
     public void onDeleteCreateSchedule() {
-        this.onDestroy();
+        Toast.makeText(getContext(), schedule.getRepairtype() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 }

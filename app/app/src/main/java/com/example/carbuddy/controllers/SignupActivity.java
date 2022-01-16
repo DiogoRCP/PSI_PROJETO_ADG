@@ -31,11 +31,11 @@ public class SignupActivity extends AppCompatActivity {
         getElements();
     }
 
-    private void getElements(){
+    private void getElements() {
         username = findViewById(R.id.txusername);
         email = findViewById(R.id.txemail);
         nif = findViewById(R.id.txnif);
-        birsthday = (DatePicker)findViewById(R.id.txbirsthday);
+        birsthday = (DatePicker) findViewById(R.id.txbirsthday);
         phonenumber = findViewById(R.id.txphone);
         password = findViewById(R.id.txpassword);
         passwordR = findViewById(R.id.txpassword2);
@@ -49,7 +49,7 @@ public class SignupActivity extends AppCompatActivity {
                     username.getText().toString(),
                     email.getText().toString(),
                     nif.getText().toString(),
-                    birsthday.getYear()+"/"+(birsthday.getMonth()+1)+"/"+birsthday.getDayOfMonth(),
+                    birsthday.getYear() + "/" + (birsthday.getMonth() + 1) + "/" + birsthday.getDayOfMonth(),
                     phonenumber.getText().toString(),
                     password.getText().toString()
             );
@@ -57,8 +57,7 @@ public class SignupActivity extends AppCompatActivity {
             form.DoSignup(this);
             Toast.makeText(getApplicationContext(), "Account Created Successfully. You can start a session.", Toast.LENGTH_SHORT).show();
             finish();
-        }
-        else {
+        } else {
             //Mensagem de erro a endicar que as passwors não correspondem
             Toast.makeText(getApplicationContext(), "Password and its Replay are different.", Toast.LENGTH_SHORT).show();
         }
