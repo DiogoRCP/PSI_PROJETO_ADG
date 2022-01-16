@@ -20,10 +20,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.listeners.SchedulesListener;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.Schedule;
 import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.singletons.CompaniesSingleton;
+import com.example.carbuddy.singletons.SchedulesSingleton;
+
+import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +39,7 @@ import java.util.Locale;
  * Use the {@link Schedules_Appointment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Schedules_Appointment extends Fragment {
+public class Schedules_Appointment extends Fragment implements SchedulesListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -90,7 +94,9 @@ public class Schedules_Appointment extends Fragment {
             carPosition = bundle.getInt("carPosition");
         }else{
             carPosition = 0;
-        } System.out.println(carPosition);
+        }
+
+        SchedulesSingleton.getInstance(getContext()).addSchedulesListener(this);
     }
 
     @Override
@@ -141,7 +147,7 @@ public class Schedules_Appointment extends Fragment {
     }
 
     private void updateLabelDate() {
-        String myFormat = "dd/MM/yyyy";
+        String myFormat = "yyyy/MM/dd";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
         tvDate.setText(dateFormat.format(myCalendar.getTime()));
     }
@@ -186,9 +192,23 @@ public class Schedules_Appointment extends Fragment {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Schedule schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText()+"T"+tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
-
+                Schedule schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText()+" "+tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+                try {
+                    SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedule);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
+    }
+
+    @Override
+    public void onRefreshSchedules(ArrayList<Schedule> schedules) {
+
+    }
+
+    @Override
+    public void onDeleteCreateSchedule() {
+        this.onDestroy();
     }
 }

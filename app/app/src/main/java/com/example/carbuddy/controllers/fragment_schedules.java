@@ -118,4 +118,9 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         lstSchedule = SchedulesSingleton.getInstance(getContext()).getSchedules();
         myRecyclerView.setAdapter(new ScheduleListAdapter(getContext(), lstSchedule));
     }
+
+    @Override
+    public void onDeleteCreateSchedule() {
+
+    }
 }

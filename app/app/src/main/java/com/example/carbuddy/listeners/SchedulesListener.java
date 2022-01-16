@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface SchedulesListener {
     void onRefreshSchedules(final ArrayList<Schedule> schedules);
+    void onDeleteCreateSchedule();
 }
