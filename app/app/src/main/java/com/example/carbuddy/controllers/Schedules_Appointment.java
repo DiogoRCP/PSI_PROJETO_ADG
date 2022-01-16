@@ -18,12 +18,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.listeners.SchedulesListener;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.Schedule;
 import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.singletons.CompaniesSingleton;
+import com.example.carbuddy.singletons.SchedulesSingleton;
+
+import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +40,7 @@ import java.util.Locale;
  * Use the {@link Schedules_Appointment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Schedules_Appointment extends Fragment {
+public class Schedules_Appointment extends Fragment implements SchedulesListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,6 +59,8 @@ public class Schedules_Appointment extends Fragment {
     private Spinner spRepairType;
     private Button btSubmit;
     private EditText edtxtDescription;
+
+    private Schedule schedule;
 
     public Schedules_Appointment() {
         // Required empty public constructor
@@ -88,9 +95,11 @@ public class Schedules_Appointment extends Fragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             carPosition = bundle.getInt("carPosition");
-        }else{
+        } else {
             carPosition = 0;
-        } System.out.println(carPosition);
+        }
+
+        SchedulesSingleton.getInstance(getContext()).addSchedulesListener(this);
     }
 
     @Override
@@ -141,7 +150,7 @@ public class Schedules_Appointment extends Fragment {
     }
 
     private void updateLabelDate() {
-        String myFormat = "dd/MM/yyyy";
+        String myFormat = "yyyy/MM/dd";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
         tvDate.setText(dateFormat.format(myCalendar.getTime()));
     }
@@ -172,7 +181,7 @@ public class Schedules_Appointment extends Fragment {
         tvHour.setText(dateFormat.format(myCalendar.getTime()));
     }
 
-    private void ChargeCompanies(View view){
+    private void ChargeCompanies(View view) {
         ArrayList<String> companies = new ArrayList<>();
         for (Company company : CompaniesSingleton.getInstance(getContext()).getCompanies()) {
             companies.add(company.getCompanyName());
@@ -182,13 +191,39 @@ public class Schedules_Appointment extends Fragment {
         spinnerTheme(getContext(), spRepairType, R.array.repairtype_array);
     }
 
-    private void btSubmitClick(){
+    private void btSubmitClick() {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Schedule schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText()+"T"+tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
-
+                verificarDescricao();
+                if (verificarDescricao()) {
+                    schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+                    try {
+                        SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedule);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
+    }
+
+    private boolean verificarDescricao() {
+        if (edtxtDescription.getText().toString().isEmpty()) {
+            edtxtDescription.setError(getString(R.string.WriteDescription));
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onRefreshSchedules(ArrayList<Schedule> schedules) {
+
+    }
+
+    @Override
+    public void onDeleteCreateSchedule() {
+        Toast.makeText(getContext(), schedule.getRepairtype() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 }

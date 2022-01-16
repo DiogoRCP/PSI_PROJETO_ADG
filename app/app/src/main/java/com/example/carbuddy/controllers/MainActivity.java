@@ -53,13 +53,13 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         boolean userBool = isUserValid(user);
         boolean passBool = isPassValid(pass);
 
-        if (userBool != true)
+        if (!userBool)
             editTextUser.setError("Invalid User");
 
-        if (passBool != true)
+        if (!passBool)
             editTextPass.setError("Invalid Password");
 
-        if (userBool == true && passBool == true) {
+        if (userBool && passBool) {
             return true;
         }
         return false;
@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         startActivity(companiesView);
     }
 
-    private void VerificarLogin(){
-        if(database.getAllLogin().size()>0){
+    private void VerificarLogin() {
+        if (database.getAllLogin().size() > 0) {
             Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
             startActivity(paginaInicial);
         }
@@ -109,11 +109,11 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
 
     @Override
     public void onValidateLogin(Login login) {
-        if(login.getToken() != null){
+        if (login.getToken() != null) {
             database.insertLogin(login);
             Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
             startActivity(paginaInicial);
-        }else{
+        } else {
             Toast.makeText(this, "Username or password incorrect", Toast.LENGTH_SHORT).show();
         }
     }

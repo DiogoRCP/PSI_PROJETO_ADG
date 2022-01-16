@@ -2,23 +2,24 @@ package com.example.carbuddy.models;
 
 import android.content.Context;
 
+import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.singletons.CompaniesSingleton;
 
-public class Schedule {
-    private int id;
-    private String currentdate, schedulingdate, repairdescription, state, repairtype, company, carregistration, carbrand, carmodel;
+import java.util.ArrayList;
 
-    public Schedule(int id, String currentdate, String schedulingdate, String repairdescription, String state, String repairtype, String company, String carregistration, String carbrand, String carmodel) {
+public class Schedule {
+    private int id, carId, companyId;
+    private String currentdate, schedulingdate, repairdescription, state, repairtype;
+
+    public Schedule(int id, int carId, int companyId, String currentdate, String schedulingdate, String repairdescription, String state, String repairtype) {
         this.id = id;
+        this.carId = carId;
+        this.companyId = companyId;
         this.currentdate = currentdate;
         this.schedulingdate = schedulingdate;
         this.repairdescription = repairdescription;
         this.state = state;
         this.repairtype = repairtype;
-        this.company = company;
-        this.carregistration = carregistration;
-        this.carbrand = carbrand;
-        this.carmodel = carmodel;
     }
 
     /** Construtor para receber os dados do formulário **/
@@ -26,11 +27,11 @@ public class Schedule {
         this.id = 0;
         this.carId = carId;
         this.companyId = checkCompanyIdByName(companyName, context);
-        this.currentDate = "";
-        this.schedulingDate = schedulingDate;
-        this.repairDescription = repairDescription;
+        this.currentdate = "";
+        this.schedulingdate = schedulingDate;
+        this.repairdescription = repairDescription;
         this.state = "Pending";
-        this.repairType = repairType;
+        this.repairtype = repairType;
     }
 
     public int getId() {
@@ -57,20 +58,12 @@ public class Schedule {
         return repairtype;
     }
 
-    public String getCompany() {
-        return company;
+    public int getCarId() {
+        return carId;
     }
 
-    public String getCarregistration() {
-        return carregistration;
-    }
-
-    public String getCarbrand() {
-        return carbrand;
-    }
-
-    public String getCarmodel() {
-        return carmodel;
+    public int getCompanyId() {
+        return companyId;
     }
 
     public void setId(int id) {
@@ -97,20 +90,12 @@ public class Schedule {
         this.repairtype = repairtype;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setCarId(int carId) {
+        this.carId = carId;
     }
 
-    public void setCarregistration(String carregistration) {
-        this.carregistration = carregistration;
-    }
-
-    public void setCarbrand(String carbrand) {
-        this.carbrand = carbrand;
-    }
-
-    public void setCarmodel(String carmodel) {
-        this.carmodel = carmodel;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     private int checkCompanyIdByName(String name, Context context){
@@ -123,19 +108,41 @@ public class Schedule {
         return CompId;
     }
 
+    public String getCompanyName(Context context){
+        for (Company company : CompaniesSingleton.getInstance(context).getCompanies()) {
+            if(company.getId() == this.companyId)
+                return company.getCompanyName();
+        }
+        return "";
+    }
+
+    /** Devolve uma lista de três informações do carro
+     * (0 - marca),
+     * (1 - modelo),
+     * (2 - matrícula) **/
+    public ArrayList<String> getCarInfo(Context context){
+        ArrayList<String> info = new ArrayList<>();
+        for (Car car : CarSingleton.getInstance(context).getCars()) {
+            if(car.getId() == this.carId) {
+                info.add(car.getBrand());
+                info.add(car.getModel());
+                info.add(car.getRegistration());
+            }
+        }
+        return info;
+    }
+
     @Override
     public String toString() {
         return "Schedule{" +
                 "id=" + id +
+                ", carId=" + carId +
+                ", companyId=" + companyId +
                 ", currentdate='" + currentdate + '\'' +
                 ", schedulingdate='" + schedulingdate + '\'' +
                 ", repairdescription='" + repairdescription + '\'' +
                 ", state='" + state + '\'' +
                 ", repairtype='" + repairtype + '\'' +
-                ", company='" + company + '\'' +
-                ", carregistration='" + carregistration + '\'' +
-                ", carbrand='" + carbrand + '\'' +
-                ", carmodel='" + carmodel + '\'' +
                 '}';
     }
 }

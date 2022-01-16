@@ -194,10 +194,8 @@ class SchedulesController extends ActiveController
                         'repairdescription' => $schedule->repairdescription,
                         'state' => $schedule->state,
                         'repairtype' => $schedule->repairtype,
-                        'company' => $schedule->getCompany()->one()->companyname,
-                        'carregistration' => $car->registration,
-                        'carbrand' => $car->brand,
-                        'carmodel' => $car->model
+                        'companyId' => $schedule->getCompany()->one()->id,
+                        'carId' => $car->id
                     ];
                     $recs[] = $objSchedule;
                 }

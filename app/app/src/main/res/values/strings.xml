@@ -51,9 +51,9 @@
     <string name="RepeatPassword">Repeat Password</string>
     <string name="Schedule_Date">Schedule Date</string>
     <string name="VehicleRepair">Vehicle Repair</string>
-    <string name="Company">Company</string>
     <string name="Schedule_Description">Description</string>
     <string name="Submit">Submit</string>
+    <string name="WriteDescription">Please write a small description.</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>
@@ -73,10 +73,4 @@
         <item>Maintenance</item>
         <item>Repair</item>
     </string-array>
-    <string name="NotDeleteCar">You can\'t delete a vehicle with repairs</string>
-    <string name="RepeatPassword">Repeat Password</string>
-    <string name="Schedule_Date">Schedule Date</string>
-    <string name="VehicleRepair">Vehicle Repair</string>
-
-
 </resources>

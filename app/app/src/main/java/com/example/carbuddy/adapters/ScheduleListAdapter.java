@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.controllers.fragment_schedules;
 import com.example.carbuddy.models.Schedule;
 
 import java.util.ArrayList;
@@ -37,9 +38,10 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
     @Override
     public void onBindViewHolder(@NonNull ScheduleListAdapter.MyViewHolder holder, int position) {
         holder.textViewSchedulingDate.setText(listaSchedules.get(position).getSchedulingdate());
-        holder.textViewCompany.setText(listaSchedules.get(position).getCompany());
-        holder.textViewCar.setText(listaSchedules.get(position).getCarbrand()+ " " + listaSchedules.get(position).getCarmodel());
-        holder.textViewCar2.setText(listaSchedules.get(position).getCarregistration());
+
+        holder.textViewCompany.setText(listaSchedules.get(position).getCompanyName(context));
+        holder.textViewCar.setText(listaSchedules.get(position).getCarInfo(context).get(0) + " " + listaSchedules.get(position).getCarInfo(context).get(1));
+        holder.textViewCar2.setText(listaSchedules.get(position).getCarInfo(context).get(2));
     }
 
     @Override

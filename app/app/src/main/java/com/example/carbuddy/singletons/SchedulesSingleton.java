@@ -1,9 +1,11 @@
 package com.example.carbuddy.singletons;
 
-import static com.example.carbuddy.utils.Json_Objects_Convertor.IP;
-import static com.example.carbuddy.utils.Json_Objects_Convertor.objectjsonConvert;
+import static com.example.carbuddy.utils.libs.IP;
+import static com.example.carbuddy.utils.libs.isInternetConnection;
+import static com.example.carbuddy.utils.libs.objectjsonConvert;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -11,15 +13,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.carbuddy.controllers.CompaniesActivity;
+import com.example.carbuddy.controllers.Schedules_Appointment;
 import com.example.carbuddy.controllers.fragment_schedules;
 import com.example.carbuddy.listeners.CompaniesListener;
 import com.example.carbuddy.listeners.SchedulesListener;
+import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.models.Schedule;
-import com.example.carbuddy.utils.Json_Objects_Convertor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,9 +40,6 @@ public class SchedulesSingleton {
     public static RequestQueue volleyQueue = null;
 
     private SchedulesListener schedulesListener = null;
-
-
-
 
     /** Responsável por fazer com que se crie só uma unica vez a instância
     Caso haja uma instância, a mesma é retornada **/
@@ -60,7 +61,7 @@ public class SchedulesSingleton {
     }
 
     public void CarregarListaSchedules(Context context) {
-        if (!Json_Objects_Convertor.isInternetConnection(context)) {
+        if (!isInternetConnection(context)) {
             Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
         } else {
             final String URL = IP + "schedules/getschedulesclient?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
@@ -92,11 +93,46 @@ public class SchedulesSingleton {
         }
     }
 
+    public void AddSchedule(Context context, Schedule schedule) throws JSONException {
+        if (!isInternetConnection(context)) {
+            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+        } else {
+            RequestQueue queue = Volley.newRequestQueue(context);
+            String url = IP + "schedules/post?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+
+            JSONObject scheduleData = new JSONObject();
+            scheduleData.put("schedulingdate", schedule.getSchedulingdate());
+            scheduleData.put("repairdescription", schedule.getRepairdescription());
+            scheduleData.put("repairtype", schedule.getRepairtype());
+            scheduleData.put("carId", schedule.getCarId());
+            scheduleData.put("companyId", schedule.getCompanyId());
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.POST, url, scheduleData, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            schedulesListener.onDeleteCreateSchedule();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("Error", error.toString());
+                        }
+                    });
+
+            queue.add(jsonObjectRequest);
+        }
+    }
+
     public ArrayList<Schedule> getSchedules() {
         return schedules;
     }
 
     public void setSchedulesListener(fragment_schedules fragment){
+        this.schedulesListener = fragment;
+    }
+
+    public void addSchedulesListener(Schedules_Appointment fragment){
         this.schedulesListener = fragment;
     }
 }

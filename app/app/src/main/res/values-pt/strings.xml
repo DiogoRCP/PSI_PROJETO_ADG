@@ -50,4 +50,5 @@
     <string name="Company">Empresa</string>
     <string name="Schedule_Description">Descrição</string>
     <string name="Submit">Submeter</string>
+    <string name="WriteDescription">Por favor escreva uma pequena descrição.</string>
 </resources>
