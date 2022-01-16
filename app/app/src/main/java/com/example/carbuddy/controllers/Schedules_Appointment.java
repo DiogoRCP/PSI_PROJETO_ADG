@@ -22,6 +22,7 @@ import android.widget.TimePicker;
 import com.example.carbuddy.R;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.Schedule;
+import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.singletons.CompaniesSingleton;
 
 import java.text.SimpleDateFormat;
@@ -45,6 +46,7 @@ public class Schedules_Appointment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private int carPosition;
     private TextView tvDate;
     private TextView tvHour;
     final Calendar myCalendar = Calendar.getInstance();
@@ -82,6 +84,13 @@ public class Schedules_Appointment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            carPosition = bundle.getInt("carPosition");
+        }else{
+            carPosition = 0;
+        } System.out.println(carPosition);
     }
 
     @Override
@@ -177,8 +186,8 @@ public class Schedules_Appointment extends Fragment {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Schedule schedule = new Schedule(0, spCompany.getSelectedItem().toString(), tvDate.getText()+"T"+tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
-                System.out.println(schedule.toString());
+                Schedule schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText()+"T"+tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+
             }
         });
     }

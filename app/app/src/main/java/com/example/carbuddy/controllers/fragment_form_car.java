@@ -118,8 +118,6 @@ public class fragment_form_car extends Fragment implements CarsListener {
                         spFuelType.getSelectedItem().toString(),
                         txtRegistration.getText().toString(), Integer.parseInt(txtYear.getText().toString()),
                         Integer.parseInt(txtKilometers.getText().toString()));
-
-                System.out.println(car);
                 try {
                     CarSingleton.getInstance(getContext()).AddCar(getContext(), car);
                 } catch (JSONException e) {
