@@ -54,6 +54,7 @@
     <string name="Schedule_Description">Description</string>
     <string name="Submit">Submit</string>
     <string name="WriteDescription">Please write a small description.</string>
+    <string name="EditVehicle">Edit Vehicle</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>

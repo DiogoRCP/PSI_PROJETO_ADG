@@ -126,6 +126,16 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
                         .addToBackStack("SchedulesAppointment")
                         .commit();
                 break;
+            case R.id.bt_editar_menu_car:
+                fragment = new fragment_form_car();
+                bundle = new Bundle();
+                bundle.putSerializable("carToEdit", car);
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("EditCar")
+                        .commit();
+                break;
             case R.id.bt_apagar_menu_car:
                 DeleteConfirmationDialogFragment deleteFragment = new DeleteConfirmationDialogFragment();
                 deleteFragment.setDeleteYesListener(this);

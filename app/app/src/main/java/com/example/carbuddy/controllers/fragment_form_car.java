@@ -1,7 +1,9 @@
 package com.example.carbuddy.controllers;
 
+import static com.example.carbuddy.utils.libs.isInternetConnection;
 import static com.example.carbuddy.utils.libs.spinnerTheme;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,6 +59,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
     private ColorPickerDialog colorPickerDialog;
     public static RequestQueue volleyQueue = null;
     Car car;
+    private boolean editar;
 
     public fragment_form_car() {
         // Required empty public constructor
@@ -89,13 +92,25 @@ public class fragment_form_car extends Fragment implements CarsListener {
         }
         volleyQueue = Volley.newRequestQueue(getContext());
         CarSingleton.getInstance(getContext()).setCreateListener(this);
+        editar = false;
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            car = (Car) bundle.getSerializable("carToEdit");
+            if (bundle.getSerializable("carToEdit") != null) {
+                editar = true;
+            }
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle(R.string.AddVehicle);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.AddVehicle);
+        int title = R.string.AddVehicle;
+        if (editar) {
+            title = R.string.EditVehicle;
+        }
+        getActivity().setTitle(title);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         View view = inflater.inflate(R.layout.fragment_form_car,
@@ -112,7 +127,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
             @Override
             public void onClick(View v) {
                 car = new Car(txtVin.getText().toString(), txtBrand.getText().toString(),
-                        txtModel.getText().toString(), "#"+colorPickerDialog.getCurrentColorAsHexa().substring(3, 9),
+                        txtModel.getText().toString(), "#" + colorPickerDialog.getCurrentColorAsHexa().substring(3, 9),
                         spCarType.getSelectedItem().toString(),
                         Float.parseFloat(txtDisplacement.getText().toString()),
                         spFuelType.getSelectedItem().toString(),
@@ -126,7 +141,18 @@ public class fragment_form_car extends Fragment implements CarsListener {
             }
         });
 
+        if (editar) {
+            editarVehicleForm();
+        }
         return view;
+    }
+
+    private void editarVehicleForm() {
+        txtVin.setText(car.getVin());
+        txtBrand.setText(car.getBrand());
+        txtModel.setText(car.getModel());
+        colorPickerDialog.setLastColor(car.getColor());
+        btColor.setBackgroundColor(Color.parseColor(car.getColor()));
     }
 
     private void findId(View view) {
@@ -165,28 +191,28 @@ public class fragment_form_car extends Fragment implements CarsListener {
     }
 
     private void vinSearch(View view) {
-        txtVin.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        if(!editar || !txtVin.getText().toString().equals(car.getVin())) {
+            txtVin.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (txtVin.getText().length() == 17) {
-                    vinAPI();
                 }
-            }
-        });
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (txtVin.getText().length() == 17) {
+                        vinAPI();
+                    }
+                }
+            });
+        }
     }
 
     private void vinAPI() {
-        if (!libs.isInternetConnection(getContext())) {
+        if (!isInternetConnection(getContext())) {
             Toast.makeText(getContext(), "No internet", Toast.LENGTH_SHORT).show();
         } else {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -255,7 +281,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
 
     @Override
     public void onDeleteCreateCar() {
-        Toast.makeText(getContext(), car.getBrand()+" "+car.getModel()+" "+getString(R.string.Added), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), car.getBrand() + " " + car.getModel() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
         getActivity().getSupportFragmentManager().popBackStack();
     }
 }
