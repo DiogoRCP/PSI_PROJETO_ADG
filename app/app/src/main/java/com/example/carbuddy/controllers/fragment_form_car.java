@@ -151,6 +151,12 @@ public class fragment_form_car extends Fragment implements CarsListener {
         txtVin.setText(car.getVin());
         txtBrand.setText(car.getBrand());
         txtModel.setText(car.getModel());
+        txtYear.setText(String.valueOf(car.getModelyear()));
+        txtDisplacement.setText(String.valueOf(car.getDisplacement()));
+        txtRegistration.setText(car.getRegistration());
+        txtKilometers.setText(String.valueOf(car.getKilometers()));
+        spFuelType.setSelection(spinnerFuelNameToIndex());
+        spCarType.setSelection(spinnerTypeNameToIndex());
         colorPickerDialog.setLastColor(car.getColor());
         btColor.setBackgroundColor(Color.parseColor(car.getColor()));
     }
@@ -272,6 +278,24 @@ public class fragment_form_car extends Fragment implements CarsListener {
 
             volleyQueue.add(jsonObjectRequest);
         }
+    }
+
+    private int spinnerFuelNameToIndex(){
+        String[] fuelTypes = getResources().getStringArray(R.array.fuelType_array);
+        for (int count = 0; count < fuelTypes.length; count++){
+            if(fuelTypes[count].equals(car.getFueltype()))
+                return count;
+        }
+        return 0;
+    }
+
+    private int spinnerTypeNameToIndex(){
+        String[] carTypes = getResources().getStringArray(R.array.carType_array);
+        for (int count = 0; count < carTypes.length; count++){
+            if(carTypes[count].equals(car.getFueltype()))
+                return count;
+        }
+        return 0;
     }
 
     @Override
