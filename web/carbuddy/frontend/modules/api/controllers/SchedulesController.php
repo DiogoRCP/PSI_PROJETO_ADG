@@ -144,10 +144,10 @@ class SchedulesController extends ActiveController
 
             $car = $scheduleModel::findOne($id)->car;
             if ($car->userId === Yii::$app->user->getId()) {
-                $scheduleModel->schedulingdate = $schedule['schedulingdate'];
-                $scheduleModel->repairdescription = $schedule['repairdescription'];
-                $scheduleModel->repairtype = $schedule['repairtype'];
-                $scheduleModel->carId = $schedule['carId'];
+                if(isset($schedule['schedulingdate']))$scheduleModel->schedulingdate = $schedule['schedulingdate'];
+                if(isset($schedule['repairdescription']))$scheduleModel->repairdescription = $schedule['repairdescription'];
+                if(isset($schedule['repairtype']))$scheduleModel->repairtype = $schedule['repairtype'];
+                if(isset($schedule['carId']))$scheduleModel->carId = $schedule['carId'];
                 $rec = $scheduleModel->save();
                 return ['PUT' => $rec];
             }
