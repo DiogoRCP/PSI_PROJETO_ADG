@@ -128,11 +128,7 @@ class Schedules extends \yii\db\ActiveRecord
 
             $message = $this->car->id . ":::" . $this->car->brand . " " . $this->car->model . ":::is " . $this->state . ":::" . $this->schedulingdate;
 
-            if ($insert) {
-                $this->FazPublish("SCHEDULE-" . $this->car->userId, $message);
-            } else {
-                $this->FazPublish("SCHEDULE-" . $this->car->userId, $message);
-            }
+            $this->FazPublish("SCHEDULE-" . $this->car->userId, $message);
         }
     }
 

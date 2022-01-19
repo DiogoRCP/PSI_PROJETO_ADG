@@ -134,11 +134,7 @@ class Repairs extends \yii\db\ActiveRecord
 
         $message = $this->car->id.":::".$this->car->brand . " " . $this->car->model . ":::is " . $this->state;
 
-        if ($insert) {
-            $this->FazPublish("REPAIR-".$this->car->userId, $message);
-        } else {
-            $this->FazPublish("REPAIR-".$this->car->userId, $message);
-        }
+        $this->FazPublish("REPAIR-".$this->car->userId, $message);
     }
 
     public function FazPublish($canal, $msg)
