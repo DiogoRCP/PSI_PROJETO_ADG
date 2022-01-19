@@ -58,8 +58,9 @@ public class fragment_form_car extends Fragment implements CarsListener {
     private Button btColor;
     private ColorPickerDialog colorPickerDialog;
     public static RequestQueue volleyQueue = null;
-    Car car;
+    private Car car;
     private boolean editar;
+    private String carColor;
 
     public fragment_form_car() {
         // Required empty public constructor
@@ -93,6 +94,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         volleyQueue = Volley.newRequestQueue(getContext());
         CarSingleton.getInstance(getContext()).setCreateListener(this);
         editar = false;
+        carColor = "#ffffff";
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             car = (Car) bundle.getSerializable("carToEdit");
@@ -118,7 +120,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
 
         ColorPicker(view);
         findId(view);
-        vinSearch(view);
+        vinSearch();
 
         spinnerTheme(getContext(), spCarType, R.array.carType_array);
         spinnerTheme(getContext(), spFuelType, R.array.fuelType_array);
@@ -126,15 +128,20 @@ public class fragment_form_car extends Fragment implements CarsListener {
         view.findViewById(R.id.btAddCar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                car = new Car(txtVin.getText().toString(), txtBrand.getText().toString(),
-                        txtModel.getText().toString(), "#" + colorPickerDialog.getCurrentColorAsHexa().substring(3, 9),
+                Car newCar = new Car(txtVin.getText().toString(), txtBrand.getText().toString(),
+                        txtModel.getText().toString(), carColor,
                         spCarType.getSelectedItem().toString(),
                         Float.parseFloat(txtDisplacement.getText().toString()),
                         spFuelType.getSelectedItem().toString(),
                         txtRegistration.getText().toString(), Integer.parseInt(txtYear.getText().toString()),
                         Integer.parseInt(txtKilometers.getText().toString()));
                 try {
-                    CarSingleton.getInstance(getContext()).AddCar(getContext(), car);
+                    if(!editar) {
+                        CarSingleton.getInstance(getContext()).AddCar(getContext(), newCar);
+                    }else{
+                        newCar.setId(car.getId());
+                        CarSingleton.getInstance(getContext()).EditCar(getContext(), newCar);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -157,8 +164,9 @@ public class fragment_form_car extends Fragment implements CarsListener {
         txtKilometers.setText(String.valueOf(car.getKilometers()));
         spFuelType.setSelection(spinnerFuelNameToIndex());
         spCarType.setSelection(spinnerTypeNameToIndex());
-        colorPickerDialog.setLastColor(car.getColor());
+        colorPickerDialog.setInitialColor(Color.parseColor(car.getColor()));
         btColor.setBackgroundColor(Color.parseColor(car.getColor()));
+        carColor = car.getColor();
     }
 
     private void findId(View view) {
@@ -183,6 +191,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
             @Override
             public void onColorPicked(int color, String hexVal) {
                 btColor.setBackgroundColor(color);
+                carColor = "#" + hexVal.substring(3, 9);
             }
         });
 
@@ -196,25 +205,27 @@ public class fragment_form_car extends Fragment implements CarsListener {
         });
     }
 
-    private void vinSearch(View view) {
-        if(!editar || !txtVin.getText().toString().equals(car.getVin())) {
-            txtVin.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    private void vinSearch() {
+        txtVin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                }
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
-                }
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (txtVin.getText().length() == 17) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (txtVin.getText().length() == 17) {
+                    if (!editar || !txtVin.getText().toString().equals(car.getVin())) {
                         vinAPI();
                     }
                 }
-            });
-        }
+            }
+        });
     }
 
     private void vinAPI() {
@@ -280,19 +291,19 @@ public class fragment_form_car extends Fragment implements CarsListener {
         }
     }
 
-    private int spinnerFuelNameToIndex(){
+    private int spinnerFuelNameToIndex() {
         String[] fuelTypes = getResources().getStringArray(R.array.fuelType_array);
-        for (int count = 0; count < fuelTypes.length; count++){
-            if(fuelTypes[count].equals(car.getFueltype()))
+        for (int count = 0; count < fuelTypes.length; count++) {
+            if (fuelTypes[count].equals(car.getFueltype()))
                 return count;
         }
         return 0;
     }
 
-    private int spinnerTypeNameToIndex(){
+    private int spinnerTypeNameToIndex() {
         String[] carTypes = getResources().getStringArray(R.array.carType_array);
-        for (int count = 0; count < carTypes.length; count++){
-            if(carTypes[count].equals(car.getFueltype()))
+        for (int count = 0; count < carTypes.length; count++) {
+            if (carTypes[count].equals(car.getCartype()))
                 return count;
         }
         return 0;

@@ -130,20 +130,20 @@ class CarsController extends ActiveController
         if (Yii::$app->user->can('frontendCrudVehicle')) {
             $car = Yii::$app->request->post();
 
-            $carssmodel = new $this->modelClass;
+            $carssmodel = Cars::findOne($id);
 
             if (Cars::findOne($id)->userId === Yii::$app->user->getId()) {
-                $carssmodel->vin = $car['vin'];
-                $carssmodel->brand = $car['brand'];
-                $carssmodel->model = $car['model'];
-                $carssmodel->color = $car['color'];
-                $carssmodel->carType = $car['carType'];
-                $carssmodel->fuelType = $car['fuelType'];
-                $carssmodel->registration = $car['registration'];
-                $carssmodel->modelyear = $car['modelyear'];
-                $carssmodel->kilometers = $car['kilometers'];
-                $carssmodel->displacement = $car['displacement'];
-                $carssmodel->state = $car['state'];
+                if(isset($car['vin']))$carssmodel->vin = $car['vin'];
+                if(isset($car['brand']))$carssmodel->brand = $car['brand'];
+                if(isset($car['model']))$carssmodel->model = $car['model'];
+                if(isset($car['color']))$carssmodel->color = $car['color'];
+                if(isset($car['carType']))$carssmodel->carType = $car['carType'];
+                if(isset($car['fuelType']))$carssmodel->fuelType = $car['fuelType'];
+                if(isset($car['registration']))$carssmodel->registration = $car['registration'];
+                if(isset($car['modelyear']))$carssmodel->modelyear = $car['modelyear'];
+                if(isset($car['kilometers']))$carssmodel->kilometers = $car['kilometers'];
+                if(isset($car['displacement']))$carssmodel->displacement = $car['displacement'];
+                if(isset($car['state']))$carssmodel->state = $car['state'];
 
                 $rec = $carssmodel->save();
                 return ['Save' => $rec];

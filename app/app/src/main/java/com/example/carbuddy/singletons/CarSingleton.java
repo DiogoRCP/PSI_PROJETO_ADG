@@ -56,7 +56,7 @@ public class CarSingleton {
     public CarSingleton(Context context) {
         database = new ModeloBDHelper(context);
         cars = new ArrayList<>();
-        for (Car dbCar: database.getAllCars()) {
+        for (Car dbCar : database.getAllCars()) {
             ArrayList<Repair> carRepairs = new ArrayList<>();
             carRepairs.addAll(database.getAllRepairs(dbCar.getId()));
             dbCar.setRepairs(carRepairs);
@@ -161,7 +161,7 @@ public class CarSingleton {
                                     default:
                                         Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
                                 }
-                            }catch (Exception ex){
+                            } catch (Exception ex) {
                                 carsListener.onDeleteCreateCar();
                             }
                         }
@@ -208,27 +208,64 @@ public class CarSingleton {
         }
     }
 
+    public void EditCar(Context context, Car car) throws JSONException {
+        if (!isInternetConnection(context)) {
+            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+        } else {
+            RequestQueue queue = Volley.newRequestQueue(context);
+            String url = IP + "cars/put/"+car.getId()+"?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+
+            JSONObject carData = new JSONObject();
+            carData.put("vin", car.getVin());
+            carData.put("brand", car.getBrand());
+            carData.put("model", car.getModel());
+            carData.put("color", car.getColor());
+            carData.put("carType", car.getCartype());
+            carData.put("fuelType", car.getFueltype());
+            carData.put("registration", car.getRegistration());
+            carData.put("modelyear", car.getModelyear());
+            carData.put("kilometers", car.getKilometers());
+            carData.put("displacement", car.getDisplacement());
+            carData.put("state", car.getState());
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.PUT, url, carData, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            carsListener.onDeleteCreateCar();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("Error", error.toString());
+                        }
+                    });
+
+            queue.add(jsonObjectRequest);
+        }
+    }
+
     public ArrayList<Car> getCars() {
         return cars;
     }
 
-    public void setCarsListener(fragment_garage fragment){
+    public void setCarsListener(fragment_garage fragment) {
         this.carsListener = fragment;
     }
 
-    public ArrayList<Repair> getRepairs(int carId){
+    public ArrayList<Repair> getRepairs(int carId) {
         return cars.get(carId).getRepairs();
     }
 
-    public void setRepairsListener(RepairFragment fragment){
+    public void setRepairsListener(RepairFragment fragment) {
         this.repairsListener = fragment;
     }
 
-    public void setDeleteListener(fragment_carInfo fragment){
+    public void setDeleteListener(fragment_carInfo fragment) {
         this.carsListener = fragment;
     }
 
-    public void setCreateListener(fragment_form_car fragment){
+    public void setCreateListener(fragment_form_car fragment) {
         this.carsListener = fragment;
     }
 }

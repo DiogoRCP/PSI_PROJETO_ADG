@@ -156,6 +156,12 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         View view = inflater.inflate(R.layout.fragment_car_info,
                 container, false);
 
+        writeForm(view);
+
+        return view;
+    }
+
+    private void writeForm(View view){
         imageCar = view.findViewById(R.id.imageViewCar);
         txtVin = view.findViewById(R.id.textViewVin);
         txtBrand = view.findViewById(R.id.textViewBrand);
@@ -177,8 +183,6 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         txtDisplacement.setText(String.valueOf(car.getDisplacement()));
         txtModelYear.setText(String.valueOf(car.getModelyear()));
         txtKilometers.setText(String.valueOf(car.getKilometers()));
-
-        return view;
     }
 
     private void chooseTypeColor() {
