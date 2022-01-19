@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -316,7 +317,15 @@ public class fragment_form_car extends Fragment implements CarsListener {
 
     @Override
     public void onDeleteCreateCar() {
-        Toast.makeText(getContext(), car.getBrand() + " " + car.getModel() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
-        getActivity().getSupportFragmentManager().popBackStack();
+        if(!editar) {
+            Toast.makeText(getContext(), car.getBrand() + " " + car.getModel() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
+            getActivity().getSupportFragmentManager().popBackStack();
+        }else{
+            Toast.makeText(getContext(), car.getBrand() + " " + car.getModel() + " " + getString(R.string.Edited), Toast.LENGTH_SHORT).show();
+            Fragment fragment = new fragment_garage();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 }
