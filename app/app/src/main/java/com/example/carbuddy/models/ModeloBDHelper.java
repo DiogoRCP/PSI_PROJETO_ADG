@@ -46,15 +46,13 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         String createSchedulesTable =
                 "CREATE TABLE IF NOT EXISTS schedules" +
                         "(id INTEGER PRIMARY KEY, " +
+                        "carId INTEGER NOT NULL, " +
                         "currentdate DATETIME NOT NULL, " +
                         "schedulingdate DATETIME NOT NULL, " +
                         "repairdescription VARCHAR(100) NOT NULL, " +
                         "state VARCHAR(100) NOT NULL," +
                         "repairtype VARCHAR(100) NOT NULL," +
-                        "carId INT NOT NULL," +
-                        "companyId INT NOT NULL," +
-                        "FOREIGN KEY (carId) REFERENCES car(id)," +
-                        "FOREIGN KEY (companyId) REFERENCES company(id)" +
+                        "companyId INTEGER NOT NULL" +
                         ");";
         db.execSQL(createSchedulesTable);
 
@@ -204,12 +202,12 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     public void insertSchedules(Schedule schedule) {
         ContentValues values = new ContentValues();
         values.put("id", schedule.getId());
-        values.put("currentdate", schedule.getCurrentDate());
-        values.put("schedulingdate", schedule.getSchedulingDate());
-        values.put("repairdescription", schedule.getRepairDescription());
-        values.put("state", schedule.getState());
-        values.put("repairtype", schedule.getRepairType());
         values.put("carId", schedule.getCarId());
+        values.put("currentdate", schedule.getCurrentdate());
+        values.put("schedulingdate", schedule.getSchedulingdate());
+        values.put("repairdescription", schedule.getRepairdescription());
+        values.put("state", schedule.getState());
+        values.put("repairtype", schedule.getRepairtype());
         values.put("companyId", schedule.getCompanyId());
 
         if (!verificarSchedule(schedule, values)) {
@@ -238,6 +236,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                 cursor.getString(5),
                 cursor.getString(6),
                 cursor.getString(7)
+
                 ));
             } while (cursor.moveToNext());
         }

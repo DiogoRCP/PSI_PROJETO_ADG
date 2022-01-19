@@ -4,92 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controllers.Schedules_Appointment" >
+    android:layout_margin="32dp"
+    android:background="@drawable/roudedconers"
+    android:padding="32dp"
+    tools:context=".controllers.Schedules_Appointment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/roudedconers"
-        android:padding="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="@string/Company"
+            android:textColor="@color/figma3" />
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Companies:" />
+        <Spinner
+            android:id="@+id/spCompany"
+            style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:foregroundTint="#FFFFFF"
+            android:minHeight="48dp"
+            android:spinnerMode="dropdown" />
 
-            <Spinner
-                android:id="@+id/spCompany"
-                style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:entries="@array/fuelType_array"
-                android:foregroundTint="#FFFFFF"
-                android:minHeight="48dp"
-                android:spinnerMode="dropdown" />
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Schedule_Date"
+            android:textColor="@color/figma3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvDateSchedule"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ems="10"
-                android:gravity="center_vertical"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvHourSchedule"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ems="10"
-                android:gravity="center_vertical"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
-
-            <Spinner
-                android:id="@+id/spCompany2"
-                style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:entries="@array/fuelType_array"
-                android:foregroundTint="#FFFFFF"
-                android:minHeight="48dp"
-                android:spinnerMode="dropdown" />
-
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_states"
-                android:text="Button"
-                android:textColor="#FFFFFF" />
-
         </LinearLayout>
-    </ScrollView>
+
+        <Spinner
+            android:id="@+id/spRepairType"
+            style="@style/Widget.AppCompat.Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:entries="@array/repairtype_array"
+            android:foregroundTint="#FFFFFF"
+            android:minHeight="48dp"
+            android:spinnerMode="dropdown" />
+
+        <EditText
+            android:id="@+id/edtxtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/Schedule_Description"
+            android:inputType="textShortMessage|textAutoCorrect|textAutoComplete"
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/figma3" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btSubmitSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button_states"
+        android:text="@string/Submit"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

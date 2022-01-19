@@ -9,6 +9,7 @@ use frontend\models\Schedules;
 use Yii;
 use yii\db\IntegrityException;
 use yii\filters\auth\QueryParamAuth;
+use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
 
@@ -143,10 +144,10 @@ class SchedulesController extends ActiveController
 
             $car = $scheduleModel::findOne($id)->car;
             if ($car->userId === Yii::$app->user->getId()) {
-                $scheduleModel->schedulingdate = $schedule['schedulingdate'];
-                $scheduleModel->repairdescription = $schedule['repairdescription'];
-                $scheduleModel->repairtype = $schedule['repairtype'];
-                $scheduleModel->carId = $schedule['carId'];
+                if(isset($schedule['schedulingdate']))$scheduleModel->schedulingdate = $schedule['schedulingdate'];
+                if(isset($schedule['repairdescription']))$scheduleModel->repairdescription = $schedule['repairdescription'];
+                if(isset($schedule['repairtype']))$scheduleModel->repairtype = $schedule['repairtype'];
+                if(isset($schedule['carId']))$scheduleModel->carId = $schedule['carId'];
                 $rec = $scheduleModel->save();
                 return ['PUT' => $rec];
             }
@@ -183,9 +184,22 @@ class SchedulesController extends ActiveController
     {
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
             $cars = Cars::find()->where("userId = " . Yii::$app->user->getId())->all();
-            $recs = array();
+            $recs = [];
             foreach($cars as $car){
-                array_push($recs, $car->getSchedules());
+                foreach ($car->getSchedules() as $schedule){
+                    $objSchedule = [
+                        'id' => $schedule->id,
+                        'currentdate' => $schedule->currentdate,
+                        'schedulingdate' => $schedule->schedulingdate,
+                        'repairdescription' => $schedule->repairdescription,
+                        'state' => $schedule->state,
+                        'repairtype' => $schedule->repairtype,
+                        'companyId' => $schedule->getCompany()->one()->id,
+                        'carId' => $car->id
+                    ];
+                    $recs[] = $objSchedule;
+                }
+
             }
             return $recs;
         }

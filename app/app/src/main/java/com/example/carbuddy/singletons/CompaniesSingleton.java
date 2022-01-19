@@ -1,10 +1,9 @@
 package com.example.carbuddy.singletons;
 
-import static com.example.carbuddy.utils.Json_Objects_Convertor.IP;
-import static com.example.carbuddy.utils.Json_Objects_Convertor.objectjsonConvert;
+import static com.example.carbuddy.utils.libs.IP;
+import static com.example.carbuddy.utils.libs.objectjsonConvert;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,7 +16,7 @@ import com.example.carbuddy.controllers.CompaniesActivity;
 import com.example.carbuddy.listeners.CompaniesListener;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.ModeloBDHelper;
-import com.example.carbuddy.utils.Json_Objects_Convertor;
+import com.example.carbuddy.utils.libs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,7 +57,7 @@ public class CompaniesSingleton {
     }
 
     public void CarregarListaCompanies(Context context) {
-        if (!Json_Objects_Convertor.isInternetConnection(context)) {
+        if (!libs.isInternetConnection(context)) {
             Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest

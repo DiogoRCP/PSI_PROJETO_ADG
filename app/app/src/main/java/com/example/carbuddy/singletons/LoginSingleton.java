@@ -1,11 +1,10 @@
 package com.example.carbuddy.singletons;
 
-import static com.example.carbuddy.utils.Json_Objects_Convertor.IP;
-import static com.example.carbuddy.utils.Json_Objects_Convertor.isInternetConnection;
-import static com.example.carbuddy.utils.Json_Objects_Convertor.objectjsonConvert;
+import static com.example.carbuddy.utils.libs.IP;
+import static com.example.carbuddy.utils.libs.isInternetConnection;
+import static com.example.carbuddy.utils.libs.objectjsonConvert;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,10 +16,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.carbuddy.controllers.AccountFragment;
 import com.example.carbuddy.controllers.MainActivity;
 import com.example.carbuddy.listeners.LoginListener;
-import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.Login;
 import com.example.carbuddy.models.ModeloBDHelper;
-import com.example.carbuddy.utils.Json_Objects_Convertor;
+import com.example.carbuddy.utils.libs;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,7 +87,7 @@ public class LoginSingleton {
 
     public void apiAccount(Context context) {
         /* Verificar se existe internet **/
-        if (!Json_Objects_Convertor.isInternetConnection(context)) {
+        if (!libs.isInternetConnection(context)) {
             Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
         } else {
             System.out.println(IP);

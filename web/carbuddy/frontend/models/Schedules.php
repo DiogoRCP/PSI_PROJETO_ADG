@@ -4,6 +4,7 @@ namespace frontend\models;
 
 use common\mosquitto\phpMQTT;
 use Yii;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "schedules".

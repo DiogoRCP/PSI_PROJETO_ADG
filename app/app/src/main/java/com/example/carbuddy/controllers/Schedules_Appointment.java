@@ -1,5 +1,7 @@
 package com.example.carbuddy.controllers;
 
+import static com.example.carbuddy.utils.libs.spinnerTheme;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -10,16 +12,26 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.listeners.SchedulesListener;
+import com.example.carbuddy.models.Company;
+import com.example.carbuddy.models.Schedule;
+import com.example.carbuddy.singletons.CarSingleton;
+import com.example.carbuddy.singletons.CompaniesSingleton;
+import com.example.carbuddy.singletons.SchedulesSingleton;
 
-import org.w3c.dom.Text;
+import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
-import java.time.Clock;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -28,7 +40,7 @@ import java.util.Locale;
  * Use the {@link Schedules_Appointment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Schedules_Appointment extends Fragment {
+public class Schedules_Appointment extends Fragment implements SchedulesListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,9 +51,16 @@ public class Schedules_Appointment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private int carPosition;
     private TextView tvDate;
     private TextView tvHour;
     final Calendar myCalendar = Calendar.getInstance();
+    private Spinner spCompany;
+    private Spinner spRepairType;
+    private Button btSubmit;
+    private EditText edtxtDescription;
+
+    private Schedule schedule;
 
     public Schedules_Appointment() {
         // Required empty public constructor
@@ -72,6 +91,15 @@ public class Schedules_Appointment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            carPosition = bundle.getInt("carPosition");
+        } else {
+            carPosition = 0;
+        }
+
+        SchedulesSingleton.getInstance(getContext()).addSchedulesListener(this);
     }
 
     @Override
@@ -84,11 +112,18 @@ public class Schedules_Appointment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_schedules__appointment, container, false);
 
+        spCompany = view.findViewById(R.id.spCompany);
+        spRepairType = view.findViewById(R.id.spRepairType);
+        edtxtDescription = view.findViewById(R.id.edtxtDescription);
+        ChargeCompanies(view);
         // Alterar data
         dateManagement(view);
 
         // Alterar hora
         hourManagement(view);
+
+        btSubmit = view.findViewById(R.id.btSubmitSchedule);
+        btSubmitClick();
 
         return view;
     }
@@ -115,7 +150,7 @@ public class Schedules_Appointment extends Fragment {
     }
 
     private void updateLabelDate() {
-        String myFormat = "dd/MM/yyyy";
+        String myFormat = "yyyy/MM/dd";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
         tvDate.setText(dateFormat.format(myCalendar.getTime()));
     }
@@ -144,5 +179,51 @@ public class Schedules_Appointment extends Fragment {
         String myFormat = "HH:mm";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
         tvHour.setText(dateFormat.format(myCalendar.getTime()));
+    }
+
+    private void ChargeCompanies(View view) {
+        ArrayList<String> companies = new ArrayList<>();
+        for (Company company : CompaniesSingleton.getInstance(getContext()).getCompanies()) {
+            companies.add(company.getCompanyName());
+        }
+
+        spinnerTheme(getContext(), spCompany, companies);
+        spinnerTheme(getContext(), spRepairType, R.array.repairtype_array);
+    }
+
+    private void btSubmitClick() {
+        btSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verificarDescricao();
+                if (verificarDescricao()) {
+                    schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+                    try {
+                        SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedule);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    private boolean verificarDescricao() {
+        if (edtxtDescription.getText().toString().isEmpty()) {
+            edtxtDescription.setError(getString(R.string.WriteDescription));
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onRefreshSchedules(ArrayList<Schedule> schedules) {
+
+    }
+
+    @Override
+    public void onDeleteCreateSchedule() {
+        Toast.makeText(getContext(), schedule.getRepairtype() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 }

@@ -3,9 +3,10 @@ package com.example.carbuddy.models;
 import android.content.ContentValues;
 import android.graphics.Color;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Car {
+public class Car implements Serializable {
     private int id, kilometers, userId, modelyear;
     private String vin, brand, model, color, carType, fuelType, registration, state;
     private float displacement;
