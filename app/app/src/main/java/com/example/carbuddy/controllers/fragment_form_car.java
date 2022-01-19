@@ -1,11 +1,14 @@
 package com.example.carbuddy.controllers;
 
+import static com.example.carbuddy.utils.libs.isInternetConnection;
 import static com.example.carbuddy.utils.libs.spinnerTheme;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -56,7 +59,9 @@ public class fragment_form_car extends Fragment implements CarsListener {
     private Button btColor;
     private ColorPickerDialog colorPickerDialog;
     public static RequestQueue volleyQueue = null;
-    Car car;
+    private Car car;
+    private boolean editar;
+    private String carColor;
 
     public fragment_form_car() {
         // Required empty public constructor
@@ -89,13 +94,26 @@ public class fragment_form_car extends Fragment implements CarsListener {
         }
         volleyQueue = Volley.newRequestQueue(getContext());
         CarSingleton.getInstance(getContext()).setCreateListener(this);
+        editar = false;
+        carColor = "#ffffff";
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            car = (Car) bundle.getSerializable("carToEdit");
+            if (bundle.getSerializable("carToEdit") != null) {
+                editar = true;
+            }
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle(R.string.AddVehicle);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.AddVehicle);
+        int title = R.string.AddVehicle;
+        if (editar) {
+            title = R.string.EditVehicle;
+        }
+        getActivity().setTitle(title);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         View view = inflater.inflate(R.layout.fragment_form_car,
@@ -103,7 +121,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
 
         ColorPicker(view);
         findId(view);
-        vinSearch(view);
+        vinSearch();
 
         spinnerTheme(getContext(), spCarType, R.array.carType_array);
         spinnerTheme(getContext(), spFuelType, R.array.fuelType_array);
@@ -111,22 +129,45 @@ public class fragment_form_car extends Fragment implements CarsListener {
         view.findViewById(R.id.btAddCar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                car = new Car(txtVin.getText().toString(), txtBrand.getText().toString(),
-                        txtModel.getText().toString(), "#"+colorPickerDialog.getCurrentColorAsHexa().substring(3, 9),
+                Car newCar = new Car(txtVin.getText().toString(), txtBrand.getText().toString(),
+                        txtModel.getText().toString(), carColor,
                         spCarType.getSelectedItem().toString(),
                         Float.parseFloat(txtDisplacement.getText().toString()),
                         spFuelType.getSelectedItem().toString(),
                         txtRegistration.getText().toString(), Integer.parseInt(txtYear.getText().toString()),
                         Integer.parseInt(txtKilometers.getText().toString()));
                 try {
-                    CarSingleton.getInstance(getContext()).AddCar(getContext(), car);
+                    if(!editar) {
+                        CarSingleton.getInstance(getContext()).AddCar(getContext(), newCar);
+                    }else{
+                        newCar.setId(car.getId());
+                        CarSingleton.getInstance(getContext()).EditCar(getContext(), newCar);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
 
+        if (editar) {
+            editarVehicleForm();
+        }
         return view;
+    }
+
+    private void editarVehicleForm() {
+        txtVin.setText(car.getVin());
+        txtBrand.setText(car.getBrand());
+        txtModel.setText(car.getModel());
+        txtYear.setText(String.valueOf(car.getModelyear()));
+        txtDisplacement.setText(String.valueOf(car.getDisplacement()));
+        txtRegistration.setText(car.getRegistration());
+        txtKilometers.setText(String.valueOf(car.getKilometers()));
+        spFuelType.setSelection(spinnerFuelNameToIndex());
+        spCarType.setSelection(spinnerTypeNameToIndex());
+        colorPickerDialog.setInitialColor(Color.parseColor(car.getColor()));
+        btColor.setBackgroundColor(Color.parseColor(car.getColor()));
+        carColor = car.getColor();
     }
 
     private void findId(View view) {
@@ -151,6 +192,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
             @Override
             public void onColorPicked(int color, String hexVal) {
                 btColor.setBackgroundColor(color);
+                carColor = "#" + hexVal.substring(3, 9);
             }
         });
 
@@ -164,7 +206,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         });
     }
 
-    private void vinSearch(View view) {
+    private void vinSearch() {
         txtVin.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -179,14 +221,16 @@ public class fragment_form_car extends Fragment implements CarsListener {
             @Override
             public void afterTextChanged(Editable s) {
                 if (txtVin.getText().length() == 17) {
-                    vinAPI();
+                    if (!editar || !txtVin.getText().toString().equals(car.getVin())) {
+                        vinAPI();
+                    }
                 }
             }
         });
     }
 
     private void vinAPI() {
-        if (!libs.isInternetConnection(getContext())) {
+        if (!isInternetConnection(getContext())) {
             Toast.makeText(getContext(), "No internet", Toast.LENGTH_SHORT).show();
         } else {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -248,6 +292,24 @@ public class fragment_form_car extends Fragment implements CarsListener {
         }
     }
 
+    private int spinnerFuelNameToIndex() {
+        String[] fuelTypes = getResources().getStringArray(R.array.fuelType_array);
+        for (int count = 0; count < fuelTypes.length; count++) {
+            if (fuelTypes[count].equals(car.getFueltype()))
+                return count;
+        }
+        return 0;
+    }
+
+    private int spinnerTypeNameToIndex() {
+        String[] carTypes = getResources().getStringArray(R.array.carType_array);
+        for (int count = 0; count < carTypes.length; count++) {
+            if (carTypes[count].equals(car.getCartype()))
+                return count;
+        }
+        return 0;
+    }
+
     @Override
     public void onRefreshCars(ArrayList<Car> cars) {
 
@@ -255,7 +317,15 @@ public class fragment_form_car extends Fragment implements CarsListener {
 
     @Override
     public void onDeleteCreateCar() {
-        Toast.makeText(getContext(), car.getBrand()+" "+car.getModel()+" "+getString(R.string.Added), Toast.LENGTH_SHORT).show();
-        getActivity().getSupportFragmentManager().popBackStack();
+        if(!editar) {
+            Toast.makeText(getContext(), car.getBrand() + " " + car.getModel() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
+            getActivity().getSupportFragmentManager().popBackStack();
+        }else{
+            Toast.makeText(getContext(), car.getBrand() + " " + car.getModel() + " " + getString(R.string.Edited), Toast.LENGTH_SHORT).show();
+            Fragment fragment = new fragment_garage();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, fragment)
+                    .commit();
+        }
     }
 }

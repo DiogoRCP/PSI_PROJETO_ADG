@@ -126,6 +126,16 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
                         .addToBackStack("SchedulesAppointment")
                         .commit();
                 break;
+            case R.id.bt_editar_menu_car:
+                fragment = new fragment_form_car();
+                bundle = new Bundle();
+                bundle.putSerializable("carToEdit", car);
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, fragment)
+                        .addToBackStack("EditCar")
+                        .commit();
+                break;
             case R.id.bt_apagar_menu_car:
                 DeleteConfirmationDialogFragment deleteFragment = new DeleteConfirmationDialogFragment();
                 deleteFragment.setDeleteYesListener(this);
@@ -146,6 +156,12 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         View view = inflater.inflate(R.layout.fragment_car_info,
                 container, false);
 
+        writeForm(view);
+
+        return view;
+    }
+
+    private void writeForm(View view){
         imageCar = view.findViewById(R.id.imageViewCar);
         txtVin = view.findViewById(R.id.textViewVin);
         txtBrand = view.findViewById(R.id.textViewBrand);
@@ -167,8 +183,6 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         txtDisplacement.setText(String.valueOf(car.getDisplacement()));
         txtModelYear.setText(String.valueOf(car.getModelyear()));
         txtKilometers.setText(String.valueOf(car.getKilometers()));
-
-        return view;
     }
 
     private void chooseTypeColor() {

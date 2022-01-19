@@ -51,4 +51,6 @@
     <string name="Schedule_Description">Descrição</string>
     <string name="Submit">Submeter</string>
     <string name="WriteDescription">Por favor escreva uma pequena descrição.</string>
+    <string name="EditVehicle">Editar Veículo</string>
+    <string name="Edited">Editado</string>
 </resources>
