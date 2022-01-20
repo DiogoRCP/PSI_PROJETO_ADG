@@ -1,5 +1,6 @@
 package com.example.carbuddy.controllers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -92,8 +93,11 @@ public class AccountFragment extends Fragment implements LoginListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.bt_acc_edit:
-                break;
-            case R.id.bt_acc_delete:
+
+                Intent signup = new Intent(getContext(), SignupActivity.class);
+                signup.putExtra("userEdit", login);
+                startActivity(signup);
+
                 break;
         }
         return super.onOptionsItemSelected(item);

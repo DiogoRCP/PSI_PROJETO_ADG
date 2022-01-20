@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.singletons.LoginSingleton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +32,15 @@ public class Signup {
         this.nif = nif;
         this.birsthday = birsthday;
         this.phonenumber = phonenumber;
+        this.password = password;
+    }
+
+    public Signup(String email, String password) {
+        this.username = "";
+        this.email = email;
+        this.nif = "";
+        this.birsthday = "";
+        this.phonenumber = "";
         this.password = password;
     }
 
@@ -118,6 +128,33 @@ public class Signup {
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.i("VOLLEY", response.toString());
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("VOLLEY", error.toString());
+                        }
+                    });
+
+            queue.add(jsonObjectRequest);
+        }
+    }
+
+    public void updateAccount(Context context) throws JSONException {
+        if (!isInternetConnection(context)) {
+            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+        } else {
+            RequestQueue queue = Volley.newRequestQueue(context);
+            String url = IP + "user/put?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("email", this.getEmail());
+            if (!this.getPassword().equals("")) jsonBody.put("password", this.getPassword());
+            System.out.println(jsonBody.toString());
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.PUT, url, jsonBody, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.i("VOLLEY", response.toString());
