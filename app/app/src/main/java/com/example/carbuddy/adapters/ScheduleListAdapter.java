@@ -38,10 +38,10 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
     @Override
     public void onBindViewHolder(@NonNull ScheduleListAdapter.MyViewHolder holder, int position) {
         holder.textViewSchedulingDate.setText(listaSchedules.get(position).getSchedulingdate());
-
         holder.textViewCompany.setText(listaSchedules.get(position).getCompanyName(context));
         holder.textViewCar.setText(listaSchedules.get(position).getCarInfo(context).get(0) + " " + listaSchedules.get(position).getCarInfo(context).get(1));
         holder.textViewCar2.setText(listaSchedules.get(position).getCarInfo(context).get(2));
+        holder.textViewState.setText(listaSchedules.get(position).getState());
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView textViewSchedulingDate, textViewCompany, textViewCar, textViewCar2;
+        private TextView textViewSchedulingDate, textViewCompany, textViewCar, textViewCar2, textViewState;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +59,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
             textViewCompany = (TextView) itemView.findViewById(R.id.textViewCompany);
             textViewCar = (TextView) itemView.findViewById(R.id.textViewCar);
             textViewCar2 = (TextView) itemView.findViewById(R.id.textViewCar2);
+            textViewState = (TextView) itemView.findViewById(R.id.textViewState);
         }
     }
 }

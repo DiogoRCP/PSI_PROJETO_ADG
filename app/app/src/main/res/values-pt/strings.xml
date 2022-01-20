@@ -53,4 +53,5 @@
     <string name="WriteDescription">Por favor escreva uma pequena descrição.</string>
     <string name="EditVehicle">Editar Veículo</string>
     <string name="Edited">Editado</string>
+    <string name="State">Estado</string>
 </resources>
