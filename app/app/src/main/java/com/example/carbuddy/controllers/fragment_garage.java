@@ -71,7 +71,10 @@ public class fragment_garage extends Fragment implements CarsListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         database = new ModeloBDHelper(getContext());
+        carregarDados();
+    }
 
+    private void carregarDados(){
         // Instanciar singleton
         CarSingleton.getInstance(getContext()).setCarsListener(this);
 
@@ -131,9 +134,6 @@ public class fragment_garage extends Fragment implements CarsListener {
     public void onResume() {
         super.onResume();
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
-        CarSingleton.getInstance(getContext()).setCarsListener(this);
-        // Carregar dados da api
-        CarSingleton.getInstance(getContext()).CarregarListaCarros(getContext());
+        carregarDados();
     }
 }

@@ -125,7 +125,8 @@
             android:fontFamily="@font/worksansbold"
             android:onClick="btSignup"
             android:text="@string/Signup"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 

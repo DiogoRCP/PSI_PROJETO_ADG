@@ -189,6 +189,4 @@ public class Pagina_Inicial extends AppCompatActivity {
         this.deleteDatabase("carbuddy");
         this.finish();
     }
-
-
 }

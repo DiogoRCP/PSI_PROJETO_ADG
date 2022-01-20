@@ -145,7 +145,7 @@ class Repairs extends \yii\db\ActiveRecord
         $password = ""; // set your password
         $client_id = "phpMQTT-publisher"; // unique!
         $mqtt = new phpMQTT($server, $port, $client_id);
-        if ($mqtt->connect(true, NULL, $username, $password)) {
+        if ($mqtt->connect(true, null, $username, $password)) {
             $mqtt->publish($canal, $msg, 0, true);
             $mqtt->close();
         } else {

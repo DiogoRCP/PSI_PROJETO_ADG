@@ -9,8 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
 import com.example.carbuddy.R;
 import com.example.carbuddy.listeners.LoginListener;
 import com.example.carbuddy.models.Login;
@@ -26,40 +28,39 @@ public class AccountFragment extends Fragment implements LoginListener {
      * create an instance of this fragment.
      */
 
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private static final String ARG_PARAM1 = "param1";
-        private static final String ARG_PARAM2 = "param2";
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
-        // TODO: Rename and change types of parameters
-        private String mParam1;
-        private String mParam2;
-        private ModeloBDHelper database;
-        private Login login;
-        public TextView textViewAccUserName, textViewAccEmail, textViewNif, textViewBirthday, textViewPhoneNumber;
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+    private ModeloBDHelper database;
+    private Login login;
+    public TextView textViewAccUserName, textViewAccEmail, textViewNif, textViewBirthday, textViewPhoneNumber;
 
-        public AccountFragment() {
-            // Required empty public constructor
-        }
+    public AccountFragment() {
+        // Required empty public constructor
+    }
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RepairFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-
-        public static com.example.carbuddy.controllers.AccountFragment newInstance(String param1, String param2) {
-            com.example.carbuddy.controllers.AccountFragment fragment = new com.example.carbuddy.controllers.AccountFragment();
-            Bundle args = new Bundle();
-            args.putString(ARG_PARAM1, param1);
-            args.putString(ARG_PARAM2, param2);
-            fragment.setArguments(args);
-            return fragment;
-        }
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment RepairFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static com.example.carbuddy.controllers.AccountFragment newInstance(String param1, String param2) {
+        com.example.carbuddy.controllers.AccountFragment fragment = new com.example.carbuddy.controllers.AccountFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,12 @@ public class AccountFragment extends Fragment implements LoginListener {
         }
         database = new ModeloBDHelper(getContext());
 
+        carregarDados();
 
+        setHasOptionsMenu(true);
+    }
+
+    private void carregarDados() {
         //Instanciar a Singleton
         LoginSingleton.getInstance(getContext()).setLoginListenerAccount(this);
 
@@ -79,8 +85,6 @@ public class AccountFragment extends Fragment implements LoginListener {
 
         //Variavel fica inicialmente carregada com o Singleton
         login = LoginSingleton.getInstance(getContext()).getLogin();
-
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -108,8 +112,8 @@ public class AccountFragment extends Fragment implements LoginListener {
                              Bundle savedInstanceState) {
 
         getActivity().setTitle(getString(R.string.Account));
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Account);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.Account);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         View view = inflater.inflate(R.layout.fragment_account,
                 container, false);
@@ -139,12 +143,18 @@ public class AccountFragment extends Fragment implements LoginListener {
         updateAccount();
     }
 
-    private void updateAccount(){
+    private void updateAccount() {
         textViewAccUserName.setText(login.getUsername());
         textViewAccEmail.setText(login.getEmail());
         textViewNif.setText(login.getNif());
         textViewBirthday.setText(login.getBirsthday());
         textViewPhoneNumber.setText(login.getPhonenumber());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        carregarDados();
     }
 }
 

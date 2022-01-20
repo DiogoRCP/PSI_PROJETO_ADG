@@ -21,6 +21,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.listeners.CompaniesListener;
 import com.example.carbuddy.listeners.SchedulesListener;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.Schedule;
@@ -40,7 +41,7 @@ import java.util.Locale;
  * Use the {@link Schedules_Appointment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Schedules_Appointment extends Fragment implements SchedulesListener {
+public class Schedules_Appointment extends Fragment implements SchedulesListener, CompaniesListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -99,7 +100,10 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             carPosition = 0;
         }
 
+        CompaniesSingleton.getInstance(getContext()).setCompaniesOnSchedulingListener(this);
         SchedulesSingleton.getInstance(getContext()).addSchedulesListener(this);
+
+        CompaniesSingleton.getInstance(getContext()).CarregarListaCompanies(getContext());
     }
 
     @Override
@@ -225,5 +229,10 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     public void onDeleteCreateSchedule() {
         Toast.makeText(getContext(), schedule.getRepairtype() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
         getActivity().getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void onRefreshCompanies(ArrayList<Company> companies) {
+
     }
 }

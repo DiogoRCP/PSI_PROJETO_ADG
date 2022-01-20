@@ -101,7 +101,6 @@ public class MQTT {
 
                 @Override
                 public void deliveryComplete(IMqttDeliveryToken token) {
-
                 }
             });
         } catch (MqttException e) {
