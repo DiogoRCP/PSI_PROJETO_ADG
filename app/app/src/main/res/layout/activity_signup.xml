@@ -8,15 +8,13 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
         android:background="@drawable/roudedconers"
         android:orientation="vertical"
         android:padding="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,86 +23,80 @@
             android:id="@+id/txusername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:fontFamily="@font/worksansbold"
             android:hint="@string/tVUsername"
             android:inputType="textPersonName"
             android:lineSpacingExtra="12sp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/figma4" />
 
         <EditText
             android:id="@+id/txemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:fontFamily="@font/worksansbold"
             android:hint="@string/tVEmail"
             android:inputType="textEmailAddress"
             android:lineSpacingExtra="12sp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/figma4" />
 
         <EditText
             android:id="@+id/txnif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:fontFamily="@font/worksansbold"
             android:hint="@string/tVNif"
             android:inputType="number"
             android:lineSpacingExtra="12sp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/figma4" />
 
         <EditText
             android:id="@+id/txphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:fontFamily="@font/worksansbold"
             android:hint="@string/tVPNumber"
             android:inputType="phone"
             android:lineSpacingExtra="12sp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/figma4" />
 
         <EditText
             android:id="@+id/txpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:fontFamily="@font/worksansbold"
             android:hint="@string/TextViewPassword"
             android:inputType="textPassword"
             android:lineSpacingExtra="12sp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/figma4" />
 
         <EditText
             android:id="@+id/txpassword2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:fontFamily="@font/worksansbold"
             android:hint="@string/RepeatPassword"
             android:inputType="textPassword"
             android:lineSpacingExtra="12sp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/figma4" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/lbBirthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_weight="1"
             android:ems="10"
             android:fontFamily="@font/worksansbold"
             android:lineSpacingExtra="12sp"
@@ -116,7 +108,7 @@
             android:id="@+id/txbirsthday"
             style="@android:style/Widget.DatePicker"
             android:layout_width="match_parent"
-            android:layout_height="167dp"
+            android:layout_height="130dp"
             android:background="@drawable/roudedconers"
             android:calendarTextColor="#ffffff"
             android:calendarViewShown="false"
@@ -125,11 +117,10 @@
 
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_weight="1"
             android:background="@drawable/button_states"
             android:fontFamily="@font/worksansbold"
             android:onClick="btSignup"

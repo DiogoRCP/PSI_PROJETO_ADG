@@ -102,8 +102,8 @@ class UserController extends ActiveController
             $Usermodel = new $this->modelClass;
             $rec = $Usermodel::find()->where('id = ' . Yii::$app->user->getId())->one();
 
-            $rec->email = $user['email'];
-            $rec->password_hash = Yii::$app->security->generatePasswordHash($user['password']);
+            if(isset($user['email']))$rec->email = $user['email'];
+            if(isset($user['password']))$rec->password_hash = Yii::$app->security->generatePasswordHash($user['password']);
             $rec->save();
             return ['Save' => $rec];
         }

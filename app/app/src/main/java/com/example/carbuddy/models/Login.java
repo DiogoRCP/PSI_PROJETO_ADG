@@ -2,7 +2,9 @@ package com.example.carbuddy.models;
 
 import android.widget.DatePicker;
 
-public class Login {
+import java.io.Serializable;
+
+public class Login implements Serializable {
 
     private int id;
     private String username, email, auth_key, nif, phonenumber, birsthday;
