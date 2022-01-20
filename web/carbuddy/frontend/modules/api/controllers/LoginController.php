@@ -2,10 +2,15 @@
 
 namespace frontend\modules\api\controllers;
 
+use Cassandra\Exception\ValidationException;
 use Yii;
+use yii\base\UserException;
+use yii\db\Exception;
 use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
 use common\mosquitto\phpMQTT;
+use yii\web\ForbiddenHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class LoginController extends ActiveController
 {
@@ -26,6 +31,6 @@ class LoginController extends ActiveController
 
             return ["user" => $user];
         }
-        return ['Login' => false];
+        throw new UnauthorizedHttpException("Failed login");
     }
 }

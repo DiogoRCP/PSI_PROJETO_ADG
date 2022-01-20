@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.R;
 import com.example.carbuddy.controllers.AccountFragment;
 import com.example.carbuddy.controllers.MainActivity;
 import com.example.carbuddy.listeners.LoginListener;
@@ -77,7 +78,15 @@ public class LoginSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            String mensagem = "";
+                            switch (error.networkResponse.statusCode){
+                                case 401:
+                                    mensagem = context.getResources().getString(R.string.FailedLogin);
+                                    break;
+                                default:
+                                    mensagem = context.getResources().getString(R.string.Error);
+                            }
+                            Toast.makeText(context, mensagem, Toast.LENGTH_SHORT).show();
                         }
                     });
 

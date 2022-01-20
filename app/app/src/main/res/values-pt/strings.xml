@@ -54,4 +54,6 @@
     <string name="EditVehicle">Editar Veículo</string>
     <string name="Edited">Editado</string>
     <string name="State">Estado</string>
+    <string name="Error">Erro</string>
+    <string name="FailedLogin">Falha no login</string>
 </resources>
