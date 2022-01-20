@@ -54,4 +54,8 @@
     <string name="EditVehicle">Editar Veículo</string>
     <string name="Edited">Editado</string>
     <string name="State">Estado</string>
+    <string name="EditAccount">Editar Conta</string>
+    <string name="PassDMatch">Passwords não coincidem</string>
+    <string name="AccountCreated">Conta criada com sucesso</string>
+    <string name="AccountUpdated">Conta editada com sucesso</string>
 </resources>
