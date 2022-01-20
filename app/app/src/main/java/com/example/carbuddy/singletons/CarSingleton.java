@@ -213,7 +213,7 @@ public class CarSingleton {
             Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = IP + "cars/put/"+car.getId()+"?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "cars/put/" + car.getId() + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
 
             JSONObject carData = new JSONObject();
             carData.put("vin", car.getVin());

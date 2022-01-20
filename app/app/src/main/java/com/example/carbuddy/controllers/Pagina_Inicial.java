@@ -41,7 +41,6 @@ public class Pagina_Inicial extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private Fragment fragment;
-    private Menu menu;
     private int fragmentNumber;
 
     @Override
@@ -83,7 +82,6 @@ public class Pagina_Inicial extends AppCompatActivity {
             //Title bar back press triggers onBackPressed()
             onBackPressed();
             return true;
-        } else {
         }
         return super.onOptionsItemSelected(item);
     }

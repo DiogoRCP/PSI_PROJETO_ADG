@@ -167,8 +167,8 @@ class SchedulesController extends ActiveController
             $company = $scheduleModel::findOne($id)->companyId;
             $contributor = Contributors::find()->where("userId = " . Yii::$app->user->getId())->one();
             if ($company === $contributor->companyId) {
-                $scheduleModel->schedulingdate = $schedule['schedulingdate'];
-                $scheduleModel->state = $schedule['state'];
+                if(isset($schedule['schedulingdate']))$scheduleModel->schedulingdate = $schedule['schedulingdate'];
+                if(isset($schedule['state']))$scheduleModel->state = $schedule['state'];
                 $rec = $scheduleModel->save();
                 return ['PUT' => $rec];
             }
