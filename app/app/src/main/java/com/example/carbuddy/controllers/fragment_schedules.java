@@ -1,5 +1,7 @@
 package com.example.carbuddy.controllers;
 
+import static com.example.carbuddy.utils.libs.SelectedMainMenu;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -107,6 +109,9 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         ScheduleListAdapter listaSchedules = new ScheduleListAdapter(getContext(), lstSchedule);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaSchedules);
+
+        SelectedMainMenu(getActivity(), R.id.btMainSchedules);
+
         return v;
     }
 

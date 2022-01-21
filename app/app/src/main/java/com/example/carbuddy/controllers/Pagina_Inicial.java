@@ -2,6 +2,7 @@ package com.example.carbuddy.controllers;
 
 import static com.example.carbuddy.utils.MQTT.connectionMQTTRepair;
 import static com.example.carbuddy.utils.MQTT.connectionMQTTSchedule;
+import static com.example.carbuddy.utils.libs.SelectedMainMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.carbuddy.R;
@@ -41,7 +43,7 @@ public class Pagina_Inicial extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private Fragment fragment;
-    private int fragmentNumber;
+    public int fragmentNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,7 @@ public class Pagina_Inicial extends AppCompatActivity {
         if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStack();
             if (fragmentManager.getBackStackEntryCount() == 1) {
+                fragmentNumber = 1;
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             }
         }
@@ -100,10 +103,11 @@ public class Pagina_Inicial extends AppCompatActivity {
     public void onClickGaragem(View view) {
         if (fragmentNumber != 1) {
             fragment = new fragment_garage();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setTitle(R.string.Garage);
 
             fragmentNumber = 1;
+
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)
                     .addToBackStack("garage")
@@ -122,6 +126,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.Account);
 
             fragmentNumber = 2;
+
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)
                     .addToBackStack("Account")
@@ -140,6 +145,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.Schedules);
 
             fragmentNumber = 3;
+
             fragmentManager.beginTransaction().
                     replace(R.id.fragmentContainerView, fragment)
                     .addToBackStack("schedules")
@@ -157,27 +163,11 @@ public class Pagina_Inicial extends AppCompatActivity {
 
         getSupportActionBar().setTitle(R.string.Garage);
 
+        SelectedMainMenu(this, R.id.btMainGarage);
+
         fragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, fragment)
                 .commit();
-    }
-
-    public void onClickAccountMenu(MenuItem item) {
-        if (fragmentNumber != 2) {
-            fragment = new AccountFragment();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.Account);
-
-            fragmentNumber = 2;
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .addToBackStack("Account")
-                    .commit();
-        } else {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .commit();
-        }
     }
 
     public void onClickCompaniesMenu(MenuItem item) {
