@@ -254,8 +254,11 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     public void editSchedule(){
         if(edit){
             getActivity().setTitle(R.string.editschedule);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.editschedule);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
             textViewCompanySchedule.setVisibility(View.GONE);
             spCompany.setVisibility(View.GONE);
+            btSubmit.setText(R.string.editschedule);
 
             //Carregar o fragmento com os dados da schedule
             tvDate.setText(schedule.getDateTime()[0]);
