@@ -108,10 +108,8 @@ public class fragment_form_car extends Fragment implements CarsListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        int title = R.string.AddVehicle;
-        if (editar) {
-            title = R.string.EditVehicle;
-        }
+        int title = (editar) ? R.string.EditVehicle : R.string.AddVehicle;
+
         getActivity().setTitle(title);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);

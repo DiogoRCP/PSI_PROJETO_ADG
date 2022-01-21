@@ -132,6 +132,12 @@ public class Schedule {
         return info;
     }
 
+    /** Método de retorna 0 - Data; 1- Hora **/
+    public String[] getDateTime(){
+        String[] dateTime = this.schedulingdate.split(" ");
+        return dateTime;
+    }
+
     @Override
     public String toString() {
         return "Schedule{" +

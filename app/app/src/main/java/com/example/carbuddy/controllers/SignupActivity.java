@@ -1,6 +1,7 @@
 package com.example.carbuddy.controllers;
 
-import android.content.Intent;
+import static com.example.carbuddy.models.Signup.PasswordVerify;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.models.Login;
@@ -68,7 +68,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void btSignup(View view) throws JSONException {
-        if (Signup.PasswordVerify(password.getText().toString(), passwordR.getText().toString())) {
+        if (PasswordVerify(password.getText().toString(), passwordR.getText().toString())) {
             if (!edit) {
                 Signup form = new Signup(
                         username.getText().toString(),
