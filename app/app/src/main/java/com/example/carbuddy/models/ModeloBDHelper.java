@@ -224,7 +224,7 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
 
     public LinkedList<Schedule> getAllSchedules() {
         LinkedList<Schedule> schedules = new LinkedList<>();
-        Cursor cursor = this.database.rawQuery("SELECT * FROM schedules",
+        Cursor cursor = this.database.rawQuery("SELECT * FROM schedules ORDER BY schedulingdate DESC",
                 null);
         if (cursor.moveToFirst()) {
             do {

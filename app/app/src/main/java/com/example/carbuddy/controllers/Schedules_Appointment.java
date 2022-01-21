@@ -56,12 +56,13 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     private Car car;
     private TextView tvDate;
     private TextView tvHour;
+    private TextView textViewCompanySchedule;
     final Calendar myCalendar = Calendar.getInstance();
     private Spinner spCompany;
     private Spinner spRepairType;
     private Button btSubmit;
     private EditText edtxtDescription;
-
+    private boolean edit;
     private Schedule schedule;
 
     public Schedules_Appointment() {
@@ -93,10 +94,16 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //Caso o objetivo seja o post de um agendamento- true se for para editar
+        edit = false;
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             car = (Car) bundle.getSerializable("car");
+            if(bundle.getSerializable("schedule") != null){
+                schedule = (Schedule) bundle.getSerializable("schedule");
+                edit = true;
+            }
         } else {
             car = null;
         }
@@ -111,7 +118,9 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //Titulo da página para post
         getActivity().setTitle(R.string.Schedulesappointment);
+
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.Schedulesappointment);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
@@ -120,6 +129,8 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         spCompany = view.findViewById(R.id.spCompany);
         spRepairType = view.findViewById(R.id.spRepairType);
         edtxtDescription = view.findViewById(R.id.edtxtDescription);
+        textViewCompanySchedule = view.findViewById(R.id.textViewCompanySchedule);
+
         ChargeCompanies(view);
         // Alterar data
         dateManagement(view);
@@ -129,6 +140,9 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
         btSubmit = view.findViewById(R.id.btSubmitSchedule);
         btSubmitClick();
+
+        //Verirficar se é para editar schedule
+        editSchedule();
 
         return view;
     }
@@ -202,11 +216,27 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             public void onClick(View v) {
                 verificarDescricao();
                 if (verificarDescricao()) {
-                    schedule = new Schedule(car.getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
-                    try {
-                        SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedule);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+                    //POST
+                    if(!edit) {
+                        Schedule schedules = new Schedule(schedule.getCarId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+
+                        try {
+                            SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedules);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //PUT
+                    else {
+                        schedule.setSchedulingdate(tvDate.getText() + " " + tvHour.getText());
+                        schedule.setRepairdescription(edtxtDescription.getText().toString());
+                        schedule.setRepairtype(spRepairType.getSelectedItem().toString());
+                        try {
+                            SchedulesSingleton.getInstance(v.getContext()).PutSchedule(v.getContext(), schedule);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -219,6 +249,27 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             return false;
         }
         return true;
+    }
+
+    public void editSchedule(){
+        if(edit){
+            getActivity().setTitle(R.string.editschedule);
+            textViewCompanySchedule.setVisibility(View.GONE);
+            spCompany.setVisibility(View.GONE);
+
+            //Carregar o fragmento com os dados da schedule
+            tvDate.setText(schedule.getDateTime()[0]);
+            tvHour.setText(schedule.getDateTime()[1]);
+            edtxtDescription.setText(schedule.getRepairdescription());
+
+            //carregar o spinner do repair type quando for edit
+            switch (schedule.getRepairtype()){
+                case "Maintenance":
+                    spRepairType.setSelection(0);
+                case "Repair":
+                    spRepairType.setSelection(1);
+            }
+        }
     }
 
     @Override
