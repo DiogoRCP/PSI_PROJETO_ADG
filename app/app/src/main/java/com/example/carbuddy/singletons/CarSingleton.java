@@ -98,12 +98,12 @@ public class CarSingleton {
         }
     }
 
-    public void CarregarListaRepairs(Context context, int carPosition) {
+    public void CarregarListaRepairs(Context context, Car car) {
         if (!isInternetConnection(context)) {
             Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = IP + "repairs/history/" + cars.get(carPosition).getId() + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "repairs/history/" + car.getId() + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                     (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -120,7 +120,7 @@ public class CarSingleton {
                                     e.printStackTrace();
                                 }
                             }
-                            cars.get(carPosition).setRepairs(repairs);
+                            car.setRepairs(repairs);
 
                             repairsListener.onRefreshRepair(repairs);
                         }
@@ -253,8 +253,8 @@ public class CarSingleton {
         this.carsListener = fragment;
     }
 
-    public ArrayList<Repair> getRepairs(int carId) {
-        return cars.get(carId).getRepairs();
+    public ArrayList<Repair> getRepairs(Car car) {
+        return car.getRepairs();
     }
 
     public void setRepairsListener(RepairFragment fragment) {

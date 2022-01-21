@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.carbuddy.R;
 import com.example.carbuddy.listeners.CompaniesListener;
 import com.example.carbuddy.listeners.SchedulesListener;
+import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.Schedule;
 import com.example.carbuddy.singletons.CarSingleton;
@@ -52,7 +53,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     private String mParam1;
     private String mParam2;
 
-    private int carPosition;
+    private Car car;
     private TextView tvDate;
     private TextView tvHour;
     final Calendar myCalendar = Calendar.getInstance();
@@ -95,9 +96,9 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            carPosition = bundle.getInt("carPosition");
+            car = (Car) bundle.getSerializable("car");
         } else {
-            carPosition = 0;
+            car = null;
         }
 
         CompaniesSingleton.getInstance(getContext()).setCompaniesOnSchedulingListener(this);
@@ -201,7 +202,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             public void onClick(View v) {
                 verificarDescricao();
                 if (verificarDescricao()) {
-                    schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+                    schedule = new Schedule(car.getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
                     try {
                         SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedule);
                     } catch (JSONException e) {
