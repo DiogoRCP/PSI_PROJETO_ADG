@@ -131,9 +131,6 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         edtxtDescription = view.findViewById(R.id.edtxtDescription);
         textViewCompanySchedule = view.findViewById(R.id.textViewCompanySchedule);
 
-        //Verficar se é para editar a schedule
-        editSchedule();
-
         ChargeCompanies(view);
         // Alterar data
         dateManagement(view);
@@ -143,6 +140,9 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
         btSubmit = view.findViewById(R.id.btSubmitSchedule);
         btSubmitClick();
+
+        //Verirficar se é para editar schedule
+        editSchedule();
 
         return view;
     }
@@ -216,11 +216,27 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             public void onClick(View v) {
                 verificarDescricao();
                 if (verificarDescricao()) {
-                    schedule = new Schedule(car.getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
-                    try {
-                        SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedule);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+                    //POST
+                    if(!edit) {
+                        Schedule schedules = new Schedule(schedule.getCarId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+
+                        try {
+                            SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedules);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //PUT
+                    else {
+                        schedule.setSchedulingdate(tvDate.getText() + " " + tvHour.getText());
+                        schedule.setRepairdescription(edtxtDescription.getText().toString());
+                        schedule.setRepairtype(spRepairType.getSelectedItem().toString());
+                        try {
+                            SchedulesSingleton.getInstance(v.getContext()).PutSchedule(v.getContext(), schedule);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -242,8 +258,8 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             spCompany.setVisibility(View.GONE);
 
             //Carregar o fragmento com os dados da schedule
-            //tvDate.setText(dateFormat.format(schedule.getSchedulingdate()));
-            //tvHour.setText(dateFormat.format(myCalendar.getTime()));
+            tvDate.setText(schedule.getDateTime()[0]);
+            tvHour.setText(schedule.getDateTime()[1]);
             edtxtDescription.setText(schedule.getRepairdescription());
 
             //carregar o spinner do repair type quando for edit
