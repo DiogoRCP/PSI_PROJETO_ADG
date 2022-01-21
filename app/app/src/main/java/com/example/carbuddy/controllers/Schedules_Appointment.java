@@ -266,8 +266,10 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             switch (schedule.getRepairtype()){
                 case "Maintenance":
                     spRepairType.setSelection(0);
+                    break;
                 case "Repair":
                     spRepairType.setSelection(1);
+                    break;
             }
         }
     }
