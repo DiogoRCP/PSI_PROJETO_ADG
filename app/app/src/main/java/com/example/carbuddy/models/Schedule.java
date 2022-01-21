@@ -5,13 +5,14 @@ import android.content.Context;
 import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.singletons.CompaniesSingleton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Schedule {
+public class Schedule implements Serializable {
     private int id, carId, companyId;
     private String currentdate, schedulingdate, repairdescription, state, repairtype;
 
-    public Schedule(int id, int carId, int companyId, String currentdate, String schedulingdate, String repairdescription, String state, String repairtype) {
+    public Schedule(int id, int carId, String currentdate, String schedulingdate, String repairdescription, String state, String repairtype,  int companyId) {
         this.id = id;
         this.carId = carId;
         this.companyId = companyId;
@@ -130,6 +131,12 @@ public class Schedule {
             }
         }
         return info;
+    }
+
+    /** Método de retorna 0 - Data; 1- Hora **/
+    public String[] getDateTime(){
+        String[] dateTime = this.schedulingdate.split(" ");
+        return dateTime;
     }
 
     @Override

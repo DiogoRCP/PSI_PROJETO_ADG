@@ -124,6 +124,35 @@ public class SchedulesSingleton {
         }
     }
 
+    public void PutSchedule(Context context, Schedule schedule) throws JSONException {
+        if (!isInternetConnection(context)) {
+            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+        } else {
+            RequestQueue queue = Volley.newRequestQueue(context);
+            String url = IP + "schedules/putclient/" + schedule.getId() + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+
+            JSONObject scheduleData = new JSONObject();
+            scheduleData.put("schedulingdate", schedule.getSchedulingdate());
+            scheduleData.put("repairdescription", schedule.getRepairdescription());
+            scheduleData.put("repairtype", schedule.getRepairtype());
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.PUT, url, scheduleData, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            schedulesListener.onDeleteCreateSchedule();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("Error", error.toString());
+                        }
+                    });
+
+            queue.add(jsonObjectRequest);
+        }
+    }
+
     public ArrayList<Schedule> getSchedules() {
         return schedules;
     }

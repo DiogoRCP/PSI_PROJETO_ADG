@@ -106,7 +106,7 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_schedules, container, false);
         myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewSchedules);
-        ScheduleListAdapter listaSchedules = new ScheduleListAdapter(getContext(), lstSchedule);
+        ScheduleListAdapter listaSchedules = new ScheduleListAdapter(getContext(), lstSchedule, super.getFragmentManager());
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaSchedules);
 
@@ -121,7 +121,7 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
             database.insertSchedules(schedule);
         }
         lstSchedule = SchedulesSingleton.getInstance(getContext()).getSchedules();
-        myRecyclerView.setAdapter(new ScheduleListAdapter(getContext(), lstSchedule));
+        myRecyclerView.setAdapter(new ScheduleListAdapter(getContext(), lstSchedule, super.getFragmentManager()));
     }
 
     @Override
