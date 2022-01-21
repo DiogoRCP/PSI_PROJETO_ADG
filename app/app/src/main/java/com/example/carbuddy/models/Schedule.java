@@ -12,7 +12,7 @@ public class Schedule implements Serializable {
     private int id, carId, companyId;
     private String currentdate, schedulingdate, repairdescription, state, repairtype;
 
-    public Schedule(int id, int carId, int companyId, String currentdate, String schedulingdate, String repairdescription, String state, String repairtype) {
+    public Schedule(int id, int carId, String currentdate, String schedulingdate, String repairdescription, String state, String repairtype,  int companyId) {
         this.id = id;
         this.carId = carId;
         this.companyId = companyId;
