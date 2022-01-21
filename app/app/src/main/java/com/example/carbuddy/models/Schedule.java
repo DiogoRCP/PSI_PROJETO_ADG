@@ -5,9 +5,10 @@ import android.content.Context;
 import com.example.carbuddy.singletons.CarSingleton;
 import com.example.carbuddy.singletons.CompaniesSingleton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Schedule {
+public class Schedule implements Serializable {
     private int id, carId, companyId;
     private String currentdate, schedulingdate, repairdescription, state, repairtype;
 
