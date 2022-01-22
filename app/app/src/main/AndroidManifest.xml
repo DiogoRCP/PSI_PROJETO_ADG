@@ -4,10 +4,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_carbuddy_logo_svg"
+        android:icon="@mipmap/ic_carbuddy_launcher"
         android:label="@string/app_name"
-        android:logo="@drawable/ic_carbuddy_logo_svg"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:logo="@mipmap/ic_carbuddy_launcher"
+        android:roundIcon="@mipmap/ic_carbuddy_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CarBuddy"
         android:usesCleartextTraffic="true">

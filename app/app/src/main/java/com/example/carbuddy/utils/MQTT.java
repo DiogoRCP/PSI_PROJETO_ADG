@@ -76,7 +76,7 @@ public class MQTT {
 
     private static void subscribeMQTTRepair(MqttAndroidClient client, Context context) {
         String topic = "REPAIR-" + LoginSingleton.getInstance(context).getLogin().getId();
-        int qos = 0;
+        int qos = 1;
         try {
             client.subscribe(topic, qos);
             client.setCallback(new MqttCallback() {
@@ -95,8 +95,12 @@ public class MQTT {
                     builder.setSmallIcon(R.drawable.ic_car_repair);
                     builder.setAutoCancel(true);
 
+                    // Criar notificação
                     NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
                     managerCompat.notify(1 + Integer.parseInt(separated[0]), builder.build());
+
+                    // Delete retain message
+                    client.publish(topic, new byte[]{}, qos, true);
                 }
 
                 @Override
@@ -110,7 +114,7 @@ public class MQTT {
 
     private static void subscribeMQTTSchedules(MqttAndroidClient client, Context context) {
         String topic = "SCHEDULE-" + LoginSingleton.getInstance(context).getLogin().getId();
-        int qos = 0;
+        int qos = 1;
         try {
             client.subscribe(topic, qos);
             client.setCallback(new MqttCallback() {
@@ -136,6 +140,9 @@ public class MQTT {
 
                     NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
                     managerCompat.notify(2 + Integer.parseInt(separated[0]), builder.build());
+
+                    // Delete retain message
+                    client.publish(topic, new byte[]{}, qos, true);
                 }
 
                 @Override
