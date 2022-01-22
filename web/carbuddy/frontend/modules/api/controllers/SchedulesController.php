@@ -144,10 +144,10 @@ class SchedulesController extends ActiveController
 
             $car = $scheduleModel::findOne($id)->car;
             if ($car->userId === Yii::$app->user->getId()) {
-                if(isset($schedule['schedulingdate']))$scheduleModel->schedulingdate = $schedule['schedulingdate'];
-                if(isset($schedule['repairdescription']))$scheduleModel->repairdescription = $schedule['repairdescription'];
-                if(isset($schedule['repairtype']))$scheduleModel->repairtype = $schedule['repairtype'];
-                if(isset($schedule['carId']))$scheduleModel->carId = $schedule['carId'];
+                if (isset($schedule['schedulingdate'])) $scheduleModel->schedulingdate = $schedule['schedulingdate'];
+                if (isset($schedule['repairdescription'])) $scheduleModel->repairdescription = $schedule['repairdescription'];
+                if (isset($schedule['repairtype'])) $scheduleModel->repairtype = $schedule['repairtype'];
+                if (isset($schedule['carId'])) $scheduleModel->carId = $schedule['carId'];
                 $rec = $scheduleModel->save();
                 return ['PUT' => $rec];
             }
@@ -167,8 +167,8 @@ class SchedulesController extends ActiveController
             $company = $scheduleModel::findOne($id)->companyId;
             $contributor = Contributors::find()->where("userId = " . Yii::$app->user->getId())->one();
             if ($company === $contributor->companyId) {
-                if(isset($schedule['schedulingdate']))$scheduleModel->schedulingdate = $schedule['schedulingdate'];
-                if(isset($schedule['state']))$scheduleModel->state = $schedule['state'];
+                if (isset($schedule['schedulingdate'])) $scheduleModel->schedulingdate = $schedule['schedulingdate'];
+                if (isset($schedule['state'])) $scheduleModel->state = $schedule['state'];
                 $rec = $scheduleModel->save();
                 return ['PUT' => $rec];
             }
@@ -185,8 +185,9 @@ class SchedulesController extends ActiveController
         if (Yii::$app->user->can('frontendCrudSchedulesClient')) {
             $cars = Cars::find()->where("userId = " . Yii::$app->user->getId())->all();
             $recs = [];
-            foreach($cars as $car){
-                foreach ($car->getSchedules() as $schedule){
+            $recsOrdered = [];
+            foreach ($cars as $car) {
+                foreach ($car->getSchedules() as $schedule) {
                     $objSchedule = [
                         'id' => $schedule->id,
                         'currentdate' => $schedule->currentdate,
@@ -200,8 +201,17 @@ class SchedulesController extends ActiveController
                     $recs[] = $objSchedule;
                 }
 
+                // Ordenar Schedules
+                for ($i = 0; $i < sizeof($recs); $i++) {
+                    $recsOrdered[$i] = $recs[$i];
+                    for ($c = 0; $c < sizeof($recs); $c++) {
+                        if($recs[$i]->schedulingdate < $recs[$c]->schedulingdate ){
+                            $recsOrdered[$i] = $recs[$i];
+                        }
+                    }
+                }
             }
-            return $recs;
+            return $recsOrdered;
         }
         throw new ForbiddenHttpException(self::noPermission);
     }
