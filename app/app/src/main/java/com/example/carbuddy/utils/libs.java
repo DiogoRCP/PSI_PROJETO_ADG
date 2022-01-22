@@ -1,10 +1,12 @@
 package com.example.carbuddy.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.carbuddy.R;
@@ -62,5 +64,19 @@ public class libs {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.color_spinner_layout, list);
         arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
         spinner.setAdapter(arrayAdapter);
+    }
+
+    public static void SelectedMainMenu(Activity activity, int btId){
+        Button btMainMenuSchedules, btMainMenuGarage, btMainMenuAccount;
+        btMainMenuSchedules = activity.findViewById(R.id.btMainSchedules);
+        btMainMenuGarage = activity.findViewById(R.id.btMainGarage);
+        btMainMenuAccount = activity.findViewById(R.id.btMainAccount);
+
+        btMainMenuSchedules.setBackground(null);
+        btMainMenuGarage.setBackground(null);
+        btMainMenuAccount.setBackground(null);
+
+        Button btMainMenuSelected = activity.findViewById(btId);
+        btMainMenuSelected.setBackgroundResource(R.drawable.button_states);
     }
 }

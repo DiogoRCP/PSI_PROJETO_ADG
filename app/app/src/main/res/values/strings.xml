@@ -60,9 +60,10 @@
     <string name="PassDMatch">Passwords doesn\'t match</string>
     <string name="AccountCreated">" Account successfully created"</string>
     <string name="AccountUpdated">" Account successfully updated"</string>
-
     <string name="Error">Error</string>
     <string name="FailedLogin">Failed login</string>
+    <string name="State">State</string>
+    <string name="editschedule">Update Schedule</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>
@@ -82,5 +83,5 @@
         <item>Maintenance</item>
         <item>Repair</item>
     </string-array>
-    <string name="State">State</string>
+
 </resources>

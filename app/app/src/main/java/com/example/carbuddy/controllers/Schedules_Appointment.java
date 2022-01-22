@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.carbuddy.R;
 import com.example.carbuddy.listeners.CompaniesListener;
 import com.example.carbuddy.listeners.SchedulesListener;
+import com.example.carbuddy.models.Car;
 import com.example.carbuddy.models.Company;
 import com.example.carbuddy.models.Schedule;
 import com.example.carbuddy.singletons.CarSingleton;
@@ -52,15 +53,16 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     private String mParam1;
     private String mParam2;
 
-    private int carPosition;
+    private Car car;
     private TextView tvDate;
     private TextView tvHour;
+    private TextView textViewCompanySchedule;
     final Calendar myCalendar = Calendar.getInstance();
     private Spinner spCompany;
     private Spinner spRepairType;
     private Button btSubmit;
     private EditText edtxtDescription;
-
+    private boolean edit;
     private Schedule schedule;
 
     public Schedules_Appointment() {
@@ -92,12 +94,18 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //Caso o objetivo seja o post de um agendamento- true se for para editar
+        edit = false;
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            carPosition = bundle.getInt("carPosition");
+            car = (Car) bundle.getSerializable("car");
+            if(bundle.getSerializable("schedule") != null){
+                schedule = (Schedule) bundle.getSerializable("schedule");
+                edit = true;
+            }
         } else {
-            carPosition = 0;
+            car = null;
         }
 
         CompaniesSingleton.getInstance(getContext()).setCompaniesOnSchedulingListener(this);
@@ -110,7 +118,9 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //Titulo da página para post
         getActivity().setTitle(R.string.Schedulesappointment);
+
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.Schedulesappointment);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
@@ -119,6 +129,8 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         spCompany = view.findViewById(R.id.spCompany);
         spRepairType = view.findViewById(R.id.spRepairType);
         edtxtDescription = view.findViewById(R.id.edtxtDescription);
+        textViewCompanySchedule = view.findViewById(R.id.textViewCompanySchedule);
+
         ChargeCompanies(view);
         // Alterar data
         dateManagement(view);
@@ -128,6 +140,9 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
         btSubmit = view.findViewById(R.id.btSubmitSchedule);
         btSubmitClick();
+
+        //Verirficar se é para editar schedule
+        editSchedule();
 
         return view;
     }
@@ -201,11 +216,27 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             public void onClick(View v) {
                 verificarDescricao();
                 if (verificarDescricao()) {
-                    schedule = new Schedule(CarSingleton.getInstance(v.getContext()).getCars().get(carPosition).getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
-                    try {
-                        SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedule);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+                    //POST
+                    if(!edit) {
+                        Schedule schedules = new Schedule(schedule.getCarId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+
+                        try {
+                            SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedules);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //PUT
+                    else {
+                        schedule.setSchedulingdate(tvDate.getText() + " " + tvHour.getText());
+                        schedule.setRepairdescription(edtxtDescription.getText().toString());
+                        schedule.setRepairtype(spRepairType.getSelectedItem().toString());
+                        try {
+                            SchedulesSingleton.getInstance(v.getContext()).PutSchedule(v.getContext(), schedule);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -218,6 +249,32 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             return false;
         }
         return true;
+    }
+
+    public void editSchedule(){
+        if(edit){
+            getActivity().setTitle(R.string.editschedule);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.editschedule);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
+            textViewCompanySchedule.setVisibility(View.GONE);
+            spCompany.setVisibility(View.GONE);
+            btSubmit.setText(R.string.editschedule);
+
+            //Carregar o fragmento com os dados da schedule
+            tvDate.setText(schedule.getDateTime()[0]);
+            tvHour.setText(schedule.getDateTime()[1]);
+            edtxtDescription.setText(schedule.getRepairdescription());
+
+            //carregar o spinner do repair type quando for edit
+            switch (schedule.getRepairtype()){
+                case "Maintenance":
+                    spRepairType.setSelection(0);
+                    break;
+                case "Repair":
+                    spRepairType.setSelection(1);
+                    break;
+            }
+        }
     }
 
     @Override

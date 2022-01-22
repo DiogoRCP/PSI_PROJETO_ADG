@@ -40,7 +40,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
     private ArrayList<Repair> lstRepair;
     View v;
     private static ModeloBDHelper database;
-    private int carPosition;
+    private Car car;
     private String carRegistration;
 
     public RepairFragment() {
@@ -76,20 +76,20 @@ public class RepairFragment extends Fragment implements RepairsListener{
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            carPosition = bundle.getInt("carPosition");
+            car = (Car) bundle.getSerializable("car");
             carRegistration = bundle.getString("carRegistration");
         }else{
-            carPosition = 0;
+            car = null;
         }
 
         //Instanciar a Singleton
         CarSingleton.getInstance(getContext()).setRepairsListener(this);
 
         //Carregar os Dados da API
-        CarSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), carPosition);
+        CarSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), car);
 
-        if(CarSingleton.getInstance(getContext()).getRepairs(carPosition) != null) {
-            lstRepair = CarSingleton.getInstance(getContext()).getRepairs(carPosition);
+        if(CarSingleton.getInstance(getContext()).getRepairs(car) != null) {
+            lstRepair = CarSingleton.getInstance(getContext()).getRepairs(car);
         }else{
             lstRepair = new ArrayList<>();
         }
@@ -119,7 +119,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
         for (Repair repair: repairs) {
             database.insertRepairs(repair);
         }
-        lstRepair = CarSingleton.getInstance(getContext()).getRepairs(carPosition);
+        lstRepair = CarSingleton.getInstance(getContext()).getRepairs(car);
         myRecyclerView.setAdapter(new RepairListAdapter(getContext(), lstRepair));
     }
 }

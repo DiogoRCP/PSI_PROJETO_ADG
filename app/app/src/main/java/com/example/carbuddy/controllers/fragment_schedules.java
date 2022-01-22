@@ -1,5 +1,7 @@
 package com.example.carbuddy.controllers;
 
+import static com.example.carbuddy.utils.libs.SelectedMainMenu;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -104,9 +106,12 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_schedules, container, false);
         myRecyclerView = (RecyclerView) v.findViewById(R.id.RecyclerViewSchedules);
-        ScheduleListAdapter listaSchedules = new ScheduleListAdapter(getContext(), lstSchedule);
+        ScheduleListAdapter listaSchedules = new ScheduleListAdapter(getContext(), lstSchedule, super.getFragmentManager());
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaSchedules);
+
+        SelectedMainMenu(getActivity(), R.id.btMainSchedules);
+
         return v;
     }
 
@@ -116,7 +121,7 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
             database.insertSchedules(schedule);
         }
         lstSchedule = SchedulesSingleton.getInstance(getContext()).getSchedules();
-        myRecyclerView.setAdapter(new ScheduleListAdapter(getContext(), lstSchedule));
+        myRecyclerView.setAdapter(new ScheduleListAdapter(getContext(), lstSchedule, super.getFragmentManager()));
     }
 
     @Override

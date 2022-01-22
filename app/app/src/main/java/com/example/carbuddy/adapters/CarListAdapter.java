@@ -44,7 +44,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        holder.listaCarros = this.listaCarros;
         holder.tvRegistration.setText(listaCarros.get(position).getRegistration());
         holder.tvBrand.setText(listaCarros.get(position).getBrand());
         holder.tvModel.setText(listaCarros.get(position).getModel());
@@ -77,7 +77,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+        private ArrayList<Car> listaCarros;
         private TextView tvRegistration, tvBrand, tvModel;
         private ImageView imgView;
         Fragment fragment;
@@ -86,6 +86,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
 
         public MyViewHolder(@NonNull View itemView, FragmentManager manager, ActionBar actionBar) {
             super(itemView);
+
             tvRegistration = (TextView) itemView.findViewById(R.id.textViewRegistrationValue);
             tvBrand = (TextView) itemView.findViewById(R.id.textViewBrandValue);
             tvModel = (TextView) itemView.findViewById(R.id.textViewModelValue);
@@ -93,6 +94,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
             this.manager = manager;
             this.actionBar = actionBar;
             itemView.setOnClickListener(this);
+
         }
 
         @Override
@@ -101,7 +103,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
 
             fragment = new fragment_carInfo();
             Bundle bundle = new Bundle();
-            bundle.putInt("position", getAdapterPosition());
+            bundle.putSerializable("car", listaCarros.get(getAdapterPosition()));
             fragment.setArguments(bundle);
             manager.beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)

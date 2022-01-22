@@ -43,11 +43,10 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button2"
-            style="@style/Widget.AppCompat.Button"
+            android:id="@+id/btMainGarage"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/button_states"
             android:foreground="@drawable/ic_carbuddy_logo_svg"
             android:foregroundGravity="center"
             android:onClick="onClickGaragem"
@@ -58,32 +57,30 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button6"
-            style="@style/Widget.AppCompat.Button"
+            android:id="@+id/btMainSchedules"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/button_states"
             android:foreground="@drawable/ic_clock"
             android:foregroundGravity="center"
             android:onClick="onClickSchedules"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button2"
+            app:layout_constraintEnd_toStartOf="@+id/btMainGarage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button7"
-            style="@style/Widget.AppCompat.Button"
+            android:id="@+id/btMainAccount"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/button_states"
             android:foreground="@drawable/ic_user"
             android:foregroundGravity="center"
             android:includeFontPadding="false"
             android:onClick="onClickAccount"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button2"
+            app:layout_constraintStart_toEndOf="@+id/btMainGarage"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

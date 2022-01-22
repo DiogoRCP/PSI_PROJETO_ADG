@@ -60,4 +60,5 @@
     <string name="AccountUpdated">Conta editada com sucesso</string>
     <string name="Error">Erro</string>
     <string name="FailedLogin">Falha no login</string>
+    <string name="editschedule">Atualizar Agendamento</string>
 </resources>

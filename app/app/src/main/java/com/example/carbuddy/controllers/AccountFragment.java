@@ -1,5 +1,7 @@
 package com.example.carbuddy.controllers;
 
+import static com.example.carbuddy.utils.libs.SelectedMainMenu;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -129,6 +131,8 @@ public class AccountFragment extends Fragment implements LoginListener {
         textViewPhoneNumber = view.findViewById(R.id.textViewPhoneNumber);
 
         updateAccount();
+
+        SelectedMainMenu(getActivity(), R.id.btMainAccount);
 
         return view;
     }

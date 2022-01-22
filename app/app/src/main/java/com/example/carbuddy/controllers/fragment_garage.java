@@ -1,8 +1,11 @@
 package com.example.carbuddy.controllers;
 
+import static com.example.carbuddy.utils.libs.SelectedMainMenu;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.carbuddy.R;
 import com.example.carbuddy.adapters.CarListAdapter;
@@ -112,6 +116,8 @@ public class fragment_garage extends Fragment implements CarsListener {
                         .commit();
             }
         });
+
+        SelectedMainMenu(getActivity(), R.id.btMainGarage);
 
         return v;
     }

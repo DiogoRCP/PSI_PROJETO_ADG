@@ -46,7 +46,6 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private int position;
     private Car car;
 
     private ImageView imageCar;
@@ -84,8 +83,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            position = bundle.getInt("position");
-            car = CarSingleton.getInstance(getContext()).getCars().get(position);
+            car = (Car) bundle.getSerializable("car");
         } else {
             car = null;
         }
@@ -108,7 +106,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
             case R.id.bt_repairs_menu:
                 fragment = new RepairFragment();
                 bundle = new Bundle();
-                bundle.putInt("carPosition", position);
+                bundle.putSerializable("car", car);
                 bundle.putString("carRegistration", car.getRegistration());
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
@@ -119,7 +117,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
             case R.id.bt_schedules_menu:
                 fragment = new Schedules_Appointment();
                 bundle = new Bundle();
-                bundle.putInt("carPosition", position);
+                bundle.putSerializable("car", car);
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainerView, fragment)
