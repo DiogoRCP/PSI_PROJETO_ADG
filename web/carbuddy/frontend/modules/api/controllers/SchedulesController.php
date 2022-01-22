@@ -202,25 +202,12 @@ class SchedulesController extends ActiveController
                 }
 
                 // Ordenar Schedules
-                for ($i = 0; $i < sizeof($recs); $i++) {
-                    $recsOrdered[$i] = $recs[$i];
-                    for ($c = 0; $c < sizeof($recs); $c++) {
-                        if ($recsOrdered[$i]['schedulingdate'] > $recs[$c]['schedulingdate']) {
-                            foreach ($recsOrdered as $recToOrdered) {
-                                $guardar = true;
-                                if ($recToOrdered['id'] == $recs[$c]['id']) {
-                                    $guardar = false;
-                                    break;
-                                }
-                            }
-                            if ($guardar) {
-                                $recsOrdered[$i] = $recs[$c];
-                            }
-                        }
-                    }
-                }
+                usort($recs, function ($a, $b){
+                    return strtotime($a['schedulingdate']) - strtotime($b['schedulingdate']);
+                });
             }
-            return $recsOrdered;
+            
+            return $recs;
         }
         throw new ForbiddenHttpException(self::noPermission);
     }
