@@ -64,6 +64,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     private EditText edtxtDescription;
     private boolean edit;
     private Schedule schedule;
+    private String carRegistration;
 
     public Schedules_Appointment() {
         // Required empty public constructor
@@ -118,11 +119,12 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        carRegistration = (car != null)?car.getRegistration():"";
+
         //Titulo da página para post
         getActivity().setTitle(R.string.Schedulesappointment);
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.Schedulesappointment);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         View view = inflater.inflate(R.layout.fragment_schedules__appointment, container, false);
 
@@ -143,6 +145,8 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
         //Verirficar se é para editar schedule
         editSchedule();
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(carRegistration);
 
         return view;
     }
@@ -274,6 +278,8 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
                     spRepairType.setSelection(1);
                     break;
             }
+
+            carRegistration = schedule.getCarInfo(getContext()).get(2);
         }
     }
 

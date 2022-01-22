@@ -64,6 +64,7 @@
     <string name="FailedLogin">Failed login</string>
     <string name="State">State</string>
     <string name="editschedule">Update Schedule</string>
+    <string name="EditTextRequired">Required field</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>
