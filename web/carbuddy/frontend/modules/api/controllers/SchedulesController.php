@@ -205,8 +205,17 @@ class SchedulesController extends ActiveController
                 for ($i = 0; $i < sizeof($recs); $i++) {
                     $recsOrdered[$i] = $recs[$i];
                     for ($c = 0; $c < sizeof($recs); $c++) {
-                        if($recs[$i]->schedulingdate < $recs[$c]->schedulingdate ){
-                            $recsOrdered[$i] = $recs[$i];
+                        if ($recsOrdered[$i]['schedulingdate'] > $recs[$c]['schedulingdate']) {
+                            foreach ($recsOrdered as $recToOrdered) {
+                                $guardar = true;
+                                if ($recToOrdered['id'] == $recs[$c]['id']) {
+                                    $guardar = false;
+                                    break;
+                                }
+                            }
+                            if ($guardar) {
+                                $recsOrdered[$i] = $recs[$c];
+                            }
                         }
                     }
                 }
