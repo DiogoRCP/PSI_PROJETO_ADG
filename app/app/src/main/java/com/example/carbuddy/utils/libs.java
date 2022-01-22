@@ -66,6 +66,7 @@ public class libs {
         spinner.setAdapter(arrayAdapter);
     }
 
+    /** Método para dar efeito de selecionado aos botões do menu **/
     public static void SelectedMainMenu(Activity activity, int btId){
         Button btMainMenuSchedules, btMainMenuGarage, btMainMenuAccount;
         btMainMenuSchedules = activity.findViewById(R.id.btMainSchedules);
