@@ -1,9 +1,10 @@
 --------------------------------------------------------------------------------------------------------------------------
+
 API - Método de Instalação
 1 - Colocar a pasta da API no seu provedor local de servidor APACHE (XAMPP, WAMP, LARAGON)
 
 2 - Executar os seguintes comandos (Dentro do diretório da pasta da API):
-	php init
+	php init (Responder às questões com: 0, Yes, No, No, No, No, No)
 	Composer install
 	Composer update
 
@@ -19,12 +20,14 @@ API - Método de Instalação
 6 - Lançar o servidor MQTT executando o seguinte comando:
 	mosquitto.exe (Dentro do seguinte diretório: C:\ProgramFiles\mosquitto)
 
+--------------------------------------------------------------------------------------------------------------------------
 
 APP - Método de Instalação
 1 - Abrir o Projeto no Android Studio e executar (O gradle vai automáticamente instalar todas as bibliotecas necessárias)
 
 --------------------------------------------------------------------------------------------------------------------------
-Credenciais de Acesso
+
+Credenciais de Acesso (APP)
 
 Utilizadores Previamente Registados na Base de Dados
 Com dados (carros, reparações e agendamentos)
@@ -50,4 +53,5 @@ Password: 12345678
 Cliente
 User: Goncalo12345678
 Password: 12345678
+
 --------------------------------------------------------------------------------------------------------------------------
