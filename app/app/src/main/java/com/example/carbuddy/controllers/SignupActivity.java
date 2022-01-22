@@ -78,9 +78,16 @@ public class SignupActivity extends AppCompatActivity {
                         phonenumber.getText().toString(),
                         password.getText().toString()
                 );
-                form.DoSignup(this);
-                Toast.makeText(getApplicationContext(), getString(R.string.AccountCreated), Toast.LENGTH_SHORT).show();
-                finish();
+                if (!boxesEmptyVerify(username).isEmpty() &&
+                        !boxesEmptyVerify(email).isEmpty() &&
+                        !boxesEmptyVerify(nif).isEmpty() &&
+                        !boxesEmptyVerify(phonenumber).isEmpty() &&
+                        !boxesEmptyVerify(password).isEmpty()
+                ) {
+                    form.DoSignup(this);
+                    Toast.makeText(getApplicationContext(), getString(R.string.AccountCreated), Toast.LENGTH_SHORT).show();
+                    finish();
+                }
 
             } else {
                 Signup form = new Signup(
@@ -96,6 +103,15 @@ public class SignupActivity extends AppCompatActivity {
             //Mensagem de erro a indicar que as passwors não correspondem
             passwordR.setError(getString(R.string.PassDMatch));
         }
+    }
+
+    private String boxesEmptyVerify(EditText box) {
+        if (box.getText().toString().isEmpty()) {
+            box.setError(getString(R.string.EditTextRequired));
+        } else {
+            return box.getText().toString();
+        }
+        return "";
     }
 
     @Override
