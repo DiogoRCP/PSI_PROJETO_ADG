@@ -102,6 +102,7 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         getActivity().setTitle(R.string.Schedules);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Schedules);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(null);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_schedules, container, false);

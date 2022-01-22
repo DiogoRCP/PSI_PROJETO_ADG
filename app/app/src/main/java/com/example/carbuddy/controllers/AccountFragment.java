@@ -116,6 +116,7 @@ public class AccountFragment extends Fragment implements LoginListener {
         getActivity().setTitle(getString(R.string.Account));
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.Account);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         View view = inflater.inflate(R.layout.fragment_account,
                 container, false);
