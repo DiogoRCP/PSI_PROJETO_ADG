@@ -60,7 +60,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             CarregarFragmentoInicial();
         }
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channelRepair = new NotificationChannel("VehicleRepair", "VehicleRepair", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationChannel channelSchedule = new NotificationChannel("VehicleSchedule", "VehicleSchedule", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
@@ -91,70 +91,34 @@ public class Pagina_Inicial extends AppCompatActivity {
     //Both navigation bar back press and title bar back press will trigger this method
     @Override
     public void onBackPressed() {
-        if (fragmentManager.getBackStackEntryCount() > 0) {
-            fragmentManager.popBackStack();
-            if (fragmentManager.getBackStackEntryCount() == 1) {
-                fragmentNumber = 1;
-                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            }
-        }
+        fragmentManager.popBackStack();
     }
 
     public void onClickGaragem(View view) {
-        if (fragmentNumber != 1) {
-            fragment = new fragment_garage();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setTitle(R.string.Garage);
+        fragment = new fragment_garage();
 
-            fragmentNumber = 1;
-
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .addToBackStack("garage")
-                    .commit();
-        } else {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .commit();
-        }
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .addToBackStack("garage")
+                .commit();
     }
 
     public void onClickAccount(View view) {
-        if (fragmentNumber != 2) {
-            fragment = new AccountFragment();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.Account);
+        fragment = new AccountFragment();
 
-            fragmentNumber = 2;
-
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .addToBackStack("Account")
-                    .commit();
-        } else {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .commit();
-        }
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .addToBackStack("Account")
+                .commit();
     }
 
     public void onClickSchedules(View view) {
-        if (fragmentNumber != 3) {
-            fragment = new fragment_schedules();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.Schedules);
+        fragment = new fragment_schedules();
 
-            fragmentNumber = 3;
-
-            fragmentManager.beginTransaction().
-                    replace(R.id.fragmentContainerView, fragment)
-                    .addToBackStack("schedules")
-                    .commit();
-        } else {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .commit();
-        }
+        fragmentManager.beginTransaction().
+                replace(R.id.fragmentContainerView, fragment)
+                .addToBackStack("schedules")
+                .commit();
     }
 
     public void CarregarFragmentoInicial() {

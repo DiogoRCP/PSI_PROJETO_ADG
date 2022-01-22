@@ -95,6 +95,7 @@ public class fragment_garage extends Fragment implements CarsListener {
         getActivity().setTitle(R.string.Garage);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.Garage);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_garage, container, false);
