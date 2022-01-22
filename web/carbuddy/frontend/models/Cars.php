@@ -75,7 +75,7 @@ class Cars extends \yii\db\ActiveRecord
 
     public function getSchedules()
     {
-        return Schedules::find()->where("carId = " . $this->id)->all();
+        return Schedules::find()->where("carId = " . $this->id)->orderBy("schedulingdate")->all();
     }
 
     /**
