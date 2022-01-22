@@ -133,7 +133,7 @@ class RepairsController extends ActiveController
         $CarModel = Cars::findOne($car);
         if ($CarModel->userId === Yii::$app->user->getId()) {
             $Repairssmodel = new $this->modelClass;
-            $recs = $Repairssmodel::find()->where("carId = " . $car)->all();
+            $recs = $Repairssmodel::find()->where("carId = " . $car)->orderBy("repairdate")->all();
             return $recs;
         }
         throw new ForbiddenHttpException(self::noPermission);
