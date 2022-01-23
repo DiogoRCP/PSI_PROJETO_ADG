@@ -1,9 +1,11 @@
 package com.example.carbuddy.models;
 
+/** Modelo User, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString **/
 public class User {
     private int id;
     private String username, userPassword, userType, nif, birthday, phoneNumber, registrationDate;
 
+    /** Construtor do user **/
     public User(int id, String username, String userPassword, String userType, String nif, String birthday, String phoneNumber, String registrationDate) {
         this.id = id;
         this.username = username;
@@ -15,6 +17,7 @@ public class User {
         this.registrationDate = registrationDate;
     }
 
+    //Getters e Setters
     public int getId() {
         return id;
     }
@@ -79,6 +82,7 @@ public class User {
         this.registrationDate = registrationDate;
     }
 
+    /** Redefinição do método toString **/
     @Override
     public String toString() {
         return "User{" +

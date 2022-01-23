@@ -4,11 +4,14 @@ import android.widget.DatePicker;
 
 import java.io.Serializable;
 
+//Com Serializable pois é permitido dar update na APP e foi necessário guardar o objeto
+/** Modelo Login, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString **/
 public class Login implements Serializable {
 
     private int id;
     private String username, email, auth_key, nif, phonenumber, birsthday;
 
+    /** Construtor do Login **/
     public Login(int id, String auth_key, String username, String email, String nif, String phonenumber, String birsthday) {
         this.id = id;
         this.auth_key = auth_key;
@@ -19,6 +22,7 @@ public class Login implements Serializable {
         this.birsthday = birsthday;
     }
 
+    //Getters e Setters
     public int getId() {
         return id;
     }
@@ -71,6 +75,7 @@ public class Login implements Serializable {
         this.birsthday = birsthday;
     }
 
+    /** Redefinição do método toString **/
     @Override
     public String toString() {
         return "Login{" +

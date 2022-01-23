@@ -1,9 +1,11 @@
 package com.example.carbuddy.models;
 
+/** Modelo Company, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString **/
 public class Company {
     private int id;
     private String companyname, nif, email, phonenumber, registrationdate;
 
+    /** Construtor da company **/
     public Company(int id, String companyname, String nif, String email, String phonenumber, String registrationdate) {
         this.id = id;
         this.companyname = companyname;
@@ -13,6 +15,7 @@ public class Company {
         this.registrationdate = registrationdate;
     }
 
+    //Getters e Setters
     public int getId() {
         return id;
     }
@@ -61,6 +64,7 @@ public class Company {
         this.registrationdate = registrationdate;
     }
 
+    /** Redefinição do método toString **/
     @Override
     public String toString() {
         return "Company{" +

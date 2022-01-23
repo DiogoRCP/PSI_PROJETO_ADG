@@ -6,12 +6,15 @@ import android.graphics.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+//Com Serializable pois é permitido dar update na APP e foi necessário guardar o objeto
+/** Modelo Car, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString **/
 public class Car implements Serializable {
     private int id, kilometers, userId, modelyear;
     private String vin, brand, model, color, carType, fuelType, registration, state;
     private float displacement;
     private ArrayList<Repair> repairs;
 
+    /** Construtor do car **/
     public Car(int id, String vin, String brand, String model, String color, String carType, float displacement, String fuelType, String registration, int modelyear, int kilometers, String state, int userId) {
         this.id = id;
         this.kilometers = kilometers;
@@ -45,6 +48,7 @@ public class Car implements Serializable {
         this.state = "Accepted";
     }
 
+    //Getters e Setters
     public int getId() {
         return id;
     }
@@ -157,6 +161,7 @@ public class Car implements Serializable {
         this.repairs = repairs;
     }
 
+    /** Redefinição do método toString **/
     @Override
     public String toString() {
         return "Carro{" +
