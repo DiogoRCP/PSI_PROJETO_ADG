@@ -1,5 +1,6 @@
 package com.example.carbuddy.singletons;
 
+import static com.example.carbuddy.utils.libs.ACCESSTOKEN;
 import static com.example.carbuddy.utils.libs.IP;
 import static com.example.carbuddy.utils.libs.isInternetConnection;
 import static com.example.carbuddy.utils.libs.objectjsonConvert;
@@ -55,7 +56,7 @@ public class LoginSingleton {
 
     public void apiLogin(Context context, final String user, final String pass) throws JSONException {
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
             final String URL_LOGIN = IP + "login/do";
@@ -97,10 +98,10 @@ public class LoginSingleton {
     public void apiAccount(Context context) {
         /* Verificar se existe internet **/
         if (!libs.isInternetConnection(context)) {
-            Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
             System.out.println(IP);
-            final String URL_LOGIN = IP + "user/account?access-token=" + this.getLogin().getToken();
+            final String URL_LOGIN = IP + "user/account" + ACCESSTOKEN(context);
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.GET,
@@ -115,7 +116,7 @@ public class LoginSingleton {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
 

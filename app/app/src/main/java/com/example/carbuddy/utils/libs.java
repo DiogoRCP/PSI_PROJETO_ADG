@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.singletons.LoginSingleton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -24,6 +25,11 @@ public class libs {
 
     /** Definição incial do endpoint da API **/
     public static final String IP = "http://10.0.2.2:8000/api/";
+
+    /** Definição final do endpoint da API **/
+    public static String ACCESSTOKEN(Context context){
+        return "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+    }
 
     /** Função que recebe um objeto e o converte em json **/
     public static String jsonObjectConvert(Object object) {

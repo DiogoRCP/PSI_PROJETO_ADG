@@ -62,4 +62,25 @@
     <string name="FailedLogin">Falha no login</string>
     <string name="editschedule">Atualizar Agendamento</string>
     <string name="EditTextRequired">Campo obrigatório</string>
+
+    <string-array name="fuelType_array">
+        <item>Gasóleo</item>
+        <item>Híbrido</item>
+        <item>Elétrico</item>
+        <item>Gasolina</item>
+    </string-array>
+
+    <string-array name="carType_array">
+        <item>Veículo Ligeiro</item>
+        <item>Veículo de passageiros multiusos</item>
+        <item>Camião</item>
+        <item>Motociclo</item>
+    </string-array>
+
+    <string-array name="repairtype_array">
+        <item>Manutenção</item>
+        <item>Reparação</item>
+    </string-array>
+    <string name="NoInternet">Sem internet</string>
+    <string name="NoConnection">Sem ligação</string>
 </resources>

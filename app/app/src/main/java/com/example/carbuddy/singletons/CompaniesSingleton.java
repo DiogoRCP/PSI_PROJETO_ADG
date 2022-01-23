@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.R;
 import com.example.carbuddy.controllers.CompaniesActivity;
 import com.example.carbuddy.controllers.Schedules_Appointment;
 import com.example.carbuddy.listeners.CompaniesListener;
@@ -59,7 +60,7 @@ public class CompaniesSingleton {
 
     public void CarregarListaCompanies(Context context) {
         if (!libs.isInternetConnection(context)) {
-            Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                     (Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
@@ -81,7 +82,7 @@ public class CompaniesSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
 

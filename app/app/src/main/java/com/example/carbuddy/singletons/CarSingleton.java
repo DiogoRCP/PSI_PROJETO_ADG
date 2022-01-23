@@ -1,5 +1,6 @@
 package com.example.carbuddy.singletons;
 
+import static com.example.carbuddy.utils.libs.ACCESSTOKEN;
 import static com.example.carbuddy.utils.libs.IP;
 import static com.example.carbuddy.utils.libs.isInternetConnection;
 import static com.example.carbuddy.utils.libs.objectjsonConvert;
@@ -66,9 +67,9 @@ public class CarSingleton {
 
     public void CarregarListaCarros(Context context) {
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
-            String url = IP + "cars/carsuser?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "cars/carsuser" + ACCESSTOKEN(context);
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                     (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -89,7 +90,7 @@ public class CarSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -100,10 +101,10 @@ public class CarSingleton {
 
     public void CarregarListaRepairs(Context context, Car car) {
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = IP + "repairs/history/" + car.getId() + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "repairs/history/" + car.getId() + ACCESSTOKEN(context);
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                     (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -127,7 +128,7 @@ public class CarSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.i("Error", error.toString());
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -137,10 +138,10 @@ public class CarSingleton {
 
     public void DeleteCar(Context context, int carId) {
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = IP + "cars/deleted/" + carId + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "cars/deleted/" + carId + ACCESSTOKEN(context);
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
@@ -159,7 +160,7 @@ public class CarSingleton {
                                         Toast.makeText(context, R.string.NotDeleteCar, Toast.LENGTH_SHORT).show();
                                         break;
                                     default:
-                                        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception ex) {
                                 carsListener.onDeleteCreateCar();
@@ -173,10 +174,10 @@ public class CarSingleton {
 
     public void AddCar(Context context, Car car) throws JSONException {
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = IP + "cars/post?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "cars/post" + ACCESSTOKEN(context);
 
             JSONObject carData = new JSONObject();
             carData.put("vin", car.getVin());
@@ -200,7 +201,7 @@ public class CarSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("Error", error.toString());
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -210,10 +211,10 @@ public class CarSingleton {
 
     public void EditCar(Context context, Car car) throws JSONException {
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = IP + "cars/put/" + car.getId() + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "cars/put/" + car.getId() + ACCESSTOKEN(context);
 
             JSONObject carData = new JSONObject();
             carData.put("vin", car.getVin());
@@ -237,7 +238,7 @@ public class CarSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("Error", error.toString());
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
 

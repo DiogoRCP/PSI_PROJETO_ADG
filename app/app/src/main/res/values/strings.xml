@@ -65,6 +65,8 @@
     <string name="State">State</string>
     <string name="editschedule">Update Schedule</string>
     <string name="EditTextRequired">Required field</string>
+    <string name="NoInternet">No internet</string>
+    <string name="NoConnection">No connection</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>
@@ -74,10 +76,10 @@
     </string-array>
 
     <string-array name="carType_array">
-        <item>PASSENGER CAR</item>
-        <item>MULTIPURPOSE PASSENGER VEHICLE (MPV)</item>
-        <item>TRUCK</item>
-        <item>MOTORCYCLE</item>
+        <item>Passenger car</item>
+        <item>Multipurpose passenger vehicle</item>
+        <item>Truck</item>
+        <item>Motorcycle</item>
     </string-array>
 
     <string-array name="repairtype_array">

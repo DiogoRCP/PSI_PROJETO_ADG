@@ -1,5 +1,6 @@
 package com.example.carbuddy.models;
 
+import static com.example.carbuddy.utils.libs.ACCESSTOKEN;
 import static com.example.carbuddy.utils.libs.IP;
 import static com.example.carbuddy.utils.libs.isInternetConnection;
 
@@ -13,7 +14,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.R;
 import com.example.carbuddy.singletons.LoginSingleton;
+import com.example.carbuddy.utils.libs;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -122,7 +125,7 @@ public class Signup {
 
         // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         }
         // Se houver internet executa o código de POST do user
         else {
@@ -151,7 +154,7 @@ public class Signup {
                         // Quando o pedido não é executado corretamente (Erro)
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("VOLLEY", error.toString());
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
             // Adicionar pedido à fila
@@ -163,14 +166,14 @@ public class Signup {
     public void updateAccount(Context context) throws JSONException {
         // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         }
         // Se houver internet executa o código de PUT do user
         else {
             // cria um request em volley
             RequestQueue queue = Volley.newRequestQueue(context);
             // indicação do URL do endpoint da API
-            String url = IP + "user/put?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "user/put" + ACCESSTOKEN(context);
             // Colocar os dados do PUT no jsonObject
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("email", this.getEmail());
@@ -189,7 +192,7 @@ public class Signup {
                         // Quando o pedido não é executado corretamente (Erro)
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("VOLLEY", error.toString());
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
             // Adicionar pedido à fila

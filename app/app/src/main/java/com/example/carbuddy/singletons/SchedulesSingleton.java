@@ -1,5 +1,6 @@
 package com.example.carbuddy.singletons;
 
+import static com.example.carbuddy.utils.libs.ACCESSTOKEN;
 import static com.example.carbuddy.utils.libs.IP;
 import static com.example.carbuddy.utils.libs.isInternetConnection;
 import static com.example.carbuddy.utils.libs.objectjsonConvert;
@@ -15,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.carbuddy.R;
 import com.example.carbuddy.controllers.CompaniesActivity;
 import com.example.carbuddy.controllers.Schedules_Appointment;
 import com.example.carbuddy.controllers.fragment_schedules;
@@ -62,9 +64,9 @@ public class SchedulesSingleton {
 
     public void CarregarListaSchedules(Context context) {
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
-            final String URL = IP + "schedules/getschedulesclient?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            final String URL = IP + "schedules/getschedulesclient" + ACCESSTOKEN(context);
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                     (Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
                         @Override
@@ -85,7 +87,7 @@ public class SchedulesSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -95,10 +97,10 @@ public class SchedulesSingleton {
 
     public void AddSchedule(Context context, Schedule schedule) throws JSONException {
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = IP + "schedules/post?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "schedules/post" + ACCESSTOKEN(context);
 
             JSONObject scheduleData = new JSONObject();
             scheduleData.put("schedulingdate", schedule.getSchedulingdate());
@@ -116,7 +118,7 @@ public class SchedulesSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("Error", error.toString());
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -126,10 +128,10 @@ public class SchedulesSingleton {
 
     public void PutSchedule(Context context, Schedule schedule) throws JSONException {
         if (!isInternetConnection(context)) {
-            Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
         } else {
             RequestQueue queue = Volley.newRequestQueue(context);
-            String url = IP + "schedules/putclient/" + schedule.getId() + "?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            String url = IP + "schedules/putclient/" + schedule.getId() + ACCESSTOKEN(context);
 
             JSONObject scheduleData = new JSONObject();
             scheduleData.put("schedulingdate", schedule.getSchedulingdate());
@@ -145,7 +147,7 @@ public class SchedulesSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.e("Error", error.toString());
+                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
 
