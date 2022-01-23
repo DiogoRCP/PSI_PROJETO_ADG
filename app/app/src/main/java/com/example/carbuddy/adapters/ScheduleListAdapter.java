@@ -21,18 +21,21 @@ import com.example.carbuddy.models.Schedule;
 
 import java.util.ArrayList;
 
+/** Adapter- ligação entre a view e o modelo SCHEDULE**/
 public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapter.MyViewHolder> {
 
     private Context context;
     private ArrayList<Schedule> listaSchedules;
     private FragmentManager manager;
 
+    /** Recebe os dados e dispõe-nos no recycler view **/
     public ScheduleListAdapter(Context context, ArrayList<Schedule> listaSchedules, FragmentManager manager) {
         this.context = context;
         this.listaSchedules = listaSchedules;
         this.manager = manager;
     }
 
+    /** Inflater da View **/
     @NonNull
     @Override
     public ScheduleListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,7 +45,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
         return vHolder;
     }
 
-
+    /** Carregar os dados na view **/
     @Override
     public void onBindViewHolder(@NonNull ScheduleListAdapter.MyViewHolder holder, int position) {
         holder.textViewSchedulingDate.setText(listaSchedules.get(position).getSchedulingdate());
@@ -53,11 +56,13 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
         holder.listaSchedules = this.listaSchedules;
     }
 
+    /** Contar o número de schedules **/
     @Override
     public int getItemCount() {
         return listaSchedules.size();
     }
 
+    /** Associar a cada item da recycler view os dados da repair **/
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         private ArrayList<Schedule> listaSchedules;
 
@@ -77,6 +82,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
             this.manager = manager;
 
             llschedules.setOnClickListener(new View.OnClickListener() {
+                /** Onclick que levas os dados num bundle para a edição de schedules **/
                 @Override
                 public void onClick(View view) {
                     fragment = new Schedules_Appointment();
