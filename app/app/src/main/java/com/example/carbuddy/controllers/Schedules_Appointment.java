@@ -101,7 +101,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             car = (Car) bundle.getSerializable("car");
-            if(bundle.getSerializable("schedule") != null){
+            if (bundle.getSerializable("schedule") != null) {
                 schedule = (Schedule) bundle.getSerializable("schedule");
                 edit = true;
             }
@@ -119,7 +119,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        carRegistration = (car != null)?car.getRegistration():"";
+        carRegistration = (car != null) ? car.getRegistration() : "";
 
         //Titulo da página para post
         getActivity().setTitle(R.string.Schedulesappointment);
@@ -222,7 +222,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
                 if (verificarDescricao()) {
 
                     //POST
-                    if(!edit) {
+                    if (!edit) {
                         Schedule schedules = new Schedule(schedule.getCarId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
 
                         try {
@@ -255,8 +255,8 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         return true;
     }
 
-    public void editSchedule(){
-        if(edit){
+    public void editSchedule() {
+        if (edit) {
             getActivity().setTitle(R.string.editschedule);
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.editschedule);
             ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
@@ -264,13 +264,22 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
             spCompany.setVisibility(View.GONE);
             btSubmit.setText(R.string.editschedule);
 
-            //Carregar o fragmento com os dados da schedule
-            tvDate.setText(schedule.getDateTime()[0]);
-            tvHour.setText(schedule.getDateTime()[1]);
+            // Atualizar a data e hora do objeto myCalendar
+            myCalendar.set(schedule.getDateTime().get(0),
+                    schedule.getDateTime().get(1),
+                    schedule.getDateTime().get(2),
+                    schedule.getDateTime().get(3),
+                    schedule.getDateTime().get(4),
+                    schedule.getDateTime().get(5));
+
+            // Atualizar textviews da data e hora mediante a objeto myCalendar.
+            updateLabelDate();
+            updateLabelHour();
+
             edtxtDescription.setText(schedule.getRepairdescription());
 
             //carregar o spinner do repair type quando for edit
-            switch (schedule.getRepairtype()){
+            switch (schedule.getRepairtype()) {
                 case "Maintenance":
                     spRepairType.setSelection(0);
                     break;

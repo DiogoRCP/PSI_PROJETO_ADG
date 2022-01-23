@@ -20,12 +20,14 @@ import com.example.carbuddy.models.Car;
 
 import java.util.ArrayList;
 
+/** Adapter- ligação entre a view e o modelo CAR**/
 public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<Car> listaCarros;
     private FragmentManager manager;
     private ActionBar actionbar;
 
+    /** Recebe os dados e dispõe-nos no recycler view **/
     public CarListAdapter(Context context, ArrayList<Car> listaCarros, FragmentManager manager, ActionBar actionBar) {
         this.context = context;
         this.listaCarros = listaCarros;
@@ -33,6 +35,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         this.actionbar = actionBar;
     }
 
+    /** Inflater da View **/
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,6 +45,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         return vHolder;
     }
 
+    /** Carregar os dados na view **/
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.listaCarros = this.listaCarros;
@@ -51,6 +55,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         chooseTypeColor(holder, position);
     }
 
+    /** Apresentar o ícone do carro consoante o tipo de carro **/
     private void chooseTypeColor(MyViewHolder holder, int position) {
         switch (listaCarros.get(position).getCartype()) {
             case "PASSENGER CAR":
@@ -71,11 +76,13 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         holder.imgView.setColorFilter(Color.parseColor(listaCarros.get(position).getColor()));
     }
 
+    /** Contar o número de carros **/
     @Override
     public int getItemCount() {
         return listaCarros.size();
     }
 
+    /** Associar a cada item da recycler view os dados da lista carros **/
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ArrayList<Car> listaCarros;
         private TextView tvRegistration, tvBrand, tvModel;
@@ -84,6 +91,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         FragmentManager manager;
         ActionBar actionBar;
 
+        /** Associar a cada item da recycler view os dados da lista carros **/
         public MyViewHolder(@NonNull View itemView, FragmentManager manager, ActionBar actionBar) {
             super(itemView);
 
@@ -97,6 +105,8 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
 
         }
 
+        //É obrigatório implemnetar o onclick pois o myviewholder tem "implements View.OnClickListener"
+        /** Enviar os dados do carro selecionado para o fragmento de informações do carro utilizando um bundle **/
         @Override
         public void onClick(View v) {
             actionBar.setDisplayHomeAsUpEnabled(true);
