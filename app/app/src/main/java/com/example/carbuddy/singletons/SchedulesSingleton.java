@@ -72,7 +72,7 @@ public class SchedulesSingleton {
         else {
             // indicação do URL do endpoint da API
             final String URL = IP + "schedules/getschedulesclient" + ACCESSTOKEN(context);
-            // cria um request JsonArrayRequest
+            // cria um request JsonArrayRequest GET
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                     (Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
                         @Override
@@ -99,6 +99,7 @@ public class SchedulesSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            //Mensagem de erro
                             Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -127,49 +128,61 @@ public class SchedulesSingleton {
             scheduleData.put("carId", schedule.getCarId());
             scheduleData.put("companyId", schedule.getCompanyId());
 
+            // cria um request JsonObjectRequest POST
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.POST, url, scheduleData, new Response.Listener<JSONObject>() {
+                        //Chamar o listener para lançar a função existente no Schedules_Appointment
                         @Override
                         public void onResponse(JSONObject response) {
                             schedulesListener.onDeleteCreateSchedule();
                         }
                     }, new Response.ErrorListener() {
+                        //Mensagem de erro
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
-
+            // Adicionar pedido à fila
             queue.add(jsonObjectRequest);
         }
     }
 
     /** Função que faz PUT de uma schedule **/
     public void PutSchedule(Context context, Schedule schedule) throws JSONException {
+        // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
             Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        // Se houver internet executa o código de PUT de schedules
+        else {
+            //Criação de um novo request
             RequestQueue queue = Volley.newRequestQueue(context);
+            // indicação do URL do endpoint da API
             String url = IP + "schedules/putclient/" + schedule.getId() + ACCESSTOKEN(context);
 
+            //Criação de um jsonobject com os dados provenientes do fragment shcedules appointmenmt edit
             JSONObject scheduleData = new JSONObject();
             scheduleData.put("schedulingdate", schedule.getSchedulingdate());
             scheduleData.put("repairdescription", schedule.getRepairdescription());
             scheduleData.put("repairtype", schedule.getRepairtype());
 
+            // cria um request JsonObjectRequest PUT
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.PUT, url, scheduleData, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            //Chamar o listener para lançar a função existente no Schedules_Appointment
                             schedulesListener.onDeleteCreateSchedule();
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            //Mensagem de erro
                             Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
-
+            // Adicionar pedido à fila
             queue.add(jsonObjectRequest);
         }
     }

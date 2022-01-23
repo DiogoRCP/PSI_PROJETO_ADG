@@ -46,6 +46,8 @@ public class CarSingleton {
     private CarsListener carsListener = null;
     private RepairsListener repairsListener = null;
 
+    /** Responsável por fazer com que se crie só uma unica vez a instância
+     Caso haja uma instância, a mesma é retornada **/
     public static synchronized CarSingleton getInstance(Context context) {
         if (instancia == null) {
             instancia = new CarSingleton(context);
@@ -54,6 +56,7 @@ public class CarSingleton {
         return instancia;
     }
 
+    /** Construtor da Class CarSingleton **/
     public CarSingleton(Context context) {
         database = new ModeloBDHelper(context);
         cars = new ArrayList<>();
@@ -65,45 +68,64 @@ public class CarSingleton {
         }
     }
 
+    /** Função que faz GET das carros **/
     public void CarregarListaCarros(Context context) {
+        // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
             Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        // Se houver internet executa o código de obtenção de carros
+        else {
+            // URL do endpoint da API
             String url = IP + "cars/carsuser" + ACCESSTOKEN(context);
-
+            // cria um request JsonArrayRequest GET
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                     (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
+                            //Limpa a lista de carros
                             cars.clear();
+                            //Ciclo for para receber todos os carros e 1 a 1 adicioná-la à lista carros
                             for (int i = 0; i < response.length(); i++) {
                                 try {
+                                    //Receber um objeto carro na posição i
                                     JSONObject resp = response.getJSONObject(i);
+                                    //Converter o json em objeto
                                     Car car = (Car) objectjsonConvert(resp, Car.class);
+                                    //Adicionar o carro na posição i à lista depois de convertida para objeto
                                     cars.add(car);
                                 } catch (JSONException e) {
+                                    //Exception
                                     e.printStackTrace();
                                 }
                             }
+                            //Chamar o listener
                             carsListener.onRefreshCars(cars);
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            //Mensagem de erro
                             Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                         }
                     });
-
+            // Adicionar pedido à fila
             volleyQueue.add(jsonArrayRequest);
 
         }
     }
 
+    /** Função que faz GET das reparações de um carro **/
     public void CarregarListaRepairs(Context context, Car car) {
+        // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
             Toast.makeText(context, R.string.NoInternet, Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        // Se houver internet executa o código de obtenção de repairs
+        else {
+            //criação de um request
             RequestQueue queue = Volley.newRequestQueue(context);
+            // URL do endpoint da API
             String url = IP + "repairs/history/" + car.getId() + ACCESSTOKEN(context);
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
