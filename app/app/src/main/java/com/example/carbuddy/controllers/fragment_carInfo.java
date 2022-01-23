@@ -36,6 +36,10 @@ import java.util.ArrayList;
  * Use the {@link fragment_carInfo#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/** extends Fragment - herança de classe do Fragmento
+ * implements DeleteDialogListener, CarsListener - implementação do Listener
+ * */
 public class fragment_carInfo extends Fragment implements DeleteDialogListener, CarsListener {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -44,6 +48,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    /** Definição das variáveis globais*/
     private String mParam1;
     private String mParam2;
     private Car car;
@@ -51,6 +56,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
     private ImageView imageCar;
     private TextView txtVin, txtBrand, txtModel, txtRegistration, txtCarType, txtFuelType, txtDisplacement, txtModelYear, txtKilometers;
 
+    /** Construtor do fragmento em vazio - requerido pelo programa*/
     public fragment_carInfo() {
         // Required empty public constructor
     }
@@ -64,6 +70,8 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
      * @return A new instance of fragment fragment_carInfo.
      */
     // TODO: Rename and change types and number of parameters
+
+    /** Método de criação de uma nova instância do fragmento */
     public static fragment_carInfo newInstance(String param1, String param2) {
         fragment_carInfo fragment = new fragment_carInfo();
         Bundle args = new Bundle();
@@ -73,6 +81,11 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         return fragment;
     }
 
+    /** Função onCreate
+     * - provém da extensão do Fragment
+     * - Inicialização dos argumentos da instância criada anteriormente
+     * - setHasOptionsMenu(true): Função necessária para conseguirmos ter acesso ao menu existente
+     * */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,12 +105,18 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         CarSingleton.getInstance(getContext()).setDeleteListener(this);
     }
 
+    /** Função necessária para conseguirmos ter acesso ao menu existente */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.car_repair, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /** - Função que permite gerar uma ação ao clicar no item do menu
+     *  - Identificação do item do menu
+     *  - Criação de um novo intent para inicializar a ação do menu neste fragmento
+     *  - Aceder ás activities
+     * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Fragment fragment;
@@ -143,6 +162,10 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         return super.onOptionsItemSelected(item);
     }
 
+    /** Função onCreateView
+     * - Gerar a view e tudo o que é visual
+     * - Associar o layout FragmentAccount ao objeto view
+     * - Definição de título */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -159,6 +182,8 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         return view;
     }
 
+
+     /** - Definição e chamada de textviews */
     private void writeForm(View view){
         imageCar = view.findViewById(R.id.imageViewCar);
         txtVin = view.findViewById(R.id.textViewVin);
