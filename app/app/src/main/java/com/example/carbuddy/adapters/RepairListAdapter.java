@@ -15,16 +15,19 @@ import com.example.carbuddy.models.Repair;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 
+/** Adapter- ligação entre a view e o modelo REPAIR**/
 public class RepairListAdapter extends RecyclerView.Adapter<RepairListAdapter.MyViewHolder> {
 
     private Context context;
     private ArrayList<Repair> listaRepairs;
 
+    /** Recebe os dados e dispõe-nos no recycler view **/
     public RepairListAdapter(Context context, ArrayList<Repair> listaRepairs) {
         this.context = context;
         this.listaRepairs = listaRepairs;
     }
 
+    /** Inflater da View **/
     @NonNull
     @Override
     public RepairListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,7 +37,7 @@ public class RepairListAdapter extends RecyclerView.Adapter<RepairListAdapter.My
         return vHolder;
     }
 
-
+    /** Carregar os dados na view **/
     @Override
     public void onBindViewHolder(@NonNull RepairListAdapter.MyViewHolder holder, int position) {
         holder.textViewRepairDate.setText(listaRepairs.get(position).getRepairDate());
@@ -44,11 +47,13 @@ public class RepairListAdapter extends RecyclerView.Adapter<RepairListAdapter.My
         holder.textViewRepairState.setText(listaRepairs.get(position).getState());
     }
 
+    /** Contar o número de reparações **/
     @Override
     public int getItemCount() {
         return listaRepairs.size();
     }
 
+    /** Associar a cada item da recycler view os dados da repair **/
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textViewRepairDate, textViewRepairType, textViewRepairDescp, textViewRepairKm, textViewRepairState;

@@ -15,6 +15,7 @@ import com.example.carbuddy.models.Company;
 
 import java.util.ArrayList;
 
+/** Adapter- ligação entre a view e o modelo COMPANY**/
 public class CompanyListAdapter extends RecyclerView.Adapter<CompanyListAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<Company> listaCompanies;
@@ -25,6 +26,7 @@ public class CompanyListAdapter extends RecyclerView.Adapter<CompanyListAdapter.
         this.listaCompanies = listaCompanies;
     }
 
+    /** Inflater da View **/
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,18 +36,20 @@ public class CompanyListAdapter extends RecyclerView.Adapter<CompanyListAdapter.
         return vHolder;
     }
 
+    /** Carregar os dados na view **/
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.textViewCompanyNameValue.setText(listaCompanies.get(position).getCompanyName());
     }
 
-
+    /** Contar o número de empresas **/
     @Override
     public int getItemCount() {
         return listaCompanies.size();
     }
 
+    /** Associar a cada item da recycler view o nome de uma empresa **/
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewCompanyNameValue;
