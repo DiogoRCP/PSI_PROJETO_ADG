@@ -16,13 +16,23 @@ import com.example.carbuddy.models.ModeloBDHelper;
 
 import java.util.ArrayList;
 
-
+/** extends Fragment - herança de classe do Fragmento
+ * implements CompaniesListener - implementação do Listener
+ * */
 public class CompaniesActivity extends AppCompatActivity implements CompaniesListener {
 
+    /** Definição das variáveis globais*/
     private RecyclerView myRecyclerView;
     private ArrayList<Company> lstCompany;
     private ModeloBDHelper database;
 
+    /** Função onCreate
+     * - provém da extensão do AppCompatActivity
+     * - Gerar a view e tudo o que é visual
+     * - Conexão à base de dados
+     * - Declaração da RecyclerView
+     * - Atribuição do adaptador
+     * */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_companies);
@@ -34,10 +44,10 @@ public class CompaniesActivity extends AppCompatActivity implements CompaniesLis
 
         database = new ModeloBDHelper(this);
 
-        // Instanciar singleton
+        //Define o fragmento onde é disparado o listener
         CompaniesSingleton.getInstance(this).setCompaniesListener(this);
 
-        // Carregar dados da api
+        //Carregar a Singleton com os Dados da API
         CompaniesSingleton.getInstance(this).CarregarListaCompanies(this);
 
         //Carrega os dados do Singleton provenientes da base de dados
@@ -50,6 +60,10 @@ public class CompaniesActivity extends AppCompatActivity implements CompaniesLis
 
     }
 
+    /** - Função que permite gerar uma ação ao clicar no item do menu
+     *  - Identificação do item do menu
+     *  - Aceder ao main page
+     * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -61,6 +75,11 @@ public class CompaniesActivity extends AppCompatActivity implements CompaniesLis
         return super.onOptionsItemSelected(item);
     }
 
+
+    /** Função onRefreshCompanies
+     * Vai buscar as companies à base de dados
+     * Mostra os dados na recyclerview
+     * */
     @Override
     public void onRefreshCompanies(ArrayList<Company> companies) {
         for (Company company: companies) {
