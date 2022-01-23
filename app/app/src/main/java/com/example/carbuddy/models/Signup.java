@@ -21,7 +21,9 @@ import com.example.carbuddy.utils.libs;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/** Modelo Singup, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString **/
+/**
+ * Modelo Singup, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString
+ **/
 public class Signup {
     String username;
     String email;
@@ -30,7 +32,9 @@ public class Signup {
     String phonenumber;
     String password;
 
-    /** Construtor do modelo singup quando se faz o registo de um user **/
+    /**
+     * Construtor do modelo singup quando se faz o registo de um user
+     **/
     public Signup(String username, String email, String nif, String birsthday, String phonenumber, String password) {
         this.username = username;
         this.email = email;
@@ -40,7 +44,9 @@ public class Signup {
         this.password = password;
     }
 
-    /** Construtor do modelo singup quando se faz o update de um user **/
+    /**
+     * Construtor do modelo singup quando se faz o update de um user
+     **/
     public Signup(String email, String password) {
         this.username = "";
         this.email = email;
@@ -99,7 +105,9 @@ public class Signup {
         this.password = password;
     }
 
-    /** Redefinição do método toString **/
+    /**
+     * Redefinição do método toString
+     **/
     @Override
     public String toString() {
         return "Signup{" +
@@ -112,7 +120,9 @@ public class Signup {
                 '}';
     }
 
-    /** Método utilizado para verificar se as duas password introduzidas no registo e update são iguais **/
+    /**
+     * Método utilizado para verificar se as duas password introduzidas no registo e update são iguais
+     **/
     public static boolean PasswordVerify(String password1, String password2) {
         if (password1.matches(password2)) {
             return true;
@@ -120,7 +130,9 @@ public class Signup {
         return false;
     }
 
-    /** Método que efetua o registo de um utilizador **/
+    /**
+     * Método que efetua o registo de um utilizador
+     **/
     public void DoSignup(Context context) throws JSONException {
 
         // Se não houver conexão à internet mostra mensagem de erro
@@ -162,7 +174,9 @@ public class Signup {
         }
     }
 
-    /** Método que efetua o atualização de um utilizador **/
+    /**
+     * Método que efetua o atualização de um utilizador
+     **/
     public void updateAccount(Context context) throws JSONException {
         // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {

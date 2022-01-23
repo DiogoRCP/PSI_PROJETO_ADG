@@ -82,10 +82,10 @@ public class RepairFragment extends Fragment implements RepairsListener{
             car = null;
         }
 
-        //Instanciar a Singleton
+        //Define o fragmento onde é disparado o listener
         CarSingleton.getInstance(getContext()).setRepairsListener(this);
 
-        //Carregar os Dados da API
+        //Carregar a Singleton com os dados da API
         CarSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), car);
 
         if(CarSingleton.getInstance(getContext()).getRepairs(car) != null) {

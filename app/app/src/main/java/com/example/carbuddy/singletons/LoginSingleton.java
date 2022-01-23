@@ -92,15 +92,20 @@ public class LoginSingleton {
                         // Quando o pedido não é executado corretamente (Mostrar Erro)
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            String mensagem = "";
-                            switch (error.networkResponse.statusCode){
-                                case 401:
-                                    mensagem = context.getResources().getString(R.string.FailedLogin);
-                                    break;
-                                default:
-                                    mensagem = context.getResources().getString(R.string.Error);
+                            String message = "";
+                            if(error.networkResponse != null) {
+                                switch (error.networkResponse.statusCode) {
+                                    case 401:
+                                        message = context.getResources().getString(R.string.FailedLogin);
+                                        break;
+                                    default:
+                                        message = context.getResources().getString(R.string.Error);
+                                }
+
+                            }else{
+                                message = context.getResources().getString(R.string.NoConnection);
                             }
-                            Toast.makeText(context, mensagem, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                         }
                     });
             // Adicionar pedido à fila
