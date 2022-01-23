@@ -21,7 +21,9 @@ import com.example.carbuddy.models.Login;
 import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.singletons.LoginSingleton;
 
-
+/** extends Fragment - herança de classe do Fragmento
+ * implements LoginListener - implementação do Listener
+ * */
 public class AccountFragment extends Fragment implements LoginListener {
 
     /**
@@ -36,12 +38,14 @@ public class AccountFragment extends Fragment implements LoginListener {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    /** Definição das variáveis globais*/
     private String mParam1;
     private String mParam2;
     private ModeloBDHelper database;
     private Login login;
     public TextView textViewAccUserName, textViewAccEmail, textViewNif, textViewBirthday, textViewPhoneNumber;
 
+    /** Construtor do fragmento em vazio - requerido pelo programa*/
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -55,6 +59,8 @@ public class AccountFragment extends Fragment implements LoginListener {
      * @return A new instance of fragment RepairFragment.
      */
     // TODO: Rename and change types and number of parameters
+
+    /** Método de criação de uma nova instância do fragmento */
     public static com.example.carbuddy.controllers.AccountFragment newInstance(String param1, String param2) {
         com.example.carbuddy.controllers.AccountFragment fragment = new com.example.carbuddy.controllers.AccountFragment();
         Bundle args = new Bundle();
@@ -64,6 +70,13 @@ public class AccountFragment extends Fragment implements LoginListener {
         return fragment;
     }
 
+    /** Função onCreate
+     * - provém da extensão do Fragment
+     * - Inicialização dos argumentos da instância criada anteriormente
+     * - Conexão à base de dados
+     * - carregarDados(): Inicializa a Singleton
+     * - setHasOptionsMenu(true): Função necessária para conseguirmos ter acesso ao menu existente
+     * */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,23 +91,31 @@ public class AccountFragment extends Fragment implements LoginListener {
         setHasOptionsMenu(true);
     }
 
+    /** Inicializa a Singleton */
     private void carregarDados() {
-        //Instanciar a Singleton
+
+        //Define o fragmento onde é disparado o listener
         LoginSingleton.getInstance(getContext()).setLoginListenerAccount(this);
 
-        //Carregar os Dados da API
+        //Carregar a Singleton com os Dados da API
         LoginSingleton.getInstance(getContext()).apiAccount(getContext());
 
         //Variavel fica inicialmente carregada com o Singleton
         login = LoginSingleton.getInstance(getContext()).getLogin();
     }
 
+    /** Função necessária para conseguirmos ter acesso ao menu existente */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.account, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /** - Função que permite gerar uma ação ao clicar no item do menu
+     *  - Identificação do item do menu
+     *  - Criação de um novo intent para inicializar a ação do menu neste fragmento
+     *  - Aceder ao activity signup para edição da conta
+     * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -109,6 +130,13 @@ public class AccountFragment extends Fragment implements LoginListener {
         return super.onOptionsItemSelected(item);
     }
 
+    /** Função onCreateView
+     * - Gerar a view e tudo o que é visual
+     * - Associar o layout FragmentAccount ao objeto view
+     * - Definição de título
+     * - Definição e chamada de textviews
+     * - Definição e chamada de botão
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -138,6 +166,7 @@ public class AccountFragment extends Fragment implements LoginListener {
         return view;
     }
 
+    /** Validação dos dados de conta */
     @Override
     public void onValidateLogin(Login login) {
         //Atualizar o objeto login com a API
@@ -148,6 +177,7 @@ public class AccountFragment extends Fragment implements LoginListener {
         updateAccount();
     }
 
+    /** Passa os dados do objeto login para o design */
     private void updateAccount() {
         textViewAccUserName.setText(login.getUsername());
         textViewAccEmail.setText(login.getEmail());
@@ -156,6 +186,11 @@ public class AccountFragment extends Fragment implements LoginListener {
         textViewPhoneNumber.setText(login.getPhonenumber());
     }
 
+    /** Função onResume
+     * - atualizar os dados quando a view entra no estado onResume
+     * - quando alteramos um dado e retornamos para a página anterior (que estava on pause anteriormente)
+     * irá fazer onResume e atualizar automaticamente os dados
+     * */
     @Override
     public void onResume() {
         super.onResume();
