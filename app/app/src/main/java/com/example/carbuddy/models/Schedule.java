@@ -8,10 +8,13 @@ import com.example.carbuddy.singletons.CompaniesSingleton;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+//Com Serializable pois é permitido dar update na APP e foi necessário guardar o objeto
+/** Modelo Schedule, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString **/
 public class Schedule implements Serializable {
     private int id, carId, companyId;
     private String currentdate, schedulingdate, repairdescription, state, repairtype;
 
+    /** Construtor do schedule **/
     public Schedule(int id, int carId, String currentdate, String schedulingdate, String repairdescription, String state, String repairtype,  int companyId) {
         this.id = id;
         this.carId = carId;
@@ -35,6 +38,7 @@ public class Schedule implements Serializable {
         this.repairtype = repairType;
     }
 
+    //Getters e Setters
     public int getId() {
         return id;
     }
@@ -99,6 +103,8 @@ public class Schedule implements Serializable {
         this.companyId = companyId;
     }
 
+
+    /** Método que obtem o Id de uma empresa ao receber o seu nome **/
     private int checkCompanyIdByName(String name, Context context){
         int CompId = 0;
         for (Company company : CompaniesSingleton.getInstance(context).getCompanies()) {
@@ -109,6 +115,7 @@ public class Schedule implements Serializable {
         return CompId;
     }
 
+    /** Método que retorena o nome de uma empresa**/
     public String getCompanyName(Context context){
         for (Company company : CompaniesSingleton.getInstance(context).getCompanies()) {
             if(company.getId() == this.companyId)
@@ -139,6 +146,7 @@ public class Schedule implements Serializable {
         return dateTime;
     }
 
+    /** Redefinição do método toString **/
     @Override
     public String toString() {
         return "Schedule{" +

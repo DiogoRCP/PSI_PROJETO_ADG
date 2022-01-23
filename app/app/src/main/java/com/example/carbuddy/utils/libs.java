@@ -22,8 +22,10 @@ import java.util.ArrayList;
 
 public class libs {
 
+    /** Definição incial do endpoint da API **/
     public static final String IP = "http://10.0.2.2:8000/api/";
 
+    /** Função que recebe um objeto e o converte em json **/
     public static String jsonObjectConvert(Object object) {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
@@ -33,6 +35,7 @@ public class libs {
         return gson.toJson(object);
     }
 
+    /** Função que recebe um json e o converte em objeto **/
     public static Object objectjsonConvert(JSONObject json, Class objectClass){
         Object object = new Object();
 
@@ -46,6 +49,7 @@ public class libs {
         return object;
     }
 
+    /** Função que verifica a conexão à internet **/
     public static boolean isInternetConnection(Context context){
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();

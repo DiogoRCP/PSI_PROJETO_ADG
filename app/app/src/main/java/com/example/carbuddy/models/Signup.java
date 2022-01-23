@@ -18,6 +18,7 @@ import com.example.carbuddy.singletons.LoginSingleton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/** Modelo Singup, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString **/
 public class Signup {
     String username;
     String email;
@@ -26,6 +27,7 @@ public class Signup {
     String phonenumber;
     String password;
 
+    /** Construtor do modelo singup quando se faz o registo de um user **/
     public Signup(String username, String email, String nif, String birsthday, String phonenumber, String password) {
         this.username = username;
         this.email = email;
@@ -35,6 +37,7 @@ public class Signup {
         this.password = password;
     }
 
+    /** Construtor do modelo singup quando se faz o update de um user **/
     public Signup(String email, String password) {
         this.username = "";
         this.email = email;
@@ -44,6 +47,7 @@ public class Signup {
         this.password = password;
     }
 
+    //Getters e Setters
     public String getUsername() {
         return username;
     }
@@ -92,6 +96,7 @@ public class Signup {
         this.password = password;
     }
 
+    /** Redefinição do método toString **/
     @Override
     public String toString() {
         return "Signup{" +
@@ -104,6 +109,7 @@ public class Signup {
                 '}';
     }
 
+    /** Método utilizado para verificar se as duas password introduzidas no registo e update são iguais **/
     public static boolean PasswordVerify(String password1, String password2) {
         if (password1.matches(password2)) {
             return true;
@@ -111,13 +117,20 @@ public class Signup {
         return false;
     }
 
+    /** Método que efetua o registo de um utilizador **/
     public void DoSignup(Context context) throws JSONException {
 
+        // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
             Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        // Se houver internet executa o código de POST do user
+        else {
+            // cria um request em volley
             RequestQueue queue = Volley.newRequestQueue(context);
+            // indicação do URL do endpoint da API
             String url = IP + "signup/post";
+            // Colocar os dados do POST no jsonObject
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("username", this.getUsername());
             jsonBody.put("email", this.getEmail());
@@ -126,46 +139,60 @@ public class Signup {
             jsonBody.put("password", this.getPassword());
             jsonBody.put("birsthday", this.getBirsthday());
 
+            // cria um request JsonObjectRequest
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                        // Quando o pedido é executado corretamente
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.i("VOLLEY", response.toString());
                         }
                     }, new Response.ErrorListener() {
+                        // Quando o pedido não é executado corretamente (Erro)
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.e("VOLLEY", error.toString());
                         }
                     });
-
+            // Adicionar pedido à fila
             queue.add(jsonObjectRequest);
         }
     }
 
+    /** Método que efetua o atualização de um utilizador **/
     public void updateAccount(Context context) throws JSONException {
+        // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
             Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        // Se houver internet executa o código de PUT do user
+        else {
+            // cria um request em volley
             RequestQueue queue = Volley.newRequestQueue(context);
+            // indicação do URL do endpoint da API
             String url = IP + "user/put?access-token=" + LoginSingleton.getInstance(context).getLogin().getToken();
+            // Colocar os dados do PUT no jsonObject
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("email", this.getEmail());
+            // Colocar a password no jsonObject se a mesma na for vazia
             if (!this.getPassword().equals("")) jsonBody.put("password", this.getPassword());
             System.out.println(jsonBody.toString());
+            // cria um request JsonObjectRequest
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.PUT, url, jsonBody, new Response.Listener<JSONObject>() {
+                        // Quando o pedido é executado corretamente
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.i("VOLLEY", response.toString());
                         }
                     }, new Response.ErrorListener() {
+                        // Quando o pedido não é executado corretamente (Erro)
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.e("VOLLEY", error.toString());
                         }
                     });
-
+            // Adicionar pedido à fila
             queue.add(jsonObjectRequest);
         }
     }
