@@ -29,6 +29,10 @@ import java.util.ArrayList;
  * Use the {@link fragment_garage#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/** extends Fragment - herança de classe do Fragmento
+ * implements CarsListener - implementação do Listener
+ * */
 public class fragment_garage extends Fragment implements CarsListener {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -37,6 +41,7 @@ public class fragment_garage extends Fragment implements CarsListener {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    /** Definição das variáveis globais*/
     private String mParam1;
     private String mParam2;
     private RecyclerView myRecyclerView;
@@ -44,6 +49,7 @@ public class fragment_garage extends Fragment implements CarsListener {
     View v;
     private static ModeloBDHelper database;
 
+    /** Construtor do fragmento em vazio - requerido pelo programa*/
     public fragment_garage() {
         // Required empty public constructor
     }
@@ -57,6 +63,8 @@ public class fragment_garage extends Fragment implements CarsListener {
      * @return A new instance of fragment fragment_garage.
      */
     // TODO: Rename and change types and number of parameters
+
+    /** Método de criação de uma nova instância do fragmento */
     public static fragment_garage newInstance(String param1, String param2) {
         fragment_garage fragment = new fragment_garage();
         Bundle args = new Bundle();
@@ -66,6 +74,12 @@ public class fragment_garage extends Fragment implements CarsListener {
         return fragment;
     }
 
+    /** Função onCreate
+     * - provém da extensão do Fragment
+     * - Inicialização dos argumentos da instância criada anteriormente
+     * - Conexão à base de dados
+     * - carregarDados(): Inicializa a Singleton
+     * */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,16 +92,28 @@ public class fragment_garage extends Fragment implements CarsListener {
         carregarDados();
     }
 
+    /** Inicializa a Singleton */
     private void carregarDados(){
-        // Instanciar singleton
+        //Define o fragmento onde é disparado o listener
         CarSingleton.getInstance(getContext()).setCarsListener(this);
 
-        // Carregar dados da api
+        //Carregar a Singleton com os Dados da API
         CarSingleton.getInstance(getContext()).CarregarListaCarros(getContext());
 
+        //Variavel fica inicialmente carregada com o Singleton
         lstCar = CarSingleton.getInstance(getContext()).getCars();
     }
 
+    /** Função onCreateView
+     * - Gerar a view e tudo o que é visual
+     * - Associar o layout Fragment Garage ao objeto view
+     * - Definição de título
+     * - Definição e chamada de textviews
+     * - Definição e chamada de botão
+     * - Chamada da RecyclerView
+     * - Chamada do Adapter da view
+     * - Floating Action Button - Implementação do botão float
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -123,6 +149,10 @@ public class fragment_garage extends Fragment implements CarsListener {
         return v;
     }
 
+    /** Função onRefreshCars
+     * Vai buscar os carros à base de dados
+     * Mostra os dados na recyclerview
+     * */
     @Override
     public void onRefreshCars(ArrayList<Car> cars) {
         for (Car car : cars) {
@@ -132,11 +162,19 @@ public class fragment_garage extends Fragment implements CarsListener {
         myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity) getActivity()).getSupportActionBar()));
     }
 
+    /** ?? */
     @Override
     public void onDeleteCreateCar() {
 
     }
 
+    /** Função onResume
+     * - atualizar os dados quando a view entra no estado onResume
+     * - quando alteramos um dado e retornamos para a página anterior (que estava on pause anteriormente)
+     * irá fazer onResume e atualizar automaticamente os dados
+     * */
+
+    /** ?? */
     @Override
     public void onResume() {
         super.onResume();
