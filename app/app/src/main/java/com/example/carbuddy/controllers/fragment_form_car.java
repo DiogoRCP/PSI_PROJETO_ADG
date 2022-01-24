@@ -278,16 +278,16 @@ public class fragment_form_car extends Fragment implements CarsListener {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-                                if (response.getJSONArray("Results").getJSONObject(6).getString("Value")!=null) {
+                                if (response.getJSONArray("Results").getJSONObject(6).getString("Value")!="null") {
                                     txtBrand.setText(response.getJSONArray("Results").getJSONObject(6).getString("Value"));
                                 }
-                                if (response.getJSONArray("Results").getJSONObject(8).getString("Value")!=null) {
+                                if (response.getJSONArray("Results").getJSONObject(8).getString("Value")!="null") {
                                     txtModel.setText(response.getJSONArray("Results").getJSONObject(8).getString("Value"));
                                 }
-                                if (response.getJSONArray("Results").getJSONObject(9).getString("Value")!=null) {
+                                if (response.getJSONArray("Results").getJSONObject(9).getString("Value")!="null") {
                                     txtYear.setText(response.getJSONArray("Results").getJSONObject(9).getString("Value"));
                                 }
-                                if (response.getJSONArray("Results").getJSONObject(69).getString("Value")!=null) {
+                                if (response.getJSONArray("Results").getJSONObject(69).getString("Value")!="null") {
                                     txtDisplacement.setText(response.getJSONArray("Results").getJSONObject(69).getString("Value"));
                                 }
 
