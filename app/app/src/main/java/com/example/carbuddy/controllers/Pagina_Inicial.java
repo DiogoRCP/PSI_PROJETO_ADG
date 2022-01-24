@@ -80,7 +80,7 @@ public class Pagina_Inicial extends AppCompatActivity {
         connectionMQTTSchedule(this);
     }
 
-    /**??*/
+    /**Criação do menu lateral*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
