@@ -150,7 +150,7 @@ public class fragment_garage extends Fragment implements CarsListener {
     }
 
     /** Função onRefreshCars
-     * Vai buscar os carros à base de dados
+     * Vai inserir os carros na base de dados
      * Mostra os dados na recyclerview
      * */
     @Override
@@ -162,7 +162,7 @@ public class fragment_garage extends Fragment implements CarsListener {
         myRecyclerView.setAdapter(new CarListAdapter(getContext(), lstCar, super.getFragmentManager(), ((AppCompatActivity) getActivity()).getSupportActionBar()));
     }
 
-    /** ?? */
+
     @Override
     public void onDeleteCreateCar() {
 
@@ -173,8 +173,6 @@ public class fragment_garage extends Fragment implements CarsListener {
      * - quando alteramos um dado e retornamos para a página anterior (que estava on pause anteriormente)
      * irá fazer onResume e atualizar automaticamente os dados
      * */
-
-    /** ?? */
     @Override
     public void onResume() {
         super.onResume();
