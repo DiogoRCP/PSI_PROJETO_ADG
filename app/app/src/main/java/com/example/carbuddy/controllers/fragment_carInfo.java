@@ -164,7 +164,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
 
     /** Função onCreateView
      * - Gerar a view e tudo o que é visual
-     * - Associar o layout FragmentAccount ao objeto view
+     * - Associar o layout Fragment Car Info ao objeto view
      * - Definição de título */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -183,7 +183,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
     }
 
 
-     /** - Definição e chamada de textviews */
+     /** Definição e chamada de textviews e imagens */
     private void writeForm(View view){
         imageCar = view.findViewById(R.id.imageViewCar);
         txtVin = view.findViewById(R.id.textViewVin);
@@ -208,6 +208,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         txtKilometers.setText(String.valueOf(car.getKilometers()));
     }
 
+    /** Seletor de cor do carro, consoante o tipo de carro */
     private void chooseTypeColor() {
         switch (car.getCartype()) {
             case "PASSENGER CAR":
@@ -226,6 +227,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         imageCar.setColorFilter(Color.parseColor(car.getColor()));
     }
 
+    /** Opção de eliminação de um veículo */
     @Override
     public void onDeleteYes(int id) {
         switch (id) {
@@ -240,11 +242,13 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         }
     }
 
+    /** ?? */
     @Override
     public void onRefreshCars(ArrayList<Car> cars) {
 
     }
 
+    /** ?? */
     @Override
     public void onDeleteCreateCar() {
         ModeloBDHelper database = new ModeloBDHelper(getContext());
