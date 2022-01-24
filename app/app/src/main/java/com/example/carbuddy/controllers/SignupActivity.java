@@ -23,14 +23,23 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/** extends AppCompatActivity - Funcionalidades de Activity
+ * */
 public class SignupActivity extends AppCompatActivity {
 
+    /** Definição das variáveis globais*/
     private EditText username, email, nif, phonenumber, password, passwordR;
     private DatePicker birsthday;
     private Login login;
     private boolean edit;
     private Button buttonSignup;
 
+    /** Função onCreate
+     * - provém da extensão do AppCompatActivity
+     * - Gerar a view e tudo o que é visual
+     * - Chamada da ActionBar
+     * - Serialização
+     * */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
@@ -51,6 +60,8 @@ public class SignupActivity extends AppCompatActivity {
         birsthday.setMaxDate(new Date().getTime());
     }
 
+    /** Definição das labels a aparecer na edição de conta
+     *  - Definição do botão e respetiva string para edição de conta*/
     private void editAccount() {
         setTitle(R.string.EditAccount);
 
@@ -63,6 +74,7 @@ public class SignupActivity extends AppCompatActivity {
         buttonSignup.setText(R.string.EditAccount);
     }
 
+    /** Obtenção dos elementos para as textviews */
     private void getElements() {
         username = findViewById(R.id.txusername);
         email = findViewById(R.id.txemail);
@@ -74,6 +86,7 @@ public class SignupActivity extends AppCompatActivity {
         buttonSignup = findViewById(R.id.btnSignup);
     }
 
+    /** Configuração do botão de SignUp consoante os dados inseridos nas labels: verificações de dados */
     public void btSignup(View view) throws JSONException {
         if (verificarCampos()) {
             if (PasswordVerify(password.getText().toString(), passwordR.getText().toString())) {
@@ -115,6 +128,7 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
+    /** Verificação e atribuição de mensagens de erro a campos vazios */
     private boolean verificarCampos() {
         String[] usernameSpaces = username.getText().toString().split(" ");
         boolean error = true;
@@ -142,6 +156,7 @@ public class SignupActivity extends AppCompatActivity {
         return error;
     }
 
+    /** Verificação e atribuição de mensagens de erro a campos vazios */
     private String boxesEmptyVerify(EditText box) {
         if (box.getText().toString().isEmpty()) {
             box.setError(getString(R.string.EditTextRequired));
@@ -151,6 +166,10 @@ public class SignupActivity extends AppCompatActivity {
         return "";
     }
 
+    /** - Função que permite gerar uma ação ao clicar no item do menu
+     *  - Identificação do item do menu
+     *  - Aceder ao main page
+     * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
