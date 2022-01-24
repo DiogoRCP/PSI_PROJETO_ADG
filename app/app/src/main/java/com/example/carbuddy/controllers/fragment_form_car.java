@@ -278,16 +278,16 @@ public class fragment_form_car extends Fragment implements CarsListener {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-                                if (response.getJSONArray("Results").getJSONObject(6).getString("Value").isEmpty()) {
+                                if (response.getJSONArray("Results").getJSONObject(6).getString("Value")!="null") {
                                     txtBrand.setText(response.getJSONArray("Results").getJSONObject(6).getString("Value"));
                                 }
-                                if (response.getJSONArray("Results").getJSONObject(8).getString("Value").isEmpty()) {
+                                if (response.getJSONArray("Results").getJSONObject(8).getString("Value")!="null") {
                                     txtModel.setText(response.getJSONArray("Results").getJSONObject(8).getString("Value"));
                                 }
-                                if (response.getJSONArray("Results").getJSONObject(9).getString("Value").isEmpty()) {
+                                if (response.getJSONArray("Results").getJSONObject(9).getString("Value")!="null") {
                                     txtYear.setText(response.getJSONArray("Results").getJSONObject(9).getString("Value"));
                                 }
-                                if (response.getJSONArray("Results").getJSONObject(69).getString("Value").isEmpty()) {
+                                if (response.getJSONArray("Results").getJSONObject(69).getString("Value")!="null") {
                                     txtDisplacement.setText(response.getJSONArray("Results").getJSONObject(69).getString("Value"));
                                 }
 
@@ -356,7 +356,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         switch (car.getCartype()) {
             case "PASSENGER CAR":
                 return 0;
-            case "MULTIPURPOSE PASSENGER VEHICLE":
+            case "MULTIPURPOSE PASSENGER VEHICLE (MPV)":
                 return 1;
             case "TRUCK":
                 return 2;
@@ -385,7 +385,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
             case 0:
                 return "PASSENGER CAR";
             case 1:
-                return "MULTIPURPOSE PASSENGER VEHICLE";
+                return "MULTIPURPOSE PASSENGER VEHICLE (MPV)";
             case 2:
                 return "TRUCK";
             case 3:
