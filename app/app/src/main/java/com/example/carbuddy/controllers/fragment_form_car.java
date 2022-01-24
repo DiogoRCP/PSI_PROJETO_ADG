@@ -45,6 +45,10 @@ import java.util.Locale;
  * Use the {@link fragment_form_car#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/** extends Fragment - herança de classe do Fragmento
+ * implements CarListener - implementação do Listener
+ * */
 public class fragment_form_car extends Fragment implements CarsListener {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -53,6 +57,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    /** Definição das variáveis globais*/
     private String mParam1;
     private String mParam2;
     private EditText txtVin, txtBrand, txtModel, txtYear, txtDisplacement,
@@ -65,6 +70,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
     private boolean editar;
     private String carColor;
 
+    /** Construtor do fragmento em vazio - requerido pelo programa*/
     public fragment_form_car() {
         // Required empty public constructor
     }
@@ -78,6 +84,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
      * @return A new instance of fragment fragment_form_car.
      */
     // TODO: Rename and change types and number of parameters
+    /** Método de criação de uma nova instância do fragmento */
     public static fragment_form_car newInstance(String param1, String param2) {
         fragment_form_car fragment = new fragment_form_car();
         Bundle args = new Bundle();
@@ -87,6 +94,12 @@ public class fragment_form_car extends Fragment implements CarsListener {
         return fragment;
     }
 
+    /** Função onCreate
+     * - provém da extensão do Fragment
+     * - Inicialização dos argumentos da instância criada anteriormente
+     * - Volley: Criação de um request para a API
+     * - Bundle: Receber o carro e utilizar este fragmento para editar
+     * */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +120,13 @@ public class fragment_form_car extends Fragment implements CarsListener {
         }
     }
 
+    /** Função onCreateView
+     * - Gerar a view e tudo o que é visual
+     * - Associar o layout Fragment Form Car ao objeto view
+     * - Definição de título
+     * - Definição e chamada de textviews do formulário
+     * - Definição e chamada de botão
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -157,6 +177,8 @@ public class fragment_form_car extends Fragment implements CarsListener {
         return view;
     }
 
+    /** É uma função que não permite a criação ou edição de um carro quando os dados não estão
+     * devidamente preenchidos */
     private boolean ValidarCampos() {
         boolean error = true;
         if (txtVin.getText().length() < 17) {
@@ -193,6 +215,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         return error;
     }
 
+    /** Passa os dados do objeto para o design */
     private void editarVehicleForm() {
         txtVin.setText(car.getVin());
         txtBrand.setText(car.getBrand());
@@ -208,6 +231,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         carColor = car.getColor();
     }
 
+    /** Receber o objeto da view*/
     private void findId(View view) {
         txtVin = view.findViewById(R.id.txtVin);
         txtBrand = view.findViewById(R.id.txtBrand);
@@ -224,6 +248,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         btColor = view.findViewById(R.id.bt_choose_color);
     }
 
+    /** Função responsável pelo campo de definição de cor do veículo */
     private void ColorPicker(View view) {
         colorPickerDialog = ColorPickerDialog.createColorPickerDialog(getContext(), ColorPickerDialog.DARK_THEME);
         colorPickerDialog.setOnColorPickedListener(new ColorPickerDialog.OnColorPickedListener() {
@@ -244,6 +269,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         });
     }
 
+    /** Procura dos dados do veículo através do VIN, utilizando uma API externa */
     private void vinSearch() {
         txtVin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -267,6 +293,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         });
     }
 
+    /** Preenchimento dos dados do veículo através do Vin, utilizando uma API externa */
     private void vinAPI() {
         if (!isInternetConnection(getContext())) {
             Toast.makeText(getContext(), "No internet", Toast.LENGTH_SHORT).show();
@@ -338,6 +365,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         }
     }
 
+    /** Obtenção dos dados FuelType */
     private int spinnerFuelNameToIndex() {
         switch (car.getFueltype()) {
             case "Diesel":
@@ -352,6 +380,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         return 0;
     }
 
+    /** Obtenção dos dados CarType */
     private int spinnerTypeNameToIndex() {
         switch (car.getCartype()) {
             case "PASSENGER CAR":
@@ -366,6 +395,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         return 0;
     }
 
+    /** Obtenção do index e retornar o FuelType */
     private String spFuelToApi() {
         switch (spFuelType.getSelectedItemPosition()) {
             case 0:
@@ -380,6 +410,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
         return "Diesel";
     }
 
+    /** Obtenção do index e retornar o CarType */
     private String spCarTypeToApi() {
         switch (spCarType.getSelectedItemPosition()) {
             case 0:
@@ -399,6 +430,7 @@ public class fragment_form_car extends Fragment implements CarsListener {
 
     }
 
+    /** Função que mostra a mensagem se o carro foi adicionado ou editado*/
     @Override
     public void onDeleteCreateCar() {
         if (!editar) {
