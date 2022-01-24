@@ -134,6 +134,13 @@ public class Pagina_Inicial extends AppCompatActivity {
                 .commit();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        connectionMQTTRepair(this);
+        connectionMQTTSchedule(this);
+    }
+
     public void onClickCompaniesMenu(MenuItem item) {
         Intent companiesView = new Intent(this, CompaniesActivity.class);
         startActivity(companiesView);
