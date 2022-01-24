@@ -26,6 +26,10 @@ import java.util.ArrayList;
  * Use the {@link RepairFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/** extends Fragment - herança de classe do Fragmento
+ * implements RepairsListener - implementação do Listener
+ * */
 public class RepairFragment extends Fragment implements RepairsListener{
 
     // TODO: Rename parameter arguments, choose names that match
@@ -34,6 +38,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    /** Definição das variáveis globais*/
     private String mParam1;
     private String mParam2;
     private RecyclerView myRecyclerView;
@@ -43,6 +48,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
     private Car car;
     private String carRegistration;
 
+    /** Construtor do fragmento em vazio - requerido pelo programa*/
     public RepairFragment() {
         // Required empty public constructor
     }
@@ -56,6 +62,8 @@ public class RepairFragment extends Fragment implements RepairsListener{
      * @return A new instance of fragment RepairFragment.
      */
     // TODO: Rename and change types and number of parameters
+
+    /** Método de criação de uma nova instância do fragmento */
     public static RepairFragment newInstance(String param1, String param2) {
         RepairFragment fragment = new RepairFragment();
         Bundle args = new Bundle();
@@ -65,6 +73,11 @@ public class RepairFragment extends Fragment implements RepairsListener{
         return fragment;
     }
 
+    /** Função onCreate
+     * - provém da extensão do Fragment
+     * - Inicialização dos argumentos da instância criada anteriormente
+     * - Conexão à base de dados
+     * */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +101,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
         //Carregar a Singleton com os dados da API
         CarSingleton.getInstance(getContext()).CarregarListaRepairs(getContext(), car);
 
+        //Variavel fica inicialmente carregada com o Singleton
         if(CarSingleton.getInstance(getContext()).getRepairs(car) != null) {
             lstRepair = CarSingleton.getInstance(getContext()).getRepairs(car);
         }else{
@@ -95,6 +109,12 @@ public class RepairFragment extends Fragment implements RepairsListener{
         }
     }
 
+    /** Função onCreateView
+     * - Gerar a view e tudo o que é visual
+     * - Associar o layout Fragment Repair ao objeto view
+     * - Definição de título
+     * - Definição e chamada da RecyclerView
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -114,6 +134,10 @@ public class RepairFragment extends Fragment implements RepairsListener{
         return v;
     }
 
+    /** Função onRefreshRepair
+     * Vai buscar as repairs à base de dados
+     * Mostra os dados na recyclerview
+     * */
     @Override
     public void onRefreshRepair(ArrayList<Repair> repairs) {
         for (Repair repair: repairs) {
