@@ -149,12 +149,17 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         myRecyclerView.setAdapter(new ScheduleListAdapter(getContext(), lstSchedule, super.getFragmentManager()));
     }
 
-    /** ?? */
+
     @Override
     public void onDeleteCreateSchedule() {
 
     }
 
+    /** Função onResume
+     * - atualizar os dados quando a view entra no estado onResume
+     * - quando alteramos um dado e retornamos para a página anterior (que estava on pause anteriormente)
+     * irá fazer onResume e atualizar automaticamente os dados
+     * */
     public void onResume() {
         //Define o fragmento onde é disparado o listener
         SchedulesSingleton.getInstance(getContext()).setSchedulesListener(this);

@@ -115,7 +115,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
     /** - Função que permite gerar uma ação ao clicar no item do menu
      *  - Identificação do item do menu
      *  - Criação de um novo intent para inicializar a ação do menu neste fragmento
-     *  - Aceder ás activities
+     *  - Aceder ás activities que são provenientes de fragmentos
      * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -242,13 +242,13 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         }
     }
 
-    /** ?? */
+    /** Refresh cars */
     @Override
     public void onRefreshCars(ArrayList<Car> cars) {
 
     }
 
-    /** ?? */
+    /** Função que apaga o carro da base de dados e mostra a mensagem de como foi eliminado */
     @Override
     public void onDeleteCreateCar() {
         ModeloBDHelper database = new ModeloBDHelper(getContext());

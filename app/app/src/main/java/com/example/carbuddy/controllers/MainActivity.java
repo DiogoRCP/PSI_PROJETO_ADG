@@ -20,13 +20,23 @@ import com.example.carbuddy.models.ModeloBDHelper;
 
 import org.json.JSONException;
 
+/** extends AppCompatActivity - Funcionalidades de Activity
+ * implements LoginListener - implementação do Listener
+ * */
 public class MainActivity extends AppCompatActivity implements LoginListener {
 
-
+    /** Definição das variáveis globais*/
     private EditText editTextUser, editTextPass;
     private String user, pass;
     private ModeloBDHelper database;
 
+    /** Função onCreate
+     * - provém da extensão do AppCompatActivity
+     * - Gerar a view e tudo o que é visual
+     * - Conexão à base de dados
+     * - Declaração da RecyclerView
+     * - Atribuição do adaptador
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +57,10 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
 
     }
 
+    /** Função efetuarLogin
+     * - Permite verificar o login
+     * - Atribuição de mensagens de erro caso um ou ambos
+     * elementos se encontrem diferentes do registo na base de dados*/
     private boolean efetuarLogin() {
         user = editTextUser.getText().toString();
         pass = editTextPass.getText().toString();
@@ -65,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         return false;
     }
 
-
+    /** Verificar se os dados do username estão preenchidos*/
     private boolean isUserValid(String user) {
         if (user.length() > 1 && user != "Username")
             return true;
@@ -73,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
             return false;
     }
 
+    /** Verificar se os dados da password estão preenchidos*/
     private boolean isPassValid(String pass) {
         if (pass == null)
             return false;
@@ -83,23 +98,26 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
             return true;
     }
 
-
+    /** Botão que instancia a singleton */
     public void onClickLogin(View view) throws JSONException {
         if (efetuarLogin()) {
             LoginSingleton.getInstance(this).apiLogin(this, user, pass);
         }
     }
 
+    /** Ao clicar no registo de conta, leva-nos para a SignupActivity*/
     public void onClickRegister(View view) {
         Intent signup = new Intent(this, SignupActivity.class);
         startActivity(signup);
     }
 
+    /** Ao clicar no botão companies, leva-nos para a CompaniesActivity*/
     public void onClickCompanies(View view) {
         Intent companiesView = new Intent(this, CompaniesActivity.class);
         startActivity(companiesView);
     }
 
+    /** Ao verificar o login na base de dados e for verdadeiro, inicializar a activity paginaInicial*/
     private void VerificarLogin() {
         if (database.getAllLogin().size() > 0) {
             Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
@@ -107,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         }
     }
 
+    /** Definição da mensagem de erro caso o login não der sucesso*/
     @Override
     public void onValidateLogin(Login login) {
         if (login.getToken() != null) {
@@ -118,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         }
     }
 
+    /** Instanciar uma nova base de dados */
     protected void onResume() {
         database = new ModeloBDHelper(this);
         super.onResume();
