@@ -184,6 +184,8 @@ public class CarSingleton {
                         //Executado com sucesso
                         @Override
                         public void onResponse(JSONObject response) {
+                            //Chamar o listener porque o pedido foi executado
+                            carsListener.onDeleteCreateCar();
                         }
                     }, new Response.ErrorListener() {
                         //Possiveis erros ao apagar um carrp
@@ -192,6 +194,7 @@ public class CarSingleton {
                             String message = "";
                             //Verificar que o volleyerror não é nulo
                             if(error.networkResponse != null) {
+                                System.out.println(error.networkResponse.statusCode);
                                 try {
                                     switch (error.networkResponse.statusCode) {
                                         case 200:
@@ -251,6 +254,7 @@ public class CarSingleton {
             carData.put("displacement", car.getDisplacement());
             carData.put("state", car.getState());
 
+            System.out.println(carData.toString());
             // cria um request JsonArrayRequest POST
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.POST, url, carData, new Response.Listener<JSONObject>() {

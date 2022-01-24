@@ -117,4 +117,9 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
             Toast.makeText(this, "Username or password incorrect", Toast.LENGTH_SHORT).show();
         }
     }
+
+    protected void onResume() {
+        database = new ModeloBDHelper(this);
+        super.onResume();
+    }
 }

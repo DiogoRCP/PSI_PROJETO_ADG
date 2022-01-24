@@ -25,6 +25,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  * Conexão ao canal de Repairs
  **/
 public class MQTT {
+
     public static void connectionMQTTRepair(Context context) {
 
         // Verificar se tem internet para prosseguir

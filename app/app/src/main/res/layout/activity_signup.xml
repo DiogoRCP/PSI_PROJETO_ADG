@@ -52,6 +52,7 @@
             android:hint="@string/tVNif"
             android:inputType="number"
             android:lineSpacingExtra="12sp"
+            android:maxLength="9"
             android:textColor="@color/white"
             android:textColorHint="@color/figma4" />
 
@@ -64,6 +65,7 @@
             android:hint="@string/tVPNumber"
             android:inputType="phone"
             android:lineSpacingExtra="12sp"
+            android:maxLength="9"
             android:textColor="@color/white"
             android:textColorHint="@color/figma4" />
 

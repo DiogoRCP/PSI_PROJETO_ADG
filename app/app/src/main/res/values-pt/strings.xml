@@ -42,7 +42,7 @@
     <string name="cancel">Cancelar</string>
     <string name="Yes">Sim</string>
     <string name="No">Não</string>
-    <string name="Added">adicionado</string>
+    <string name="Added">Adicionado</string>
     <string name="NotDeleteCar">Não pode apagar um veículo com reparações</string>
     <string name="RepeatPassword">Repetir Password</string>
     <string name="Schedule_Date">Data de Marcação</string>
@@ -62,6 +62,13 @@
     <string name="FailedLogin">Falha no login</string>
     <string name="editschedule">Atualizar Agendamento</string>
     <string name="EditTextRequired">Campo obrigatório</string>
+    <string name="NoInternet">Sem internet</string>
+    <string name="NoConnection">Sem ligação</string>
+    <string name="PasswordMin">A password tem de ter no minimo 8 caracteres</string>
+    <string name="FieldSpaces">Este campo não pode conter espaços</string>
+    <string name="ValidEmail">Insira um email válido</string>
+    <string name="VinCheck">Insira um vin válido</string>
+    <string name="ValidYear">Insira um ano válido</string>
 
     <string-array name="fuelType_array">
         <item>Gasóleo</item>
@@ -81,6 +88,5 @@
         <item>Manutenção</item>
         <item>Reparação</item>
     </string-array>
-    <string name="NoInternet">Sem internet</string>
-    <string name="NoConnection">Sem ligação</string>
+
 </resources>
