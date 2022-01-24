@@ -16,7 +16,7 @@ import com.example.carbuddy.models.ModeloBDHelper;
 
 import java.util.ArrayList;
 
-/** extends Fragment - herança de classe do Fragmento
+/** extends AppCompatActivity - Funcionalidades de Activity
  * implements CompaniesListener - implementação do Listener
  * */
 public class CompaniesActivity extends AppCompatActivity implements CompaniesListener {

@@ -197,4 +197,3 @@ public class AccountFragment extends Fragment implements LoginListener {
         carregarDados();
     }
 }
-
