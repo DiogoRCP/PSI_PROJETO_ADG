@@ -44,6 +44,10 @@ import java.util.Locale;
  * Use the {@link Schedules_Appointment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/** extends Fragment - herança de classe do Fragmento
+ * implements SchedulesListener, CompaniesListener - implementação do Listener
+ * */
 public class Schedules_Appointment extends Fragment implements SchedulesListener, CompaniesListener {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -52,6 +56,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    /** Definição das variáveis globais*/
     private String mParam1;
     private String mParam2;
 
@@ -68,6 +73,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
     private Schedule schedule;
     private String carRegistration;
 
+    /** Construtor do fragmento em vazio - requerido pelo programa*/
     public Schedules_Appointment() {
         // Required empty public constructor
     }
@@ -81,6 +87,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
      * @return A new instance of fragment Schedules_Appointment.
      */
     // TODO: Rename and change types and number of parameters
+    /** Método de criação de uma nova instância do fragmento */
     public static Schedules_Appointment newInstance(String param1, String param2) {
         Schedules_Appointment fragment = new Schedules_Appointment();
         Bundle args = new Bundle();
@@ -90,6 +97,11 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         return fragment;
     }
 
+    /** Função onCreate
+     * - Provém da extensão do Fragment
+     * - Inicialização dos argumentos da instância criada anteriormente
+     * - Instancialização dos Singleton
+     * */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +129,12 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         CompaniesSingleton.getInstance(getContext()).CarregarListaCompanies(getContext());
     }
 
+    /** Função onCreateView
+     * - Gerar a view e tudo o que é visual
+     * - Associar o layout Fragment Schedules Appointment  ao objeto view
+     * - Definição de título
+     * - Definição e chamada de textviews
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -153,6 +171,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         return view;
     }
 
+    /** Definições de data do schedule */
     private void dateManagement(View view) {
         tvDate = view.findViewById(R.id.tvDateSchedule);
         updateLabelDate();
@@ -178,12 +197,14 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         });
     }
 
+    /** Definições de Data */
     private void updateLabelDate() {
         String myFormat = "yyyy/MM/dd";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
         tvDate.setText(dateFormat.format(myCalendar.getTime()));
     }
 
+    /** Definições de Hora */
     private void hourManagement(View view) {
         tvHour = view.findViewById(R.id.tvHourSchedule);
         updateLabelHour();
@@ -204,12 +225,14 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         });
     }
 
+    /** Definições de Hora, atualização do campo */
     private void updateLabelHour() {
         String myFormat = "HH:mm";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
         tvHour.setText(dateFormat.format(myCalendar.getTime()));
     }
 
+    /** Carregar as empresas no spiner */
     private void ChargeCompanies(View view) {
         ArrayList<String> companies = new ArrayList<>();
         for (Company company : CompaniesSingleton.getInstance(getContext()).getCompanies()) {
@@ -220,6 +243,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         spinnerTheme(getContext(), spRepairType, R.array.repairtype_array);
     }
 
+    /** Definições de Botão Submit */
     private void btSubmitClick() {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,6 +277,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         });
     }
 
+    /** Definição de regra e verificação da descrição */
     private boolean verificarDescricao() {
         if (edtxtDescription.getText().toString().isEmpty()) {
             edtxtDescription.setError(getString(R.string.WriteDescription));
@@ -261,6 +286,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         return true;
     }
 
+    /** Atualização de dados do Schedule */
     public void editSchedule() {
         if (edit) {
             getActivity().setTitle(R.string.editschedule);
@@ -303,6 +329,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
     }
 
+    /** Função que mostra a mensagem de como foi adicionado um schedule */
     @Override
     public void onDeleteCreateSchedule() {
         Toast.makeText(getContext(), getString(R.string.Added), Toast.LENGTH_SHORT).show();
