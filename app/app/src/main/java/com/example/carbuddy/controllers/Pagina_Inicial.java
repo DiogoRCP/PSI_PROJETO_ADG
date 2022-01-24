@@ -39,12 +39,20 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+/** extends Fragment - herança de classe do Fragmento
+ * */
 public class Pagina_Inicial extends AppCompatActivity {
 
+    /** Definição das variáveis globais*/
     private FragmentManager fragmentManager;
     private Fragment fragment;
     public int fragmentNumber;
 
+    /** Função onCreate
+     * - provém da extensão do AppCompatActivity
+     * - Gerar a view e tudo o que é visual
+     * - Declaração do fragmento inicial
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,12 +80,17 @@ public class Pagina_Inicial extends AppCompatActivity {
         connectionMQTTSchedule(this);
     }
 
+    /**??*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    /** - Função que permite gerar uma ação ao clicar no item do menu
+     *  - Identificação do item do menu
+     *  - Aceder ao main page
+     * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -88,12 +101,14 @@ public class Pagina_Inicial extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Both navigation bar back press and title bar back press will trigger this method
+    /**Both navigation bar back press and title bar back press will trigger this method
+     * Botão de retornar à página anterior*/
     @Override
     public void onBackPressed() {
         fragmentManager.popBackStack();
     }
 
+    /** Ao clicar no botão Garagem, leva-nos para o fragmento garage*/
     public void onClickGaragem(View view) {
         fragment = new fragment_garage();
 
@@ -103,6 +118,7 @@ public class Pagina_Inicial extends AppCompatActivity {
                 .commit();
     }
 
+    /** Ao clicar no botão Account, leva-nos para o fragmento account*/
     public void onClickAccount(View view) {
         fragment = new AccountFragment();
 
@@ -112,6 +128,7 @@ public class Pagina_Inicial extends AppCompatActivity {
                 .commit();
     }
 
+    /** Ao clicar no botão Schedules, leva-nos para o fragmento schedules*/
     public void onClickSchedules(View view) {
         fragment = new fragment_schedules();
 
@@ -121,6 +138,7 @@ public class Pagina_Inicial extends AppCompatActivity {
                 .commit();
     }
 
+    /** Função responsável por definir o fragmento inicial */
     public void CarregarFragmentoInicial() {
         fragmentNumber = 1;
         fragment = new fragment_garage();
@@ -134,6 +152,8 @@ public class Pagina_Inicial extends AppCompatActivity {
                 .commit();
     }
 
+    /** Função onResume
+     *  */
     @Override
     protected void onResume() {
         super.onResume();
@@ -141,11 +161,14 @@ public class Pagina_Inicial extends AppCompatActivity {
         connectionMQTTSchedule(this);
     }
 
+    /** Ao clicar no botão Companies, presente no menu, leva-nos para a atividade companies*/
     public void onClickCompaniesMenu(MenuItem item) {
         Intent companiesView = new Intent(this, CompaniesActivity.class);
         startActivity(companiesView);
     }
 
+    /** Ao clicar no botão Logout, presente no menu,
+     * termina a sessão e leva-nos para a pánina de Login*/
     public void onClickLogoutMenu(MenuItem item) {
         this.deleteDatabase("carbuddy");
         this.finish();
