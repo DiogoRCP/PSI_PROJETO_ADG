@@ -229,7 +229,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
                     //POST
                     if (!edit) {
-                        Schedule schedules = new Schedule(schedule.getCarId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+                        Schedule schedules = new Schedule(car.getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
 
                         try {
                             SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedules);
@@ -305,7 +305,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
     @Override
     public void onDeleteCreateSchedule() {
-        Toast.makeText(getContext(), schedule.getRepairtype() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getString(R.string.Added), Toast.LENGTH_SHORT).show();
         getActivity().getSupportFragmentManager().popBackStack();
     }
 

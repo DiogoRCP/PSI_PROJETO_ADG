@@ -154,4 +154,19 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
     public void onDeleteCreateSchedule() {
 
     }
+
+    public void onResume() {
+        //Define o fragmento onde é disparado o listener
+        SchedulesSingleton.getInstance(getContext()).setSchedulesListener(this);
+
+        //Carregar a Singleton com os Dados da API
+        SchedulesSingleton.getInstance(getContext()).CarregarListaSchedules(getContext());
+
+        if(SchedulesSingleton.getInstance(getContext()).getSchedules() != null) {
+            lstSchedule = SchedulesSingleton.getInstance(getContext()).getSchedules();
+        }else{
+            lstSchedule = new ArrayList<>();
+        }
+        super.onResume();
+    }
 }
