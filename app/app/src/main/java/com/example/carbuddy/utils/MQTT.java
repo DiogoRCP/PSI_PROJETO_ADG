@@ -1,5 +1,7 @@
 package com.example.carbuddy.utils;
 
+import static com.example.carbuddy.utils.libs.isInternetConnection;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -19,75 +21,89 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-/** Conexão ao canal de Repairs **/
+/**
+ * Conexão ao canal de Repairs
+ **/
 public class MQTT {
     public static void connectionMQTTRepair(Context context) {
 
-        //Criação de um cliente
-        String clientId = MqttClient.generateClientId();
-        //Endpoint do canal MQTT
-        MqttAndroidClient client = new MqttAndroidClient(context, "tcp://10.0.2.2:1883", clientId);
+        // Verificar se tem internet para prosseguir
+        if (isInternetConnection(context)) {
 
-        //Conexão ao canal MQTT
-        try {
-            IMqttToken token = client.connect();
-            token.setActionCallback(new IMqttActionListener() {
-                //Com sucesso
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // Entrar na função de conexão subscribeMQTTRepairs
-                    Log.d("MQTT", "onSuccess");
-                    subscribeMQTTRepair(client, context);
-                }
-                //Sem sucesso, mensagem de erro
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    // Something went wrong e.g. connection timeout or firewall problems
-                    Log.d("MQTT", "onFailure");
+            //Criação de um cliente
+            String clientId = MqttClient.generateClientId();
+            //Endpoint do canal MQTT
+            MqttAndroidClient client = new MqttAndroidClient(context, "tcp://10.0.2.2:1883", clientId);
 
-                }
-            });
-            //Exception
-        } catch (MqttException e) {
-            e.printStackTrace();
+            //Conexão ao canal MQTT
+            try {
+                IMqttToken token = client.connect();
+                token.setActionCallback(new IMqttActionListener() {
+                    //Com sucesso
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        // Entrar na função de conexão subscribeMQTTRepairs
+                        Log.d("MQTT", "onSuccess");
+                        subscribeMQTTRepair(client, context);
+                    }
+
+                    //Sem sucesso, mensagem de erro
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        // Something went wrong e.g. connection timeout or firewall problems
+                        Log.d("MQTT", "onFailure");
+
+                    }
+                });
+                //Exception
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    /** Conexão ao canal de Schedules **/
+    /**
+     * Conexão ao canal de Schedules
+     **/
     public static void connectionMQTTSchedule(Context context) {
 
-        //Criação de um cliente
-        String clientId = MqttClient.generateClientId();
-        //Endpoint do canal MQTT
-        MqttAndroidClient client = new MqttAndroidClient(context, "tcp://10.0.2.2:1883", clientId);
+        // Verificar se tem internet para prosseguir
+        if(libs.isInternetConnection(context)) {
+            //Criação de um cliente
+            String clientId = MqttClient.generateClientId();
+            //Endpoint do canal MQTT
+            MqttAndroidClient client = new MqttAndroidClient(context, "tcp://10.0.2.2:1883", clientId);
 
-        //Conexão ao canal MQTT
-        try {
-            IMqttToken token = client.connect();
-            token.setActionCallback(new IMqttActionListener() {
-                //Com sucesso
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // Entrar na função de conexão subscribeMQTTSchedules
-                    Log.d("MQTT", "onSuccess");
-                    subscribeMQTTSchedules(client, context);
-                }
+            //Conexão ao canal MQTT
+            try {
+                IMqttToken token = client.connect();
+                token.setActionCallback(new IMqttActionListener() {
+                    //Com sucesso
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        // Entrar na função de conexão subscribeMQTTSchedules
+                        Log.d("MQTT", "onSuccess");
+                        subscribeMQTTSchedules(client, context);
+                    }
 
-                //Sem sucesso, mensagem de erro
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    // Something went wrong e.g. connection timeout or firewall problems
-                    Log.d("MQTT", "onFailure");
+                    //Sem sucesso, mensagem de erro
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        // Something went wrong e.g. connection timeout or firewall problems
+                        Log.d("MQTT", "onFailure");
 
-                }
-            });
-            //Exception
-        } catch (MqttException e) {
-            e.printStackTrace();
+                    }
+                });
+                //Exception
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    /** subscrição do canal Repair **/
+    /**
+     * subscrição do canal Repair
+     **/
     private static void subscribeMQTTRepair(MqttAndroidClient client, Context context) {
         //Nome do Canal REPAIR- + id do user
         String topic = "REPAIR-" + LoginSingleton.getInstance(context).getLogin().getId();
@@ -99,6 +115,8 @@ public class MQTT {
                 @Override
                 public void connectionLost(Throwable cause) {
                     Log.d("MQTT", "Connection Lost");
+                    //Conectar novamente
+                    connectionMQTTRepair(context);
                 }
 
                 //Mensagem recebida- criar notificação
@@ -136,7 +154,9 @@ public class MQTT {
         }
     }
 
-    /** subscrição do canal Schedule **/
+    /**
+     * subscrição do canal Schedule
+     **/
     private static void subscribeMQTTSchedules(MqttAndroidClient client, Context context) {
         //Nome do Canal SCHEDULE- + id do user
         String topic = "SCHEDULE-" + LoginSingleton.getInstance(context).getLogin().getId();
@@ -148,6 +168,8 @@ public class MQTT {
                 @Override
                 public void connectionLost(Throwable cause) {
                     Log.d("MQTT", "Connection Lost");
+                    //Conectar novamente
+                    connectionMQTTSchedule(context);
                 }
 
                 //Mensagem recebida- criar notificação
