@@ -116,29 +116,30 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private boolean verificarCampos() {
-        String[] usernameSpaces = username.getText().toString().split("[ ]");
+        String[] usernameSpaces = username.getText().toString().split(" ");
+        boolean error = true;
         if (usernameSpaces.length > 1) {
             username.setError(getString(R.string.FieldSpaces));
-            return false;
+            error = false;
         }
-        String[] emailSpaces = email.getText().toString().split("[ ]");
+        String[] emailSpaces = email.getText().toString().split(" ");
         if (emailSpaces.length > 1) {
             email.setError(getString(R.string.FieldSpaces));
-            return false;
+            error = false;
         }
-        String[] emailArroba = email.getText().toString().split("[@]");
-        String[] emailPonto = (emailArroba.length == 2) ? emailArroba[1].split("[.]") : new String[0];
+        String[] emailArroba = email.getText().toString().split("@");
+        String[] emailPonto = (emailArroba.length == 2) ? emailArroba[1].split("\\.") : new String[0];
 
-        if(emailArroba.length != 2 || emailPonto.length < 1){
+        if(emailArroba.length != 2 || emailPonto.length < 2){
             email.setError(getString(R.string.ValidEmail));
-            return false;
+            error = false;
         }
         if (password.length() < 8) {
             password.setError(getString(R.string.PasswordMin));
-            return false;
+            error = false;
         }
 
-        return true;
+        return error;
     }
 
     private String boxesEmptyVerify(EditText box) {

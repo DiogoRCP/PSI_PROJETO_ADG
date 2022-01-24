@@ -229,7 +229,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
 
                     //POST
                     if (!edit) {
-                        Schedule schedules = new Schedule(car.getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), spRepairType.getSelectedItem().toString(), v.getContext());
+                        Schedule schedules = new Schedule(car.getId(), spCompany.getSelectedItem().toString(), tvDate.getText() + " " + tvHour.getText(), edtxtDescription.getText().toString(), RepairTypeChoose(), v.getContext());
 
                         try {
                             SchedulesSingleton.getInstance(v.getContext()).AddSchedule(v.getContext(), schedules);
@@ -241,7 +241,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
                     else {
                         schedule.setSchedulingdate(tvDate.getText() + " " + tvHour.getText());
                         schedule.setRepairdescription(edtxtDescription.getText().toString());
-                        schedule.setRepairtype(spRepairType.getSelectedItem().toString());
+                        schedule.setRepairtype(RepairTypeChoose());
                         try {
                             SchedulesSingleton.getInstance(v.getContext()).PutSchedule(v.getContext(), schedule);
                         } catch (JSONException e) {
@@ -251,6 +251,17 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
                 }
             }
         });
+    }
+
+    private String RepairTypeChoose(){
+        switch (spRepairType.getSelectedItemPosition()){
+            case 0:
+                return "Maintenance";
+            case 1:
+                return "Repair";
+        }
+
+        return "Maintenance";
     }
 
     private boolean verificarDescricao() {
