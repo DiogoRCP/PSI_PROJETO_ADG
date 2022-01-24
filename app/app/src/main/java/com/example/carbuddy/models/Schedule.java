@@ -157,10 +157,10 @@ public class Schedule implements Serializable {
      * Método de retorna 0 - Ano; 1 - Mês; 2 - Dia; 3 - Hora; 4 - Minutos; 5 - Segundos
      **/
     public ArrayList<Integer> getDateTime() {
-        String[] dateTime = this.schedulingdate.split(" ");
+        String[] dateTime = this.schedulingdate.split("[ ]");
 
-        String[] dataFinal = dateTime[0].split("-");
-        String[] horaFinal = dateTime[1].split(":");
+        String[] dataFinal = dateTime[0].split("[-]");
+        String[] horaFinal = dateTime[1].split("[:]");
 
         ArrayList<Integer> dateTimeFinal = new ArrayList<>();
 

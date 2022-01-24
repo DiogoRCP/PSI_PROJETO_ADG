@@ -46,7 +46,7 @@
     <string name="edit">Edit</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
-    <string name="Added">added</string>
+    <string name="Added">Added</string>
     <string name="NotDeleteCar">You can\'t delete a vehicle with repairs</string>
     <string name="RepeatPassword">Repeat Password</string>
     <string name="Schedule_Date">Schedule Date</string>
@@ -67,6 +67,11 @@
     <string name="EditTextRequired">Required field</string>
     <string name="NoInternet">No internet</string>
     <string name="NoConnection">No connection</string>
+    <string name="PasswordMin">The password must be at least 8 characters</string>
+    <string name="FieldSpaces">This field cannot contain spaces</string>
+    <string name="ValidEmail">Please enter a valid email</string>
+    <string name="VinCheck">Please enter a valid vin</string>
+    <string name="ValidYear">Please enter a valid year</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>

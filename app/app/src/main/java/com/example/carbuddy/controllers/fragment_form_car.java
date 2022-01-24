@@ -37,6 +37,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -127,22 +129,24 @@ public class fragment_form_car extends Fragment implements CarsListener {
         view.findViewById(R.id.btAddCar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Car newCar = new Car(txtVin.getText().toString(), txtBrand.getText().toString(),
-                        txtModel.getText().toString(), carColor,
-                        spCarType.getSelectedItem().toString(),
-                        Float.parseFloat(txtDisplacement.getText().toString()),
-                        spFuelType.getSelectedItem().toString(),
-                        txtRegistration.getText().toString(), Integer.parseInt(txtYear.getText().toString()),
-                        Integer.parseInt(txtKilometers.getText().toString()));
-                try {
-                    if(!editar) {
-                        CarSingleton.getInstance(getContext()).AddCar(getContext(), newCar);
-                    }else{
-                        newCar.setId(car.getId());
-                        CarSingleton.getInstance(getContext()).EditCar(getContext(), newCar);
+                if (ValidarCampos()) {
+                    Car newCar = new Car(txtVin.getText().toString(), txtBrand.getText().toString(),
+                            txtModel.getText().toString(), carColor,
+                            spCarTypeToApi(),
+                            Float.parseFloat(txtDisplacement.getText().toString()),
+                            spFuelToApi(),
+                            txtRegistration.getText().toString(), Integer.parseInt(txtYear.getText().toString()),
+                            Integer.parseInt(txtKilometers.getText().toString()));
+                    try {
+                        if (!editar) {
+                            CarSingleton.getInstance(getContext()).AddCar(getContext(), newCar);
+                        } else {
+                            newCar.setId(car.getId());
+                            CarSingleton.getInstance(getContext()).EditCar(getContext(), newCar);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
         });
@@ -151,6 +155,42 @@ public class fragment_form_car extends Fragment implements CarsListener {
             editarVehicleForm();
         }
         return view;
+    }
+
+    private boolean ValidarCampos() {
+        boolean error = true;
+        if (txtVin.getText().length() < 17) {
+            txtVin.setError(getString(R.string.VinCheck));
+            error = false;
+        }
+        if (txtBrand.getText().toString().isEmpty()) {
+            txtBrand.setError(getString(R.string.EditTextRequired));
+            error = false;
+        }
+        if (txtModel.getText().toString().isEmpty()) {
+            txtModel.setError(getString(R.string.EditTextRequired));
+            error = false;
+        }
+        if (txtYear.getText().toString().length() < 4 ||
+                Integer.parseInt(txtYear.getText().toString()) > Calendar.getInstance().get(Calendar.YEAR) ||
+                Integer.parseInt(txtYear.getText().toString()) < 1950) {
+            txtYear.setError(getString(R.string.ValidYear));
+            error = false;
+        }
+        if (txtDisplacement.getText().toString().isEmpty()) {
+            txtDisplacement.setError(getString(R.string.EditTextRequired));
+            error = false;
+        }
+        if (txtRegistration.getText().toString().isEmpty()) {
+            txtRegistration.setError(getString(R.string.EditTextRequired));
+            error = false;
+        }
+        if (txtKilometers.getText().toString().isEmpty()) {
+            txtKilometers.setError(getString(R.string.EditTextRequired));
+            error = false;
+        }
+
+        return error;
     }
 
     private void editarVehicleForm() {
@@ -238,10 +278,18 @@ public class fragment_form_car extends Fragment implements CarsListener {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-                                txtBrand.setText(response.getJSONArray("Results").getJSONObject(6).getString("Value"));
-                                txtModel.setText(response.getJSONArray("Results").getJSONObject(8).getString("Value"));
-                                txtYear.setText(response.getJSONArray("Results").getJSONObject(9).getString("Value"));
-                                txtDisplacement.setText(response.getJSONArray("Results").getJSONObject(69).getString("Value"));
+                                if (response.getJSONArray("Results").getJSONObject(6).getString("Value").isEmpty()) {
+                                    txtBrand.setText(response.getJSONArray("Results").getJSONObject(6).getString("Value"));
+                                }
+                                if (response.getJSONArray("Results").getJSONObject(8).getString("Value").isEmpty()) {
+                                    txtModel.setText(response.getJSONArray("Results").getJSONObject(8).getString("Value"));
+                                }
+                                if (response.getJSONArray("Results").getJSONObject(9).getString("Value").isEmpty()) {
+                                    txtYear.setText(response.getJSONArray("Results").getJSONObject(9).getString("Value"));
+                                }
+                                if (response.getJSONArray("Results").getJSONObject(69).getString("Value").isEmpty()) {
+                                    txtDisplacement.setText(response.getJSONArray("Results").getJSONObject(69).getString("Value"));
+                                }
 
                                 switch (response.getJSONArray("Results").getJSONObject(13).getString("Value")) {
                                     case "PASSENGER CAR":
@@ -291,21 +339,59 @@ public class fragment_form_car extends Fragment implements CarsListener {
     }
 
     private int spinnerFuelNameToIndex() {
-        String[] fuelTypes = getResources().getStringArray(R.array.fuelType_array);
-        for (int count = 0; count < fuelTypes.length; count++) {
-            if (fuelTypes[count].equals(car.getFueltype()))
-                return count;
+        switch (car.getFueltype()) {
+            case "Diesel":
+                return 0;
+            case "Hybrid":
+                return 1;
+            case "Electric":
+                return 2;
+            case "Gasoline":
+                return 3;
         }
         return 0;
     }
 
     private int spinnerTypeNameToIndex() {
-        String[] carTypes = getResources().getStringArray(R.array.carType_array);
-        for (int count = 0; count < carTypes.length; count++) {
-            if (carTypes[count].equals(car.getCartype()))
-                return count;
+        switch (car.getCartype()) {
+            case "PASSENGER CAR":
+                return 0;
+            case "MULTIPURPOSE PASSENGER VEHICLE":
+                return 1;
+            case "TRUCK":
+                return 2;
+            case "MOTORCYCLE":
+                return 3;
         }
         return 0;
+    }
+
+    private String spFuelToApi() {
+        switch (spFuelType.getSelectedItemPosition()) {
+            case 0:
+                return "Diesel";
+            case 1:
+                return "Hybrid";
+            case 2:
+                return "Electric";
+            case 3:
+                return "Gasoline";
+        }
+        return "Diesel";
+    }
+
+    private String spCarTypeToApi() {
+        switch (spCarType.getSelectedItemPosition()) {
+            case 0:
+                return "PASSENGER CAR";
+            case 1:
+                return "MULTIPURPOSE PASSENGER VEHICLE";
+            case 2:
+                return "TRUCK";
+            case 3:
+                return "MOTORCYCLE";
+        }
+        return "PASSENGER CAR";
     }
 
     @Override
@@ -315,11 +401,11 @@ public class fragment_form_car extends Fragment implements CarsListener {
 
     @Override
     public void onDeleteCreateCar() {
-        if(!editar) {
-            Toast.makeText(getContext(), car.getBrand() + " " + car.getModel() + " " + getString(R.string.Added), Toast.LENGTH_SHORT).show();
+        if (!editar) {
+            Toast.makeText(getContext(), getString(R.string.Added), Toast.LENGTH_SHORT).show();
             getActivity().getSupportFragmentManager().popBackStack();
-        }else{
-            Toast.makeText(getContext(), car.getBrand() + " " + car.getModel() + " " + getString(R.string.Edited), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), getString(R.string.Edited), Toast.LENGTH_SHORT).show();
             Fragment fragment = new fragment_garage();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainerView, fragment)

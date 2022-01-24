@@ -18,6 +18,11 @@ import com.example.carbuddy.models.Signup;
 
 import org.json.JSONException;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class SignupActivity extends AppCompatActivity {
 
     private EditText username, email, nif, phonenumber, password, passwordR;
@@ -42,6 +47,8 @@ public class SignupActivity extends AppCompatActivity {
             editAccount();
             edit = true;
         }
+
+        birsthday.setMaxDate(new Date().getTime());
     }
 
     private void editAccount() {
@@ -68,41 +75,70 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void btSignup(View view) throws JSONException {
-        if (PasswordVerify(password.getText().toString(), passwordR.getText().toString())) {
-            if (!edit) {
-                Signup form = new Signup(
-                        username.getText().toString(),
-                        email.getText().toString(),
-                        nif.getText().toString(),
-                        birsthday.getYear() + "/" + (birsthday.getMonth() + 1) + "/" + birsthday.getDayOfMonth(),
-                        phonenumber.getText().toString(),
-                        password.getText().toString()
-                );
-                if (!boxesEmptyVerify(username).isEmpty() &&
-                        !boxesEmptyVerify(email).isEmpty() &&
-                        !boxesEmptyVerify(nif).isEmpty() &&
-                        !boxesEmptyVerify(phonenumber).isEmpty() &&
-                        !boxesEmptyVerify(password).isEmpty()
-                ) {
-                    form.DoSignup(this);
-                    Toast.makeText(getApplicationContext(), getString(R.string.AccountCreated), Toast.LENGTH_SHORT).show();
+        if (verificarCampos()) {
+            if (PasswordVerify(password.getText().toString(), passwordR.getText().toString())) {
+
+                if (!edit) {
+                    Signup form = new Signup(
+                            username.getText().toString(),
+                            email.getText().toString(),
+                            nif.getText().toString(),
+                            birsthday.getYear() + "/" + (birsthday.getMonth() + 1) + "/" + birsthday.getDayOfMonth(),
+                            phonenumber.getText().toString(),
+                            password.getText().toString()
+                    );
+                    if (!boxesEmptyVerify(username).isEmpty() &&
+                            !boxesEmptyVerify(email).isEmpty() &&
+                            !boxesEmptyVerify(nif).isEmpty() &&
+                            !boxesEmptyVerify(phonenumber).isEmpty() &&
+                            !boxesEmptyVerify(password).isEmpty()
+                    ) {
+                        form.DoSignup(this);
+                        Toast.makeText(getApplicationContext(), getString(R.string.AccountCreated), Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+                } else {
+                    Signup form = new Signup(
+                            email.getText().toString(),
+                            password.getText().toString()
+                    );
+
+                    form.updateAccount(this);
+                    Toast.makeText(getApplicationContext(), getString(R.string.AccountUpdated), Toast.LENGTH_SHORT).show();
                     finish();
                 }
-
             } else {
-                Signup form = new Signup(
-                        email.getText().toString(),
-                        password.getText().toString()
-                );
-
-                form.updateAccount(this);
-                Toast.makeText(getApplicationContext(), getString(R.string.AccountUpdated), Toast.LENGTH_SHORT).show();
-                finish();
+                //Mensagem de erro a indicar que as passwors não correspondem
+                passwordR.setError(getString(R.string.PassDMatch));
             }
-        } else {
-            //Mensagem de erro a indicar que as passwors não correspondem
-            passwordR.setError(getString(R.string.PassDMatch));
         }
+    }
+
+    private boolean verificarCampos() {
+        String[] usernameSpaces = username.getText().toString().split("[ ]");
+        if (usernameSpaces.length > 1) {
+            username.setError(getString(R.string.FieldSpaces));
+            return false;
+        }
+        String[] emailSpaces = email.getText().toString().split("[ ]");
+        if (emailSpaces.length > 1) {
+            email.setError(getString(R.string.FieldSpaces));
+            return false;
+        }
+        String[] emailArroba = email.getText().toString().split("[@]");
+        String[] emailPonto = (emailArroba.length == 2) ? emailArroba[1].split("[.]") : new String[0];
+
+        if(emailArroba.length != 2 || emailPonto.length < 1){
+            email.setError(getString(R.string.ValidEmail));
+            return false;
+        }
+        if (password.length() < 8) {
+            password.setError(getString(R.string.PasswordMin));
+            return false;
+        }
+
+        return true;
     }
 
     private String boxesEmptyVerify(EditText box) {

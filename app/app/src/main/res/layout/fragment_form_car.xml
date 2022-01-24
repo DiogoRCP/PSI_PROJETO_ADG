@@ -35,6 +35,7 @@
                 android:layout_marginBottom="16dp"
                 android:ems="10"
                 android:hint="@string/vin"
+                android:maxLength="17"
                 android:minHeight="48dp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#A0A0A0" />
@@ -69,6 +70,7 @@
                 android:ems="10"
                 android:hint="@string/modelYear"
                 android:inputType="numberSigned"
+                android:maxLength="4"
                 android:minHeight="48dp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#A0A0A0" />
@@ -136,8 +138,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:background="#FFFFFF"
                 android:text="@string/color"
-                android:textColor="#E8E3D3" />
+                android:textColor="#D8C997" />
 
             <Button
                 android:id="@+id/btAddCar"
