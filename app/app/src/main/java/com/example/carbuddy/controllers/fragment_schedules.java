@@ -31,6 +31,10 @@ import java.util.ArrayList;
  * Use the {@link fragment_schedules#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/** extends Fragment - herança de classe do Fragmento
+ * implements SchedulesListener - implementação do Listener
+ * */
 public class fragment_schedules extends Fragment implements SchedulesListener {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -39,6 +43,7 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    /** Definição das variáveis globais*/
     private String mParam1;
     private String mParam2;
 
@@ -50,6 +55,7 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
 
     View v;
 
+    /** Construtor do fragmento em vazio - requerido pelo programa*/
     public fragment_schedules() {
         // Required empty public constructor
     }
@@ -63,6 +69,7 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
      * @return A new instance of fragment fragment_schedules.
      */
     // TODO: Rename and change types and number of parameters
+    /** Método de criação de uma nova instância do fragmento */
     public static fragment_schedules newInstance(String param1, String param2) {
         fragment_schedules fragment = new fragment_schedules();
         Bundle args = new Bundle();
@@ -72,6 +79,12 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         return fragment;
     }
 
+    /** Função onCreate
+     * - provém da extensão do Fragment
+     * - Inicialização dos argumentos da instância criada anteriormente
+     * - Conexão à base de dados
+     * - Chamada da instância do SchedulesSingleton
+     * */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,10 +95,10 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
 
         database = new ModeloBDHelper(getContext());
 
-        //Instanciar a Singleton
+        //Define o fragmento onde é disparado o listener
         SchedulesSingleton.getInstance(getContext()).setSchedulesListener(this);
 
-        //Carregar os Dados da API
+        //Carregar a Singleton com os Dados da API
         SchedulesSingleton.getInstance(getContext()).CarregarListaSchedules(getContext());
 
         if(SchedulesSingleton.getInstance(getContext()).getSchedules() != null) {
@@ -95,6 +108,13 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         }
     }
 
+    /** Função onCreateView
+     * - Gerar a view e tudo o que é visual
+     * - Associar o layout Fragment Schedules ao objeto view
+     * - Definição de título
+     * - Definição e chamada de textviews
+     * - Definição e chamada de botão
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -116,6 +136,10 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         return v;
     }
 
+    /** Função onRefreshSchedules
+     * Vai buscar as schedules à base de dados
+     * Mostra os dados na recyclerview
+     * */
     @Override
     public void onRefreshSchedules(ArrayList<Schedule> schedules) {
         for (Schedule schedule: schedules) {
@@ -125,6 +149,7 @@ public class fragment_schedules extends Fragment implements SchedulesListener {
         myRecyclerView.setAdapter(new ScheduleListAdapter(getContext(), lstSchedule, super.getFragmentManager()));
     }
 
+    /** ?? */
     @Override
     public void onDeleteCreateSchedule() {
 
