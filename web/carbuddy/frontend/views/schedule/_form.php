@@ -30,7 +30,7 @@ foreach ($modelCompanies as $modelCompany) {
 
     <?= $form->field($model, 'state')->dropDownList(['' => '','Pending' => 'Pending', 'Accepted' => 'Accepted', 'Accepted with Changed Date'=>'Accepted with Changed Date']) ?>
 
-    <?= $form->field($model, 'repairtype')->dropDownList(['' => '','Repair' => 'Repair', 'Maintenance' => 'Maintenance'], ['disabled' => 'disabled']) ?>
+    <?= $form->field($model, 'repairtype')->textInput(['readonly' => true, 'maxlength' => true]) ?>
 
     <?= $form->field($model, 'carId')->dropDownList($CarList,['disabled' => 'disabled']) ?>
 
