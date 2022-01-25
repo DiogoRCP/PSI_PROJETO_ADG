@@ -112,7 +112,7 @@ class RepairsController extends ActiveController
     public function actionDeleted($id)
     {
         if (Yii::$app->user->can('frontendCrudRepair')) {
-            $contributorModel = Contributors::findOne(Yii::$app->user->getId());
+            $contributorModel = Contributors::find()->where("userId = " . Yii::$app->user->getId())->one();
             $repairsmodel = new $this->modelClass;
             try {
                 $recs = $repairsmodel->deleteAll("id=" . $id . " and contributorId = " . $contributorModel->id);
