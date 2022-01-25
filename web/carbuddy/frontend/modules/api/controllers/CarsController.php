@@ -10,6 +10,7 @@ use yii\db\IntegrityException;
 use yii\filters\auth\QueryParamAuth;
 use yii\helpers\VarDumper;
 use yii\rest\ActiveController;
+use yii\web\ConflictHttpException;
 use yii\web\ForbiddenHttpException;
 
 class CarsController extends ActiveController
@@ -103,6 +104,9 @@ class CarsController extends ActiveController
 
             $carssmodel = new $this->modelClass;
 
+            if($carssmodel::find()->where('vin = "' . $car['vin'] . '"')->one())
+                throw new ConflictHttpException("vin is already in use", 0);
+
             $carssmodel->userId = Yii::$app->user->getId();
             $carssmodel->vin = $car['vin'];
             $carssmodel->brand = $car['brand'];
@@ -131,6 +135,11 @@ class CarsController extends ActiveController
             $car = Yii::$app->request->post();
 
             $carssmodel = Cars::findOne($id);
+
+            if(isset($car['vin'])) {
+                if ($car['vin'] != $carssmodel->vin && Cars::find()->where('vin = "' . $car['vin'] . '"')->one())
+                    throw new ConflictHttpException("vin is already in use", 0);
+            }
 
             if (Cars::findOne($id)->userId === Yii::$app->user->getId()) {
                 if(isset($car['vin']))$carssmodel->vin = $car['vin'];

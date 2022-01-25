@@ -3,9 +3,11 @@
 namespace frontend\modules\api\controllers;
 
 use common\models\User;
+use frontend\models\Users;
 use Yii;
 use yii\rest\ActiveController;
 use yii\filters\auth\QueryParamAuth;
+use yii\web\ConflictHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
@@ -101,6 +103,11 @@ class UserController extends ActiveController
 
             $Usermodel = new $this->modelClass;
             $rec = $Usermodel::find()->where('id = ' . Yii::$app->user->getId())->one();
+
+            if(isset($user['email'])){
+                if ($user['email'] != $rec->email && Users::find()->where('email = "' . $user['email'] . '"')->one())
+                    throw new ConflictHttpException("Email is already in use", 0);
+            }
 
             if(isset($user['email']))$rec->email = $user['email'];
             if(isset($user['password']))$rec->password_hash = Yii::$app->security->generatePasswordHash($user['password']);

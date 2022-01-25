@@ -21,7 +21,7 @@
     <string name="fuelType">Combustivel</string>
     <string name="registration">Matricula</string>
     <string name="modelYear">Ano</string>
-    <string name="kilometers">Kilometros</string>
+    <string name="kilometers">Quilómetros</string>
     <string name="repairs">Reparações</string>
     <string name="tVRepairDate">Data de Reparação</string>
     <string name="ltVRepairType">Tipo de Reparação</string>
@@ -31,7 +31,7 @@
     <string name="Repairs">Reparações</string>
     <string name="delete_confirmation">Tem a certeza que deseja apagar este carro?</string>
     <string name="Deleted">apagado</string>
-    <string name="AddVehicle">Veiculo novo</string>
+    <string name="AddVehicle">Veículo novo</string>
     <string name="Save">Guardar</string>
     <string name="tVUsername">Nome de Utilizador</string>
     <string name="tVBirthday">Data de Nascimento</string>
@@ -64,11 +64,16 @@
     <string name="EditTextRequired">Campo obrigatório</string>
     <string name="NoInternet">Sem internet</string>
     <string name="NoConnection">Sem ligação</string>
-    <string name="PasswordMin">A password tem de ter no minimo 8 caracteres</string>
+    <string name="PasswordMin">A password tem de ter no mínimo 8 caracteres</string>
     <string name="FieldSpaces">Este campo não pode conter espaços</string>
     <string name="ValidEmail">Insira um email válido</string>
     <string name="VinCheck">Insira um vin válido</string>
     <string name="ValidYear">Insira um ano válido</string>
+    <string name="UsernameInUse">Nome de utilizador já em uso</string>
+    <string name="EmailInUse">Email já em uso</string>
+    <string name="NifInUse">Nif já em uso</string>
+    <string name="PhoneNumberInUse">Número de telemóvel já em uso</string>
+    <string name="VinInUse">Vin já em uso</string>
 
     <string-array name="fuelType_array">
         <item>Gasóleo</item>
@@ -88,9 +93,5 @@
         <item>Manutenção</item>
         <item>Reparação</item>
     </string-array>
-    <string name="UsernameInUse">Nome de utilizador já em uso</string>
-    <string name="EmailInUse">Email já em uso</string>
-    <string name="NifInUse">Nif já em uso</string>
-    <string name="PhoneNumberInUse">Número de telemóvel já em uso</string>
 
 </resources>

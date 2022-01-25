@@ -157,9 +157,16 @@ public class SignupActivity extends AppCompatActivity implements SignupListener 
             email.setError(getString(R.string.ValidEmail));
             error = false;
         }
-        if (password.length() < 8) {
-            password.setError(getString(R.string.PasswordMin));
-            error = false;
+        if(!edit) {
+            if (password.length() < 8) {
+                password.setError(getString(R.string.PasswordMin));
+                error = false;
+            }
+        }else{
+            if (password.length() > 0 && password.length() < 8) {
+                password.setError(getString(R.string.PasswordMin));
+                error = false;
+            }
         }
 
         return error;

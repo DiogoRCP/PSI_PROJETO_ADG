@@ -31,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class CarSingleton {
@@ -46,8 +47,10 @@ public class CarSingleton {
     private CarsListener carsListener = null;
     private RepairsListener repairsListener = null;
 
-    /** Responsável por fazer com que se crie só uma unica vez a instância
-     Caso haja uma instância, a mesma é retornada **/
+    /**
+     * Responsável por fazer com que se crie só uma unica vez a instância
+     * Caso haja uma instância, a mesma é retornada
+     **/
     public static synchronized CarSingleton getInstance(Context context) {
         if (instancia == null) {
             instancia = new CarSingleton(context);
@@ -56,7 +59,9 @@ public class CarSingleton {
         return instancia;
     }
 
-    /** Construtor da Class CarSingleton **/
+    /**
+     * Construtor da Class CarSingleton
+     **/
     public CarSingleton(Context context) {
         database = new ModeloBDHelper(context);
         cars = new ArrayList<>();
@@ -68,7 +73,9 @@ public class CarSingleton {
         }
     }
 
-    /** Função que faz GET das carros **/
+    /**
+     * Função que faz GET das carros
+     **/
     public void CarregarListaCarros(Context context) {
         // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
@@ -115,7 +122,9 @@ public class CarSingleton {
         }
     }
 
-    /** Função que faz GET das reparações de um carro **/
+    /**
+     * Função que faz GET das reparações de um carro
+     **/
     public void CarregarListaRepairs(Context context, Car car) {
         // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
@@ -165,7 +174,9 @@ public class CarSingleton {
         }
     }
 
-    /** Função que faz DELETE de um carro **/
+    /**
+     * Função que faz DELETE de um carro
+     **/
     public void DeleteCar(Context context, int carId) {
         // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
@@ -193,7 +204,7 @@ public class CarSingleton {
                         public void onErrorResponse(VolleyError error) {
                             String message = "";
                             //Verificar que o volleyerror não é nulo
-                            if(error.networkResponse != null) {
+                            if (error.networkResponse != null) {
                                 System.out.println(error.networkResponse.statusCode);
                                 try {
                                     switch (error.networkResponse.statusCode) {
@@ -213,8 +224,7 @@ public class CarSingleton {
                                     //Chamar o listener
                                     carsListener.onDeleteCreateCar();
                                 }
-                            }
-                            else{
+                            } else {
                                 //carregar a variável message com Erro de falha na conexão
                                 message = context.getResources().getString(R.string.NoConnection);
                             }
@@ -227,7 +237,9 @@ public class CarSingleton {
         }
     }
 
-    /** Função que faz POST de um carro **/
+    /**
+     * Função que faz POST de um carro
+     **/
     public void AddCar(Context context, Car car) throws JSONException {
         // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
@@ -266,8 +278,36 @@ public class CarSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            //Mensagem de erro
-                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
+                            //Verifica se o status de erro é 409 que significa Conflit
+                            if (error.networkResponse.statusCode == 409) {
+                                try {
+                                    //Recebe a informação em json da mensagem, code, status...
+                                    final String errorMessage = new String(error.networkResponse.data, "UTF-8");
+
+                                    //Cria uma lista com a informação do erro dividindo por ","
+                                    String[] errorMessageData = errorMessage.split(",");
+
+                                    //Divide a chave:valor do code numa lista em que a posição 0 é
+                                    // a chave e a posição 1 é o número correspondente ao code
+                                    String[] errorCode = errorMessageData[2].split(":");
+
+                                    //Cria a mensagem de erro que vai ser escolhida consuante o número do code
+                                    String mensagemFinalDeErro;
+                                    if(Integer.parseInt(errorCode[1]) == 0){
+                                        mensagemFinalDeErro = context.getResources().getString(R.string.VinInUse);
+                                    }else {
+                                        mensagemFinalDeErro = context.getResources().getString(R.string.Error);
+                                    }
+                                    //Mostra a mensagem de erro
+                                    Toast.makeText(context, mensagemFinalDeErro, Toast.LENGTH_SHORT).show();
+
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                //Mostra a mensagem
+                                Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
             // Adicionar pedido à fila
@@ -275,7 +315,9 @@ public class CarSingleton {
         }
     }
 
-    /** Função que faz PUT de um carro **/
+    /**
+     * Função que faz PUT de um carro
+     **/
     public void EditCar(Context context, Car car) throws JSONException {
         // Se não houver conexão à internet mostra mensagem de erro
         if (!isInternetConnection(context)) {
@@ -313,8 +355,36 @@ public class CarSingleton {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            //Mensagem de erro
-                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
+                            //Verifica se o status de erro é 409 que significa Conflit
+                            if (error.networkResponse.statusCode == 409) {
+                                try {
+                                    //Recebe a informação em json da mensagem, code, status...
+                                    final String errorMessage = new String(error.networkResponse.data, "UTF-8");
+
+                                    //Cria uma lista com a informação do erro dividindo por ","
+                                    String[] errorMessageData = errorMessage.split(",");
+
+                                    //Divide a chave:valor do code numa lista em que a posição 0 é
+                                    // a chave e a posição 1 é o número correspondente ao code
+                                    String[] errorCode = errorMessageData[2].split(":");
+
+                                    //Cria a mensagem de erro que vai ser escolhida consuante o número do code
+                                    String mensagemFinalDeErro;
+                                    if(Integer.parseInt(errorCode[1]) == 0){
+                                        mensagemFinalDeErro = context.getResources().getString(R.string.VinInUse);
+                                    }else {
+                                        mensagemFinalDeErro = context.getResources().getString(R.string.Error);
+                                    }
+                                    //Mostra a mensagem de erro
+                                    Toast.makeText(context, mensagemFinalDeErro, Toast.LENGTH_SHORT).show();
+
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                //Mostra a mensagem
+                                Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
             // Adicionar pedido à fila

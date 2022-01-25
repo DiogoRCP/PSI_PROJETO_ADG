@@ -72,10 +72,11 @@
     <string name="ValidEmail">Please enter a valid email</string>
     <string name="VinCheck">Please enter a valid vin</string>
     <string name="ValidYear">Please enter a valid year</string>
-    <string name="UsernameInUse">Username already in use</string>
-    <string name="EmailInUse">Email already in use</string>
-    <string name="NifInUse">Nif already in use</string>
-    <string name="PhoneNumberInUse">Phone number already in use</string>
+    <string name="UsernameInUse">Username is already in use</string>
+    <string name="EmailInUse">Email is already in use</string>
+    <string name="NifInUse">Nif is already in use</string>
+    <string name="PhoneNumberInUse">Phone number is already in use</string>
+    <string name="VinInUse">Vin is already in use</string>
 
     <string-array name="fuelType_array">
         <item>Diesel</item>

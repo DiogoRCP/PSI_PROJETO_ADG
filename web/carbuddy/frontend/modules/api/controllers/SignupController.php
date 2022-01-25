@@ -19,16 +19,16 @@ class SignupController extends ActiveController
         $signupmodel = new $this->modelClass;
 
         if (Users::find()->where('username = "' . $user['username'] . '"')->one())
-            throw new ConflictHttpException("Username already in use", 0);
+            throw new ConflictHttpException("Username is already in use", 0);
 
         if (Users::find()->where('nif = "' . $user['nif'] . '"')->one())
-            throw new ConflictHttpException("Nif already in use", 1);
+            throw new ConflictHttpException("Nif is already in use", 1);
 
         if (Users::find()->where('email = "' . $user['email'] . '"')->one())
-            throw new ConflictHttpException("Email already in use", 2);
+            throw new ConflictHttpException("Email is already in use", 2);
 
         if (Users::find()->where('phonenumber = "' . $user['phonenumber'] . '"')->one())
-            throw new ConflictHttpException("Email already in use", 3);
+            throw new ConflictHttpException("Email is already in use", 3);
 
         $signupmodel->username = $user['username'];
         $signupmodel->password = $user['password'];

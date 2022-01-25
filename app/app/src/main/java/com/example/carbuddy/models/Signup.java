@@ -262,22 +262,12 @@ public class Signup {
                                     String[] errorCode = errorMessageData[2].split(":");
 
                                     String mensagemFinalDeErro;
-                                    switch (Integer.parseInt(errorCode[1])) {
-                                        case 0:
-                                            mensagemFinalDeErro = context.getResources().getString(R.string.UsernameInUse);
-                                            break;
-                                        case 1:
-                                            mensagemFinalDeErro = context.getResources().getString(R.string.NifInUse);
-                                            break;
-                                        case 2:
-                                            mensagemFinalDeErro = context.getResources().getString(R.string.EmailInUse);
-                                            break;
-                                        case 3:
-                                            mensagemFinalDeErro = context.getResources().getString(R.string.PhoneNumberInUse);
-                                            break;
-                                        default:
-                                            mensagemFinalDeErro = context.getResources().getString(R.string.Error);
+                                    if(Integer.parseInt(errorCode[1]) == 0){
+                                        mensagemFinalDeErro = context.getResources().getString(R.string.EmailInUse);
+                                    }else{
+                                        mensagemFinalDeErro = context.getResources().getString(R.string.Error);
                                     }
+
                                     Toast.makeText(context, mensagemFinalDeErro, Toast.LENGTH_SHORT).show();
 
                                 } catch (UnsupportedEncodingException e) {
