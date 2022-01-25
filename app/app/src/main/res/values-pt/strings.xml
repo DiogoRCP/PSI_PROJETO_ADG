@@ -88,5 +88,9 @@
         <item>Manutenção</item>
         <item>Reparação</item>
     </string-array>
+    <string name="UsernameInUse">Nome de utilizador já em uso</string>
+    <string name="EmailInUse">Email já em uso</string>
+    <string name="NifInUse">Nif já em uso</string>
+    <string name="PhoneNumberInUse">Número de telemóvel já em uso</string>
 
 </resources>

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.carbuddy.R;
+import com.example.carbuddy.listeners.SignupListener;
 import com.example.carbuddy.models.Login;
 import com.example.carbuddy.models.Signup;
 
@@ -23,23 +24,27 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-/** extends AppCompatActivity - Funcionalidades de Activity
- * */
-public class SignupActivity extends AppCompatActivity {
+/**
+ * extends AppCompatActivity - Funcionalidades de Activity
+ */
+public class SignupActivity extends AppCompatActivity implements SignupListener {
 
-    /** Definição das variáveis globais*/
+    /**
+     * Definição das variáveis globais
+     */
     private EditText username, email, nif, phonenumber, password, passwordR;
     private DatePicker birsthday;
     private Login login;
     private boolean edit;
     private Button buttonSignup;
 
-    /** Função onCreate
+    /**
+     * Função onCreate
      * - provém da extensão do AppCompatActivity
      * - Gerar a view e tudo o que é visual
      * - Chamada da ActionBar
      * - Serialização
-     * */
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
@@ -60,8 +65,10 @@ public class SignupActivity extends AppCompatActivity {
         birsthday.setMaxDate(new Date().getTime());
     }
 
-    /** Definição das labels a aparecer na edição de conta
-     *  - Definição do botão e respetiva string para edição de conta*/
+    /**
+     * Definição das labels a aparecer na edição de conta
+     * - Definição do botão e respetiva string para edição de conta
+     */
     private void editAccount() {
         setTitle(R.string.EditAccount);
 
@@ -74,7 +81,9 @@ public class SignupActivity extends AppCompatActivity {
         buttonSignup.setText(R.string.EditAccount);
     }
 
-    /** Obtenção dos elementos para as textviews */
+    /**
+     * Obtenção dos elementos para as textviews
+     */
     private void getElements() {
         username = findViewById(R.id.txusername);
         email = findViewById(R.id.txemail);
@@ -86,7 +95,9 @@ public class SignupActivity extends AppCompatActivity {
         buttonSignup = findViewById(R.id.btnSignup);
     }
 
-    /** Configuração do botão de SignUp consoante os dados inseridos nas labels: verificações de dados */
+    /**
+     * Configuração do botão de SignUp consoante os dados inseridos nas labels: verificações de dados
+     */
     public void btSignup(View view) throws JSONException {
         if (verificarCampos()) {
             if (PasswordVerify(password.getText().toString(), passwordR.getText().toString())) {
@@ -107,8 +118,6 @@ public class SignupActivity extends AppCompatActivity {
                             !boxesEmptyVerify(password).isEmpty()
                     ) {
                         form.DoSignup(this);
-                        Toast.makeText(getApplicationContext(), getString(R.string.AccountCreated), Toast.LENGTH_SHORT).show();
-                        finish();
                     }
 
                 } else {
@@ -118,8 +127,6 @@ public class SignupActivity extends AppCompatActivity {
                     );
 
                     form.updateAccount(this);
-                    Toast.makeText(getApplicationContext(), getString(R.string.AccountUpdated), Toast.LENGTH_SHORT).show();
-                    finish();
                 }
             } else {
                 //Mensagem de erro a indicar que as passwors não correspondem
@@ -128,7 +135,9 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    /** Verificação e atribuição de mensagens de erro a campos vazios */
+    /**
+     * Verificação e atribuição de mensagens de erro a campos vazios
+     */
     private boolean verificarCampos() {
         String[] usernameSpaces = username.getText().toString().split(" ");
         boolean error = true;
@@ -144,7 +153,7 @@ public class SignupActivity extends AppCompatActivity {
         String[] emailArroba = email.getText().toString().split("@");
         String[] emailPonto = (emailArroba.length == 2) ? emailArroba[1].split("\\.") : new String[0];
 
-        if(emailArroba.length != 2 || emailPonto.length < 2){
+        if (emailArroba.length != 2 || emailPonto.length < 2) {
             email.setError(getString(R.string.ValidEmail));
             error = false;
         }
@@ -156,7 +165,9 @@ public class SignupActivity extends AppCompatActivity {
         return error;
     }
 
-    /** Verificação e atribuição de mensagens de erro a campos vazios */
+    /**
+     * Verificação e atribuição de mensagens de erro a campos vazios
+     */
     private String boxesEmptyVerify(EditText box) {
         if (box.getText().toString().isEmpty()) {
             box.setError(getString(R.string.EditTextRequired));
@@ -166,10 +177,11 @@ public class SignupActivity extends AppCompatActivity {
         return "";
     }
 
-    /** - Função que permite gerar uma ação ao clicar no item do menu
-     *  - Identificação do item do menu
-     *  - Aceder ao main page
-     * */
+    /**
+     * - Função que permite gerar uma ação ao clicar no item do menu
+     * - Identificação do item do menu
+     * - Aceder ao main page
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -179,5 +191,16 @@ public class SignupActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSignup(boolean create) {
+        if (create) {
+            Toast.makeText(getApplicationContext(), getString(R.string.AccountCreated), Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(), getString(R.string.AccountUpdated), Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 }

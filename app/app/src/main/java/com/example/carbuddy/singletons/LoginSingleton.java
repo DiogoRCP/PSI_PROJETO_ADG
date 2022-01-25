@@ -36,7 +36,7 @@ public class LoginSingleton {
     // listener
     private LoginListener loginListener = null;
     private LoginListener AccountFragment = null;
-    private LoginListener loginListenerAccount;
+    private LoginListener loginListenerAccount = null;
 
     /** synchronized para ser Responsável por fazer com que se crie só uma unica vez a instância
      Caso haja uma instância, a mesma é retornada se não vai para o construtor **/

@@ -15,11 +15,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.carbuddy.R;
+import com.example.carbuddy.controllers.SignupActivity;
+import com.example.carbuddy.listeners.SignupListener;
 import com.example.carbuddy.singletons.LoginSingleton;
 import com.example.carbuddy.utils.libs;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 /**
  * Modelo Singup, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString
@@ -160,13 +166,45 @@ public class Signup {
                         // Quando o pedido é executado corretamente
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.i("VOLLEY", response.toString());
+                            SignupListener signupListener = (SignupListener) context;
+                            signupListener.onSignup(true);
                         }
                     }, new Response.ErrorListener() {
                         // Quando o pedido não é executado corretamente (Erro)
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
+                            if (error.networkResponse.statusCode == 409) {
+                                try {
+                                    final String errorMessage = new String(error.networkResponse.data, "UTF-8");
+
+                                    String[] errorMessageData = errorMessage.split(",");
+                                    String[] errorCode = errorMessageData[2].split(":");
+
+                                    String mensagemFinalDeErro;
+                                    switch (Integer.parseInt(errorCode[1])) {
+                                        case 0:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.UsernameInUse);
+                                            break;
+                                        case 1:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.NifInUse);
+                                            break;
+                                        case 2:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.EmailInUse);
+                                            break;
+                                        case 3:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.PhoneNumberInUse);
+                                            break;
+                                        default:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.Error);
+                                    }
+                                    Toast.makeText(context, mensagemFinalDeErro, Toast.LENGTH_SHORT).show();
+
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
             // Adicionar pedido à fila
@@ -200,13 +238,45 @@ public class Signup {
                         // Quando o pedido é executado corretamente
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.i("VOLLEY", response.toString());
+                            SignupListener signupListener = (SignupListener) context;
+                            signupListener.onSignup(false);
                         }
                     }, new Response.ErrorListener() {
                         // Quando o pedido não é executado corretamente (Erro)
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
+                            if (error.networkResponse.statusCode == 409) {
+                                try {
+                                    final String errorMessage = new String(error.networkResponse.data, "UTF-8");
+
+                                    String[] errorMessageData = errorMessage.split(",");
+                                    String[] errorCode = errorMessageData[2].split(":");
+
+                                    String mensagemFinalDeErro;
+                                    switch (Integer.parseInt(errorCode[1])) {
+                                        case 0:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.UsernameInUse);
+                                            break;
+                                        case 1:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.NifInUse);
+                                            break;
+                                        case 2:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.EmailInUse);
+                                            break;
+                                        case 3:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.PhoneNumberInUse);
+                                            break;
+                                        default:
+                                            mensagemFinalDeErro = context.getResources().getString(R.string.Error);
+                                    }
+                                    Toast.makeText(context, mensagemFinalDeErro, Toast.LENGTH_SHORT).show();
+
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
             // Adicionar pedido à fila
