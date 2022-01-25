@@ -173,13 +173,20 @@ public class Signup {
                         // Quando o pedido não é executado corretamente (Erro)
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            //Verifica se o status de erro é 409 que significa Conflit
                             if (error.networkResponse.statusCode == 409) {
                                 try {
+                                    //Recebe a informação em json da mensagem, code, status...
                                     final String errorMessage = new String(error.networkResponse.data, "UTF-8");
 
+                                    //Cria uma lista com a informação do erro dividindo por ","
                                     String[] errorMessageData = errorMessage.split(",");
+
+                                    //Divide a chave:valor do code numa lista em que a posição 0 é
+                                    // a chave e a posição 1 é o número correspondente ao code
                                     String[] errorCode = errorMessageData[2].split(":");
 
+                                    //Cria a mensagem de erro que vai ser escolhida consuante o número do code
                                     String mensagemFinalDeErro;
                                     switch (Integer.parseInt(errorCode[1])) {
                                         case 0:
@@ -197,12 +204,14 @@ public class Signup {
                                         default:
                                             mensagemFinalDeErro = context.getResources().getString(R.string.Error);
                                     }
+                                    //Mostra a mensagem de erro
                                     Toast.makeText(context, mensagemFinalDeErro, Toast.LENGTH_SHORT).show();
 
                                 } catch (UnsupportedEncodingException e) {
                                     e.printStackTrace();
                                 }
                             } else {
+                                //Mostra a mensagem
                                 Toast.makeText(context, R.string.NoConnection, Toast.LENGTH_SHORT).show();
                             }
                         }

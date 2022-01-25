@@ -193,13 +193,20 @@ public class SignupActivity extends AppCompatActivity implements SignupListener 
         return super.onOptionsItemSelected(item);
     }
 
+    //Função que é disparada quando o Post ou Update do signup é feito na api
     @Override
     public void onSignup(boolean create) {
+        //Verificar se foi feito um post
         if (create) {
+            //Mostrar mensagem de conta criada com sucesso
             Toast.makeText(getApplicationContext(), getString(R.string.AccountCreated), Toast.LENGTH_SHORT).show();
+            //Fechar activity signup e regressar ao login
             finish();
+            //Caso tenha sido feito um put
         } else {
+            //Mostrar mensagem de conta atualizada com sucesso
             Toast.makeText(getApplicationContext(), getString(R.string.AccountUpdated), Toast.LENGTH_SHORT).show();
+            //Fechar activity signup e regressar ao login
             finish();
         }
     }
