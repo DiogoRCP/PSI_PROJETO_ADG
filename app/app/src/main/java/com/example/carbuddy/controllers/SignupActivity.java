@@ -47,21 +47,27 @@ public class SignupActivity extends AppCompatActivity implements SignupListener 
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Definir layout associado à atividade
         setContentView(R.layout.activity_signup);
 
+        //Botão de pops back
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //obter todas as referencias das textviews do layout
         getElements();
 
+        //Edit = false quando o objetivo é criar um utilizador
         edit = false;
 
+        //Se for recebido um intent ao entrar na activity o objetivo é atualizar a sua password e email edit=true
         if (getIntent().getSerializableExtra("userEdit") != null) {
             login = (Login) getIntent().getSerializableExtra("userEdit");
+            //chamar a função edit acount que vai tornar algumas labels e text views invisiveis
             editAccount();
             edit = true;
         }
-
+        //Definir data maxima para o dia de hoje
         birsthday.setMaxDate(new Date().getTime());
     }
 
@@ -99,9 +105,12 @@ public class SignupActivity extends AppCompatActivity implements SignupListener 
      * Configuração do botão de SignUp consoante os dados inseridos nas labels: verificações de dados
      */
     public void btSignup(View view) throws JSONException {
+        //Verificar se os campos estão preenchidos corretamente
         if (verificarCampos()) {
+            //Verificar se as passwords e a sua repetição são iguais
             if (PasswordVerify(password.getText().toString(), passwordR.getText().toString())) {
 
+                //Registo do user
                 if (!edit) {
                     Signup form = new Signup(
                             username.getText().toString(),
@@ -117,15 +126,17 @@ public class SignupActivity extends AppCompatActivity implements SignupListener 
                             !boxesEmptyVerify(phonenumber).isEmpty() &&
                             !boxesEmptyVerify(password).isEmpty()
                     ) {
+                        //Singleton POST user
                         form.DoSignup(this);
                     }
 
+                    //Edit do user
                 } else {
                     Signup form = new Signup(
                             email.getText().toString(),
                             password.getText().toString()
                     );
-
+                    //Singleton PUT user
                     form.updateAccount(this);
                 }
             } else {
@@ -141,28 +152,34 @@ public class SignupActivity extends AppCompatActivity implements SignupListener 
     private boolean verificarCampos() {
         String[] usernameSpaces = username.getText().toString().split(" ");
         boolean error = true;
+        //verificar se o useername esta bem preenchido, com mais que 1 caracter
         if (usernameSpaces.length > 1) {
             username.setError(getString(R.string.FieldSpaces));
             error = false;
         }
         String[] emailSpaces = email.getText().toString().split(" ");
+        //Verificar se o email tem espaços
         if (emailSpaces.length > 1) {
             email.setError(getString(R.string.FieldSpaces));
             error = false;
         }
         String[] emailArroba = email.getText().toString().split("@");
         String[] emailPonto = (emailArroba.length == 2) ? emailArroba[1].split("\\.") : new String[0];
-
+        //Verifica se o email é valido
         if (emailArroba.length != 2 || emailPonto.length < 2) {
             email.setError(getString(R.string.ValidEmail));
             error = false;
         }
+
+        //Se o obejtivo for editar o user verifica se a password tem 8 caracteres
         if(!edit) {
             if (password.length() < 8) {
                 password.setError(getString(R.string.PasswordMin));
                 error = false;
             }
-        }else{
+        }
+        // se o obejtivo for criar um user verifica se a password tem 8 caracteres
+        else{
             if (password.length() > 0 && password.length() < 8) {
                 password.setError(getString(R.string.PasswordMin));
                 error = false;
@@ -200,7 +217,7 @@ public class SignupActivity extends AppCompatActivity implements SignupListener 
         return super.onOptionsItemSelected(item);
     }
 
-    //Função que é disparada quando o Post ou Update do signup é feito na api
+    //Função que é disparada quando o Post ou PUT do signup é feito na api
     @Override
     public void onSignup(boolean create) {
         //Verificar se foi feito um post

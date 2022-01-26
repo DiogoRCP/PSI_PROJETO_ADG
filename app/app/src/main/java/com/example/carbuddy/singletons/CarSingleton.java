@@ -106,7 +106,7 @@ public class CarSingleton {
                                     e.printStackTrace();
                                 }
                             }
-                            //Chamar o listener
+                            //Chamar o listener no fragmento garage
                             carsListener.onRefreshCars(cars);
                         }
                     }, new Response.ErrorListener() {

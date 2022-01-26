@@ -88,7 +88,7 @@ public class CompaniesSingleton {
                                     e.printStackTrace();
                                 }
                             }
-                            //Chamar o listener
+                            //Chamar o listener para atualizar as empresas após o pedido
                             companiesListener.onRefreshCompanies(companies);
                         }
                     }, new Response.ErrorListener() {

@@ -85,7 +85,7 @@ public class LoginSingleton {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
+                            //Chamar o listener onValidateLogin
                             loginListener.onValidateLogin(login);
                         }
                     }, new Response.ErrorListener() {
