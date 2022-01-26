@@ -157,6 +157,7 @@ public class SignupActivity extends AppCompatActivity implements SignupListener 
             email.setError(getString(R.string.ValidEmail));
             error = false;
         }
+        //Só no caso de ser edit é possivel deixar a password vazia para não a editar
         if(!edit) {
             if (password.length() < 8) {
                 password.setError(getString(R.string.PasswordMin));
