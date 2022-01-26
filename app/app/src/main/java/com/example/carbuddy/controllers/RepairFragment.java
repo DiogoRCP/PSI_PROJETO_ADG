@@ -87,6 +87,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
         }
         database = new ModeloBDHelper(getContext());
 
+        //Recebe o carro vindo do car info
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             car = (Car) bundle.getSerializable("car");
@@ -119,6 +120,7 @@ public class RepairFragment extends Fragment implements RepairsListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //Define o titulo do fragmento
         getActivity().setTitle(getString(R.string.Repairs));
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.Repairs);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(carRegistration);

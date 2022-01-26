@@ -94,6 +94,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        //Recebe os dados do carro vindo da garagem com um bundle
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             car = (Car) bundle.getSerializable("car");
@@ -170,19 +171,22 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //Definição do titulo do fragmento
         getActivity().setTitle(R.string.InfoCarro);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.InfoCarro);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
+        //Definição do layout associado ao fragmento
         View view = inflater.inflate(R.layout.fragment_car_info,
                 container, false);
 
+        //Obtem as referencias dos objetos na view e coloca os dados no carro
         writeForm(view);
 
         return view;
     }
 
-
+    //Obtem as referencias dos objetos na view e coloca os dados no carro
      /** Definição e chamada de textviews e imagens */
     private void writeForm(View view){
         imageCar = view.findViewById(R.id.imageViewCar);
@@ -208,7 +212,7 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
         txtKilometers.setText(String.valueOf(car.getKilometers()));
     }
 
-    /** Seletor de cor do carro, consoante o tipo de carro */
+    /** Seletor do tipo de carro para definir a imagem*/
     private void chooseTypeColor() {
         switch (car.getCartype()) {
             case "PASSENGER CAR":
@@ -232,10 +236,11 @@ public class fragment_carInfo extends Fragment implements DeleteDialogListener, 
     public void onDeleteYes(int id) {
         switch (id) {
             case -1:
+                // Botão yes
                 CarSingleton.getInstance(getContext()).DeleteCar(getContext(), car.getId());
                 break;
             case -2:
-                // Botão não apagar
+                // Botão no
                 break;
             default:
                 break;

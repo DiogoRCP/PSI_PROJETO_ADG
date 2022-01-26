@@ -302,6 +302,7 @@ public class Schedules_Appointment extends Fragment implements SchedulesListener
         });
     }
 
+    //Seletor do tipo de reparação do agendamento com o index do spinner
     private String RepairTypeChoose() {
         switch (spRepairType.getSelectedItemPosition()) {
             case 0:

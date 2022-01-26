@@ -106,6 +106,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         }
 
         //É obrigatório implemnetar o onclick pois o myviewholder tem "implements View.OnClickListener"
+        //Onclick para editar o carro
         /** Enviar os dados do carro selecionado para o fragmento de informações do carro utilizando um bundle **/
         @Override
         public void onClick(View v) {

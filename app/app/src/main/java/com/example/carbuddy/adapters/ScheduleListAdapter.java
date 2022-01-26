@@ -82,7 +82,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
             this.manager = manager;
 
             llschedules.setOnClickListener(new View.OnClickListener() {
-                /** Onclick que levas os dados num bundle para a edição de schedules **/
+                /** Onclick que leva os dados num bundle para a edição de schedules **/
                 @Override
                 public void onClick(View view) {
                     fragment = new Schedules_Appointment();

@@ -132,6 +132,7 @@ public class fragment_garage extends Fragment implements CarsListener {
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(listaAdapter);
 
+        //Botão flotuante add car
         v.findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
