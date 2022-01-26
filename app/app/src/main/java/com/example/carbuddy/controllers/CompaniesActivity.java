@@ -37,8 +37,10 @@ public class CompaniesActivity extends AppCompatActivity implements CompaniesLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_companies);
 
+        //Definição do botão de pops back
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Definição do titulo e subtitulo(vazio)
         getSupportActionBar().setTitle(R.string.Companies);
         getSupportActionBar().setSubtitle(null);
 
@@ -77,15 +79,16 @@ public class CompaniesActivity extends AppCompatActivity implements CompaniesLis
 
 
     /** Função onRefreshCompanies
-     * Vai buscar as companies à base de dados
      * Mostra os dados na recyclerview
-     * */
+     * É chamado no momento em que o pedido na singleton é executado*/
     @Override
     public void onRefreshCompanies(ArrayList<Company> companies) {
         for (Company company: companies) {
             database.insertCompanies(company);
         }
+        //Cria uma lista de empresas obtidas atraves da singleton
         lstCompany = CompaniesSingleton.getInstance(this).getCompanies();
+        //Envia a lista de empresas para o adapter de forma a serem enviadas para o layout
         myRecyclerView.setAdapter(new CompanyListAdapter(this, lstCompany));
     }
 }

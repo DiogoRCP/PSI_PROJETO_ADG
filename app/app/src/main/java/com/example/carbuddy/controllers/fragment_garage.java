@@ -152,7 +152,7 @@ public class fragment_garage extends Fragment implements CarsListener {
     /** Função onRefreshCars
      * Vai inserir os carros na base de dados
      * Mostra os dados na recyclerview
-     * */
+     * A função é chamada no listener dps do get dos carros do cliente*/
     @Override
     public void onRefreshCars(ArrayList<Car> cars) {
         for (Car car : cars) {

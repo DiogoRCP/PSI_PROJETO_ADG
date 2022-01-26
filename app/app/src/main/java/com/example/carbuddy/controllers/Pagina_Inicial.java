@@ -56,8 +56,10 @@ public class Pagina_Inicial extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Declarar o fragmento inicial
         setContentView(R.layout.activity_pagina_inicial);
 
+        //Instanciar botão de back
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
         getSupportActionBar().setIcon(R.drawable.ic_action_back);
 
@@ -68,6 +70,7 @@ public class Pagina_Inicial extends AppCompatActivity {
             CarregarFragmentoInicial();
         }
 
+        //Criar as notificações vindas do MQTT
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channelRepair = new NotificationChannel("VehicleRepair", "VehicleRepair", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationChannel channelSchedule = new NotificationChannel("VehicleSchedule", "VehicleSchedule", NotificationManager.IMPORTANCE_DEFAULT);
@@ -76,20 +79,19 @@ public class Pagina_Inicial extends AppCompatActivity {
             manager.createNotificationChannel(channelSchedule);
         }
 
+        //Conectar os canais do MQTT
         connectionMQTTRepair(this);
         connectionMQTTSchedule(this);
     }
 
-    /**Criação do menu lateral*/
+    /**Criação do menu lateral(inflater, chamar o menu)*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    /** - Função que permite gerar uma ação ao clicar no item do menu
-     *  - Identificação do item do menu
-     *  - Aceder ao main page
+    /** - Função que permite gerar uma ação voltar atrás (pops back)
      * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -138,13 +140,13 @@ public class Pagina_Inicial extends AppCompatActivity {
                 .commit();
     }
 
-    /** Função responsável por definir o fragmento inicial */
+    /** Função responsável por definir o fragmento inicial, colocar o titulo etc*/
     public void CarregarFragmentoInicial() {
         fragmentNumber = 1;
         fragment = new fragment_garage();
-
+        //Definir o titulo
         getSupportActionBar().setTitle(R.string.Garage);
-
+        //Botão selecionado no menu principal(para mudar a cor do botão)
         SelectedMainMenu(this, R.id.btMainGarage);
 
         fragmentManager.beginTransaction()
@@ -152,7 +154,7 @@ public class Pagina_Inicial extends AppCompatActivity {
                 .commit();
     }
 
-    /** Função onResume
+    /** Função onResume, conectar os canais do MQTT
      *  */
     @Override
     protected void onResume() {
@@ -168,7 +170,7 @@ public class Pagina_Inicial extends AppCompatActivity {
     }
 
     /** Ao clicar no botão Logout, presente no menu,
-     * termina a sessão e leva-nos para a pánina de Login*/
+     * termina a sessão, apaga a base de dados e leva-nos para a pánina de Login*/
     public void onClickLogoutMenu(MenuItem item) {
         this.deleteDatabase("carbuddy");
         this.finish();

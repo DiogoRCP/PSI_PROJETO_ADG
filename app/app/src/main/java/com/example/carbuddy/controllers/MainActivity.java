@@ -53,14 +53,13 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         editTextPass = findViewById(R.id.editTextTextPassword);
 
         VerificarLogin();
+        //Instanciar a singleton comapnies caso o user queira aceder à activity companies os dados ja estarem carregados
         CompaniesSingleton.getInstance(this);
 
     }
 
     /** Função efetuarLogin
-     * - Permite verificar o login
-     * - Atribuição de mensagens de erro caso um ou ambos
-     * elementos se encontrem diferentes do registo na base de dados*/
+     * - Atribuição de mensagens de erro caso um ou ambos os elementos nao estejam preenchidos*/
     private boolean efetuarLogin() {
         user = editTextUser.getText().toString();
         pass = editTextPass.getText().toString();
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
             return true;
     }
 
-    /** Botão que instancia a singleton */
+    /** Botão que instancia a singleton e executa o ednpoit da API, caso os dados de login tenham sido preenchidos*/
     public void onClickLogin(View view) throws JSONException {
         if (efetuarLogin()) {
             LoginSingleton.getInstance(this).apiLogin(this, user, pass);
@@ -117,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         startActivity(companiesView);
     }
 
-    /** Ao verificar o login na base de dados e for verdadeiro, inicializar a activity paginaInicial*/
+    /** Verificar se já existem dados de login na base de dados e entrar na garagem automaticamente, pois já temos o cliente/user em questão*/
     private void VerificarLogin() {
         if (database.getAllLogin().size() > 0) {
             Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         }
     }
 
-    /** Definição da mensagem de erro caso o login não der sucesso*/
+    /** Função chamada pelo listener no momento do login no singleton*/
     @Override
     public void onValidateLogin(Login login) {
         if (login.getToken() != null) {
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         }
     }
 
-    /** Instanciar uma nova base de dados */
+    /** Instanciar uma nova base de dados quando o programa deixa de estar em background ou quando inicia */
     protected void onResume() {
         database = new ModeloBDHelper(this);
         super.onResume();
