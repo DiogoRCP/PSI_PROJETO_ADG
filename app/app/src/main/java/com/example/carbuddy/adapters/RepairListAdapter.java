@@ -53,7 +53,7 @@ public class RepairListAdapter extends RecyclerView.Adapter<RepairListAdapter.My
         return listaRepairs.size();
     }
 
-    /** Associar a cada item da recycler view os dados da repair **/
+    /** Obter as referencias das txtviews do layout **/
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textViewRepairDate, textViewRepairType, textViewRepairDescp, textViewRepairKm, textViewRepairState;
