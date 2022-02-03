@@ -1,11 +1,17 @@
 package com.example.carbuddy.models;
 
-/** Modelo Reapir, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString **/
-public class Repair {
+import java.io.Serializable;
+
+/**
+ * Modelo Reapir, onde são definidos os getters, setters, construtores, propriedades e redefinição do método toString
+ **/
+public class Repair implements Serializable {
     private int id, kilometers, carId, contributorId;
     private String repairdate, repairdescription, state, repairtype;
 
-    /** Construtor da Repair **/
+    /**
+     * Construtor da Repair
+     **/
     public Repair(int id, int kilometers, int carId, int contributorId, String repairdate, String repairdescription, String state, String repairtype) {
         this.id = id;
         this.kilometers = kilometers;
@@ -82,7 +88,9 @@ public class Repair {
         this.repairtype = repairtype;
     }
 
-    /** Redefinição do método toString **/
+    /**
+     * Redefinição do método toString
+     **/
     @Override
     public String toString() {
         return "Repair{" +
