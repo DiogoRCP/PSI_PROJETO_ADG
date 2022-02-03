@@ -171,8 +171,6 @@ public class AccountFragment extends Fragment implements LoginListener {
     public void onValidateLogin(Login login) {
         //Atualizar o objeto login com a API
         this.login = login;
-        //Fazer o update à base de dados
-        database.insertLogin(this.login);
 
         updateAccount();
     }

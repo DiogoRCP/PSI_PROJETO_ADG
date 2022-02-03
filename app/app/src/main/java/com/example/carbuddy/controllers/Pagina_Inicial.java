@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +39,11 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /** extends Fragment - herança de classe do Fragmento
  * */
@@ -161,6 +167,21 @@ public class Pagina_Inicial extends AppCompatActivity {
         super.onResume();
         connectionMQTTRepair(this);
         connectionMQTTSchedule(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try{
+            FileOutputStream fileOutputStream = openFileOutput("login.bin", Context.MODE_PRIVATE);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(LoginSingleton.getInstance(this).getLogin());
+            objectOutputStream.close();
+            fileOutputStream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /** Ao clicar no botão Companies, presente no menu, leva-nos para a atividade companies*/

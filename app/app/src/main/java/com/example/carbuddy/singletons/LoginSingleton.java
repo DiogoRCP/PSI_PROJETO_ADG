@@ -19,15 +19,17 @@ import com.example.carbuddy.controllers.AccountFragment;
 import com.example.carbuddy.controllers.MainActivity;
 import com.example.carbuddy.listeners.LoginListener;
 import com.example.carbuddy.models.Login;
-import com.example.carbuddy.models.ModeloBDHelper;
 import com.example.carbuddy.utils.libs;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 public class LoginSingleton {
     Login login;
-    private ModeloBDHelper database;
     private static LoginSingleton instancia = null;
 
     // volley
@@ -50,9 +52,16 @@ public class LoginSingleton {
 
     /** Construtor da Class LoginSingleton **/
     public LoginSingleton(Context context) {
-        database = new ModeloBDHelper(context);
-        if (database.getAllLogin().size() > 0) {
-            login = database.getAllLogin().getFirst();
+        try{
+            FileInputStream fileInputStream = context.openFileInput("login.bin");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            login = (Login) objectInputStream.readObject();
+
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

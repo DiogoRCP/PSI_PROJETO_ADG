@@ -21,7 +21,9 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     }
 
 
-    /** DB Tables CREATE **/
+    /**
+     * DB Tables CREATE
+     **/
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createCarsTable =
@@ -83,18 +85,6 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
                         ");";
 
         db.execSQL(createRepairsTable);
-
-            String createLoginTable =
-                    "CREATE TABLE IF NOT EXISTS login(" +
-                            "id INTEGER PRIMARY KEY," +
-                            "token TEXT NOT NULL," +
-                            "username VARCHAR(100) NOT NULL," +
-                            "email VARCHAR(100) NOT NULL," +
-                            "nif VARCHAR(9) NOT NULL," +
-                            "phonenumber VARCHAR(40) NOT NULL," +
-                            "birsthday DATETIME NOT NULL" +
-                            ");";
-            db.execSQL(createLoginTable);
     }
 
 
@@ -102,7 +92,9 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    /** DB Tables INSERT CAR**/
+    /**
+     * DB Tables INSERT CAR
+     **/
     public void insertCars(Car car) {
         ContentValues values = new ContentValues();
         values.put("id", car.getId());
@@ -123,13 +115,18 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
             database.insert("cars", null, values);
         }
     }
-     /** Verificar carro na DB **/
+
+    /**
+     * Verificar carro na DB
+     **/
     private boolean verificarCar(Car car, ContentValues values) {
         return this.database.update("cars", values,
                 "id = ? OR vin = ?", new String[]{"" + car.getId(), "" + car.getVin()}) > 0;
     }
 
-    /** Obter todos os carros registados**/
+    /**
+     * Obter todos os carros registados
+     **/
     public LinkedList<Car> getAllCars() {
         LinkedList<Car> cars = new LinkedList<>();
         Cursor cursor = this.database.rawQuery("SELECT * FROM cars",
@@ -155,14 +152,17 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return cars;
     }
 
-    /** Apagar carro na DB **/
-    public boolean deleteCar(int id)
-    {
+    /**
+     * Apagar carro na DB
+     **/
+    public boolean deleteCar(int id) {
         return database.delete("cars", "id" + "=?", new String[]{String.valueOf(id)}) > 0;
     }
 
 
-    /** DB Tables INSERT Company**/
+    /**
+     * DB Tables INSERT Company
+     **/
     public void insertCompanies(Company company) {
         ContentValues values = new ContentValues();
         values.put("id", company.getId());
@@ -176,13 +176,18 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
             database.insert("companies", null, values);
         }
     }
-    /** Verificar company na DB **/
+
+    /**
+     * Verificar company na DB
+     **/
     private boolean verificarCompany(Company company, ContentValues values) {
         return this.database.update("companies", values,
                 "id = ?", new String[]{"" + company.getId()}) > 0;
     }
 
-    /** Obter todas as companies registadas**/
+    /**
+     * Obter todas as companies registadas
+     **/
     public LinkedList<Company> getAllCompanies() {
         LinkedList<Company> companies = new LinkedList<>();
         Cursor cursor = this.database.rawQuery("SELECT * FROM companies",
@@ -202,7 +207,9 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
     }
 
 
-    /** DB Tables INSERT Schedules**/
+    /**
+     * DB Tables INSERT Schedules
+     **/
     public void insertSchedules(Schedule schedule) {
         ContentValues values = new ContentValues();
         values.put("id", schedule.getId());
@@ -219,13 +226,17 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         }
     }
 
-    /** Verificar schedules na DB **/
+    /**
+     * Verificar schedules na DB
+     **/
     private boolean verificarSchedule(Schedule schedule, ContentValues values) {
         return this.database.update("schedules", values,
                 "id = ?", new String[]{"" + schedule.getId()}) > 0;
     }
 
-    /** Obter todas as schedules registadas**/
+    /**
+     * Obter todas as schedules registadas
+     **/
     public LinkedList<Schedule> getAllSchedules() {
         LinkedList<Schedule> schedules = new LinkedList<>();
         Cursor cursor = this.database.rawQuery("SELECT * FROM schedules ORDER BY schedulingdate DESC",
@@ -233,13 +244,13 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 schedules.add(new Schedule(cursor.getInt(0),
-                cursor.getInt(1),
-                cursor.getString(2),
-                cursor.getString(3),
-                cursor.getString(4),
-                cursor.getString(5),
-                cursor.getString(6),
-                cursor.getInt(7)
+                        cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getInt(7)
 
                 ));
             } while (cursor.moveToNext());
@@ -247,7 +258,9 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         return schedules;
     }
 
-    /** DB Tables INSERT Repairs**/
+    /**
+     * DB Tables INSERT Repairs
+     **/
     public void insertRepairs(Repair repair) {
         ContentValues values = new ContentValues();
         values.put("id", repair.getId());
@@ -264,13 +277,17 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
         }
     }
 
-    /** Verificar Repair na DB **/
+    /**
+     * Verificar Repair na DB
+     **/
     private boolean verificarRepairs(Repair repair, ContentValues values) {
         return this.database.update("repairs", values,
                 "id = ?", new String[]{"" + repair.getId()}) > 0;
     }
 
-    /** Obter todas as Repairs registadas**/
+    /**
+     * Obter todas as Repairs registadas
+     **/
     public LinkedList<Repair> getAllRepairs(int carId) {
         LinkedList<Repair> repairs = new LinkedList<>();
         Cursor cursor = this.database.rawQuery("SELECT * FROM repairs WHERE carId = ?",
@@ -289,51 +306,6 @@ public class ModeloBDHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return repairs;
-    }
-
-
-    /** DB Tables INSERT Login**/
-    public void insertLogin(Login login) {
-        ContentValues values = new ContentValues();
-        values.put("id", login.getId());
-        values.put("token", login.getToken());
-        values.put("username", login.getUsername());
-        values.put("email", login.getEmail());
-        values.put("nif", login.getNif());
-        values.put("phonenumber", login.getPhonenumber());
-        values.put("birsthday", String.valueOf(login.getBirsthday()));
-    //String.valueOf -> Conversão para String
-
-        if (!verificarLogin(login, values)) {
-            database.insert("login", null, values);
-        }
-    }
-
-    /** Verificar Login na DB **/
-    private boolean verificarLogin(Login login, ContentValues values) {
-        return this.database.update("login", values,
-                "token = ?", new String[]{"" + login.getToken()}) > 0;
-    }
-
-    /** Obter o Login registado**/
-    public LinkedList<Login> getAllLogin() {
-        LinkedList<Login> login = new LinkedList<>();
-        Cursor cursor = this.database.rawQuery("SELECT * FROM login",
-                null);
-        if (cursor.moveToFirst()) {
-            do {
-                login.add(new Login(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getString(5),
-                        cursor.getString(6)
-                ));
-            } while (cursor.moveToNext());
-        }
-        return login;
     }
 }
 

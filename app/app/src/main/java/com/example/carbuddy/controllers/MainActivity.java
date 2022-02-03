@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
         }
 
         LoginSingleton.getInstance(this).setLoginListener(this);
-        database = new ModeloBDHelper(this);
         editTextUser = findViewById(R.id.editTextTextPersonName);
         editTextPass = findViewById(R.id.editTextTextPassword);
 
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
 
     /** Verificar se já existem dados de login na base de dados e entrar na garagem automaticamente, pois já temos o cliente/user em questão*/
     private void VerificarLogin() {
-        if (database.getAllLogin().size() > 0) {
+        if(LoginSingleton.getInstance(this).getLogin() != null){
             Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
             startActivity(paginaInicial);
         }
@@ -128,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
     @Override
     public void onValidateLogin(Login login) {
         if (login.getToken() != null) {
-            database.insertLogin(login);
             Intent paginaInicial = new Intent(this, Pagina_Inicial.class);
             startActivity(paginaInicial);
         } else {
@@ -138,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements LoginListener {
 
     /** Instanciar uma nova base de dados quando o programa deixa de estar em background ou quando inicia */
     protected void onResume() {
-        database = new ModeloBDHelper(this);
         super.onResume();
     }
 }
