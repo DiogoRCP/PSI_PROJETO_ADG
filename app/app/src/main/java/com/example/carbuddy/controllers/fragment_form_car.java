@@ -305,16 +305,16 @@ public class fragment_form_car extends Fragment implements CarsListener {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-                                if (response.getJSONArray("Results").getJSONObject(6).getString("Value")!="null") {
+                                if (!response.getJSONArray("Results").getJSONObject(6).getString("Value").equals("null")) {
                                     txtBrand.setText(response.getJSONArray("Results").getJSONObject(6).getString("Value"));
                                 }
-                                if (response.getJSONArray("Results").getJSONObject(8).getString("Value")!="null") {
+                                if (!response.getJSONArray("Results").getJSONObject(8).getString("Value").equals("null")) {
                                     txtModel.setText(response.getJSONArray("Results").getJSONObject(8).getString("Value"));
                                 }
-                                if (response.getJSONArray("Results").getJSONObject(9).getString("Value")!="null") {
+                                if (!response.getJSONArray("Results").getJSONObject(9).getString("Value").equals("null")) {
                                     txtYear.setText(response.getJSONArray("Results").getJSONObject(9).getString("Value"));
                                 }
-                                if (response.getJSONArray("Results").getJSONObject(69).getString("Value")!="null") {
+                                if (!response.getJSONArray("Results").getJSONObject(69).getString("Value").equals("null")) {
                                     txtDisplacement.setText(response.getJSONArray("Results").getJSONObject(69).getString("Value"));
                                 }
 
