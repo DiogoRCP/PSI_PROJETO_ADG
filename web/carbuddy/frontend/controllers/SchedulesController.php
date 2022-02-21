@@ -123,6 +123,8 @@ class SchedulesController extends Controller
             $modelCompanies = Companies::find()->all();
             $modelCars = Cars::find()->all();
 
+            $model->state = "Pending";
+
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
