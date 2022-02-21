@@ -148,6 +148,7 @@ class SchedulesController extends ActiveController
                 if (isset($schedule['repairdescription'])) $scheduleModel->repairdescription = $schedule['repairdescription'];
                 if (isset($schedule['repairtype'])) $scheduleModel->repairtype = $schedule['repairtype'];
                 if (isset($schedule['carId'])) $scheduleModel->carId = $schedule['carId'];
+                $scheduleModel->state = "Pending";
                 $rec = $scheduleModel->save();
                 return ['PUT' => $rec];
             }
