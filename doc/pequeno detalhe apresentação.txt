@@ -7,3 +7,24 @@ Normalmente gostamos de ir à nossa oficina de preferência porque já conhecem 
 Existem muitas oficinas de pequena escala que não têm uma organização digital de marcações, esse ponto também foi algo que pensamos em ter em conta.
 
 Quando as oficinas terminam um serviço, normalmente, notificam o prorietário por chamada telefónica o que leva muito tempo.
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+Coisas do Gonçalo...
+Backend, usar o user goncalo pass 12345678
+No frontend usar o colaborador margarida pass 12345678
+Na app usar o user goncalo pass 12345678
+
+A user margarida só tem um schedule e uma reparação da sua empresa pronta para notificar o user goncalo na app
+
+CAPA:
+Bom dia, vamos então apresentar o nosso projeto final da unidade curricular de projeto em sistemas de informação.
+Ao longo deste semestre, o grupo desenvolveu o projeto denominado de Carbuddy que consiste numa plataforma web e numa aplicação móvel
+Onde um cliente regista e faz a gestão dos seus carros, com as respetivas reparações e agendamentos.
+É ainda possivel ao administrador gerir toda a plataforma como vamos exemplificar mais à frente.
