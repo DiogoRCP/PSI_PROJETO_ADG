@@ -1,0 +1,9 @@
+A nossa ideia surgiu ao pensarmos em alguns cenários:
+
+Quando vamos de férias, se tivermos um problema no nosso veículo, temos de procurar uma oficina por perto, ir lá ou ligar e acabamos por perder tempo que facilmente se resolvia em poucos cliques.
+
+Normalmente gostamos de ir à nossa oficina de preferência porque já conhecem o nosso veículo, com o histórico de reparações e manutenções poderiamos ir a qualquer oficina capaz e rápidamente o mecânico ficar a par do historial do veículo. Para além disso se quisermos vender o nosso veículo em segunda mão temos um comprovativo detalhado dos problemas que foram resolvidos e as datas em que as manutenções foram feitas.
+
+Existem muitas oficinas de pequena escala que não têm uma organização digital de marcações, esse ponto também foi algo que pensamos em ter em conta.
+
+Quando as oficinas terminam um serviço, normalmente, notificam o prorietário por chamada telefónica o que leva muito tempo.
